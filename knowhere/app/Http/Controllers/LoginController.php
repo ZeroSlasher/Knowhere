@@ -2,53 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+session_start();
 use App\Login;
+use Illuminate\Http\Request;
+use Session;
+
 class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        // 
         $email = $request->get('email');
-        $password= $request->get('password');
-        $a=Login::where('email',$email)->where('password',$password)->get();
-        //$b=Login::where('email',$email)->where('password',$password)->where('status',2)->get();
-       // Auth::login($a);
-        //return Auth::user();
+        $password = $request->get('password');
+
+        $a = Login::where('email', $email)->get();
+
         foreach ($a as $object) {
+            if ($object->password == $password) {
+                $semail = $object->email;
+                $sutype = $object->utype_id;
+                if ($object->utype_id == '1' && $object->status_id == 1) {
+                    // session(['email'=>$semail]);
+                    // session(['utype'=>$sutype]);
+                    Session::put('email', $semail);
+                    Session::put('utype', $sutype);
 
-            if($object->email=$email){
-               // return $object;
-              // session(['email'=>$email]);
-               // $value=session('email');
-              
-                if($object->utype_id == '1')
-                {
-                    
-
-                    // session(['email'=>$email]);
-                return redirect('/ownerprofile');
+                    return redirect('/admindashboard');
+                } elseif ($object->utype_id == '2' && $object->status_id == 1) {
+                    session(['email' => $semail]);
+                    session(['utype' => $sutype]);
+                    return redirect('/ownerdashboard');
+                } else {
+                    session(['email' => $semail]);
+                    session(['utype' => $sutype]);
+                    return redirect('/userdashboard');
+                }
             }
-            else if($object->utype == 2){
-              //  session(['email'=>$email]);
-                // session(['status2'=>$email]);
-                // return redirect('/adminindex');
-            }
-                
-            }
-            
-            else{
-                //return redirect('/login')->with('success','wrong username/password');
-                //return "aa";
-            }
-            
         }
-        $msg = [
-            'message' => 'Please check your credentials!',
-           ];
-    
-       return redirect('/login')->with($msg);
-        //return redirect('/login')->with('success','wrong username/password');
-        //return redirect('/login')->back()->with('message', 'IT WORKS!');
+
+        return redirect('/')->with('msg', 'incorrect login credentials');
+
+    }
+    public function logout()
+    {
+        //session_start();
+        //session_destroy();
+        Session::flush();
+        return redirect('/')->with('msg', 'Logged out successfully');
     }
 }

@@ -96,7 +96,29 @@ function emailValidation(inputtext){
 		}
 
 
+		function emailDoesExist(){
+			var email = $("#mail").val();
+			$('#submit').addClass('disabled');
+			if(email != ''){
+				$.ajax({
+					url: 'check.php',
+					type: 'post',
+					data: {'email':email},
+					success: function(response){
+						// console.log(response);
+						if(response > 0){
+							$("#email").val('');
+							$('#submit1').removeClass('disabled');
+							$("#eval").html("<p>Email Already taken</p>").fadeIn().delay('1000').fadeOut();
+						}
 
+					}
+				});
+
+			}else{
+				$("#eval").hide();
+			}
+		}
 
 
 // function inputAlphabetf(inputtext){
@@ -176,29 +198,7 @@ function emailValidation(inputtext){
 // 				document.form.pass.value = ''; return false; } }
 
 
-// 				function emailDoesExist(){
-// 					var email = $("#email").val();
-// 					$('#submit1').addClass('disabled');
-// 					if(email != ''){
-// 						$.ajax({
-// 							url: 'check.php',
-// 							type: 'post',
-// 							data: {'email':email},
-// 							success: function(response){
-// 								// console.log(response);
-// 								if(response > 0){
-// 									$("#email").val('');
-// 									$('#submit1').removeClass('disabled');
-// 									$("#eval").html("<p>Email Already taken</p>").fadeIn().delay('1000').fadeOut();
-// 								}
 
-// 							}
-// 						});
-
-// 					}else{
-// 						$("#eval").hide();
-// 					}
-// 				}
 
 // 				function usernameDoesExist(){
 // 					var uname = $("#uname").val();

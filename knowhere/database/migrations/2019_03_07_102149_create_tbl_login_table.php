@@ -14,10 +14,8 @@ class CreateTblLoginTable extends Migration
     public function up()
     {
         Schema::create('tbl_login', function (Blueprint $table) {
-            $table->increments('login_id')->unsigned();
             
-            $table->string('email');
-            $table->foreign('email')->references('email')->on('tbl_user_reg');
+            $table->string('email')->primary();
 
             $table->string('password');
 

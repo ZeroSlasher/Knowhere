@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use illuminate\Contracts\Auth\Authenticatable;
 
 class Login extends Model
 {
@@ -15,9 +14,6 @@ class Login extends Model
         'password',
         'utype_id',
         'status_id',
-        
     ];
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+
 }

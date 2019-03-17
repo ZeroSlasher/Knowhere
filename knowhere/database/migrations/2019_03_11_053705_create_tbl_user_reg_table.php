@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTblUserRegTable extends Migration
 {
@@ -14,24 +14,22 @@ class CreateTblUserRegTable extends Migration
     public function up()
     {
         Schema::create('tbl_user_reg', function (Blueprint $table) {
-            $table->string('email')->primary();
+            $table->increments('uregid');
+
+            $table->string('email');
+            $table->foreign('email')->references('email')->on('tbl_login')->onDelete('cascade');
 
             $table->string('name');
 
-            $table->integer('loc_id')->unsigned();
-            $table->foreign('loc_id')
-            ->references('loc_id')
-            ->on('tbl_locality');
-            
+            $table->integer('city_id')->unsigned();
+            $table->foreign('city_id')->references('city_id')->on('tbl_city');
+
             $table->string('phone');
 
-            // $table->string('address');
+            $table->string('image');
 
-            // $table->string('status')->unsigned();
-            // $table->foreign('status')
-            // ->references('status')
-            // ->on('tbl_status')
-            // ->onDelete('cascade');
+            $table->integer('status_id')->unsigned();
+            $table->foreign('status_id')->references('status_id')->on('tbl_status')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -16,10 +16,9 @@ class CreateTblOutletProfTable extends Migration
         Schema::create('tbl_outlet_prof', function (Blueprint $table) {
             $table->bigIncrements('outletid');
 
-            $table->string('image')->nullable();
 
             $table->string('email');
-            $table->foreign('email')->references('email')->on('tbl_user_reg')->onDelete('cascade');
+            $table->foreign('email')->references('email')->on('tbl_login')->onDelete('cascade');
 
             $table->string('outletname');
 
@@ -27,7 +26,12 @@ class CreateTblOutletProfTable extends Migration
 
             $table->string('address');
 
-            $table->string('description');
+            $table->string('image1')->nullable();            
+            $table->string('image2')->nullable();            
+            $table->string('image3')->nullable();            
+            $table->string('image4')->nullable();
+
+            $table->string('description', 500);
 
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('city_id')->on('tbl_city');
