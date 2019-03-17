@@ -55,3 +55,14 @@ Route::any('/requestlisting', 'RequestProfController@request');
 Route::any('subcat/ajax/{id}', 'HomeController@subcatajax');
 Route::any('dist/ajax/{id}', 'HomeController@distajax');
 Route::any('city/ajax/{id}', 'HomeController@cityajax');
+
+// Password reset link request routes...
+// Auth::Routes();
+
+// Route::any('password/email ', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+
+// Route::any('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+
+// Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');

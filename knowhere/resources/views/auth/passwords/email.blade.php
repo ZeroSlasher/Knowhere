@@ -61,16 +61,26 @@
                         <h3>
                             Forgot Password
                         </h3>
-                        <form role="form" class="login-form">
+                        <form role="form" method="POST" action="/password/email" class="login-form">
+                            @csrf
+
+                            @if (count($errors) > 0)
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            @endif
+
                             <div class="form-group">
                                 <div class="input-icon">
                                     <i class="icon lni-user"></i>
                                     <input type="text" id="sender-email" class="form-control" name="email"
-                                        placeholder="Email">
+                                        placeholder="Email" value="{{ old('email') }}">
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-common log-btn">Send me my Password</button>
+                                <button type="submit" class="btn btn-common log-btn">Send me my Password</button>
                             </div>
                             <div class="form-group mt-4">
                                 <ul class="form-links">

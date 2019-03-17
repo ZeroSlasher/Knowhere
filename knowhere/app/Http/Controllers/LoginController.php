@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-session_start();
 use App\Login;
 use Illuminate\Http\Request;
 use Session;

@@ -1,0 +1,1 @@
+Click here to reset your password: {{ url('http://knowhere.com/password/reset/'.$token) }}

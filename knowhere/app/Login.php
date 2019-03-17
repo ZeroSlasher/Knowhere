@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Login extends Model
 {
     protected $table="tbl_login";
-    protected $primarykey="login_id";
+    protected $primarykey="email";
     
     public $fillable=[
         'email',
