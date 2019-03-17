@@ -1,48 +1,42 @@
 function formValidation1() {
-    alert();
     // Make quick references to our fields
-    var email = document.getElementById('email');
-    var fname = document.getElementById('fname');
-    var lname = document.getElementById('lname');
-    var uname = document.getElementById('uname');
-    var pass = document.getElementById('pass');
-    var cpass = document.getElementById('cpass');
+    var own_name = document.getElementById('own_name'); //1
+    var est_name = document.getElementById('est_name'); //2
+    var catSelect = document.getElementById('catSelect');
+    var subcat = document.getElementById('subcat');
+    var state = document.getElementById('state');
+    var district = document.getElementById('district');
+    var city = document.getElementById('city');
+    var remail = document.getElementById('remail'); //3
+    var cphone = document.getElementById('cphone'); //4
+    var proof1 = document.getElementById('proof1'); //5
+    var proof2 = document.getElementById('proof2'); //6
+    var proof3 = document.getElementById('proof3'); //7
 
 
 
     //  to check empty form fields.
 
-    if (fname.value.length == 0 || lname.value.length == 0 || uname.value.length == 0 || email.value.length == 0 || pass.value.length == 0 || cpass.value.length == 0) {
-        $("#head").show().delay(1000).fadeOut();
-        // document.getElementById('head').innerText = "All fields are mandatory"; //this segment displays the validation rule for all fields
-        email.focus();
+    if (own_name.value.length == 0 || est_name.value.length == 0 || catSelect.value.length == 0 || subcat.value.length == 0 || state.value.length == 0 || district.value.length == 0 ||
+        city.value.length == 0 || remail.value.length == 0 || cphone.value.length == 0 || proof1.value.length == 0 || proof2.value.length == 0 || proof3.value.length == 0) {
+        $("#head1").show().delay(1000).fadeOut();
+        $('#submit1').addClass('disabled');
         return false;
     }
-    if (emailValidation(email)) {
 
-        if (inputAlphabetu(uname)) {
+    if (inputAlphabetl(own_name, 3, 15)) { //1
 
-            if (lengthDefineu(uname, 6, 12)) {
+        // if (inputAlphabetl(est_name, 3, 30)) { //2
 
-                if (inputAlphabetf(fname)) {
+        if (emailValidation(remail)) { //3
 
-                    if (lengthDefinef(fname, 3, 12)) {
-
-                        if (lengthDefinel(lname, 3, 12)) {
-
-                            if (inputAlphabetl(lname)) {
-
-                                if (validatePassword(pass.value, cpass.value)) {
-
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
+            if (phonevalidation(cphone, 10)) { //4                    
+                return true;
             }
         }
+        // }
     }
+    $('#submit1').addClass('disabled');
     return false;
 }
 
@@ -50,210 +44,83 @@ function formValidation1() {
 
 //function that checks whether input text is an alphabetic character or not.
 
-function inputAlphabetf(inputtext) {
-    var alphaExp = /^[a-zA-Z]+$/;
-    if (inputtext.value.match(alphaExp)) {
-        document.getElementById('p1').innerText = "";
-
+function inputAlphabetl(inputtext, min, max) {
+    var alphaExp = /^[a-z ,.'-]+$/i;
+    var uInput = inputtext.value;
+    if (inputtext.value.match(alphaExp) && uInput.length >= min && uInput.length <= max) {
+        document.getElementById('p11').innerText = "";
         return true;
     } else {
-        // document.getElementById('p1').innerText = "Enter valid name";  //this segment displays the validation rule for name
-        $("#p1").html("<p>Enter valid name</p>").fadeIn().delay('1000').fadeOut();
-        fname.fvalue = '';
-        return false;
-    }
-}
-
-function inputAlphabetu(inputtext) {
-    var alphaExp = /^[a-zA-Z0-9]+$/;
-    if (inputtext.value.match(alphaExp)) {
-        document.getElementById('p4').innerText = "";
-        return true;
-    } else {
-        document.getElementById('p4').innerText = "Enter valid Username"; //this segment displays the validation rule for name
-        $("#p4").html("<p>Enter valid Username</p>").fadeIn().delay('1000').fadeOut();
-        uname.value = '';
-        return false;
-    }
-}
-
-function inputAlphabetl(inputtext) {
-    var alphaExp = /^[a-zA-Z]+$/;
-    if (inputtext.value.match(alphaExp)) {
-        document.getElementById('p2').innerText = "";
-
-        return true;
-    } else {
+        // $("#p1").show().delay(1000).fadeOut();
         // document.getElementById('p2').innerText = "Enter valid name";  //this segment displays the validation rule for name
-        $("#p2").html("<p>Enter valid name</p>").fadeIn().delay('1000').fadeOut();
-        lname.value = '';
+        $("#p11").fadeIn().delay('1000').fadeOut();
+        // own_name.value = '';
         return false;
+
     }
 }
-
-
-// Function that checks whether the input characters are restricted according to defined by user.
-
-function lengthDefineu(inputtext, min, max) {
-    var uInput = inputtext.value;
-    if (uInput.length >= min && uInput.length <= max) {
-        document.getElementById('p4').innerText = "";
-
-        return true;
-    } else {
-
-        // document.getElementById('p4').innerText = "Enter name between " +min+ " and " +max+ " characters *"; //this segment displays the validation rule for username
-        $("#p4").html("<p>Enter name between " + min + " and " + max + " characters</p>").fadeIn().delay('1000').fadeOut();
-        inputtext.value = '';
-        return false;
-    }
-}
-
-function lengthDefinel(inputtext, min, max) {
-    var uInput = inputtext.value;
-    if (uInput.length >= min && uInput.length <= max) {
-        document.getElementById('p2').innerText = "";
-
-        return true;
-    } else {
-
-        // document.getElementById('p2').innerText = "Enter name between " +min+ " and " +max+ " characters *"; //this segment displays the validation rule for username
-        $("#p2").html("<p>Enter name between " + min + " and " + max + " characters</p>").fadeIn().delay('1000').fadeOut();
-        inputtext.value = '';
-        return false;
-    }
-}
-
-function lengthDefinef(inputtext, min, max) {
-    var uInput = inputtext.value;
-    if (uInput.length >= min && uInput.length <= max) {
-        document.getElementById('p1').innerText = "";
-
-        return true;
-    } else {
-
-        // document.getElementById('p1').innerText = "Enter name between " +min+ " and " +max+ " characters *"; //this segment displays the validation rule for username
-        $("#p1").html("<p>Enter name between " + min + " and " + max + " characters</p>").fadeIn().delay('1000').fadeOut();
-        inputtext.value = '';
-        return false;
-    }
-}
-
-
-
-// Function that checks whether an user entered valid email address or not and displays alert message on wrong email address format.
 
 function emailValidation(inputtext) {
     var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
     if (inputtext.value.match(emailExp)) {
-        document.getElementById('p3').innerText = "";
+        document.getElementById('p22').innerText = "";
         return true;
     } else {
         // document.getElementById('p3').innerText = "Enter a vaild email"; //this segment displays the validation rule for email
-        $("#p3").html("<p>Enter a vaild email</p>").fadeIn().delay('1000').fadeOut();
-        email.value = '';
+        $("#p22").fadeIn().delay('1000').fadeOut();
+        // remail.value = '';
         return false;
     }
 }
 
-function validatePassword(pass, cpass) {
-    if (pass == cpass) {
-        document.getElementById('p5').innerText = "";
+
+function phonevalidation(inputtext, max) {
+    var alphaExp = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
+    var uInput = inputtext.value;
+    if (inputtext.value.match(alphaExp) && uInput.length <= min) {
+        document.getElementById('p33').innerText = "";
+
         return true;
     } else {
-        // document.getElementById('p5').innerText = "Check your password";
-        $("#p5").html("<p>Check your password</p>").fadeIn().delay('1000').fadeOut();
-        document.form.pass.value = '';
+        // document.getElementById('p1').innerText = "Enter valid name";  //this segment displays the validation rule for name
+        $("#p33").fadeIn().delay('1000').fadeOut();
+        // cphone.value = '';
         return false;
     }
 }
 
 
+
+
+
+
+// $(document).ready(function () {
+//     $('text[name="remail"]').on('blur', function () {
 function emailDoesExist() {
-    var email = $("#email").val();
     $('#submit1').addClass('disabled');
-    if (email != '') {
+    var remail = document.getElementById('remail').value;
+    if (remail) {
         $.ajax({
-            url: 'check.php',
-            type: 'post',
-            data: {
-                'email': email
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            success: function (response) {
-                // console.log(response);
-                if (response > 0) {
-                    $("#email").val('');
-                    $('#submit1').removeClass('disabled');
-                    $("#eval").html("<p>Email Already taken</p>").fadeIn().delay('1000').fadeOut();
+            url: '/mailcheck/' + remail,
+            type: "GET",
+            dataType: "json",
+            // data: {
+            //     'email': remail
+            // },
+            success: function (data) {
+                if (data == 1) {
+                    $("#p23").fadeIn().delay('1000').fadeOut();
+                    document.getElementById('remail').value = "";
+                } else {
+
                 }
 
             }
         });
-
-    } else {
-        $("#eval").hide();
     }
 }
-
-function usernameDoesExist() {
-    var uname = $("#uname").val();
-    $('#submit1').addClass('disabled');
-    if (uname != '') {
-        $.ajax({
-            url: 'check.php',
-            type: 'post',
-            data: {
-                'uname': uname
-            },
-            success: function (response) {
-
-                if (response > 0) {
-                    $("#uname").val('');
-                    $("#uval").html("<p>Username Already taken</p>").fadeIn().delay('1000').fadeOut();
-                }
-
-            }
-        });
-    } else {
-        $("#uval").hide();
-        $('#submit1').removeClass('disabled');
-
-    }
-}
-
-$(document).ready(function () {
-    $(".validate").on('blur', function () {
-        $type = $(this).data("type");
-
-        switch ($type) {
-            case 'email':
-                if (emailValidation(this)) {
-                    emailDoesExist();
-                }
-                break;
-            case 'fname':
-                if (lengthDefinef(this, 3, 12)) {
-                    inputAlphabetf(this);
-                }
-                break;
-            case 'lname':
-                if (lengthDefinel(this, 3, 12)) {
-                    inputAlphabetl(this);
-                }
-                break;
-            case 'uname':
-                if (inputAlphabetu(this)) {
-                    if (lengthDefineu(this, 6, 12)) {
-                        usernameDoesExist();
-                    }
-
-                }
-                break;
-            case 'cpass':
-                validatePassword($("#pass").val(), $("#cpass").val());
-                break;
-        }
-
-    })
-
-});
+//     });
+// });

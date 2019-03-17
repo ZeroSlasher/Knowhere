@@ -12,7 +12,6 @@
  */
 
 Route::any('/', 'HomeController@index');
-// Route::any('/LoginIndex', 'HomeController@lindex');
 Route::any('/forgotpwd', 'HomeController@forgot')->name('forgotpwd');
 Route::any('/register', 'UserRegController@register');
 Route::any('/login', 'LoginController@login');
@@ -24,6 +23,8 @@ Route::any('/userdashboard', 'DashController@userdash');
 
 Route::any('/approveoutlet', 'AdminController@approveoutlet');
 Route::any('/rqstapprove/{id}', 'AdminController@rqstapprove');
+Route::any('/mailcheck/{id}', 'RequestProfController@mailcheck');
+
 Route::any('/postdetails', 'HomeController@postdetails');
 Route::any('/mypost', 'HomeController@mypost');
 Route::any('/usermanagement', 'AdminController@usermanagement');

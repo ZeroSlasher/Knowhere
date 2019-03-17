@@ -83,8 +83,9 @@
     @if (Session::has('msg'))
     <div class="listing-wrapper1">
         <div class="listing1">
-            <div class="alert alert-danger" role="alert">{{Session::get('msg')}}</div>
-            <br>
+            <div role="alert" class="alert alert-danger">
+                <strong>{{Session::get('msg')}}</strong>
+            </div> <br>
             <a href="#" class="button close">Close</a>
 
         </div>
@@ -384,20 +385,27 @@
         </div> <!-- end .login -->
     </div> <!-- end .login-wrapper -->
 
-    <div class="signup-wrapper">
+    <div class="signup-wrapper" id="signupwrapper">
         <div class="signup">
             <form method="post" action="/register" onsubmit="return formValidation()">
                 @csrf
 
-                    <p id="head" style="align:center;display: none;">All details are mandatory</p>
+                <div id="head" style="align:center;display: none;" class="alert alert-danger">
+                    <strong>All details are mandatory</strong>
+                </div>
                 <div class="form-group">
                     <input type="text" placeholder="Name" id="name" name="name">
                 </div>
                 <p id="p1"></p> <!-- end .form-group -->
                 <div class="form-group">
-                    <input type="text" placeholder="Email Address" id="mail" name="mail">
+                    <input type="text" placeholder="Email Address" onblur="return emailDoesExist1()" id="mail"
+                        name="mail">
                 </div>
-                <p id="p2"></p><!-- end .form-group -->
+                <div id="p24" class="alert alert-danger" style="align:center;display: none;">
+                    <strong>Email already registered, Use a different one</strong>
+                </div>
+                <p id="p2"></p>
+                <!-- end .form-group -->
                 <div class="form-group">
                     <input type="text" placeholder="Contact number" id="phone" name="phone">
                 </div>
@@ -407,7 +415,8 @@
                         onmouseup="this.type='password'" onmouseout="this.type='password'">
                 </div>
                 <p id="p4"></p><!-- end .form-group -->
-                <div class="button-wrapper"><input type="submit" class="button" value="Register"></div>
+                <div class="button-wrapper"><input type="submit" class="button" value="Register" id="Register"
+                        name="Register"></div>
                 <div class="text-center">
                     <p>Already have an account? <a href="#" class="login-open">Log in</a></p>
                     <div class="social">
@@ -423,18 +432,23 @@
 
     <div class="listing-wrapper">
         <div class="listing">
-            <form method="POST" action="/requestlisting" id="rqstform" onsubmit="return formValidation1()" enctype="multipart/form-data">
+            <form method="POST" action="/requestlisting" id="rqstform" onsubmit="return formValidation1()"
+                enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group1">
                     <input type="text" name='own_name' id='own_name' placeholder="Owner's name">
+                    <!-- <p id="p11"></p> -->
+                    <div id="p11" class="alert alert-danger" style="align:center;display: none;">
+                        <strong>Enter a valid name</strong>
+                    </div>
                 </div>
                 <div class="form-group1">
                     <input type="text" name='est_name' id='est_name' placeholder="Establishment name">
                 </div>
 
                 <div class="form-group1">
-                    <select id="catSelect" name="catSelect" >
+                    <select id="catSelect" name="catSelect">
                         <option disabled selected value> -- select Category -- </option>
                         @isset($data)
                         @foreach($data as $category)
@@ -463,21 +477,33 @@
 
                 <div class="form-group1">
                     <select name="district" id="district">
-                    <option disabled selected value> -- select district -- </option>
+                        <option disabled selected value> -- select district -- </option>
                     </select>
                 </div>
 
                 <div class="form-group1">
                     <select name="city" id="city">
-                    <option disabled selected value> -- select city -- </option>
+                        <option disabled selected value> -- select city -- </option>
 
                     </select>
                 </div>
                 <div class="form-group1">
-                    <input type="text" name='mail' id='remail' placeholder=" Contact Email">
+                    <input type="text" name='remail' id='remail' onblur="return emailDoesExist()"
+                        placeholder=" Contact Email">
+                    <!-- <p id="p22"></p> -->
+                    <div id="p22" class="alert alert-danger" style="align:center;display: none;">
+                        <strong>Enter a valid email</strong>
+                    </div>
+                    <div id="p23" class="alert alert-danger" style="align:center;display: none;">
+                        <strong>Email already registered, Use a different one</strong>
+                    </div>
                 </div>
                 <div class="form-group1">
-                    <input type="text" name='phone' id='cphone' placeholder="Contact Number">
+                    <input type="text" name='cphone' id='cphone' placeholder="Contact Number">
+                    <!-- <p id="p33"></p> -->
+                    <div id="p33" class="alert alert-danger" style="align:center;display: none;">
+                        <strong>Enter a valid Phone number</strong>
+                    </div>
                 </div>
                 <div class="form-group1">
                     <!-- <input type="text" placeholder="Proof of existance-documents upload field"> -->
@@ -505,9 +531,10 @@
 						<div class="button-wrapper "><button type="submit" class="button">Verify</button></div>
 						</div>
 						</div> -->
-                        <p id="head" style="align:center;display: none;">All details are mandatory</p>
-
-                        <div class="button-wrapper verify-open"><button type="submit" name="submit"
+                        <div id="head1" style="align:center;display: none;" class="alert alert-danger">
+                            <strong>All details are mandatory</strong>
+                        </div>
+                        <div class="button-wrapper verify-open"><button type="submit" id="submit1" name="submit1"
                                 class="button">Request verification</button></div>
                     </div>
                     <div class="text-center">
@@ -547,8 +574,8 @@
     <script src="js/myajax.js"></script>
     <!-- formvalidate.js -->
     <script src="js/formvalidate.js"></script>
-        <!-- formvalidate1.js -->
-        <script src="js/formvalidate1.js"></script>
+    <!-- formvalidate1.js -->
+    <script src="js/formvalidate1.js"></script>
 
 </body>
 

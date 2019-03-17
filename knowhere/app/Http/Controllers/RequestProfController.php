@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RequestProf;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -28,10 +29,10 @@ class RequestProfController extends Controller
         $proof3->move($file_path, $Proof3_name);
 
         $rqst = new RequestProf([
-            'email' => $request->get('mail'),
+            'email' => $request->get('remail'),
             'outletname' => $request->get('est_name'),
             'city_id' => $request->get('city'),
-            'phone' => $request->get('phone'),
+            'phone' => $request->get('cphone'),
             'ownername' => $request->get('own_name'),
             'subcat_id' => $request->get('subcat'),
             'Proof1' => $Proof1_name,
@@ -43,5 +44,16 @@ class RequestProfController extends Controller
         $rqst->save();
         return redirect('/')->with('msg', 'Request Submitted successfully.. You will be informed via email on the approval of the request');
 
+    }
+
+    public function mailcheck($id)
+    {
+
+        $exist = DB::select("SELECT `email` FROM `tbl_login` WHERE `email` = '$id'");
+        if (isset($exist)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
