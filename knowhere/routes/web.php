@@ -11,58 +11,65 @@
 |
  */
 
-Route::any('/', 'HomeController@index');
+Route::any('/', 'HomeController@index')->name('/');
 Route::any('/forgotpwd', 'HomeController@forgot')->name('forgotpwd');
-Route::any('/register', 'UserRegController@register');
-Route::any('/login', 'LoginController@login');
-Route::any('/logout', 'LoginController@logout');
+Route::any('/register', 'UserRegController@register')->name('register');
+Route::any('/login', 'LoginController@login')->name('login');
+Route::any('/logout', 'LoginController@logout')->name('logout');
 //Dashboard
-Route::any('/admindashboard', 'DashController@admindash');
-Route::any('/ownerdashboard', 'DashController@owndash');
-Route::any('/userdashboard', 'DashController@userdash');
+Route::any('/admindashboard', 'DashController@admindash')->name('admindashboard');
+Route::any('/ownerdashboard', 'DashController@owndash')->name('ownerdashboard');
+Route::any('/userdashboard', 'DashController@userdash')->name('userdashboard');
 
-Route::any('/approveoutlet', 'AdminController@approveoutlet');
-Route::any('/rqstapprove/{id}', 'AdminController@rqstapprove');
-Route::any('/mailcheck/{id}', 'RequestProfController@mailcheck');
+Route::any('/approveoutlet', 'AdminController@approveoutlet')->name('approveoutlet');
+Route::any('/rqstapprove', 'RequestProfController@rqstapprove')->name('rqstapprove');
+Route::any('/rqstdisapprove/{id}', 'RequestProfController@rqstdisapprove')->name('rqstdisapprove/{id}');
+Route::any('/mailcheck/{id}', 'RequestProfController@mailcheck')->name('mailcheck/{id}');
 
-Route::any('/postdetails', 'HomeController@postdetails');
-Route::any('/mypost', 'HomeController@mypost');
-Route::any('/usermanagement', 'AdminController@usermanagement');
-Route::any('/outletmanagement', 'AdminController@outletmanagement');
+Route::any('/postdetails', 'HomeController@postdetails')->name('postdetails');
+Route::any('/mypost', 'HomeController@mypost')->name('mypost');
 
-Route::any('/howitworks', 'HomeController@howitworks');
-Route::any('/about', 'HomeController@about');
-Route::any('/services', 'HomeController@services');
-Route::any('/faq', 'HomeController@faq');
-Route::any('/contact', 'HomeController@contact');
-Route::any('/undermaintainence', 'HomeController@undermaintainence');
-Route::any('/404', 'HomeController@notfound');
-Route::any('/pricing', 'HomeController@pricing');
+Route::any('/outletmanagement', 'AdminController@outletmanagement')->name('outletmanagement');
 
-Route::any('/deleteprofile', 'HomeController@deleteprofile');
-Route::any('/viewpost', 'HomeController@viewpost');
-Route::any('/privacy', 'HomeController@privacy');
-Route::any('/categories', 'HomeController@categories');
-Route::any('/listing', 'HomeController@listing_list');
+Route::any('/howitworks', 'HomeController@howitworks')->name('howitworks');
+Route::any('/about', 'HomeController@about')->name('about');
+Route::any('/services', 'HomeController@services')->name('services');
+Route::any('/faq', 'HomeController@faq')->name('faq');
+Route::any('/contact', 'HomeController@contact')->name('contact');
+Route::any('/undermaintainence', 'HomeController@undermaintainence')->name('undermaintainence');
+Route::any('/404', 'HomeController@notfound')->name('404');
+Route::any('/pricing', 'HomeController@pricing')->name('pricing');
 
-Route::any('/posting', 'HomeController@posting');
-Route::any('/posting1', 'HomeController@posting1');
-Route::any('/payment', 'HomeController@payment');
-Route::any('/offer', 'HomeController@offer');
-Route::any('/editprofile', 'HomeController@editprofile');
+Route::any('/deleteprofile', 'HomeController@deleteprofile')->name('deleteprofile');
+Route::any('/viewpost', 'HomeController@viewpost')->name('viewpost');
+Route::any('/privacy', 'HomeController@privacy')->name('privacy');
+Route::any('/categories', 'HomeController@categories')->name('categories');
+Route::any('/listing', 'HomeController@listing_list')->name('listing');
 
-Route::any('/requestlisting', 'RequestProfController@request');
-Route::any('subcat/ajax/{id}', 'HomeController@subcatajax');
-Route::any('dist/ajax/{id}', 'HomeController@distajax');
-Route::any('city/ajax/{id}', 'HomeController@cityajax');
+Route::any('/posting', 'HomeController@posting')->name('posting');
+Route::any('/posting1', 'HomeController@posting1')->name('posting1');
+Route::any('/payment', 'HomeController@payment')->name('payment');
+Route::any('/offer', 'HomeController@offer')->name('offer');
+Route::any('/editprofile', 'HomeController@editprofile')->name('editprofile');
+
+Route::any('/requestlisting', 'RequestProfController@request')->name('requestlisting');
+Route::any('subcat/ajax/{id}', 'HomeController@subcatajax')->name('subcat/ajax/{id}');
+Route::any('dist/ajax/{id}', 'HomeController@distajax')->name('dist/ajax/{id}');
+Route::any('city/ajax/{id}', 'HomeController@cityajax')->name('city/ajax/{id}');
 
 // Password reset link request routes...
 // Auth::Routes();
 
-// Route::any('password/email ', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::POST('password/email ', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 
-// Route::any('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+Route::GET('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 
-// Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::POST('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
-// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+Route::GET('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+
+Route::any('/usermanagement', 'AdminController@usermanagement')->name('usermanagement');
+Route::any('/userblock', 'UOmngController@userblock')->name('/userblock');
+Route::any('/ownerblock', 'UOmngController@ownerblock')->name('/ownerblock');
+
+// Route::any('/sendEmail', 'RequestProfController@sendEmail')->name('sendEmail');

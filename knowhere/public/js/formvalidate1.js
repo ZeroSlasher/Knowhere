@@ -77,7 +77,7 @@ function emailValidation(inputtext) {
 function phonevalidation(inputtext, max) {
     var alphaExp = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
     var uInput = inputtext.value;
-    if (inputtext.value.match(alphaExp) && uInput.length <= min) {
+    if (inputtext.value.match(alphaExp) && uInput.length == max) {
         document.getElementById('p33').innerText = "";
 
         return true;

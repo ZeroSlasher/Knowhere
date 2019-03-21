@@ -15,8 +15,10 @@ class CreateTblLoginTable extends Migration
     {
         Schema::create('tbl_login', function (Blueprint $table) {
             
-            $table->string('email')->primary();
+            $table->increments('id');
 
+            $table->string('email')->unique();
+            
             $table->string('password');
 
             $table->integer('utype_id')->unsigned();
@@ -24,7 +26,11 @@ class CreateTblLoginTable extends Migration
 
             $table->integer('status_id')->unsigned();
             $table->foreign('status_id')->references('status_id')->on('tbl_status');
-
+            
+            $table->timestamp('email_verified_at')->nullable();
+            
+            $table->rememberToken();
+            
             $table->timestamps();
         });
     }

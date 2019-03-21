@@ -2,18 +2,18 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Notifications\Notifiable;
+
 class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $table="tbl_login";
-    protected $primarykey="email";
-    
-    public $fillable=[
+    protected $table = "tbl_login";
+    protected $primarykey = "id";
+
+    public $fillable = [
+        'id',
         'email',
         'password',
         'utype_id',

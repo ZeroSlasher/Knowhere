@@ -17,10 +17,12 @@ class CreateTblOutletProfTable extends Migration
             $table->bigIncrements('outletid');
 
 
-            $table->string('email');
-            $table->foreign('email')->references('email')->on('tbl_login')->onDelete('cascade');
+            $table->integer('id')->unsigned();
+            $table->foreign('id')->references('id')->on('tbl_login')->onDelete('cascade');
 
             $table->string('outletname');
+            
+            $table->string('email')->unique();
 
             $table->string('ownername');
 

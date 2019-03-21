@@ -53,7 +53,7 @@
                         class="img-responsive"></a></div> <!-- end .logo -->
             <form class="header-search">
                 <input type="text" placeholder="I’m searching for ...">
-                <button type="submit"><i class="pe-7s-search"></i></button>
+                <button type="submit" disabled><i class="pe-7s-search"></i></button>
             </form>
         </div> <!-- end .left -->
         <div class="navigation clearfix">
@@ -93,6 +93,17 @@
     @endif
 
 
+    @if (session('status'))
+    <div class="listing-wrapper1">
+        <div class="listing1">
+            <div role="alert" class="alert alert-success">
+                <strong>{{ session('status') }}</strong>
+                </div> <br>
+            <a href="#" class="button close">Close</a>
+
+        </div>
+    </div>
+    @endif
 
 
 
@@ -104,424 +115,460 @@
 
 
 
+                <div class="responsive-menu">
+                    <a href="#" class="responsive-menu-close"><i class="fa fa-times"></i></a>
+                    <nav class="responsive-nav"></nav> <!-- end .responsive-nav -->
+                </div> <!-- end .responsive-menu -->
 
-    <div class="responsive-menu">
-        <a href="#" class="responsive-menu-close"><i class="fa fa-times"></i></a>
-        <nav class="responsive-nav"></nav> <!-- end .responsive-nav -->
-    </div> <!-- end .responsive-menu -->
+                <div class="section large transparent dark text-center"
+                    style="background-image: url('images/background01.jpg');">
+                    <div class="inner">
+                        <div class="container">
+                            <h1>Discover The City Gems</h1>
+                            <p class="lead">Find great places to stay, eat, shop, or visit from local experts.</p>
+                            <form>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="What are you looking for ?">
+                                        </div> <!-- end .form-group -->
+                                    </div> <!-- end .col-sm-4 -->
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Location">
+                                            <i class="pe-7s-world"></i>
+                                        </div> <!-- end .form-group -->
+                                    </div> <!-- end .col-sm-4 -->
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <select class="selectpicker" data-live-search="true">
+                                                <option>All categories</option>
+                                                <option>Food</option>
+                                                <option>Cafe'</option>
+                                                <option>Restaurant</option>
+                                                <option>Lodging</option>
+                                                <option>Culture</option>
+                                                <option>Shopping</option>
+                                                <option>Drink</option>
+                                            </select>
+                                        </div> <!-- end .form-group -->
+                                    </div> <!-- end .col-sm-4 -->
+                                </div> <!-- end .row -->
+                                <button type="submit" class="button" diasbled>Search places</button>
+                            </form>
+                            <div class="highlight-slider-wrapper">
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-2">
+                                        <p class="lead">Or browse the highlights</p>
+                                        <div class="highlight-slider">
+                                            <div class="item">
+                                                <a href="#" class="icon">
+                                                    <img src="images/highlight-food.png" alt="food">
+                                                    <div class="overlay">Food</div>
+                                                </a> <!-- end .icon -->
+                                            </div> <!-- end .item -->
+                                            <div class="item">
+                                                <a href="#" class="icon">
+                                                    <img src="images/highlight-lodging.png" alt="lodging">
+                                                    <div class="overlay">Lodging</div>
+                                                </a> <!-- end .icon -->
+                                            </div> <!-- end .item -->
+                                            <div class="item">
+                                                <a href="#" class="icon">
+                                                    <img src="images/highlight-culture.png" alt="culture">
+                                                    <div class="overlay">Culture</div>
+                                                </a> <!-- end .icon -->
+                                            </div> <!-- end .item -->
+                                            <div class="item">
+                                                <a href="#" class="icon">
+                                                    <img src="images/highlight-shopping.png" alt="shopping">
+                                                    <div class="overlay">Shopping</div>
+                                                </a> <!-- end .icon -->
+                                            </div> <!-- end .item -->
+                                            <div class="item">
+                                                <a href="#" class="icon">
+                                                    <img src="images/highlight-nightlife.png" alt="nightlife">
+                                                    <div class="overlay">Nightlife</div>
+                                                </a> <!-- end .icon -->
+                                            </div> <!-- end .item -->
+                                            <div class="item">
+                                                <a href="#" class="icon">
+                                                    <img src="images/highlight-drink.png" alt="drink">
+                                                    <div class="overlay">Drink</div>
+                                                </a> <!-- end .icon -->
+                                            </div> <!-- end .item -->
+                                        </div> <!-- end .highlight-slider -->
+                                    </div> <!-- end .col-md-8 -->
+                                </div> <!-- end .row -->
+                            </div> <!-- end .highlight-slider-wrapper -->
+                        </div> <!-- end .container -->
+                    </div> <!-- end .inner -->
+                </div> <!-- end .section -->
 
-    <div class="section large transparent dark text-center" style="background-image: url('images/background01.jpg');">
-        <div class="inner">
-            <div class="container">
-                <h1>Discover The City Gems</h1>
-                <p class="lead">Find great places to stay, eat, shop, or visit from local experts.</p>
-                <form>
-                    <div class="row">
-                        <div class="col-sm-4">
+                <div class="section light">
+                    <div class="inner">
+                        <div class="container">
+                            <h2 class="text-center">What are you interested in?<small>Explore some of the best tips from
+                                    around the
+                                    city from our partners and friends.</small></h2>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <a href="#" class="category-box"
+                                        style="background-image: url('images/category01.jpg');">
+                                        <div class="inner">
+                                            <img src="images/category-icon01.png" alt="icon">
+                                            <span class="number">8</span>
+                                            <span class="title">Cinema</span>
+                                        </div> <!-- end .inner -->
+                                    </a> <!-- end .category-box -->
+                                </div> <!-- end .col-md-3 -->
+                                <div class="col-md-3 col-sm-6">
+                                    <a href="#" class="category-box"
+                                        style="background-image: url('images/category02.jpg');">
+                                        <div class="inner">
+                                            <img src="images/category-icon02.png" alt="icon">
+                                            <span class="number">36</span>
+                                            <span class="title">Food</span>
+                                        </div> <!-- end .inner -->
+                                    </a> <!-- end .category-box -->
+                                </div> <!-- end .col-md-3 -->
+                                <div class="col-md-3 col-sm-6">
+                                    <a href="#" class="category-box"
+                                        style="background-image: url('images/category03.jpg');">
+                                        <div class="inner">
+                                            <img src="images/category-icon03.png" alt="icon">
+                                            <span class="number">26</span>
+                                            <span class="title">Drink</span>
+                                        </div> <!-- end .inner -->
+                                    </a> <!-- end .category-box -->
+                                </div> <!-- end .col-md-3 -->
+                                <div class="col-md-3 col-sm-6">
+                                    <a href="#" class="category-box"
+                                        style="background-image: url('images/category04.jpg');">
+                                        <div class="inner">
+                                            <img src="images/category-icon04.png" alt="icon">
+                                            <span class="number">16</span>
+                                            <span class="title">Lodging</span>
+                                        </div> <!-- end .inner -->
+                                    </a> <!-- end .category-box -->
+                                </div> <!-- end .col-md-3 -->
+                                <div class="col-sm-6">
+                                    <a href="#" class="category-box"
+                                        style="background-image: url('images/category05.jpg');">
+                                        <div class="inner">
+                                            <img src="images/category-icon05.png" alt="icon">
+                                            <span class="number">12</span>
+                                            <span class="title">Nightlife</span>
+                                        </div> <!-- end .inner -->
+                                    </a> <!-- end .category-box -->
+                                </div> <!-- end .col-sm-6 -->
+                                <div class="col-md-3 col-sm-6">
+                                    <a href="#" class="category-box"
+                                        style="background-image: url('images/category06.jpg');">
+                                        <div class="inner">
+                                            <img src="images/category-icon06.png" alt="icon">
+                                            <span class="number">4</span>
+                                            <span class="title">Visit</span>
+                                        </div> <!-- end .inner -->
+                                    </a> <!-- end .category-box -->
+                                </div> <!-- end .col-md-3 -->
+                                <div class="col-md-3 col-sm-6">
+                                    <a href="#" class="category-box"
+                                        style="background-image: url('images/category07.jpg');">
+                                        <div class="inner">
+                                            <img src="images/category-icon07.png" alt="icon">
+                                            <span class="number">39</span>
+                                            <span class="title">Shop</span>
+                                        </div> <!-- end .inner -->
+                                    </a> <!-- end .category-box -->
+                                </div> <!-- end .col-md-3 -->
+                            </div> <!-- end .row -->
+                            <div class="text-center">
+                                <a href="#" class="button">All Listings</a>
+                            </div> <!-- end .text-center -->
+                        </div> <!-- end .container -->
+                    </div> <!-- end .inner -->
+                </div> <!-- end .section -->
+
+                <div class="section light transparent" style="background-image: url('images/background02.jpg');">
+                    <div class="inner">
+                        <div class="container">
+                            <h2 class="text-center">How it Works<small>Discover how EXploreCity can you help you find
+                                    everything you
+                                    want.</small></h2>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="services">
+                                        <img src="images/services-icon01.png" alt="icon"
+                                            class="img-responsive center-block">
+                                        <h3>Choose<br>What To Do</h3>
+                                        <p>Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a
+                                            mall to do
+                                            some shopping?</p>
+                                        <div class="process"><i class="pe-7s-angle-right-circle"></i></div>
+                                    </div> <!-- end .services -->
+                                </div> <!-- end .col-sm-4 -->
+                                <div class="col-sm-4">
+                                    <div class="services">
+                                        <img src="images/services-icon02.png" alt="icon"
+                                            class="img-responsive center-block">
+                                        <h3>Find<br>What You Want</h3>
+                                        <p>Search and filter hundreds of listings, read reviews, explore photos and find
+                                            the
+                                            perfect
+                                            spot.</p>
+                                        <div class="process"><i class="pe-7s-angle-right-circle"></i></div>
+                                    </div> <!-- end .services -->
+                                </div> <!-- end .col-sm-4 -->
+                                <div class="col-sm-4">
+                                    <div class="services">
+                                        <img src="images/services-icon03.png" alt="icon"
+                                            class="img-responsive center-block">
+                                        <h3>Explore<br>Amazing Places</h3>
+                                        <p>Go and have a good time or even make a booking directly from the listing
+                                            page.
+                                            All of
+                                            those, thanks to ExploreCity!</p>
+                                    </div> <!-- end .services -->
+                                </div> <!-- end .col-sm-4 -->
+                            </div> <!-- end .row -->
+                        </div> <!-- end .container -->
+                    </div> <!-- end .inner -->
+                </div> <!-- end .section -->
+
+
+                <div class="section light">
+                    <div class="inner">
+                        <div class="container">
+                            <h2 class="text-center">Our Newsletter<small>Get an extra 39% off for next your
+                                    holiday</small>
+                            </h2>
+                            <form
+                                action="https://johneyboy.us7.list-manage.com/subscribe/post-json?u=3210d74dbf054134a29daf97c&amp;id=50ad235761&amp;c=?"
+                                method="get" id="mc-embedded-subscribe-form" class="newsletter-form">
+                                <input type="email" id="mce-EMAIL" name="EMAIL" placeholder="YourEmail@domain.com">
+                                <button type="submit" id="mc-embedded-subscribe" name="subscribe"
+                                    class="button">Subscribe</button>
+                            </form>
+                        </div> <!-- end .container -->
+                    </div> <!-- end .inner -->
+                </div> <!-- end .section -->
+
+                <footer class="footer">
+                    <div class="top">
+                        <div class="left">
+                            <div class="logo"><a href="index-2.html"><img src="images/logo-dark.png" alt="ExploreCity"
+                                        class="img-responsive"></a></div> <!-- end .logo -->
+                        </div> <!-- end .left -->
+                        <div class="social-icons">
+                            <a href="#"><i class="pe-so-facebook"></i></a>
+                            <a href="#"><i class="pe-so-twitter"></i></a>
+                            <a href="#"><i class="pe-so-vimeo"></i></a>
+                            <a href="#"><i class="pe-so-tripadvisor"></i></a>
+                            <a href="#"><i class="pe-so-instagram"></i></a>
+                            <a href="#"><i class="pe-so-google-plus"></i></a>
+                        </div>
+                        <div class="right">Proudly Made in Viet Nam<a href="#">+84 968796789</a></div>
+                        <!-- end .left -->
+                    </div> <!-- end .top -->
+                    <div class="bottom">Copyright &copy; 2016. All Rights Reserved By <a href="#">Wecookcode</a></div>
+                </footer> <!-- end .footer -->
+
+                <div class="login-wrapper">
+                    <div class="login">
+                        <form action="/login" method="post">
+                            @csrf
                             <div class="form-group">
-                                <input type="text" placeholder="What are you looking for ?">
+                                <input type="email" placeholder="Email Address" id="email"
+                                    onmousedown="this.type='text'" name="email" required>
                             </div> <!-- end .form-group -->
-                        </div> <!-- end .col-sm-4 -->
-                        <div class="col-sm-4">
                             <div class="form-group">
-                                <input type="text" placeholder="Location">
-                                <i class="pe-7s-world"></i>
+                                <input type="password" required placeholder="Password" id="password" name="password"
+                                    onmouseover="this.type='text'" onmouseup="this.type='password'"
+                                    onmouseout="this.type='password'">
                             </div> <!-- end .form-group -->
-                        </div> <!-- end .col-sm-4 -->
-                        <div class="col-sm-4">
+
+                            <div class="clearfix">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Remember me
+                                    </label>
+                                </div>
+
+                                <a href="password/reset" class="lost-password">Lost your password ?</a>
+                            </div> <!-- end .clearfix -->
+                            <div class="button-wrapper"><button type="submit" class="button">Login</button></div>
+                            <div class="text-center">
+                                <p>Don't have an account ? <a href="#" class="signup-open">Sign up</a></p>
+                                <div class="social">
+                                    <p>Connect with Social Networks</p>
+                                    <a href="#"><img src="images/facebook.png" alt="facebook"></a>
+                                    <a href="#"><img src="images/twitter.png" alt="twitter"></a>
+                                    <a href="#"><img src="images/google-plus.png" alt="google plus"></a>
+                                </div> <!-- end .social -->
+                            </div>
+                        </form>
+                    </div> <!-- end .login -->
+                </div> <!-- end .login-wrapper -->
+
+                <div class="signup-wrapper" id="signupwrapper">
+                    <div class="signup">
+                        <form method="post" action="/register" onsubmit="return formValidation()">
+                            @csrf
+
+                            <div id="head" style="align:center;display: none;" class="alert alert-danger">
+                                <strong>All details are mandatory</strong>
+                            </div>
                             <div class="form-group">
-                                <select class="selectpicker" data-live-search="true">
-                                    <option>All categories</option>
-                                    <option>Food</option>
-                                    <option>Cafe'</option>
-                                    <option>Restaurant</option>
-                                    <option>Lodging</option>
-                                    <option>Culture</option>
-                                    <option>Shopping</option>
-                                    <option>Drink</option>
+                                <input type="text" placeholder="Name" id="name" name="name">
+                                <div id="p1" style="display: none;" class="alert alert-danger">
+                                    <strong>Enter a valid name</strong>
+                                </div>
+                            </div>
+                            <!-- end .form-group -->
+                            <div class="form-group">
+                                <input type="text" placeholder="Email Address" onblur="return emailDoesExist1()"
+                                    id="mail" name="mail">
+                                <div id="p24" class="alert alert-danger" style="display: none;">
+                                    <strong>Email already registered, Use a different one</strong>
+                                </div>
+                                <div id="p2" class="alert alert-danger" style="display: none;">
+                                    <strong>Enter a vaild email</strong>
+                                </div>
+                            </div>
+
+
+                            <!-- end .form-group -->
+                            <div class="form-group">
+                                <input type="text" placeholder="Contact number" id="phone" name="phone">
+                                <div id="p3" class="alert alert-danger" style="display: none;">
+                                    <strong>Enter a valid Phone number</strong>
+                                </div>
+                            </div>
+
+                            <!-- end .form-group -->
+                            <div class="form-group">
+                                <input type="password" placeholder="Password" id="pwd" name="pwd"
+                                    onmouseover="this.type='text'" onmouseup="this.type='password'"
+                                    onmouseout="this.type='password'">
+                                <div id="p4" class="alert alert-danger" style="display: none;">
+                                    <strong>Password must be between 8 and 15 characters long and include at least one
+                                        digit</strong>
+                                </div>
+                            </div>
+
+
+                            <!-- end .form-group -->
+                            <div class="button-wrapper"><input type="submit" class="button" value="Register"
+                                    id="Register" name="Register"></div>
+                            <div class="text-center">
+                                <p>Already have an account? <a href="#" class="login-open">Log in</a></p>
+                                <div class="social">
+                                    <p>Connect with Social Networks</p>
+                                    <a href=""><img src="images/facebook.png" alt="facebook"></a>
+                                    <a href=""><img src="images/twitter.png" alt="twitter"></a>
+                                    <a href=""><img src="images/google-plus.png" alt="google plus"></a>
+                                </div> <!-- end .social -->
+                            </div>
+                        </form>
+                    </div> <!-- end .signup -->
+                </div> <!-- end .signup-wrapper -->
+
+                <div class="listing-wrapper">
+                    <div class="listing">
+                        <form method="POST" action="/requestlisting" id="rqstform" onsubmit="return formValidation1()"
+                            enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="form-group1">
+                                <input type="text" name='own_name' id='own_name' placeholder="Owner's name">
+                                <!-- <p id="p11"></p> -->
+                                <div id="p11" class="alert alert-danger" style="align:center;display: none;">
+                                    <strong>Enter a valid name</strong>
+                                </div>
+                            </div>
+                            <div class="form-group1">
+                                <input type="text" name='est_name' id='est_name' placeholder="Establishment name">
+                            </div>
+
+                            <div class="form-group1">
+                                <select id="catSelect" name="catSelect">
+                                    <option disabled selected value> -- select Category -- </option>
+                                    @isset($data)
+                                    @foreach($data as $category)
+                                    <option value="{{$category->Cat_id}}">{{$category->catagory}}</option>
+                                    @endforeach
+                                    @endisset
                                 </select>
-                            </div> <!-- end .form-group -->
-                        </div> <!-- end .col-sm-4 -->
-                    </div> <!-- end .row -->
-                    <button type="submit" class="button">Search places</button>
-                </form>
-                <div class="highlight-slider-wrapper">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <p class="lead">Or browse the highlights</p>
-                            <div class="highlight-slider">
-                                <div class="item">
-                                    <a href="#" class="icon">
-                                        <img src="images/highlight-food.png" alt="food">
-                                        <div class="overlay">Food</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
-                                <div class="item">
-                                    <a href="#" class="icon">
-                                        <img src="images/highlight-lodging.png" alt="lodging">
-                                        <div class="overlay">Lodging</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
-                                <div class="item">
-                                    <a href="#" class="icon">
-                                        <img src="images/highlight-culture.png" alt="culture">
-                                        <div class="overlay">Culture</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
-                                <div class="item">
-                                    <a href="#" class="icon">
-                                        <img src="images/highlight-shopping.png" alt="shopping">
-                                        <div class="overlay">Shopping</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
-                                <div class="item">
-                                    <a href="#" class="icon">
-                                        <img src="images/highlight-nightlife.png" alt="nightlife">
-                                        <div class="overlay">Nightlife</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
-                                <div class="item">
-                                    <a href="#" class="icon">
-                                        <img src="images/highlight-drink.png" alt="drink">
-                                        <div class="overlay">Drink</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
-                            </div> <!-- end .highlight-slider -->
-                        </div> <!-- end .col-md-8 -->
-                    </div> <!-- end .row -->
-                </div> <!-- end .highlight-slider-wrapper -->
-            </div> <!-- end .container -->
-        </div> <!-- end .inner -->
-    </div> <!-- end .section -->
+                            </div>
 
-    <div class="section light">
-        <div class="inner">
-            <div class="container">
-                <h2 class="text-center">What are you interested in?<small>Explore some of the best tips from
-                        around the
-                        city from our partners and friends.</small></h2>
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <a href="#" class="category-box" style="background-image: url('images/category01.jpg');">
-                            <div class="inner">
-                                <img src="images/category-icon01.png" alt="icon">
-                                <span class="number">8</span>
-                                <span class="title">Cinema</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
-                    <div class="col-md-3 col-sm-6">
-                        <a href="#" class="category-box" style="background-image: url('images/category02.jpg');">
-                            <div class="inner">
-                                <img src="images/category-icon02.png" alt="icon">
-                                <span class="number">36</span>
-                                <span class="title">Food</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
-                    <div class="col-md-3 col-sm-6">
-                        <a href="#" class="category-box" style="background-image: url('images/category03.jpg');">
-                            <div class="inner">
-                                <img src="images/category-icon03.png" alt="icon">
-                                <span class="number">26</span>
-                                <span class="title">Drink</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
-                    <div class="col-md-3 col-sm-6">
-                        <a href="#" class="category-box" style="background-image: url('images/category04.jpg');">
-                            <div class="inner">
-                                <img src="images/category-icon04.png" alt="icon">
-                                <span class="number">16</span>
-                                <span class="title">Lodging</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
-                    <div class="col-sm-6">
-                        <a href="#" class="category-box" style="background-image: url('images/category05.jpg');">
-                            <div class="inner">
-                                <img src="images/category-icon05.png" alt="icon">
-                                <span class="number">12</span>
-                                <span class="title">Nightlife</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-sm-6 -->
-                    <div class="col-md-3 col-sm-6">
-                        <a href="#" class="category-box" style="background-image: url('images/category06.jpg');">
-                            <div class="inner">
-                                <img src="images/category-icon06.png" alt="icon">
-                                <span class="number">4</span>
-                                <span class="title">Visit</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
-                    <div class="col-md-3 col-sm-6">
-                        <a href="#" class="category-box" style="background-image: url('images/category07.jpg');">
-                            <div class="inner">
-                                <img src="images/category-icon07.png" alt="icon">
-                                <span class="number">39</span>
-                                <span class="title">Shop</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
-                </div> <!-- end .row -->
-                <div class="text-center">
-                    <a href="#" class="button">All Listings</a>
-                </div> <!-- end .text-center -->
-            </div> <!-- end .container -->
-        </div> <!-- end .inner -->
-    </div> <!-- end .section -->
+                            <div class="form-group1">
+                                <select name="subcat" id="subcat">
+                                    <option disabled selected value> -- select Sub-category -- </option>
+                                </select>
+                            </div>
 
-    <div class="section light transparent" style="background-image: url('images/background02.jpg');">
-        <div class="inner">
-            <div class="container">
-                <h2 class="text-center">How it Works<small>Discover how EXploreCity can you help you find
-                        everything you
-                        want.</small></h2>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="services">
-                            <img src="images/services-icon01.png" alt="icon" class="img-responsive center-block">
-                            <h3>Choose<br>What To Do</h3>
-                            <p>Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a
-                                mall to do
-                                some shopping?</p>
-                            <div class="process"><i class="pe-7s-angle-right-circle"></i></div>
-                        </div> <!-- end .services -->
-                    </div> <!-- end .col-sm-4 -->
-                    <div class="col-sm-4">
-                        <div class="services">
-                            <img src="images/services-icon02.png" alt="icon" class="img-responsive center-block">
-                            <h3>Find<br>What You Want</h3>
-                            <p>Search and filter hundreds of listings, read reviews, explore photos and find the
-                                perfect
-                                spot.</p>
-                            <div class="process"><i class="pe-7s-angle-right-circle"></i></div>
-                        </div> <!-- end .services -->
-                    </div> <!-- end .col-sm-4 -->
-                    <div class="col-sm-4">
-                        <div class="services">
-                            <img src="images/services-icon03.png" alt="icon" class="img-responsive center-block">
-                            <h3>Explore<br>Amazing Places</h3>
-                            <p>Go and have a good time or even make a booking directly from the listing page.
-                                All of
-                                those, thanks to ExploreCity!</p>
-                        </div> <!-- end .services -->
-                    </div> <!-- end .col-sm-4 -->
-                </div> <!-- end .row -->
-            </div> <!-- end .container -->
-        </div> <!-- end .inner -->
-    </div> <!-- end .section -->
+                            <div class="form-group1">
+                                <select id="state" name="state">
+                                    <option disabled selected value> -- select state -- </option>
+                                    @isset($state)
+                                    @foreach($state as $states)
+                                    <option value="{{$states->state_id}}">{{$states->state}}</option>
+                                    @endforeach
+                                    @endisset
+                                </select>
+                            </div>
 
+                            <div class="form-group1">
+                                <select name="district" id="district">
+                                    <option disabled selected value> -- select district -- </option>
+                                </select>
+                            </div>
 
-    <div class="section light">
-        <div class="inner">
-            <div class="container">
-                <h2 class="text-center">Our Newsletter<small>Get an extra 39% off for next your holiday</small>
-                </h2>
-                <form
-                    action="https://johneyboy.us7.list-manage.com/subscribe/post-json?u=3210d74dbf054134a29daf97c&amp;id=50ad235761&amp;c=?"
-                    method="get" id="mc-embedded-subscribe-form" class="newsletter-form">
-                    <input type="email" id="mce-EMAIL" name="EMAIL" placeholder="YourEmail@domain.com">
-                    <button type="submit" id="mc-embedded-subscribe" name="subscribe" class="button">Subscribe</button>
-                </form>
-            </div> <!-- end .container -->
-        </div> <!-- end .inner -->
-    </div> <!-- end .section -->
+                            <div class="form-group1">
+                                <select name="city" id="city">
+                                    <option disabled selected value> -- select city -- </option>
 
-    <footer class="footer">
-        <div class="top">
-            <div class="left">
-                <div class="logo"><a href="index-2.html"><img src="images/logo-dark.png" alt="ExploreCity"
-                            class="img-responsive"></a></div> <!-- end .logo -->
-            </div> <!-- end .left -->
-            <div class="social-icons">
-                <a href="#"><i class="pe-so-facebook"></i></a>
-                <a href="#"><i class="pe-so-twitter"></i></a>
-                <a href="#"><i class="pe-so-vimeo"></i></a>
-                <a href="#"><i class="pe-so-tripadvisor"></i></a>
-                <a href="#"><i class="pe-so-instagram"></i></a>
-                <a href="#"><i class="pe-so-google-plus"></i></a>
-            </div>
-            <div class="right">Proudly Made in Viet Nam<a href="#">+84 968796789</a></div> <!-- end .left -->
-        </div> <!-- end .top -->
-        <div class="bottom">Copyright &copy; 2016. All Rights Reserved By <a href="#">Wecookcode</a></div>
-    </footer> <!-- end .footer -->
+                                </select>
+                            </div>
+                            <div class="form-group1">
+                                <input type="text" name='remail' id='remail' onblur="return emailDoesExist()"
+                                    placeholder=" Contact Email">
+                                <!-- <p id="p22"></p> -->
+                                <div id="p22" class="alert alert-danger" style="align:center;display: none;">
+                                    <strong>Enter a valid email</strong>
+                                </div>
+                                <div id="p23" class="alert alert-danger" style="align:center;display: none;">
+                                    <strong>Email already registered, Use a different one</strong>
+                                </div>
+                            </div>
+                            <div class="form-group1">
+                                <input type="text" name='cphone' id='cphone' placeholder="Contact Number">
+                                <!-- <p id="p33"></p> -->
+                                <div id="p33" class="alert alert-danger" style="align:center;display: none;">
+                                    <strong>Enter a valid Phone number</strong>
+                                </div>
+                            </div>
+                            <div class="form-group1">
+                                <!-- <input type="text" placeholder="Proof of existance-documents upload field"> -->
+                                <div class="text-center">
+                                    <label>Documents for Proof of existance</label>
+                                    <h6>Proof can be Copy of licences, Image of Establishment or any Valid and legal
+                                        document</h6>
 
-    <div class="login-wrapper">
-        <div class="login">
-            <form action="/login" method="post">
-                @csrf
-                <div class="form-group">
-                    <input type="email" placeholder="Email Address" id="email" onmousedown="this.type='text'"
-                        name="email" required>
-                </div> <!-- end .form-group -->
-                <div class="form-group">
-                    <input type="password" required placeholder="Password" id="password" name="password"
-                        onmouseover="this.type='text'" onmouseup="this.type='password'"
-                        onmouseout="this.type='password'">
-                </div> <!-- end .form-group -->
+                                    <input class=" file" name="proof1" type="file" accept=".pdf,.doc,.png.,.jpg"
+                                        id="proof1" />
+                                    <input class=" file" name="proof2" type="file" accept=".pdf,.doc,.png.,.jpg"
+                                        id="proof2" />
+                                    <input class=" file" name="proof3" type="file" accept=".pdf,.doc,.png.,.jpg"
+                                        id="proof3" />
+                                </div>
+                            </div>
 
-                <div class="clearfix">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Remember me
-                        </label>
-                    </div>
+                            <div class="text-center">
+                                <div class="gap">
 
-                    <a href="/forgotpwd" class="lost-password">Lost your password ?</a>
-                </div> <!-- end .clearfix -->
-                <div class="button-wrapper"><button type="submit" class="button">Login</button></div>
-                <div class="text-center">
-                    <p>Don't have an account ? <a href="#" class="signup-open">Sign up</a></p>
-                    <div class="social">
-                        <p>Connect with Social Networks</p>
-                        <a href="#"><img src="images/facebook.png" alt="facebook"></a>
-                        <a href="#"><img src="images/twitter.png" alt="twitter"></a>
-                        <a href="#"><img src="images/google-plus.png" alt="google plus"></a>
-                    </div> <!-- end .social -->
-                </div>
-            </form>
-        </div> <!-- end .login -->
-    </div> <!-- end .login-wrapper -->
-
-    <div class="signup-wrapper" id="signupwrapper">
-        <div class="signup">
-            <form method="post" action="/register" onsubmit="return formValidation()">
-                @csrf
-
-                <div id="head" style="align:center;display: none;" class="alert alert-danger">
-                    <strong>All details are mandatory</strong>
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Name" id="name" name="name">
-                </div>
-                <p id="p1"></p> <!-- end .form-group -->
-                <div class="form-group">
-                    <input type="text" placeholder="Email Address" onblur="return emailDoesExist1()" id="mail"
-                        name="mail">
-                </div>
-                <div id="p24" class="alert alert-danger" style="align:center;display: none;">
-                    <strong>Email already registered, Use a different one</strong>
-                </div>
-                <p id="p2"></p>
-                <!-- end .form-group -->
-                <div class="form-group">
-                    <input type="text" placeholder="Contact number" id="phone" name="phone">
-                </div>
-                <p id="p3"></p><!-- end .form-group -->
-                <div class="form-group">
-                    <input type="password" placeholder="Password" id="pwd" name="pwd" onmouseover="this.type='text'"
-                        onmouseup="this.type='password'" onmouseout="this.type='password'">
-                </div>
-                <p id="p4"></p><!-- end .form-group -->
-                <div class="button-wrapper"><input type="submit" class="button" value="Register" id="Register"
-                        name="Register"></div>
-                <div class="text-center">
-                    <p>Already have an account? <a href="#" class="login-open">Log in</a></p>
-                    <div class="social">
-                        <p>Connect with Social Networks</p>
-                        <a href=""><img src="images/facebook.png" alt="facebook"></a>
-                        <a href=""><img src="images/twitter.png" alt="twitter"></a>
-                        <a href=""><img src="images/google-plus.png" alt="google plus"></a>
-                    </div> <!-- end .social -->
-                </div>
-            </form>
-        </div> <!-- end .signup -->
-    </div> <!-- end .signup-wrapper -->
-
-    <div class="listing-wrapper">
-        <div class="listing">
-            <form method="POST" action="/requestlisting" id="rqstform" onsubmit="return formValidation1()"
-                enctype="multipart/form-data">
-                @csrf
-
-                <div class="form-group1">
-                    <input type="text" name='own_name' id='own_name' placeholder="Owner's name">
-                    <!-- <p id="p11"></p> -->
-                    <div id="p11" class="alert alert-danger" style="align:center;display: none;">
-                        <strong>Enter a valid name</strong>
-                    </div>
-                </div>
-                <div class="form-group1">
-                    <input type="text" name='est_name' id='est_name' placeholder="Establishment name">
-                </div>
-
-                <div class="form-group1">
-                    <select id="catSelect" name="catSelect">
-                        <option disabled selected value> -- select Category -- </option>
-                        @isset($data)
-                        @foreach($data as $category)
-                        <option value="{{$category->Cat_id}}">{{$category->catagory}}</option>
-                        @endforeach
-                        @endisset
-                    </select>
-                </div>
-
-                <div class="form-group1">
-                    <select name="subcat" id="subcat">
-                        <option disabled selected value> -- select Sub-category -- </option>
-                    </select>
-                </div>
-
-                <div class="form-group1">
-                    <select id="state" name="state">
-                        <option disabled selected value> -- select state -- </option>
-                        @isset($state)
-                        @foreach($state as $states)
-                        <option value="{{$states->state_id}}">{{$states->state}}</option>
-                        @endforeach
-                        @endisset
-                    </select>
-                </div>
-
-                <div class="form-group1">
-                    <select name="district" id="district">
-                        <option disabled selected value> -- select district -- </option>
-                    </select>
-                </div>
-
-                <div class="form-group1">
-                    <select name="city" id="city">
-                        <option disabled selected value> -- select city -- </option>
-
-                    </select>
-                </div>
-                <div class="form-group1">
-                    <input type="text" name='remail' id='remail' onblur="return emailDoesExist()"
-                        placeholder=" Contact Email">
-                    <!-- <p id="p22"></p> -->
-                    <div id="p22" class="alert alert-danger" style="align:center;display: none;">
-                        <strong>Enter a valid email</strong>
-                    </div>
-                    <div id="p23" class="alert alert-danger" style="align:center;display: none;">
-                        <strong>Email already registered, Use a different one</strong>
-                    </div>
-                </div>
-                <div class="form-group1">
-                    <input type="text" name='cphone' id='cphone' placeholder="Contact Number">
-                    <!-- <p id="p33"></p> -->
-                    <div id="p33" class="alert alert-danger" style="align:center;display: none;">
-                        <strong>Enter a valid Phone number</strong>
-                    </div>
-                </div>
-                <div class="form-group1">
-                    <!-- <input type="text" placeholder="Proof of existance-documents upload field"> -->
-                    <div class="text-center">
-                        <label>Documents for Proof of existance</label>
-                        <h6>Proof can be Copy of licences, Image of Establishment or any Valid and legal
-                            document</h6>
-
-                        <input class=" file" name="proof1" type="file" accept=".pdf,.doc,.png.,.jpg" id="proof1" />
-                        <input class=" file" name="proof2" type="file" accept=".pdf,.doc,.png.,.jpg" id="proof2" />
-                        <input class=" file" name="proof3" type="file" accept=".pdf,.doc,.png.,.jpg" id="proof3" />
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <div class="gap">
-
-                        <!-- <div class="verify-wrapper" hidden>
+                                    <!-- <div class="verify-wrapper" hidden>
 						<div class="verify">
 						<div class="form-group">
 						<div class="text-center">
@@ -531,51 +578,52 @@
 						<div class="button-wrapper "><button type="submit" class="button">Verify</button></div>
 						</div>
 						</div> -->
-                        <div id="head1" style="align:center;display: none;" class="alert alert-danger">
-                            <strong>All details are mandatory</strong>
-                        </div>
-                        <div class="button-wrapper verify-open"><button type="submit" id="submit1" name="submit1"
-                                class="button">Request verification</button></div>
-                    </div>
-                    <div class="text-center">
-                        <p>Verification details will be sent via email</p>
-                        <p>Already have an account? <a href="#" class="login-open">Log in</a></p>
-                    </div>
-                </div>
-            </form>
-        </div> <!-- end .signup -->
-    </div> <!-- end .listing-wrapper -->
+                                    <div id="head1" style="align:center;display: none;" class="alert alert-danger">
+                                        <strong>All details are mandatory</strong>
+                                    </div>
+                                    <div class="button-wrapper verify-open"><button type="submit" id="submit1"
+                                            name="submit1" class="button">Request verification</button></div>
+                                </div>
+                                <div class="text-center">
+                                    <p>Verification details will be sent via email</p>
+                                    <p>Already have an account? <a href="#" class="login-open">Log in</a></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div> <!-- end .signup -->
+                </div> <!-- end .listing-wrapper -->
 
-    <!-- jQuery -->
-    <script src="js/jquery-3.1.0.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- google maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy-PboZ3O_A25CcJ9eoiSrKokTnWyAmt8"></script>
-    <!-- rich marker -->
-    <script src="js/richmarker.js"></script>
-    <!-- Owl Carousel -->
-    <script src="js/owl.carousel.min.js"></script>
-    <!-- Countdown -->
-    <script src="js/countdown.js"></script>
-    <!-- Sweet Alert -->
-    <script src="js/sweetalert.min.js"></script>
-    <!-- Nivo Lightbox -->
-    <script src="scripts/Nivo-Lightbox/nivo-lightbox.min.js"></script>
-    <!-- NoUISlider -->
-    <script src="js/jquery.nouislider.all.min.js"></script>
-    <!-- Bootstrap Select -->
-    <script src="js/bootstrap-select.min.js"></script>
-    <!-- Nice Scroll -->
-    <script src="js/jquery.nicescroll.min.js"></script>
-    <!-- Scripts.js -->
-    <script src="js/scripts.js"></script>
-    <!-- ajax.js -->
-    <script src="js/myajax.js"></script>
-    <!-- formvalidate.js -->
-    <script src="js/formvalidate.js"></script>
-    <!-- formvalidate1.js -->
-    <script src="js/formvalidate1.js"></script>
+                <!-- jQuery -->
+                <script src="js/jquery-3.1.0.min.js"></script>
+                <!-- Bootstrap -->
+                <script src="js/bootstrap.min.js"></script>
+                <!-- google maps -->
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy-PboZ3O_A25CcJ9eoiSrKokTnWyAmt8">
+                </script>
+                <!-- rich marker -->
+                <script src="js/richmarker.js"></script>
+                <!-- Owl Carousel -->
+                <script src="js/owl.carousel.min.js"></script>
+                <!-- Countdown -->
+                <script src="js/countdown.js"></script>
+                <!-- Sweet Alert -->
+                <script src="js/sweetalert.min.js"></script>
+                <!-- Nivo Lightbox -->
+                <script src="scripts/Nivo-Lightbox/nivo-lightbox.min.js"></script>
+                <!-- NoUISlider -->
+                <script src="js/jquery.nouislider.all.min.js"></script>
+                <!-- Bootstrap Select -->
+                <script src="js/bootstrap-select.min.js"></script>
+                <!-- Nice Scroll -->
+                <script src="js/jquery.nicescroll.min.js"></script>
+                <!-- Scripts.js -->
+                <script src="js/scripts.js"></script>
+                <!-- ajax.js -->
+                <script src="js/myajax.js"></script>
+                <!-- formvalidate.js -->
+                <script src="js/formvalidate.js"></script>
+                <!-- formvalidate1.js -->
+                <script src="js/formvalidate1.js"></script>
 
 </body>
 

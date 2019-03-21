@@ -66,7 +66,6 @@
         <div class="container">
             <div class="row">
                 @include('inc.admin.admindash_sidebar')
-                <!-- @include('inc.admin.admindash_dashtbl') -->
             </div>
         </div>
     </div>

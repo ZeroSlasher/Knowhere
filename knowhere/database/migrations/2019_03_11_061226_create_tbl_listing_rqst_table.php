@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTblListingRqstTable extends Migration
 {
@@ -16,13 +16,13 @@ class CreateTblListingRqstTable extends Migration
         Schema::create('tbl_listing_rqst', function (Blueprint $table) {
             $table->bigIncrements('rqst_id')->unsigned();
 
-            $table->string('email');
+            $table->string('email')->unique();
 
             $table->string('outletname');
 
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('city_id')->on('tbl_city');
-            
+
             $table->string('phone');
 
             $table->string('ownername');

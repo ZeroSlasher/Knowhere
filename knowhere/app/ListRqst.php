@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class ListRqst extends Model
 {
-    protected $table="tbl_listing_rqst";
-    protected $primarykey="rqst_id";
-    
-    public $fillable=[
+    protected $table = "tbl_listing_rqst";
+    protected $primarykey = "rqst_id";
+
+    public $fillable = [
         'rqst_id',
-        'email',
+        'id',
         'outletname',
         'city_id',
         'phone',

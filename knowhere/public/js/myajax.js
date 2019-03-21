@@ -11,6 +11,7 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (data) {
                     $('select[name="subcat"]').empty();
+                    $('select[name="subcat"]').append('<option disabled selected> -- select subcatagory -- </option>');
                     $.each(data, function (key, value) {
                         $('select[name="subcat"]').append('<option value="' + value.subcat_id + '">' + value.subcatagory + '</option>');
                     });
@@ -35,7 +36,7 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (data) {
                     $('select[name="district"]').empty();
-                    $('select[name="city"]').append('<option disabled selected> -- select city -- </option>');
+                    $('select[name="district"]').append('<option disabled selected> -- select district -- </option>');
                     $.each(data, function (key, value) {
                         $('select[name="district"]').append('<option value="' + value.dist_id + '">' + value.district + '</option>');
                     });
@@ -60,7 +61,7 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (data) {
                     $('select[name="city"]').empty();
-                    $('select[name="city"]').append('<option disabled selected> -- select district -- </option>');
+                    $('select[name="city"]').append('<option disabled selected> -- select city -- </option>');
                     $.each(data, function (key, value) {
                         $('select[name="city"]').append('<option value="' + value.city_id + '">' + value.city + '</option>');
                     });

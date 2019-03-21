@@ -5,7 +5,6 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Knowhere</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css')}}">
@@ -13,23 +12,17 @@
 
     <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/slicknav.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/color-switcher.css')}}
-">
+    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/color-switcher.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/nivo-lightbox.css')}}
-">
+    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/nivo-lightbox.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/animate.css')}}
-">
+    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/animate.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/owl.carousel.css')}}
-">
+    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/owl.carousel.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/main.css')}}
-">
+    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/main.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/responsive.css')}}
-">
+    <link rel="stylesheet" type="text/css" href="    {{ asset('assets/css/responsive.css')}}">
 </head>
 
 <body>
@@ -64,46 +57,51 @@
                 <div class="col-lg-5 col-md-12 col-xs-12">
                     <div class="forgot login-area">
                         <h3>
-                            Forgot Password
+                            Reset Password
                         </h3>
-                        <form role="form" method="POST" action="/password/email" class="login-form">
+                        <form role="form" method="POST" action="/password/reset" class="login-form">
                             @csrf
-
-                            <div class="card-body">
-                                @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    <strong>{{ session('status') }}</strong>
+                            <input type="hidden" name="token" value="{{ $token }}">
+                            @if (count($errors) > 0)
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <div id="head" class="alert alert-danger">
+                                    <strong>{{ $error }}</strong>
                                 </div>
-                                @endif
+                                @endforeach
+                            </ul>
+                            @endif
+                            <div class="form-group">
+                                <div class="input-icon">
+                                    <i class="lni-envelope"></i>
+                                    <input type="email" id="email" class="form-control" name="email"
+                                        placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-icon">
+                                    <i class="lni-lock"></i>
+                                    <input type="password" id="password" class="form-control" name="password"
+                                        placeholder="password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-icon">
+                                    <i class="lni-lock"></i>
+                                    <input type="password" id="password_confirmation" class="form-control"
+                                        name="password_confirmation" placeholder="Confirm Password">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-common log-btn">Reset Password</button>
+                            </div>
+                            <div class="form-group mt-4">
+                                <ul class="form-links">
 
-
-                                @if (count($errors) > 0)
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                    <!-- <li class="alert alert-danger">{{ $error }}</li> -->
-                                    <div id="head" class="alert alert-danger">
-                                        <strong>{{ $error }}</strong>
-                                    </div>
-                                    @endforeach
+                                    <li class="float-left"><a href="/">Don't have an account?</a></li>
+                                    <li class="float-right"><a href="/">Back to Login</a></li>
                                 </ul>
-                                @endif
-                                <div class="form-group">
-                                    <div class="input-icon">
-                                        <i class="icon lni-user"></i>
-                                        <input type="text" id="sender-email" class="form-control" name="email"
-                                            placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-common log-btn">Send me my Password</button>
-                                </div>
-                                <div class="form-group mt-4">
-                                    <ul class="form-links">
-
-                                        <li class="float-left"><a href="/">Don't have an account?</a></li>
-                                        <li class="float-right"><a href="/">Back to Login</a></li>
-                                    </ul>
-                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -207,32 +205,19 @@
     </div>
 
     <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
-    <script src="    {{ asset('assets/js/popper.min.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/bootstrap.min.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/color-switcher.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/jquery.counterup.min.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/waypoints.min.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/wow.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/owl.carousel.min.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/nivo-lightbox.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/jquery.slicknav.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/main.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/form-validator.min.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/contact-form-script.min.js') }}
-"></script>
-    <script src="    {{ asset('assets/js/summernote.js') }}
-"></script>
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('assets/js/wow.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/nivo-lightbox.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
+    <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
+    <script src="{{ asset('assets/js/summernote.js') }}"></script>
 </body>
 
 

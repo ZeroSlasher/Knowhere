@@ -11,8 +11,8 @@
                              <div class="dashboardbox">
                                  <div class="icon"><i class="lni-write"></i></div>
                                  <div class="contentbox">
-                                     <h2><a href="#">Total Ad Posted</a></h2>
-                                     <h3>480 Add Posted</h3>
+                                     <h2><a href="#">Total Outlet Owners</a></h2>
+                                     <h3>{{$total}} Owners</h3>
                                  </div>
                              </div>
                          </div>
@@ -20,8 +20,8 @@
                              <div class="dashboardbox">
                                  <div class="icon"><i class="lni-add-files"></i></div>
                                  <div class="contentbox">
-                                     <h2><a href="#">Featured Ads</a></h2>
-                                     <h3>80 Add Posted</h3>
+                                     <h2><a href="#">Blocked Owners</a></h2>
+                                     <h3>{{$blocked}} Owners</h3>
                                  </div>
                              </div>
                          </div>
@@ -29,13 +29,14 @@
                              <div class="dashboardbox">
                                  <div class="icon"><i class="lni-support"></i></div>
                                  <div class="contentbox">
-                                     <h2><a href="#">Offers / Messages</a></h2>
-                                     <h3>2040 Messages</h3>
+                                     <h2><a href="#">Active owners</a></h2>
+                                     <h3>{{$active}} owners</h3>
                                  </div>
                              </div>
                          </div>
                      </div>
                  </div>
+                 @include('inc.message')
                  <table class="table table-responsive dashboardtable tablemyads">
                      <thead>
                          <tr>
@@ -51,43 +52,55 @@
                          </tr>
                      </thead>
                      <tbody>
-                         <form name="approveform" action="#" method="POST">
-                             @csrf
-                             @isset($orqst)
+                         @isset($orqst)
 
-                             @foreach($orqst as $cmp)
+                         @foreach($orqst as $cmp)
+                         <form name="approveform" action="/ownerblock" method="POST">
+                             @csrf
+
                              <!-- deleted expired inactive sold deleted -->
                              <tr data-category="inactive">
-                                 <!-- outlet name -->
+
+                                 <input type="text" name="oregid" id="oregid" hidden value="{{$cmp->oregid}}">
+
+                                 <!-- owner name -->
                                  <td class="Title">
                                      <h3>{{$cmp->name}}</h3>
                                  </td>
-                                 <!-- City -->
+                                 <!-- email -->
                                  <td data-title="Title">
-                                     <h3>{{$cmp->email}}</h3>
-
+                                     <input type="text" id="email" name="email" value="{{$cmp->email}}"
+                                         style="background:rgba(0,0,0,0);border:none;cursor:not-allowed;font-family:montserrat, sans-serif;"
+                                         size='20' readonly />
                                  </td>
-                                 <!-- Email -->
+                                 <!-- Phone -->
                                  <td data-title="Phone"><span class="adcategories">{{$cmp->phone}}</span>
-                                 </td><!-- Phone -->
+                                 </td><!-- city  -->
                                  <td data-title="Email"><span class="adcategories">{{$cmp->city}}</span>
                                      <span>District -- State</span>
                                  </td>
+                                 <!-- address  -->
                                  <td data-title="Phone"><span class="adcategories">{{$cmp->address}}</span>
-                                 </td><!-- Phone -->
+                                 </td><!-- status -->
                                  <td data-title="Status"><span class="adstatus adstatusactive">{{$cmp->status}}</span>
                                  </td>
                                  <td data-title="Action">
                                      <div class="btns-actions">
-                                         <a class="btn-action btn-view" href=""><i class="lni-ban"></i></i></a>
-                                         <a class="btn-action btn-edit" href=""><i
-                                                 class="lni-check-mark-circle"></i></a>
+                                         @if($cmp->status =='active')
+                                         <button type="submit" class="btn-action btn-delete"><i
+                                                 class="lni-ban"></i></button>
+
+                                         @else
+                                         <button type="submit" class="btn-action btn-view"><i
+                                                 class="lni-check-mark-circle"></i></button>
+                                         @endif
                                      </div>
-                                 </td>
-                             </tr>
-                             @endforeach
-                             @endisset
                          </form>
+                         </td>
+                         </tr>
+                         @endforeach
+                         @endisset
+
                      </tbody>
                  </table>
              </div>

@@ -15,13 +15,13 @@ function formValidation() {
         name.focus();
         return false;
     }
-    if (inputAlphabetl(name, 3, 15)) {
+    if (inputAlphabetln(name, 3, 15)) {
 
-        if (emailValidation(email)) {
+        if (emailValidationn(email)) {
 
-            if (lengthDefinep(pass, 3)) {
+            if (phonevalidationn(phone, 10)) {
 
-                if (phonevalidation(phone, 10)) {
+                if (lengthDefinepn(pass, 8)) {
 
                     return true;
                 }
@@ -33,7 +33,53 @@ function formValidation() {
 
 
 
-function lengthDefinep(inputtext, min) {
+
+function inputAlphabetln(inputtext, min, max) {
+    var alphaExp = /^[a-z ,.'-]+$/i;
+    var uInput = inputtext.value;
+    if (inputtext.value.match(alphaExp) && uInput.length >= min && uInput.length <= max) {
+        document.getElementById('p1').innerText = "";
+        return true;
+    } else {
+        // document.getElementById('p2').innerText = "Enter valid name";  //this segment displays the validation rule for name
+        $("#p1").show().delay(1000).fadeOut();
+        name.value = '';
+        return false;
+    }
+}
+
+
+function emailValidationn(inputtext) {
+    var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+    if (inputtext.value.match(emailExp)) {
+        document.getElementById('p2').innerText = "";
+        return true;
+    } else {
+        // document.getElementById('p3').innerText = "Enter a vaild email"; //this segment displays the validation rule for email
+        $("#p2").show().delay(1000).fadeOut();
+        mail.value = '';
+        return false;
+    }
+}
+
+
+function phonevalidationn(inputtext, max) {
+    var alphaExp = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
+    var uInput = inputtext.value;
+    if (inputtext.value.match(alphaExp) && uInput.length == max) {
+        document.getElementById('p3').innerText = "";
+
+        return true;
+    } else {
+        // document.getElementById('p1').innerText = "Enter valid name";  //this segment displays the validation rule for name
+        $("#p3").show().delay(1000).fadeOut();
+        phone.value = '';
+        return false;
+    }
+}
+
+
+function lengthDefinepn(inputtext, min) {
 
     var uInput = inputtext.value;
     var alphaExp = /^(?=.*\d).{8,15}$/;
@@ -43,56 +89,11 @@ function lengthDefinep(inputtext, min) {
     } else {
 
         // document.getElementById('p4').innerText = "Enter name between " +min+ " and " +max+ " characters *"; //this segment displays the validation rule for username
-        $("#p4").html("<p>Password must be between 8 and 15 digits long and include at least one digit </p>").fadeIn().delay('1000').fadeOut();
-        // inputtext.value = '';
+        $("#p4").show().delay(1000).fadeOut();
+        inputtext.value = '';
         return false;
     }
 }
-
-function inputAlphabetl(inputtext, min, max) {
-    var alphaExp = /^[a-z ,.'-]+$/i;
-    var uInput = inputtext.value;
-    if (inputtext.value.match(alphaExp) && uInput.length >= min && uInput.length <= max) {
-        document.getElementById('p1').innerText = "";
-        return true;
-    } else {
-        // document.getElementById('p2').innerText = "Enter valid name";  //this segment displays the validation rule for name
-        $("#p1").html("<p>Enter valid name</p>").fadeIn().delay('1000').fadeOut();
-        // name.value = '';
-        return false;
-    }
-}
-
-
-function emailValidation(inputtext) {
-    var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-    if (inputtext.value.match(emailExp)) {
-        document.getElementById('p2').innerText = "";
-        return true;
-    } else {
-        // document.getElementById('p3').innerText = "Enter a vaild email"; //this segment displays the validation rule for email
-        $("#p2").html("<p>Enter a vaild email</p>").fadeIn().delay('1000').fadeOut();
-        // email.value = '';
-        return false;
-    }
-}
-
-
-function phonevalidation(inputtext, max) {
-    var alphaExp = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
-    var uInput = inputtext.value;
-    if (inputtext.value.match(alphaExp) && uInput.length <= min) {
-        document.getElementById('p3').innerText = "";
-
-        return true;
-    } else {
-        // document.getElementById('p1').innerText = "Enter valid name";  //this segment displays the validation rule for name
-        $("#p3").html("<p>Enter valid Phone</p>").fadeIn().delay('1000').fadeOut();
-        // phone.value = '';
-        return false;
-    }
-}
-
 
 function emailDoesExist1() {
     $('#Register').addClass('disabled');
@@ -110,8 +111,8 @@ function emailDoesExist1() {
             // },
             success: function (data) {
                 if (data == 1) {
-                    $("#p24").fadeIn().delay('1000').fadeOut();
-                    document.getElementById('email').value = "";
+                    $("#p24").show().delay(1000).fadeOut();
+                    document.getElementById('mail').value = "";
                 } else {
 
                 }
