@@ -17,6 +17,8 @@
 
                 Go to Knowhere.com and edit your posting today.<br>
                 greetings from Knowhere..
+                <img src="<?php echo $message->embed('images/logo.png'); ?>">
+
 
     </div>
 

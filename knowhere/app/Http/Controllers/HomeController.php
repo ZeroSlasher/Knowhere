@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-session_start();
+// session_start();
 use App\City;
 use App\District;
 use App\SubCat;
@@ -134,6 +134,10 @@ class HomeController extends Controller
     public function mypost()
     {
         return view('mypost');
+    }
+    public function coming()
+    {
+        return view('comingsoon');
     }
 
 }

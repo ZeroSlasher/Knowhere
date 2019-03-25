@@ -24,12 +24,14 @@ class LoginController extends Controller
             $dbpwd_h = $object->password; //hash
             $hash; //plain
 
-            if (Hash::check($hash, $dbpwd_h)) 
-            {
+            if (Hash::check($hash, $dbpwd_h)) {
 
                 $sutype = $object->utype_id;
                 $semail = $object->email;
-                
+                $id = $object->id;
+
+                // $reguser = DB::select('');
+
                 if ($object->utype_id == '1' && $object->status_id == 1) {
                     // session(['email'=>$semail]);
                     // session(['utype'=>$sutype]);
@@ -58,7 +60,7 @@ class LoginController extends Controller
     {
         //session_start();
         //session_destroy();
-        Session::forget(['id','utype']);
+        Session::forget(['id', 'utype']);
         Session::flush();
         return redirect('/')->with('msg', 'Logged out successfully');
     }

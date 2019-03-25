@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-wrapper">
-                        <h2 class="product-title">Dashbord</h2>
+                        <h2 class="product-title">ZeroSlasher</h2>
                         <ol class="breadcrumb">
                             <li><a href="/">Home /</a></li>
                             <li class="current">Dashboard</li>

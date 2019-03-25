@@ -79,6 +79,8 @@
 
                                  <!-- Category -->
                                  <td data-title="Category">
+                                     <input type="text" name="subcatid" id="subcatid" hidden
+                                         value="{{$cmp->subcat_id}}">
                                      <input type="text" id="subcat" name="subcat" value="{{$cmp->subcatagory}}"
                                          style="background:rgba(0,0,0,0);border:none;cursor:not-allowed;font-family:montserrat, sans-serif;"
                                          size='10' readonly />
@@ -120,6 +122,7 @@
 
                                  <!-- status -->
                                  <td data-title="Status">
+                                     <input type="text" name="status" id="status" hidden value="{{$cmp->status_id}}">
                                      <span class="adstatus adstatusactive">{{$cmp->status}}</span>
                                  </td>
 
@@ -134,7 +137,6 @@
                                                  class="lni-check-mark-circle"></i></button>
                                          <a class="btn-action btn-delete" href="/rqstdisapprove/{{$cmp->rqst_id}}"><i
                                                  class="lni-ban"></i></a>
-                                         <a class="btn-action btn-view" href="/sendEmail"><i class="lni-cloud"></i></a>
 
 
                                      </div>

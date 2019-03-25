@@ -6,6 +6,7 @@
                     <a href="#"><img src="assets/img/author/img1.jpg" alt="ZeroSlasher"></a>
                 </figure>
                 <div class="usercontent">
+
                     <h3>User</h3>
                     <h4>Administrator</h4>
                 </div>
