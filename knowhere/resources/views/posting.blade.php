@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from preview.uideck.com/items/classixer-1.1/post-ads.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:14:23 GMT -->
+<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/post-ads.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:14:23 GMT -->
 <head>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>ClassiXER - Classified Ads Website Template</title>
+<title>Knowhere</title>
 
 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
@@ -567,5 +567,5 @@ Listings
 <script src="assets/js/summernote.js"></script>
 </body>
 
-<!-- Mirrored from preview.uideck.com/items/classixer-1.1/post-ads.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:14:25 GMT -->
+<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/post-ads.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:14:25 GMT -->
 </html>

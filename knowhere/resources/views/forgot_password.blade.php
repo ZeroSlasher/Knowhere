@@ -199,6 +199,6 @@
     <script src="assets/js/summernote.js"></script>
 </body>
 
-<!-- Mirrored from preview.uideck.com/items/classixer-1.1/forgot-password.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:25 GMT -->
+<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/forgot-password.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:25 GMT -->
 
 </html>

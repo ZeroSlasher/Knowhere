@@ -385,7 +385,7 @@
                             <p>Go and have a good time or even make a booking directly from the listing
                                 page.
                                 All of
-                                those, thanks to ExploreCity!</p>
+                                those, thanks to Knowhere!</p>
                         </div> <!-- end .services -->
                     </div> <!-- end .col-sm-4 -->
                 </div> <!-- end .row -->

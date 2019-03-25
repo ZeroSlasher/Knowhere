@@ -7,7 +7,7 @@
                 </figure>
                 <div class="usercontent">
 
-                    <h3>User</h3>
+                    <h3>{{Session::get('name')}}</h3>
                     <h4>Administrator</h4>
                 </div>
             </div>

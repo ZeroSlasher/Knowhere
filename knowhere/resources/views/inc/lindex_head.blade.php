@@ -29,7 +29,13 @@
         <a href="#" class="responsive-menu-open"><i class="fa fa-bars"></i></a>
     </div> <!-- end .navigation -->
     <div class="right">
+        @if(Session::get('utype')=='1')
         <a href="/admindashboard" class="button">Dashboard</a>
+        @elseif(Session::get('utype')=='2')
+        <a href="/ownerdashboard" class="button">Dashboard</a>
+        @elseif(Session::get('utype')=='3')
+        <a href="/userdashboard" class="button">Dashboard</a>
+        @endif
         <a href="/logout" class="button">Logout</a>
     </div> <!-- end .left -->
 </header> <!-- end .header -->

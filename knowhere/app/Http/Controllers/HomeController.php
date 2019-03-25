@@ -50,6 +50,19 @@ class HomeController extends Controller
         return $city;
     }
 
+    public function editpost($id)
+    {
+        $cat = DB::table('tbl_cat')->get();
+        $state = DB::table('tbl_state')->get();
+        $city = DB::table('tbl_city')->get();
+        $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
+            `tbl_status` as st, `tbl_state` as sta, `tbl_district` as d,tbl_owner_reg as o,tbl_login as log
+            WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and
+            c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`oregid`=o.`oregid` and log.`id`=l.`id`
+            and l.outletid=$id");
+        return view('editpost', compact('cat', 'state', 'city', 'post'));
+    }
+
     public function forgot()
     {
         return view('forgot_password');

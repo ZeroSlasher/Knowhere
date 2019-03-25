@@ -167,8 +167,8 @@
                                     <a href="#"><img src="assets/img/author/img1.jpg" alt=""></a>
                                 </figure>
                                 <div class="usercontent">
-                                    <h3>User</h3>
-                                    <h4>Administrator</h4>
+                                    <h3>{{Session::get('name')}}</h3>
+                                    <h4>User</h4>
                                 </div>
                             </div>
                             <nav class="navdashboard">
@@ -731,6 +731,6 @@
     <script src="assets/js/summernote.js"></script>
 </body>
 
-<!-- Mirrored from preview.uideck.com/items/classixer-1.1/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:29 GMT -->
+<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:29 GMT -->
 
 </html>

@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin Dashboard</title>
+    <title>Owner's Dashboard</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
@@ -30,111 +30,7 @@
 
     <header id="header-wrap">
 
-        <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar">
-            <div class="container">
-
-                <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar"
-                        aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        <span class="lni-menu"></span>
-                        <span class="lni-menu"></span>
-                        <span class="lni-menu"></span>
-                    </button>
-                    <a href="/" class="navbar-brand"><img src="images/logo.png" alt=""></a>
-                </div>
-                <div class="collapse navbar-collapse" id="main-navbar">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="/" aria-haspopup="true">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/categories">
-                                Categories
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="/listing_list" data-toggle="dropdown">Listings</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                About
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="about">About Us</a>
-                                <a class="dropdown-item" href="services">Services</a>
-                                <a class="dropdown-item" href="faq">FAQ</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact">
-                                Contact
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="sign-in">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false"><i class="lni-user"></i> My Account</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="logout"><i class="lni-home"></i> Logout</a>
-                                <!-- <a class="dropdown-item" href="account-profile-setting.html"><i class="lni-home"></i> Account Home</a> -->
-                                <!-- <a class="dropdown-item" href="account-myads.html"><i class="lni-wallet"></i> My Ads</a> -->
-                                <!-- <a class="dropdown-item" href="account-favourite-ads.html"><i class="lni-heart"></i> Favourite ads</a>
-                    <a class="dropdown-item" href="account-archived-ads.html"><i class="lni-folder"></i> Archived</a>
-                    <a class="dropdown-item" href="login.html"><i class="lni-lock"></i> Log In</a>
-                    <a class="dropdown-item" href="signup.html"><i class="lni-user"></i> Signup</a>
-                    <a class="dropdown-item" href="forgot-password.html"><i class="lni-reload"></i> Forgot Password</a>
-                    <a class="dropdown-item" href="account-close.html"><i class="lni-close"></i>Account close</a> -->
-                            </div>
-                        </li>
-                    </ul>
-                    <a class="tg-btn" href="#">
-                        <i class="lni-pencil-alt"></i> Extras
-                    </a>
-                </div>
-            </div>
-
-            <ul class="mobile-menu">
-                <li>
-                    <a href="/">Home</a>
-                </li>
-                <li>
-                    <a href="/categories">Categories</a>
-                </li>
-                <li>
-                    <a href="/listing_list">Listings</a>
-                </li>
-                <li>
-                    <a href="#">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="about">About Us</a></li>
-                        <li><a href="services">Services</a></li>
-                        <li><a href="faq">FAQ</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="contact">Contact Us</a>
-                </li>
-                <li>
-                    <a>My Account</a>
-                    <ul class="dropdown">
-                        <li><a href="/logout"><i class="lni-home"></i>Logout</a></li>
-                        <!-- <li><a href="account-profile-setting.html"><i class="lni-home"></i> Account Home</a></li>
-            <li><a href="account-myads.html"><i class="lni-wallet"></i> My Ads</a></li>
-            <li><a href="account-favourite-ads.html"><i class="lni-heart"></i> Favourite ads</a></li>
-            <li><a href="account-archived-ads.html"><i class="lni-folder"></i> Archived</a></li>
-            <li><a href="login.html"><i class="lni-lock"></i> Log In</a></li>
-            <li><a href="signup.html"><i class="lni-user"></i> Signup</a></li>
-            <li><a href="forgot-password.html"><i class="lni-reload"></i> Forgot Password</a></li>
-            <li><a href="account-close.html"><i class="lni-close"></i>Account close</a></li> -->
-                    </ul>
-                </li>
-            </ul>
-
-        </nav>
+        @include('inc.admin.admindash_head')
 
     </header>
 
@@ -155,7 +51,7 @@
         </div>
     </div>
 
-
+    @foreach($post as $own)
     <div id="content" class="section-padding">
         <div class="container">
             <div class="row">
@@ -167,8 +63,8 @@
                                     <a href="#"><img src="assets/img/author/img1.jpg" alt=""></a>
                                 </figure>
                                 <div class="usercontent">
-                                    <h3>User</h3>
-                                    <h4>Administrator</h4>
+                                    <h3>{{Session::get('name')}}</h3>
+                                    <h4>Owner of {{$own->outletname}}</h4>
                                 </div>
                             </div>
                             <nav class="navdashboard">
@@ -176,43 +72,43 @@
                                     <li>
                                         <a class="active" href="admindashboard">
                                             <i class="lni-dashboard"></i>
-                                            <span>Dashboard</span>
+                                            <span>My Postings</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="account-profile-setting.html">
+                                        <a href="">
                                             <i class="lni-cog"></i>
-                                            <span>Profile Settings</span>
+                                            <span>Edit profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="account-myads.html">
+                                        <a href="">
                                             <i class="lni-layers"></i>
-                                            <span>My Ads</span>
+                                            <span>Option2</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="offermessages.html">
+                                        <a href="">
                                             <i class="lni-envelope"></i>
-                                            <span>Offers/Messages</span>
+                                            <span>Option3</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="payments.html">
+                                        <a href="">
                                             <i class="lni-wallet"></i>
-                                            <span>Payments</span>
+                                            <span>Option3</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="account-favourite-ads.html">
+                                        <a href="">
                                             <i class="lni-heart"></i>
-                                            <span>My Favourites</span>
+                                            <span>Option4</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="privacy-setting.html">
+                                        <a href="">
                                             <i class="lni-star"></i>
-                                            <span>Privacy Settings</span>
+                                            <span>Option5</span>
                                         </a>
                                     </li>
                                     <li>
@@ -239,352 +135,68 @@
                                 <h2 class="dashbord-title">Dashboard</h2>
                             </div>
                             <div class="dashboard-wrapper">
-                                <div class="dashboard-sections">
-                                    <div class="row">
-                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-                                            <div class="dashboardbox">
-                                                <div class="icon"><i class="lni-write"></i></div>
-                                                <div class="contentbox">
-                                                    <h2><a href="#">Total Ad Posted</a></h2>
-                                                    <h3>480 Add Posted</h3>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="featured-box">
+                                            <figure>
+                                                <div class="icon">
+                                                    <i class="lni-heart"></i>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-                                            <div class="dashboardbox">
-                                                <div class="icon"><i class="lni-add-files"></i></div>
-                                                <div class="contentbox">
-                                                    <h2><a href="#">Featured Ads</a></h2>
-                                                    <h3>80 Add Posted</h3>
+                                                <a href="#"><img class="img-fluid" src="assets/img/featured/img1.jpg"
+                                                        alt=""></a>
+                                            </figure>
+                                            <div class="feature-content">
+                                                <div class="product">
+                                                    <a href="#"><i class="lni-folder"></i>
+                                                        {{$own->subcatagory}}</a>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-                                            <div class="dashboardbox">
-                                                <div class="icon"><i class="lni-support"></i></div>
-                                                <div class="contentbox">
-                                                    <h2><a href="#">Offers / Messages</a></h2>
-                                                    <h3>2040 Messages</h3>
+                                                <h4><a href="editpost/{{$own->outletid}}">{{$own->outletname}}</a></h4>
+
+                                                <span>Last Updated: {{$own->updated_at}}</span>
+                                                <ul class=" address">
+                                                    <li>
+                                                        <a href="#"><i class="lni-map-marker"></i>
+                                                            {{$own->city}},{{$own->district}},{{$own->state}}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="lni-alarm-clock"></i>
+                                                            {{$own->created_at}}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="lni-user"></i>
+                                                            {{$own->ownername}}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="lni-home"></i>
+                                                            {{$own->address}}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="lni-phone-handset"></i>
+                                                            {{$own->phone1}}</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="listing-bottom">
+                                                    <h3 class="price float-left">
+                                                        </>
+                                                    </h3>
+                                                    <a href="account-myads.html" class="btn-verified float-right"><i
+                                                            class="lni-check-box"></i>
+                                                        Verified Ad</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
+
                                 </div>
-                                <table class="table table-responsive dashboardtable tablemyads">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkedall">
-                                                    <label class="custom-control-label" for="checkedall"></label>
-                                                </div>
-                                            </th>
-                                            <th>Photo</th>
-                                            <th>Title</th>
-                                            <th>Category</th>
-                                            <th>Ad Status</th>
-                                            <th>Price</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr data-category="active">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="adone">
-                                                    <label class="custom-control-label" for="adone"></label>
-                                                </div>
-                                            </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img1.jpg"
-                                                    alt=""></td>
-                                            <td data-title="Title">
-                                                <h3>HP Laptop 6560b core i3 3nd generation</h3>
-                                                <span>Ad ID: ng3D5hAMHPajQrM</span>
-                                            </td>
-                                            <td data-title="Category"><span class="adcategories">Laptops & PCs</span>
-                                            </td>
-                                            <td data-title="Ad Status"><span
-                                                    class="adstatus adstatusactive">active</span></td>
-                                            <td data-title="Price">
-                                                <h3>139$</h3>
-                                            </td>
-                                            <td data-title="Action">
-                                                <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i
-                                                            class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i
-                                                            class="lni-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr data-category="active">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="adtwo">
-                                                    <label class="custom-control-label" for="adtwo"></label>
-                                                </div>
-                                            </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img2.jpg"
-                                                    alt=""></td>
-                                            <td data-title="Title">
-                                                <h3>Jvc Haebr80b In-ear Sports Headphones</h3>
-                                                <span>Ad ID: ng3D5hAMHPajQrM</span>
-                                            </td>
-                                            <td data-title="Category">Electronics</td>
-                                            <td data-title="Ad Status"><span
-                                                    class="adstatus adstatusactive">Active</span></td>
-                                            <td data-title="Price">
-                                                <h3>$189</h3>
-                                            </td>
-                                            <td data-title="Action">
-                                                <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i
-                                                            class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i
-                                                            class="lni-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr data-category="inactive">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="adthree">
-                                                    <label class="custom-control-label" for="adthree"></label>
-                                                </div>
-                                            </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img3.jpg"
-                                                    alt=""></td>
-                                            <td data-title="Title">
-                                                <h3>Furniture Straps 4-Pack, TV Anti-Tip Metal Wall </h3>
-                                                <span>Ad ID: ng3D5hAMHPajQrM</span>
-                                            </td>
-                                            <td data-title="Category">Real Estate</td>
-                                            <td>
-                                                <span class="adstatus adstatusinactive">Inactive</span>
-                                            </td>
-                                            <td data-title="Price">
-                                                <h3>$69</h3>
-                                            </td>
-                                            <td data-title="Action">
-                                                <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i
-                                                            class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i
-                                                            class="lni-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr data-category="sold">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="adfour">
-                                                    <label class="custom-control-label" for="adfour"></label>
-                                                </div>
-                                            </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img4.jpg"
-                                                    alt=""></td>
-                                            <td data-title="Title">
-                                                <h3>Apple iPhone X, Fully Unlocked 5.8", 64 GB - Black</h3>
-                                                <span>Ad ID: ng3D5hAMHPajQrM</span>
-                                            </td>
-                                            <td data-title="Category">Mobile</td>
-                                            <td data-title="Ad Status"><span class="adstatus adstatussold">Sold</span>
-                                            </td>
-                                            <td data-title="Price">
-                                                <h3>$89</h3>
-                                            </td>
-                                            <td data-title="Action">
-                                                <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i
-                                                            class="lni-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr data-category="active">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="adfive">
-                                                    <label class="custom-control-label" for="adfive"></label>
-                                                </div>
-                                            </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img5.jpg"
-                                                    alt=""></td>
-                                            <td data-title="Title">
-                                                <h3>Apple Macbook Pro 13 Inch with/without Touch Bar</h3>
-                                                <span>Ad ID: ng3D5hAMHPajQrM</span>
-                                            </td>
-                                            <td data-title="Category">Apple</td>
-                                            <td data-title="Ad Status"><span
-                                                    class="adstatus adstatusactive">Active</span></td>
-                                            <td data-title="Price">
-                                                <h3>$289</h3>
-                                            </td>
-                                            <td data-title="Action">
-                                                <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i
-                                                            class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i
-                                                            class="lni-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr data-category="sold">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="adsix">
-                                                    <label class="custom-control-label" for="adsix"></label>
-                                                </div>
-                                            </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img6.jpg"
-                                                    alt=""></td>
-                                            <td data-title="Title">
-                                                <h3>Apple MQDT2CL/A 10.5-Inch 64GB Wi-Fi iPad Pro</h3>
-                                                <span>Ad ID: ng3D5hAMHPajQrM</span>
-                                            </td>
-                                            <td data-title="Category">Apple iPad</td>
-                                            <td data-title="Ad Status"><span class="adstatus adstatussold">Sold</span>
-                                            </td>
-                                            <td data-title="Price">
-                                                <h3>$159</h3>
-                                            </td>
-                                            <td data-title="Action">
-                                                <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i
-                                                            class="lni-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr data-category="expired">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="adseven">
-                                                    <label class="custom-control-label" for="adseven"></label>
-                                                </div>
-                                            </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img7.jpg"
-                                                    alt=""></td>
-                                            <td data-title="Title">
-                                                <h3>Essential Phone 8GB Unlocked with Dual Camera</h3>
-                                                <span>Ad ID: ng3D5hAMHPajQrM</span>
-                                            </td>
-                                            <td data-title="Category">Mobile</td>
-                                            <td data-title="Ad Status"><span
-                                                    class="adstatus adstatusexpired">Expired</span></td>
-                                            <td data-title="Price">
-                                                <h3>$89</h3>
-                                            </td>
-                                            <td data-title="Action">
-                                                <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i
-                                                            class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i
-                                                            class="lni-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr data-category="inactive">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="adeight">
-                                                    <label class="custom-control-label" for="adeight"></label>
-                                                </div>
-                                            </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img8.jpg"
-                                                    alt=""></td>
-                                            <td data-title="Title">
-                                                <h3>LG Nexus 5x LG-H791 32GB GSM Smartphone</h3>
-                                                <span>Ad ID: ng3D5hAMHPajQrM</span>
-                                            </td>
-                                            <td data-title="Category">Mobile</td>
-                                            <td>
-                                                <span class="adstatus adstatusinactive">Inactive</span>
-                                            </td>
-                                            <td data-title="Price">
-                                                <h3>$59</h3>
-                                            </td>
-                                            <td data-title="Action">
-                                                <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i
-                                                            class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i
-                                                            class="lni-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr data-category="expired">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="adnine">
-                                                    <label class="custom-control-label" for="adnine"></label>
-                                                </div>
-                                            </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img9.jpg"
-                                                    alt=""></td>
-                                            <td data-title="Title">
-                                                <h3>Samsung Galaxy G550T On5 GSM Unlocked Smartphone</h3>
-                                                <span>Ad ID: ng3D5hAMHPajQrM</span>
-                                            </td>
-                                            <td data-title="Category">Mobile</td>
-                                            <td data-title="Ad Status"><span
-                                                    class="adstatus adstatusexpired">Expired</span></td>
-                                            <td data-title="Price">
-                                                <h3>$129</h3>
-                                            </td>
-                                            <td data-title="Action">
-                                                <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i
-                                                            class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i
-                                                            class="lni-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr data-category="deleted">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="adten">
-                                                    <label class="custom-control-label" for="adten"></label>
-                                                </div>
-                                            </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img10.jpg"
-                                                    alt=""></td>
-                                            <td data-title="Title">
-                                                <h3>Apple iMac Pro 27" All-in-One Desktop, Space Gray</h3>
-                                                <span>Ad ID: ng3D5hAMHPajQrM</span>
-                                            </td>
-                                            <td data-title="Category">Apple iMac</td>
-                                            <td data-title="Ad Status"><span
-                                                    class="adstatus adstatusdeleted">Deleted</span></td>
-                                            <td data-title="Price">
-                                                <h3>$389</h3>
-                                            </td>
-                                            <td data-title="Action">
-                                                <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i
-                                                            class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i
-                                                            class="lni-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -731,6 +343,6 @@
     <script src="assets/js/summernote.js"></script>
 </body>
 
-<!-- Mirrored from preview.uideck.com/items/classixer-1.1/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:29 GMT -->
+<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:29 GMT -->
 
 </html>

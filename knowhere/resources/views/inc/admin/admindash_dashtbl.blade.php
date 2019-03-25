@@ -123,7 +123,12 @@
                                  <!-- status -->
                                  <td data-title="Status">
                                      <input type="text" name="status" id="status" hidden value="{{$cmp->status_id}}">
+                                     @if($cmp->status =='disapproved')
+                                     <span class="adstatus adstatusdeleted">{{$cmp->status}}</span>
+                                     @else
                                      <span class="adstatus adstatusactive">{{$cmp->status}}</span>
+                                     @endif
+
                                  </td>
 
 

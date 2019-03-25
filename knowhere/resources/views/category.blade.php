@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from preview.uideck.com/items/classixer-1.1/category.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:13:46 GMT -->
+<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/category.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:13:46 GMT -->
 <head>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>ClassiXER - Classified Ads Website Template</title>
+<title>Knowhere</title>
 
 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="assets/fonts/line-icons.css">
@@ -785,5 +785,5 @@ Electronics <span class="category-counter">(9)</span>
 <script src="assets/js/summernote.js"></script>
 </body>
 
-<!-- Mirrored from preview.uideck.com/items/classixer-1.1/category.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:13:50 GMT -->
+<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/category.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:13:50 GMT -->
 </html>
