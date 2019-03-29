@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class OwnerController extends Controller
@@ -79,13 +79,56 @@ class OwnerController extends Controller
             DB::select("INSERT INTO `tbl_prof_images`(`outletid`, `imgname`) VALUES ($outlet,'$rename')");
 
             // }
-            return response()->json(['uploaded'=>'successfully']);
+            return response()->json(['uploaded' => 'successfully']);
         }
 
     }
 
-    public function deleteupload($id){
+    public function deleteupload($id)
+    {
         DB::select("delete from tbl_prof_images where imgid = $id");
-        return back()->with('success','image removed successfully');
+        return back()->with('success', 'image removed successfully');
+    }
+
+    public function editownerprofile()
+    {
+        $oid = Session::get('uid');
+        $state = DB::table('tbl_state')->get();
+        $prof = DB::table('tbl_owner_reg')->where('id', $oid)->get();
+        return view('edit-owner-profile', compact('state', 'prof'));
+    }
+
+    public function updateownerprofile(Request $request)
+    {
+        if ($request->hasFile('prof')) {
+            $destinationPath = 'uploads/';
+            $file = $request->file('prof');
+            $file_name = $file->getClientOriginalName();
+            $rename = time() . $file_name;
+            $file->move($destinationPath, $rename);
+            $own = $request->all();
+            $own['own_name'];
+            DB::select("UPDATE `tbl_owner_reg` SET `name`='$own[own_name]',`city_id`=$own[city],
+             `phone`='$own[cphone]',`address`='$own[Address]',`image`='$rename' WHERE `id`=$own[id]");
+            return back()->with('info', 'profile updated');
+        }
+        return back()->with('warning', 'Invalid data recived');
+
+    }
+
+    public function resetopwd()
+    {
+        $oid = Session::get('uid');
+        $log = DB::table('tbl_login')->where('id', $oid)->get();
+        return view('resetopwd',compact('log'));
+    }
+
+    public function changepassword(Request $request){
+        return $own = $request->all();
+        if($own['own_name'] ){
+            
+        }
+        
+
     }
 }

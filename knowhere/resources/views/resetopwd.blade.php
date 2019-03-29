@@ -1,16 +1,12 @@
-<?php
-use App\Images;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Owner's Dashboard</title>
-    <link rel="stylesheet" href="css/w3.css">
+    <title>Knowhere</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
@@ -22,6 +18,8 @@ use App\Images;
 
     <link rel="stylesheet" type="text/css" href="assets/css/nivo-lightbox.css">
 
+    <link rel="stylesheet" type="text/css" href="assets/css/summernote.css">
+
     <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.css">
@@ -29,7 +27,6 @@ use App\Images;
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
-
 </head>
 
 <body>
@@ -46,10 +43,10 @@ use App\Images;
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-wrapper">
-                        <h2 class="product-title">Dashbord</h2>
+                        <h2 class="product-title">Reset Password</h2>
                         <ol class="breadcrumb">
-                            <li><a href="/">Home /</a></li>
-                            <li class="current">Dashboard</li>
+                            <li><a href="#">Home /</a></li>
+                            <li class="current">Reset Password</li>
                         </ol>
                     </div>
                 </div>
@@ -76,19 +73,20 @@ use App\Images;
                             <nav class="navdashboard">
                                 <ul>
                                     <li>
-                                        <a class="active" href="ownerdashboard">
+                                        <a href="ownerdashboard">
                                             <i class="lni-dashboard"></i>
-                                            <span>My Postings</span>
+                                            <span>Dashboard</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="editownerprofile">
                                             <i class="lni-cog"></i>
-                                            <span>Edit profile</span>
+                                            <span>Profile Settings</span>
                                         </a>
                                     </li>
+                                    </li>
                                     <li>
-                                        <a href="resetopwd">
+                                        <a class="active" href="#">
                                             <i class="lni-layers"></i>
                                             <span>Reset password</span>
                                         </a>
@@ -135,98 +133,65 @@ use App\Images;
                     </aside>
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-9">
-                    <div class="page-content">
-                        <div class="inner-box">
-                            <div class="dashboard-box">
-                                <h2 class="dashbord-title">Dashboard</h2>
-                            </div>
-                            @include('inc.message')
-                            <div class="dashboard-wrapper">
-                                <div class="row">
-                                    @foreach($post as $own)
+                    <div class="row page-content">
 
-                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                        <div class="featured-box">
-                                            <?php
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                            <div class="inner-box" style="width: 1000px;">
+                                <div class="tg-contactdetail">
+                                    <div class="dashboard-box">
+                                        <h2 class="dashbord-title">Contact Detail</h2>
+                                    </div>
+                                    @include('inc.message')
 
-$images = Images::where('outletid', $own->outletid)->get();
-foreach ($images as $i) {
-    $ii = $i->imgname;
-}
-?>
-                                            <figure>
-
-                                                <div class="icon">
-                                                    <a href="editpostimg/{{$own->outletid}}"><i
-                                                            class="lni-upload"></i></a>
+                                    <div class="dashboard-wrapper">
+                                        <form method="POST" action="/changepassword" id="rqstform"
+                                            onsubmit="return formValidation2()" enctype="multipart/form-data">
+                                            @csrf
+                                            @isset($log)
+                                            @foreach($log as $l)
+                                            <input type="text" name="id" value="{{$l->id}}">
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Email</label>
+                                                <input class="form-control input-md" value="{{$l->email}}" name='remail'
+                                                    id='remail' onblur="return emailDoesExist()"
+                                                    placeholder=" Contact Email">
+                                                <div id="p22" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter a valid email</strong>
                                                 </div>
-
-
-
-
-                                                <div class="w3-content w3-display-container" style="max-width:800px">
-                                                    <img class="" src="{{asset('storage/uploads')}}/{{$ii}}" style="
-                                                        width:100%">
-                                                </div>
-
-                                            </figure>
-                                            <div class="feature-content">
-                                                <div class="product">
-                                                    <a href="#"><i class="lni-folder"></i>
-                                                        {{$own->catagory}} -- {{$own->subcatagory}}</a>
-                                                </div>
-                                                <h4><a href=" editpost/{{$own->outletid}}">{{$own->outletname}} </a>
-                                                </h4> <span>Last Updated: {{$own->updated_at}}</span>
-                                                <ul class=" address">
-                                                    <li>
-                                                        <a href="#"><i class="lni-map-marker"></i>
-                                                            {{$own->city}},{{$own->district}},{{$own->state}}</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="lni-alarm-clock"></i>
-                                                            {{$own->created_at}}</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="lni-user"></i>
-                                                            {{$own->ownername}}</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="lni-home"></i>
-                                                            {{$own->address}}</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="lni-phone-handset"></i>
-                                                            {{$own->phone1}}</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li>
-                                                        <i class="lni-notepad"></i>
-                                                        {!!$own->description!!}
-                                                    </li>
-                                                </ul>
-                                                <div class="listing-bottom">
-                                                    <h3 class="price float-left">
-                                                        </>
-                                                    </h3>
-                                                    <a href="account-myads.html" class="btn-verified float-right"><i
-                                                            class="lni-check-box"></i>
-                                                        Verified Ad</a>
+                                                <div id="p23" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Email already registered, Use a different one</strong>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
+                                            @endforeach
+                                            @endisset
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Current password</label>
+                                                <input class="form-control input-md" name="curpass" type="text">
+                                            </div>
 
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">New password</label>
+                                                <input class="form-control input-md" name="npass" type="text">
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Confirm password</label>
+                                                <input class="form-control input-md" name="cpass" type="text">
+                                            </div>
+
+                                            <div class="button-wrapper"><button type="submit" id="submit1"
+                                                    name="submit1" class="btn btn-common">Reset Password</button></div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 
@@ -256,8 +221,12 @@ foreach ($images as $i) {
     <script src="assets/js/form-validator.min.js"></script>
     <script src="assets/js/contact-form-script.min.js"></script>
     <script src="assets/js/summernote.js"></script>
+    <script src="{{ asset('js/myajax.js') }}"></script>
+    <!-- formvalidate1.js -->
+    <script src="js/formvalidate2.js"></script>
 
 </body>
 
+<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/account-profile-setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:22 GMT -->
 
 </html>

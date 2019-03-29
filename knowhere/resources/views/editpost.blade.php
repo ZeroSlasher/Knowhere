@@ -91,9 +91,9 @@
                         @isset($post)
                         @foreach($post as $prof)
                         <form name="editpost" method="Post" action="/updatepost" onsubmit="return"
-                            enctype="multipart/form-data">>
+                            enctype="multipart/form-data">
                             @csrf
-                            <input type="text" name="outletid" value="{{$prof->outletid}}">
+                            <input hidden type="text" name="outletid" value="{{$prof->outletid}}">
                             <div class="form-group mb-3">
                                 <label class="control-label">Outlet name</label>
                                 <input class="form-control input-md" value="{{$prof->outletname}}" id="oname"
@@ -142,7 +142,7 @@
 
 
                                 <div class="form-group mb-3 tg-inputwithicon">
-                                    <label class="control-label">Sub category</label>
+                                    <label class="control-label">State</label>
                                     <div class="tg-select form-control">
                                         <select id="state" name="state">
                                             <option disabled selected value> -- select state -- </option>
@@ -156,7 +156,7 @@
                                 </div>
 
                                 <div class="form-group mb-3 tg-inputwithicon">
-                                    <label class="control-label">Sub district</label>
+                                    <label class="control-label">district</label>
                                     <div class="tg-select form-control">
                                         <select name="district" id="district">
                                             <option disabled selected value> -- select district -- </option>
@@ -165,7 +165,7 @@
                                 </div>
 
                                 <div class="form-group mb-3 tg-inputwithicon">
-                                    <label class="control-label">Sub city</label>
+                                    <label class="control-label">city</label>
                                     <div class="tg-select form-control">
                                         <select name="city" id="city">
                                             <option disabled selected value> -- select city -- </option>
@@ -197,12 +197,12 @@
                                     placeholder="Alternate Contact number" type="text">
                             </div>
 
-                            <div class="form-group mb-3">
+                            <!-- <div class="form-group mb-3">
                                 <label class="control-label">Images</label>
                                 <input id="file" type="file" name="file" multiple class="file" data-max-file-count="4"
                                     data-min-file-count="2">
 
-                            </div>
+                            </div> -->
 
                             @endforeach
                             @endisset

@@ -28,10 +28,16 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::any('/userblock', 'UOmngController@userblock')->name('/userblock');
     Route::any('/ownerblock', 'UOmngController@ownerblock')->name('/ownerblock');
     Route::any('/updatepost', 'OwnerController@updatepost')->name('/updatepost');
-    Route::post('storeimg','OwnerController@storeimg')->name('/storeimg');
+    Route::post('storeimg', 'OwnerController@storeimg')->name('/storeimg');
     Route::any('/editpost/{id}', 'OwnerController@editpost')->name('editpost');
     Route::any('/editpostimg/{id}', 'OwnerController@editpostimg')->name('editpostimg');
     Route::any('/deleteupload/{id}', 'OwnerController@deleteupload')->name('deleteupload');
+    Route::any('/editownerprofile', 'OwnerController@editownerprofile')->name('editownerprofile');
+    Route::any('/updateownerprofile', 'OwnerController@editownerprofile')->name('editownerprofile');
+    Route::any('/updateownerprofile', 'OwnerController@editownerprofile')->name('editownerprofile');
+    Route::any('/updateownerprofile', 'OwnerController@updateownerprofile')->name('editownerprofile');
+    Route::any('/resetopwd', 'OwnerController@resetopwd')->name('resetopwd');
+    Route::any('/changepassword', 'OwnerController@changepassword')->name('changepassword');
 
 });
 
@@ -67,7 +73,6 @@ Route::any('/posting', 'HomeController@posting')->name('posting');
 Route::any('/posting1', 'HomeController@posting1')->name('posting1');
 Route::any('/payment', 'HomeController@payment')->name('payment');
 Route::any('/offer', 'HomeController@offer')->name('offer');
-Route::any('/editprofile', 'HomeController@editprofile')->name('editprofile');
 Route::any('/comingsoon', 'HomeController@coming')->name('comingsoon');
 
 Route::any('subcat/ajax/{id}', 'HomeController@subcatajax')->name('subcat/ajax/{id}');
@@ -84,3 +89,5 @@ Route::GET('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::POST('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 Route::GET('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+
+Route::any('/dummy', 'HomeController@dummy')->name('dummy');

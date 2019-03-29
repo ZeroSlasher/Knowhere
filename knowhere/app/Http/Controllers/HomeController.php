@@ -51,7 +51,6 @@ class HomeController extends Controller
     }
 
 
-
     public function forgot()
     {
         return view('forgot_password');
@@ -117,10 +116,6 @@ class HomeController extends Controller
     {
         return view('how-it-works');
     }
-    public function editprofile()
-    {
-        return view('edit-profile');
-    }
     public function postdetails()
     {
         return view('postdetails');
@@ -141,5 +136,8 @@ class HomeController extends Controller
     {
         return view('comingsoon');
     }
+    public function dummy()
+    {
 
+    }
 }
