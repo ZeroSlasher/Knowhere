@@ -70,7 +70,7 @@
                             <nav class="navdashboard">
                                 <ul>
                                     <li>
-                                        <a class="active" href="admindashboard">
+                                        <a class="active" href="ownerdashboard">
                                             <i class="lni-dashboard"></i>
                                             <span>My Postings</span>
                                         </a>
@@ -134,16 +134,17 @@
                             <div class="dashboard-box">
                                 <h2 class="dashbord-title">Dashboard</h2>
                             </div>
+                            @include('inc.message')
                             <div class="dashboard-wrapper">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="featured-box">
                                             <figure>
                                                 <div class="icon">
-                                                    <i class="lni-heart"></i>
+                                                    <a href="editpostimg/{{$own->outletid}}"><i
+                                                            class="lni-upload"></i></a>
                                                 </div>
-                                                <a href="#"><img class="img-fluid" src="assets/img/featured/img1.jpg"
-                                                        alt=""></a>
+                                                <img class="img-fluid" src="assets/img/featured/img1.jpg" alt="">
                                             </figure>
                                             <div class="feature-content">
                                                 <div class="product">
@@ -173,6 +174,12 @@
                                                     <li>
                                                         <a href="#"><i class="lni-phone-handset"></i>
                                                             {{$own->phone1}}</a>
+                                                    </li>
+                                                </ul>
+                                                <ul>
+                                                    <li>
+                                                        <i class="lni-notepad"></i>
+                                                        {!!$own->description!!}
                                                     </li>
                                                 </ul>
                                                 <div class="listing-bottom">

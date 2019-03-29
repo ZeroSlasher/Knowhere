@@ -27,6 +27,12 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::any('/usermanagement', 'AdminController@usermanagement')->name('usermanagement');
     Route::any('/userblock', 'UOmngController@userblock')->name('/userblock');
     Route::any('/ownerblock', 'UOmngController@ownerblock')->name('/ownerblock');
+    Route::any('/updatepost', 'OwnerController@updatepost')->name('/updatepost');
+    Route::post('storeimg','OwnerController@storeimg')->name('/storeimg');
+    Route::any('/editpost/{id}', 'OwnerController@editpost')->name('editpost');
+    Route::any('/editpostimg/{id}', 'OwnerController@editpostimg')->name('editpostimg');
+    Route::any('/deleteupload/{id}', 'OwnerController@deleteupload')->name('deleteupload');
+
 });
 
 Route::any('/', 'HomeController@index')->name('/');
@@ -35,6 +41,9 @@ Route::any('/register', 'UserRegController@register')->name('register');
 Route::any('/login', 'LoginController@login')->name('login');
 Route::any('/logout', 'LoginController@logout')->name('logout');
 Route::any('/requestlisting', 'RequestProfController@request')->name('requestlisting');
+
+Route::any('/editpost/{id}', 'OwnerController@editpost')->name('editpost');
+Route::any('/fetchservice/{id}', 'OwnerController@fetchservice')->name('fetchservice');
 
 Route::any('/postdetails', 'HomeController@postdetails')->name('postdetails');
 Route::any('/mypost', 'HomeController@mypost')->name('mypost');

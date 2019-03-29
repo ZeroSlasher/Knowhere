@@ -9,7 +9,8 @@
                 <span class="lni-menu"></span>
                 <span class="lni-menu"></span>
             </button>
-            <a href="/" class="navbar-brand"><img src="images/logo.png" alt=""></a>
+            <a href="/" class="navbar-brand"><img src="{{asset('images/logo.png')}}"
+                    alt="Knowhere"></a>
         </div>
         <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav mr-auto">
