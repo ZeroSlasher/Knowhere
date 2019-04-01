@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+
 </head>
 
 <body>
@@ -92,15 +93,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            <i class="lni-envelope"></i>
-                                            <span>Option3</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
+                                        <a href="Addposting">
                                             <i class="lni-wallet"></i>
-                                            <span>Option3</span>
+                                            <span>Add new posting</span>
                                         </a>
                                     </li>
                                     <li>
@@ -174,14 +169,18 @@
                                             <div class="form-group mb-3">
                                                 <label class="control-label">Address</label>
                                                 <textarea class="form-control input-md" id="Address"
-                                                    name="Address">{{$p->address}}</textarea>
+                                                    name="Address">{{$p->oaddress}}</textarea>
                                             </div>
 
                                             <div class="form-group mb-3">
                                                 <label class="control-label">Add profile image</label>
-                                                <input class="form-control input-md" name="prof" type="file">
+                                                <input class="form-control input-md" id="prof" onchange="myFunction()"
+                                                    name="prof" type="file">
                                                 <img class="img-thumbnail" src="/uploads/{{$p->image}}"
                                                     alt="Profile image" width="200px">
+                                                <img id="preview" src="#" style="display:none" alt="Uploaded image"
+                                                    width="200px" title="click to remove" />
+
                                             </div>
                                             @endforeach
                                             @endisset
@@ -270,9 +269,37 @@
     <script src="{{ asset('js/myajax.js') }}"></script>
     <!-- formvalidate1.js -->
     <script src="js/formvalidate2.js"></script>
+    <script>
+    function readURL(input) {
 
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#prof").change(function() {
+        readURL(this);
+    });
+
+    function myFunction() {
+        var x = document.getElementById("preview");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        }
+    }
+
+    $('#preview').on('click', function() {
+        $('#prof').val("");
+        $('#preview').hide();
+    });
+    </script>
 </body>
 
-<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/account-profile-setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:22 GMT -->
 
 </html>

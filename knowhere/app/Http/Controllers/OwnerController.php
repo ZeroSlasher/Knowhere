@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class OwnerController extends Controller
 {
@@ -14,39 +16,72 @@ class OwnerController extends Controller
         $cat = DB::table('tbl_cat')->get();
         $state = DB::table('tbl_state')->get();
         $city = DB::table('tbl_city')->get();
-        $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
+         $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
             `tbl_status` as st, `tbl_state` as sta, `tbl_district` as d,tbl_owner_reg as o,tbl_login as log
             WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and
             c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`oregid`=o.`oregid` and log.`id`=l.`id`
             and l.outletid=$id");
-        // $service = DB::table('tbl_services')->get();
         return view('editpost', compact('cat', 'state', 'city', 'post'));
     }
 
     public function updatepost(Request $request)
     {
-        $request->all();
-        $oid = $request->get('outletid');
+         $request->all();
+         $oid = $request->get('outletid');
 
-        $outletname = $request->get('oname');
-        $ownername = $request->get('owname');
-        $address = $request->get('Address');
-        $description = $request->get('Description');
-        $subcat_id = $request->get('subcat');
-        $city_id = $request->get('city');
-        if (!empty($request->get('service'))) {
-            $Service_id = implode(",", $request->get('service'));
-
-            $website = $request->get('wsite');
-            $phone1 = $request->get('phone1');
-            $phone2 = $request->get('phone2');
-            $status_id = 3;
-
-            DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
-       `address`='$address',`description`='$description',`website`='$website',`city_id`=$city_id,`subcat_id`=$subcat_id,
-       `Service_id`='$Service_id',`phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
+         $outletname = $request->get('oname');
+         $ownername = $request->get('owname');
+         $address = $request->get('Address');
+         $description = $request->get('Description');
+         $subcat_id = $request->get('subcat'); //subcat value is there if cat is selected
+         $city_id = $request->get('city');
+         $website = $request->get('wsite');
+         $phone1 = $request->get('phone1');
+         $phone2 = $request->get('phone2');
+        $status_id = 3;
+        if (!empty($request->get('subcat'))) //if subcat is selected
+        {
+            return 1;
+            $Service_id = implode(",", $request->get('service'));//value of service is here
+            return DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
+            `address`='$address',`description`='$description',`website`='$website',`subcat_id`=$subcat_id,
+            `Service_id`='$Service_id',`phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
+             
+             return redirect('/ownerdashboard')->with('info', 'Posting updated');
         }
-        return redirect('/ownerdashboard')->with('info', 'Posting updated');
+        elseif(!empty($request->get('city'))) //if state,city and dist are selected
+        {
+            return 2;
+
+           return  DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
+           `address`='$address',`description`='$description',`website`='$website',`city_id`=$city_id,`phone1`='$phone1',
+           `phone2`='$phone2' WHERE `outletid`=$oid");
+
+return redirect('/ownerdashboard')->with('info', 'Posting updated');
+}
+        elseif(empty($subcat_id) && empty($city_id))// if both city and subcat are not selected
+        {
+            echo $address;
+            // return 3;
+            // return $request->all();
+
+              DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',`address`='$address',`description`='$description',`website`='$website',`phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
+             return redirect('/ownerdashboard')->with('info', 'Posting updated');
+
+        }
+        else//if all are selected
+        {
+            return 4;
+            return  DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
+           `address`='$address',`description`='$description',`website`='$website',`city_id`=$city_id,`subcat_id`=$subcat_id,
+            `Service_id`='$Service_id',`phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
+
+return redirect('/ownerdashboard')->with('info', 'Posting updated');
+
+        }
+
+
+
 
     }
 
@@ -100,16 +135,19 @@ class OwnerController extends Controller
 
     public function updateownerprofile(Request $request)
     {
+        return $file = $request->file('prof');
+
         if ($request->hasFile('prof')) {
             $destinationPath = 'uploads/';
             $file = $request->file('prof');
             $file_name = $file->getClientOriginalName();
             $rename = time() . $file_name;
             $file->move($destinationPath, $rename);
+            // Storage::disk('local'->put('$rename'));
             $own = $request->all();
             $own['own_name'];
             DB::select("UPDATE `tbl_owner_reg` SET `name`='$own[own_name]',`city_id`=$own[city],
-             `phone`='$own[cphone]',`address`='$own[Address]',`image`='$rename' WHERE `id`=$own[id]");
+             `phone`='$own[cphone]',`oaddress`='$own[Address]',`image`='$rename' WHERE `id`=$own[id]");
             return back()->with('info', 'profile updated');
         }
         return back()->with('warning', 'Invalid data recived');
@@ -120,15 +158,30 @@ class OwnerController extends Controller
     {
         $oid = Session::get('uid');
         $log = DB::table('tbl_login')->where('id', $oid)->get();
-        return view('resetopwd',compact('log'));
+        return view('resetopwd', compact('log'));
     }
 
-    public function changepassword(Request $request){
-        return $own = $request->all();
-        if($own['own_name'] ){
-            
+    public function changepassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'npass' => 'required|regex:/^(?=.*\d).{8,15}$/',
+            'cpass' => 'required|regex:/^(?=.*\d).{8,15}$/',
+        ]);
+        $own = $request->all();
+        if ($own['npass'] == null || $own['cpass'] == null || $own['curpass'] == null) {
+            //return 3;
+            return back()->with('error', 'All fields are mandatory');
+        } elseif ($own['npass'] != $own['cpass']) {
+            //return 2;
+             return back()->with('error', 'passwords not matching');
+        } elseif ($validator->fails()) {
+            //return 1;
+            return back()->with('error', 'password: Uppercase letter,digit,min 8 characters');
         }
+        else{
+            return back()->with('success', 'password changed');
         
+        }
 
     }
 }

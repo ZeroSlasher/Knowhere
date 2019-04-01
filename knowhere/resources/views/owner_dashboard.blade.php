@@ -94,9 +94,9 @@ use App\Images;
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            <i class="lni-envelope"></i>
-                                            <span>Option3</span>
+                                        <a href="Addposting">
+                                            <i class="lni-wallet"></i>
+                                            <span>Add new posting</span>
                                         </a>
                                     </li>
                                     <li>
@@ -165,7 +165,7 @@ foreach ($images as $i) {
 
 
                                                 <div class="w3-content w3-display-container" style="max-width:800px">
-                                                    <img class="" src="{{asset('storage/uploads')}}/{{$ii}}" style="
+                                                    <img class="" src="{{asset('/uploads')}}/{{$ii}}" style="
                                                         width:100%">
                                                 </div>
 
@@ -175,7 +175,7 @@ foreach ($images as $i) {
                                                     <a href="#"><i class="lni-folder"></i>
                                                         {{$own->catagory}} -- {{$own->subcatagory}}</a>
                                                 </div>
-                                                <h4><a href=" editpost/{{$own->outletid}}">{{$own->outletname}} </a>
+                                                <h4><a href=" ">{{$own->outletname}} </a>
                                                 </h4> <span>Last Updated: {{$own->updated_at}}</span>
                                                 <ul class=" address">
                                                     <li>
@@ -198,6 +198,10 @@ foreach ($images as $i) {
                                                         <a href="#"><i class="lni-phone-handset"></i>
                                                             {{$own->phone1}}</a>
                                                     </li>
+                                                    <li>
+                                                        <a href="#"><i class="lni-phone-handset"></i>
+                                                            {{$own->phone2}}</a>
+                                                    </li>
                                                 </ul>
                                                 <ul>
                                                     <li>
@@ -209,9 +213,9 @@ foreach ($images as $i) {
                                                     <h3 class="price float-left">
                                                         </>
                                                     </h3>
-                                                    <a href="account-myads.html" class="btn-verified float-right"><i
-                                                            class="lni-check-box"></i>
-                                                        Verified Ad</a>
+                                                    <a href="editpost/{{$own->outletid}}"
+                                                        class="btn-verified float-right"><i class="lni-pencil"></i>
+                                                        Edit posting</a>
                                                 </div>
                                             </div>
                                         </div>

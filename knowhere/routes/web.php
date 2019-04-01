@@ -27,17 +27,23 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::any('/usermanagement', 'AdminController@usermanagement')->name('usermanagement');
     Route::any('/userblock', 'UOmngController@userblock')->name('/userblock');
     Route::any('/ownerblock', 'UOmngController@ownerblock')->name('/ownerblock');
+
+        Route::any('/editpost/{id}', 'OwnerController@editpost')->name('editpost');
+
     Route::any('/updatepost', 'OwnerController@updatepost')->name('/updatepost');
     Route::post('storeimg', 'OwnerController@storeimg')->name('/storeimg');
-    Route::any('/editpost/{id}', 'OwnerController@editpost')->name('editpost');
     Route::any('/editpostimg/{id}', 'OwnerController@editpostimg')->name('editpostimg');
     Route::any('/deleteupload/{id}', 'OwnerController@deleteupload')->name('deleteupload');
+    
     Route::any('/editownerprofile', 'OwnerController@editownerprofile')->name('editownerprofile');
     Route::any('/updateownerprofile', 'OwnerController@editownerprofile')->name('editownerprofile');
     Route::any('/updateownerprofile', 'OwnerController@editownerprofile')->name('editownerprofile');
     Route::any('/updateownerprofile', 'OwnerController@updateownerprofile')->name('editownerprofile');
     Route::any('/resetopwd', 'OwnerController@resetopwd')->name('resetopwd');
+
     Route::any('/changepassword', 'OwnerController@changepassword')->name('changepassword');
+    Route::any('/Addposting', 'PostController@Addposting')->name('Addposting');
+    Route::any('/addpost', 'PostController@addpost')->name('addpost');
 
 });
 
@@ -48,7 +54,6 @@ Route::any('/login', 'LoginController@login')->name('login');
 Route::any('/logout', 'LoginController@logout')->name('logout');
 Route::any('/requestlisting', 'RequestProfController@request')->name('requestlisting');
 
-Route::any('/editpost/{id}', 'OwnerController@editpost')->name('editpost');
 Route::any('/fetchservice/{id}', 'OwnerController@fetchservice')->name('fetchservice');
 
 Route::any('/postdetails', 'HomeController@postdetails')->name('postdetails');
@@ -70,7 +75,6 @@ Route::any('/categories', 'HomeController@categories')->name('categories');
 Route::any('/listing', 'HomeController@listing_list')->name('listing');
 
 Route::any('/posting', 'HomeController@posting')->name('posting');
-Route::any('/posting1', 'HomeController@posting1')->name('posting1');
 Route::any('/payment', 'HomeController@payment')->name('payment');
 Route::any('/offer', 'HomeController@offer')->name('offer');
 Route::any('/comingsoon', 'HomeController@coming')->name('comingsoon');

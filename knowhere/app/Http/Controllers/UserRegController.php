@@ -37,7 +37,7 @@ class UserRegController extends Controller
         ]);
         $reg->save();
 
-        return redirect('/')->with('success', 'Regestration Successfull..Please login');
+        return redirect('/')->with('msg', 'Regestration Successfull..Please login');
     }
 
 }

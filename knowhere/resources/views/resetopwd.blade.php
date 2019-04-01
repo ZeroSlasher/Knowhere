@@ -91,16 +91,11 @@
                                             <span>Reset password</span>
                                         </a>
                                     </li>
+
                                     <li>
-                                        <a href="">
-                                            <i class="lni-envelope"></i>
-                                            <span>Option3</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
+                                        <a href="Addposting">
                                             <i class="lni-wallet"></i>
-                                            <span>Option3</span>
+                                            <span>Add new posting</span>
                                         </a>
                                     </li>
                                     <li>
@@ -145,15 +140,15 @@
 
                                     <div class="dashboard-wrapper">
                                         <form method="POST" action="/changepassword" id="rqstform"
-                                            onsubmit="return formValidation2()" enctype="multipart/form-data">
+                                            onsubmit="return formValidation3()" enctype="multipart/form-data">
                                             @csrf
                                             @isset($log)
                                             @foreach($log as $l)
                                             <input type="text" name="id" value="{{$l->id}}">
                                             <div class="form-group mb-3">
                                                 <label class="control-label">Email</label>
-                                                <input class="form-control input-md" value="{{$l->email}}" name='remail'
-                                                    id='remail' onblur="return emailDoesExist()"
+                                                <input class="form-control input-md" value="{{$l->email}}" name='email'
+                                                    id='email' onblur="return emailDoesExist()"
                                                     placeholder=" Contact Email">
                                                 <div id="p22" class="alert alert-danger"
                                                     style="align:center;display: none;">
@@ -180,7 +175,14 @@
                                                 <label class="control-label">Confirm password</label>
                                                 <input class="form-control input-md" name="cpass" type="text">
                                             </div>
-
+                                            <div id="p24" class="alert alert-danger"
+                                                style="align:center;display: none;">
+                                                <strong>check password</strong>
+                                            </div>
+                                            <div id="head" style="align:center;display: none;"
+                                                class="alert alert-danger">
+                                                <strong>Enter valid input</strong>
+                                            </div>
                                             <div class="button-wrapper"><button type="submit" id="submit1"
                                                     name="submit1" class="btn btn-common">Reset Password</button></div>
                                         </form>
@@ -223,7 +225,7 @@
     <script src="assets/js/summernote.js"></script>
     <script src="{{ asset('js/myajax.js') }}"></script>
     <!-- formvalidate1.js -->
-    <script src="js/formvalidate2.js"></script>
+    <script src="js/formvalidate3.js"></script>
 
 </body>
 

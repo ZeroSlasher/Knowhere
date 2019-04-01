@@ -423,10 +423,10 @@
                 <a href=""><i class="pe-so-instagram"></i></a>
                 <a href=""><i class="pe-so-google-plus"></i></a>
             </div>
-            <div class="right">ZeroSlasher</div>
+            <div class="right"></div>
             <!-- end .left -->
         </div> <!-- end .top -->
-        <div class="bottom">Copyright &copy; 2019. All Rights Reserved By <a href="#">Wecookcode</a></div>
+        <div class="bottom">Copyright &copy; 2019. All Rights Reserved By ZeroSlasher</a></div>
     </footer> <!-- end .footer -->
 
     <div class="login-wrapper">

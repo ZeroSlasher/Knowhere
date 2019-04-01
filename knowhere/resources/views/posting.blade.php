@@ -1,571 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/post-ads.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:14:23 GMT -->
 <head>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Knowhere</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Knowhere</title>
 
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
-<link rel="stylesheet" type="text/css" href="assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="assets/fonts/line-icons.css">
 
-<link rel="stylesheet" type="text/css" href="assets/css/slicknav.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slicknav.css">
 
-<link rel="stylesheet" type="text/css" href="assets/css/color-switcher.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/color-switcher.css">
 
-<link rel="stylesheet" type="text/css" href="assets/css/nivo-lightbox.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/nivo-lightbox.css">
 
-<link rel="stylesheet" type="text/css" href="assets/css/summernote.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/summernote.css">
 
-<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
 
-<link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.css">
 
-<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
-<link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+
+    <link href="{{ asset('css/fileinput.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/font-awesome.min.css') }}" media="all" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
 
-<header id="header-wrap">
+    <header id="header-wrap">
 
-<nav class="navbar navbar-expand-lg fixed-top scrolling-navbar">
-<div class="container">
-
-<div class="navbar-header">
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>
-<span class="lni-menu"></span>
-<span class="lni-menu"></span>
-<span class="lni-menu"></span>
-</button>
-<a href="index-2.html" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a>
-</div>
-<div class="collapse navbar-collapse" id="main-navbar">
-<ul class="navbar-nav mr-auto">
-<li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Home
-</a>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="index-2.html">Home 1</a>
-<a class="dropdown-item" href="index-3.html">Home 2</a>
-<a class="dropdown-item" href="index-4.html">Home 3</a>
-</div>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="category.html">
-Categories
-</a>
-</li>
-<li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Listings
-</a>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="adlistinggrid.html">Ad Grid</a>
-<a class="dropdown-item" href="adlistinglist.html">Ad Listing</a>
-<a class="dropdown-item" href="ads-details.html">Listing Detail</a>
-</div>
-</li>
-<li class="nav-item dropdown active">
-<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Pages
-</a>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="about.html">About Us</a>
-<a class="dropdown-item" href="services.html">Services</a>
-<a class="dropdown-item" href="ads-details.html">Ads Details</a>
-<a class="dropdown-item active" href="post-ads.html">Ads Post</a>
-<a class="dropdown-item" href="pricing.html">Packages</a>
-<a class="dropdown-item" href="testimonial.html">Testimonial</a>
-<a class="dropdown-item" href="faq.html">FAQ</a>
-<a class="dropdown-item" href="404.html">404</a>
-</div>
-</li>
-<li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Blog
-</a>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="blog.html">Blog - Right Sidebar</a>
-<a class="dropdown-item" href="blog-left-sidebar.html">Blog - Left Sidebar</a>
-<a class="dropdown-item" href="blog-grid-full-width.html"> Blog full width </a>
-<a class="dropdown-item" href="single-post.html">Blog Details</a>
-</div>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="contact.html">
-Contact
-</a>
-</li>
-</ul>
-<ul class="sign-in">
-<li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lni-user"></i> My Account</a>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="account-profile-setting.html"><i class="lni-home"></i> Account Home</a>
-<a class="dropdown-item" href="account-myads.html"><i class="lni-wallet"></i> My Ads</a>
-<a class="dropdown-item" href="account-favourite-ads.html"><i class="lni-heart"></i> Favourite ads</a>
-<a class="dropdown-item" href="account-archived-ads.html"><i class="lni-folder"></i> Archived</a>
-<a class="dropdown-item" href="login.html"><i class="lni-lock"></i> Log In</a>
-<a class="dropdown-item" href="signup.html"><i class="lni-user"></i> Signup</a>
-<a class="dropdown-item" href="forgot-password.html"><i class="lni-reload"></i> Forgot Password</a>
-<a class="dropdown-item" href="account-close.html"><i class="lni-close"></i>Account close</a>
-</div>
-</li>
-</ul>
-<a class="tg-btn" href="post-ads.html">
-<i class="lni-pencil-alt"></i> Post An Ad
-</a>
-</div>
-</div>
-
-<ul class="mobile-menu">
-<li>
-<a href="#">
-Home
-</a>
-<ul class="dropdown">
-<li><a href="index-2.html">Home 1</a></li>
-<li><a href="index-3.html">Home 2</a></li>
-<li><a href="index-4.html">Home 2</a></li>
-</ul>
-</li>
-<li>
-<a href="category.html">Categories</a>
-</li>
-<li>
-<a href="#">
-Listings
-</a>
-<ul class="dropdown">
-<li><a href="adlistinggrid.html">Ad Grid</a></li>
-<li><a href="adlistinglist.html">Ad Listing</a></li>
-<li><a href="ads-details.html">Listing Detail</a></li>
-</ul>
-</li>
-<li>
-<a class="active" href="#">Pages</a>
-<ul class="dropdown">
-<li><a href="about.html">About Us</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="ads-details.html">Ads Details</a></li>
-<li><a class="active" href="post-ads.html">Ads Post</a></li>
-<li><a href="pricing.html">Packages</a></li>
-<li><a href="testimonial.html">Testimonial</a></li>
-<li><a href="faq.html">FAQ</a></li>
-<li><a href="404.html">404</a></li>
-</ul>
-</li>
-<li>
-<a href="#">Blog</a>
-<ul class="dropdown">
-<li><a href="blog.html">Blog - Right Sidebar</a></li>
-<li><a href="blog-left-sidebar.html">Blog - Left Sidebar</a></li>
-<li><a href="blog-grid-full-width.html"> Blog full width </a></li>
-<li><a href="single-post.html">Blog Details</a></li>
-</ul>
-</li>
-<li>
-<a href="contact.html">Contact Us</a>
-</li>
-<li>
-<a>My Account</a>
-<ul class="dropdown">
-<li><a href="account-profile-setting.html"><i class="lni-home"></i> Account Home</a></li>
-<li><a href="account-myads.html"><i class="lni-wallet"></i> My Ads</a></li>
-<li><a href="account-favourite-ads.html"><i class="lni-heart"></i> Favourite ads</a></li>
-<li><a href="account-archived-ads.html"><i class="lni-folder"></i> Archived</a></li>
-<li><a href="login.html"><i class="lni-lock"></i> Log In</a></li>
-<li><a href="signup.html"><i class="lni-user"></i> Signup</a></li>
-<li><a href="forgot-password.html"><i class="lni-reload"></i> Forgot Password</a></li>
-<li><a href="account-close.html"><i class="lni-close"></i>Account close</a></li>
-</ul>
-</li>
-</ul>
-
-</nav>
-
-</header>
+        @include('inc.admin.admindash_head')
 
 
-<div class="page-header" style="background: url(assets/img/banner1.jpg);">
-<div class="container">
-<div class="row">
-<div class="col-md-12">
-<div class="breadcrumb-wrapper">
-<h2 class="product-title">Post you Ads</h2>
-<ol class="breadcrumb">
-<li><a href="#">Home /</a></li>
-<li class="current">Post you Ads</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-</div>
+    </header>
 
 
-<div id="content" class="section-padding">
-<div class="container">
-<div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
-<aside>
-<div class="sidebar-box">
-<div class="user">
-<figure>
-<a href="#"><img src="assets/img/author/img1.jpg" alt=""></a>
-</figure>
-<div class="usercontent">
-<h3>User</h3>
-<h4>Administrator</h4>
-</div>
-</div>
-<nav class="navdashboard">
-<ul>
-<li>
-<a href="dashboard.html">
-<i class="lni-dashboard"></i>
-<span>Dashboard</span>
-</a>
-</li>
-<li>
-<a href="account-profile-setting.html">
-<i class="lni-cog"></i>
-<span>Profile Settings</span>
-</a>
-</li>
-<li>
-<a href="account-myads.html">
-<i class="lni-layers"></i>
-<span>My Ads</span>
-</a>
-</li>
-<li>
-<a href="#">
-<i class="lni-envelope"></i>
-<span>Offers/Messages</span>
-</a>
-</li>
-<li>
-<a href="dashboard-payments.html">
-<i class="lni-wallet"></i>
-<span>Payments</span>
-</a>
-</li>
-<li>
-<a href="account-favourite-ads.html">
-<i class="lni-heart"></i>
-<span>My Favourites</span>
-</a>
-</li>
-<li>
-<a href="account-profile-setting.html">
-<i class="lni-star"></i>
-<span>Privacy Settings</span>
-</a>
-</li>
-<li>
-<a href="#">
-<i class="lni-enter"></i>
-<span>Logout</span>
-</a>
-</li>
-</ul>
-</nav>
-</div>
-<div class="widget">
-<h4 class="widget-title">Advertisement</h4>
-<div class="add-box">
-<img class="img-fluid" src="assets/img/img1.jpg" alt="">
- </div>
-</div>
-</aside>
-</div>
-<div class="col-sm-12 col-md-8 col-lg-9">
-<div class="row page-content">
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
-<div class="inner-box">
-<div class="dashboard-box">
-<h2 class="dashbord-title">Ad Detail</h2>
-</div>
-<div class="dashboard-wrapper">
-<div class="form-group mb-3">
-<label class="control-label">Project Title</label>
-<input class="form-control input-md" name="Title" placeholder="Title" type="text">
-</div>
-<div class="form-group mb-3 tg-inputwithicon">
-<label class="control-label">Categories</label>
-<div class="tg-select form-control">
-<select>
-<option value="none">Select Categories</option>
-<option value="none">Mobiles</option>
-<option value="none">Electronics</option>
-<option value="none">Training</option>
-<option value="none">Real Estate</option>
-<option value="none">Services</option>
-<option value="none">Training</option>
-<option value="none">Vehicles</option>
-</select>
-</div>
-</div>
-<div class="form-group mb-3">
-<label class="control-label">Price Title</label>
-<input class="form-control input-md" name="price" placeholder="Ad your Price" type="text">
-<div class="tg-checkbox mt-3">
-<div class="custom-control custom-checkbox">
-<input type="checkbox" class="custom-control-input" id="tg-priceoncall">
-<label class="custom-control-label" for="tg-priceoncall">Price On Call</label>
-</div>
-</div>
-</div>
-<div class="form-group md-3">
-<section id="editor">
-<div id="summernote">
-</div>
-</section>
-</div>
-<label class="tg-fileuploadlabel" for="tg-photogallery">
-<span>Drop files anywhere to upload</span>
-<span>Or</span>
-<span class="btn btn-common">Select Files</span>
-<span>Maximum upload file size: 500 KB</span>
-<input id="tg-photogallery" class="tg-fileinput" type="file" name="file">
-</label>
-</div>
-</div>
-</div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
-<div class="inner-box">
-<div class="tg-contactdetail">
-<div class="dashboard-box">
-<h2 class="dashbord-title">Contact Detail</h2>
-</div>
-<div class="dashboard-wrapper">
-<div class="form-group mb-3">
-<strong>I’m a:</strong>
-<div class="tg-selectgroup">
-<span class="tg-radio">
-<input id="tg-sameuser" type="radio" name="usertype" value="same user" checked="">
-<label for="tg-sameuser">Same User</label>
-</span>
-<span class="tg-radio">
-<input id="tg-someoneelse" type="radio" name="usertype" value="someone else">
-<label for="tg-someoneelse">Someone Else</label>
-</span>
- </div>
-</div>
-<div class="form-group mb-3">
-<label class="control-label">First Name*</label>
-<input class="form-control input-md" name="name" type="text">
-</div>
-<div class="form-group mb-3">
-<label class="control-label">Last Name*</label>
-<input class="form-control input-md" name="name" type="text">
-</div>
-<div class="form-group mb-3">
-<label class="control-label">Phone*</label>
-<input class="form-control input-md" name="phone" type="text">
-</div>
-<div class="form-group mb-3">
-<label class="control-label">Enter Address</label>
-<input class="form-control input-md" name="address" type="text">
-</div>
-<div class="form-group mb-3">
-<label class="control-label">Enter Address</label>
-<input class="form-control input-md" name="address" type="text">
-</div>
-<div class="form-group mb-3 tg-inputwithicon">
-<label class="control-label">Country</label>
-<div class="tg-select form-control">
-<select>
-<option value="none">Select Country</option>
-<option value="none">Country 1</option>
-<option value="none">Country 2</option>
-<option value="none">Country 3</option>
-<option value="none">Country 4</option>
-<option value="none">Country 5</option>
-<option value="none">Country 6</option>
-</select>
-</div>
-</div>
-<div class="form-group mb-3 tg-inputwithicon">
-<label class="control-label">State</label>
-<div class="tg-select form-control">
-<select>
-<option value="none">Select State</option>
-<option value="none">Select State</option>
-<option value="none">Select State</option>
-</select>
-</div>
-</div>
-<div class="form-group mb-3 tg-inputwithicon">
-<label class="control-label">City</label>
-<div class="tg-select form-control">
-<select>
-<option value="none">Select City</option>
-<option value="none">Select City</option>
-<option value="none">Select City</option>
-</select>
-</div>
-</div>
-<div class="tg-checkbox">
-<div class="custom-control custom-checkbox">
-<input type="checkbox" class="custom-control-input" id="tg-agreetermsandrules">
-<label class="custom-control-label" for="tg-agreetermsandrules">I agree to all <a href="javascript:void(0);">Terms of Use &amp; Posting Rules</a></label>
-</div>
-</div>
-<button class="btn btn-common" type="button">Post Ad</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+    <div class="page-header" style="background: url(assets/img/banner1.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-wrapper">
+                        <h2 class="product-title">Add new posting</h2>
+                        <ol class="breadcrumb">
+                            <li><a href="/">Home /</a></li>
+                            <li class="current">Add new posting</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<footer>
+    <div id="content" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
+                    <aside>
+                        <div class="sidebar-box">
+                            <div class="user">
+                                <figure>
+                                    <a href="#"><img src="assets/img/author/img1.jpg" alt=""></a>
+                                </figure>
+                                <div class="usercontent">
+                                    <h3>{{Session::get('name')}}</h3>
+                                    <h4></h4>
+                                </div>
+                            </div>
+                            <nav class="navdashboard">
+                                <ul>
+                                    <li>
+                                        <a href="ownerdashboard">
+                                            <i class="lni-dashboard"></i>
+                                            <span>My Postings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="editownerprofile">
+                                            <i class="lni-cog"></i>
+                                            <span>Edit profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="resetopwd">
+                                            <i class="lni-layers"></i>
+                                            <span>Reset password</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="active" href="Addposting">
+                                            <i class="lni-wallet"></i>
+                                            <span>Add new posting</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <i class="lni-wallet"></i>
+                                            <span>Option3</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <i class="lni-heart"></i>
+                                            <span>Option4</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <i class="lni-star"></i>
+                                            <span>Option5</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout">
+                                            <i class="lni-enter"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="widget">
+                            <h4 class="widget-title">Advertisement</h4>
+                            <div class="add-box">
+                                <img class="img-fluid" src="assets/img/img1.jpg" alt="">
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-9">
+                    <div class="row page-content">
+                        <div class="inner-box" style="width:1000px;">
+                            <div class="dashboard-box">
+                                <h2 class="dashbord-title">Add a posting</h2>
+                            </div>
+                            @include('inc.message')
 
-<section class="footer-Content">
- <div class="container">
-<div class="row">
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-<div class="widget">
-<h3 class="footer-logo"><img src="assets/img/logo.png" alt=""></h3>
-<div class="textwidget">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lobortis tincidunt est, et euismod purus suscipit quis. Etiam euismod ornare elementum. Sed ex est, consectetur eget facilisis sed, auctor ut purus.</p>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-<div class="widget">
-<h3 class="block-title">Latest Ads</h3>
-<ul class="media-content-list">
-<li>
-<div class="media-left">
-<img class="img-fluid" src="assets/img/art/img1.jpg" alt="">
-<div class="overlay">
-<span class="price">$ 79</span>
-</div>
-</div>
-<div class="media-body">
-<h4 class="post-title"><a href="ads-details.html">Brand New Macbook Pro</a></h4>
-<span class="date">12 Jan 2018</span>
-</div>
-</li>
-<li>
-<div class="media-left">
-<img class="img-fluid" src="assets/img/art/img2.jpg" alt="">
-<div class="overlay">
-<span class="price">$ 49</span>
-</div>
-</div>
-<div class="media-body">
-<h4 class="post-title"><a href="ads-details.html">Canon Photography Camera</a></h4>
-<span class="date">28 Mar 2018</span>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-<div class="widget">
-<h3 class="block-title">Help & Support</h3>
-<ul class="menu">
-<li><a href="#">Live Chat</a></li>
-<li><a href="#">Privacy Policy</a></li>
-<li><a href="#">Purchase Protection</a></li>
-<li><a href="#">Support</a></li>
-<li><a href="#">Contact us</a></li>
-</ul>
-</div>
-</div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-<div class="widget">
-<h3 class="block-title">Subscribe us</h3>
-<p class="text-sub">We have over 5 years of experience Our suppoer avalable to help you 24 hours a day, seven days week</p>
-<form method="post" id="subscribe-form" name="subscribe-form" class="validate">
-<div class="form-group is-empty">
-<input type="email" value="" name="Email" class="form-control" id="EMAIL" placeholder="Email address" required="">
-<button type="submit" name="subscribe" id="subscribes" class="btn btn-common sub-btn"><i class="lni-check-box"></i></button>
-<div class="clearfix"></div>
-</div>
-</form>
-<ul class="footer-social">
-<li><a class="facebook" href="#"><i class="lni-facebook-filled"></i></a></li>
-<li><a class="twitter" href="#"><i class="lni-twitter-filled"></i></a></li>
-<li><a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a></li>
-<li><a class="google-plus" href="#"><i class="lni-google-plus"></i></a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</section>
+                            <div class="dashboard-wrapper">
+
+                                <form name="editpost" method="Post" action="/addpost" onsubmit="return"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <input hidden type="text" name="outletid" value="">
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Name of outlet</label>
+                                        <input class="form-control input-md" value="" id="oname" name=" oname"
+                                            placeholder="Outlet's name" type="text">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Owner name</label>
+                                        <input class="form-control input-md" value="" name="owname"
+                                            placeholder="Owner name" type="text">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Address of the outlet</label>
+                                        <textarea class="form-control input-md" id="Address" name="Address"></textarea>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">give a description about outlet</label>
+                                        <textarea class="form-control" id="Description" name="Description"></textarea>
+                                    </div>
+
+                                    <div class="form-group mb-3 tg-inputwithicon">
+                                        <label class="control-label">which category the outlet belongs to</label>
+                                        <div class="tg-select form-control">
+                                            <select id="catSelect" name="catSelect">
+                                                <option disabled selected value> -- select Category -- </option>
+                                                @isset($cat)
+                                                @foreach($cat as $category)
+                                                <option value="{{$category->Cat_id}}">{{$category->catagory}}</option>
+                                                @endforeach
+                                                @endisset
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group mb-3 tg-inputwithicon">
+                                            <label class="control-label">select appropriate Sub category</label>
+                                            <div class="tg-select form-control">
+                                                <select name="subcat" id="subcat">
+                                                    <option disabled selected value> -- select Sub-category -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
 
 
-<div id="copyright">
- <div class="container">
-<div class="row">
-<div class="col-md-12">
-<div class="site-info float-left">
-<p>All copyrights reserved &copy; 2018 - Designed by <a href="https://uideck.com/" rel="nofollow">UIdeck</a></p>
-</div>
-<div class="float-right">
-<ul class="bottom-card">
-<li>
-<a href="#"><img src="assets/img/footer/card1.jpg" alt="card"></a>
-</li>
-<li>
-<a href="#"><img src="assets/img/footer/card2.jpg" alt="card"></a>
-</li>
-<li>
-<a href="#"><img src="assets/img/footer/card3.jpg" alt="card"></a>
-</li>
-<li>
-<a href="#"><img src="assets/img/footer/card4.jpg" alt="card"></a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
+                                        <div class="form-group mb-3 tg-inputwithicon">
+                                            <label class="control-label">State</label>
+                                            <div class="tg-select form-control">
+                                                <select id="state" name="state">
+                                                    <option disabled selected value> -- select state -- </option>
+                                                    @isset($state)
+                                                    @foreach($state as $states)
+                                                    <option value="{{$states->state_id}}">{{$states->state}}</option>
+                                                    @endforeach
+                                                    @endisset
+                                                </select>
+                                            </div>
+                                        </div>
 
-</footer>
+                                        <div class="form-group mb-3 tg-inputwithicon">
+                                            <label class="control-label">district</label>
+                                            <div class="tg-select form-control">
+                                                <select name="district" id="district">
+                                                    <option disabled selected value> -- select district -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-3 tg-inputwithicon">
+                                            <label class="control-label">city</label>
+                                            <div class="tg-select form-control">
+                                                <select name="city" id="city">
+                                                    <option disabled selected value> -- select city -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <label class="control-label">Services</label>
+                                        <div class="tg-checkbox form-control" name="tbox" id="tbox">
+                                            <label class="control-label">Select services provided</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Website</label>
+                                        <input class="form-control input-md" value="" name="wsite" placeholder="wsite"
+                                            type="text">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Contact number</label>
+                                        <input class="form-control input-md" value="" name="phone1"
+                                            placeholder="Contact number" type="text">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Alternate Contact number</label>
+                                        <input class="form-control input-md" value="" name="phone2"
+                                            placeholder="Alternate Contact number" type="text">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Images</label>
+                                        <input id="file" type="file" name="file" multiple class="file"
+                                            data-max-file-count="4" data-min-file-count="2">
+
+                                    </div>
 
 
-<a href="#" class="back-to-top">
-<i class="lni-chevron-up"></i>
-</a>
+                                    <input type="submit" class="btn btn-common sub-btn" name="upost"
+                                        value="Add Posting">
+                            </div>
+                            </form>
+                        </div>
 
-<div id="preloader">
-<div class="loader" id="loader-1"></div>
-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<script src="assets/js/jquery-min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/color-switcher.js"></script>
-<script src="assets/js/jquery.counterup.min.js"></script>
-<script src="assets/js/waypoints.min.js"></script>
-<script src="assets/js/wow.js"></script>
-<script src="assets/js/owl.carousel.min.js"></script>
-<script src="assets/js/nivo-lightbox.js"></script>
-<script src="assets/js/jquery.slicknav.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/form-validator.min.js"></script>
-<script src="assets/js/contact-form-script.min.js"></script>
-<script src="assets/js/summernote.js"></script>
+    @include('inc.outer.footer')
+
+
+    <a href="#" class="back-to-top">
+        <i class="lni-chevron-up"></i>
+    </a>
+
+    <div id="preloader">
+        <div class="loader" id="loader-1"></div>
+    </div>
+
+    <script src="{{ asset('assets/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script>
+    CKEDITOR.replace('Description');
+    </script>
+    <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('assets/js/wow.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/nivo-lightbox.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
+    <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
+    <script src="{{ asset('assets/js/summernote.js') }}"></script>
+    <!-- ajax.js -->
+    <script src="{{ asset('js/myajax.js') }}"></script>
+    <script src="{{ asset('js/fileinput.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/theme.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+    $("#file").fileinput({
+        theme: 'fa',
+        uploadUrl: "/storeimg",
+        uploadExtraData: function() {
+            return {
+                _token: $("input[name='_token']").val(),
+            };
+        },
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+        overwriteInitial: false,
+        maxFileSize: 3000,
+        maxFilesNum: 4,
+        slugCallback: function(filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+    </script>
 </body>
 
-<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/post-ads.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:14:25 GMT -->
+
 </html>

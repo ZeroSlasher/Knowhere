@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-// session_start();
 use App\City;
 use App\District;
 use App\SubCat;
@@ -50,6 +49,7 @@ class HomeController extends Controller
         return $city;
     }
 
+    
 
     public function forgot()
     {
@@ -96,14 +96,7 @@ class HomeController extends Controller
     {
         return view('pricing');
     }
-    public function posting()
-    {
-        return view('posting');
-    }
-    public function posting1()
-    {
-        return view('posting1');
-    }
+
     public function payment()
     {
         return view('payments');

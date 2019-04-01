@@ -16,6 +16,7 @@ class OutletProf extends Model
         'ownername',
         'address',
         'description',
+        'website',
         'city_id',
         'subcat_id',
         'Service_id',

@@ -213,7 +213,9 @@
             </div>
         </div>
     </div>
-    @include('inc.outer.footer') <script src="{{ asset('assets/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    @include('inc.outer.footer')
+
+    <script src="{{ asset('assets/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <script>
     CKEDITOR.replace('Description');
     </script>

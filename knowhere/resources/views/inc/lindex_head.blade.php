@@ -19,6 +19,8 @@
                         <li><a href="about">About Us</a></li>
                         <li><a href="services">Services</a></li>
                         <li><a href="faq">FAQ</a></li>
+                        <li><a href="howitworks">How it works</a></li>
+
                     </ul>
                 </li>
                 <li class="menu-item-has-children">
