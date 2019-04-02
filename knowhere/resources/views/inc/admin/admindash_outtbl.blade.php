@@ -80,7 +80,7 @@
                                      <span>District -- State</span>
                                  </td>
                                  <!-- address  -->
-                                 <td data-title="Phone"><span class="adcategories">{{$cmp->address}}</span>
+                                 <td data-title="Phone"><span class="adcategories">{{$cmp->oaddress}}</span>
                                  </td><!-- status -->
                                  <td data-title="Status"><span class="adstatus adstatusactive">{{$cmp->status}}</span>
                                  </td>

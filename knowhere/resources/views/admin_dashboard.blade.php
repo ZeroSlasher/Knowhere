@@ -24,15 +24,12 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600%7CRoboto:400" rel="stylesheet"
-        type="text/css">
+
     <link href="assets/vendors/material-icons/material-icons.css" rel="stylesheet" type="text/css">
-    <link href="assets/vendors/mono-social-icons/monosocialiconsfont.css" rel="stylesheet" type="text/css">
+    
     <link href="assets/vendors/feather-icons/feather.css" rel="stylesheet" type="text/css">
-    <link href="../../cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.7.0/css/perfect-scrollbar.min.css"
-        rel="stylesheet" type="text/css">
-    <link href="../../cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet"
-        type="text/css">
+
+
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -66,11 +63,25 @@
         <div class="container">
             <div class="row">
                 @include('inc.admin.admindash_sidebar')
+                <div class="col-sm-12 col-md-8 col-lg-9">
+                    <div class="page-content">
+                        <div class="inner-box">
+
+                            <div class="dashboard-wrapper">
+
+                                @include('inc.profilewid')
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    </div>
+    </div>
 
-    @include('inc.admin.admindash_footer')
+    @include('inc.outer.footer')
 
 
 
@@ -100,6 +111,5 @@
     <script src="assets/js/summernote.js"></script>
 </body>
 
-<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:29 GMT -->
 
 </html>

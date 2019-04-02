@@ -17,6 +17,13 @@ class PostController extends Controller
         return view('posting', compact('state', 'cat'));
     }
 
+    public function Addpostingu()
+    {
+        $cat = DB::table('tbl_cat')->get();
+        $state = DB::table('tbl_state')->get();
+        return view('postingu', compact('state', 'cat'));
+    }
+
     public function addpost(Request $request)
     {
         $all = $request->all();

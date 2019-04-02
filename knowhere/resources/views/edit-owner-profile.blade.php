@@ -80,6 +80,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="omypostings">
+                                            <i class="lni-dashboard"></i>
+                                            <span>My Postings</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a class="active" href="#">
                                             <i class="lni-cog"></i>
                                             <span>Profile Settings</span>

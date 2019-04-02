@@ -84,7 +84,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a  href="usermanagement">
+                                        <a href="usermanagement">
                                             <i class="lni-layers"></i>
                                             <span>User Management</span>
                                         </a>
@@ -136,7 +136,7 @@
     </div>
 
 
-    @include('inc.admin.admindash_footer')
+    @include('inc.outer.footer')
 
 
     <a href="#" class="back-to-top">

@@ -40,10 +40,12 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::any('/updateownerprofile', 'OwnerController@editownerprofile')->name('editownerprofile');
     Route::any('/updateownerprofile', 'OwnerController@updateownerprofile')->name('editownerprofile');
     Route::any('/resetopwd', 'OwnerController@resetopwd')->name('resetopwd');
+    Route::any('/omypostings', 'OwnerController@omypostings')->name('omypostings');
 
     Route::any('/changepassword', 'OwnerController@changepassword')->name('changepassword');
     Route::any('/Addposting', 'PostController@Addposting')->name('Addposting');
     Route::any('/addpost', 'PostController@addpost')->name('addpost');
+    Route::any('/Addpostingu', 'PostController@Addpostingu')->name('Addpostingu');
 
 });
 

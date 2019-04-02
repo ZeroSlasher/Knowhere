@@ -344,7 +344,7 @@
                     </div> <!-- end .col-md-3 -->
                 </div> <!-- end .row -->
                 <div class="text-center">
-                    <a href="/categories" class="button">All Listings</a>
+                    <a href="/categories" disabled class="button">All Listings</a>
                 </div> <!-- end .text-center -->
             </div> <!-- end .container -->
         </div> <!-- end .inner -->

@@ -200,7 +200,8 @@
                     <br>
 
                     <div class="dashboard-sections">
-                        <div class="row" style="margin-left: 90px;">
+                        <div class="row">
+                            <!-- style="margin-left: 90px;" -->
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="dashboardbox">
                                     <div class="icon"><i class="lni-write"></i></div>

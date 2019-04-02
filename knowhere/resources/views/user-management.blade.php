@@ -136,7 +136,7 @@
     </div>
 
 
-    @include('inc.admin.admindash_footer')
+    @include('inc.outer.footer')
 
 
     <a href="#" class="back-to-top">

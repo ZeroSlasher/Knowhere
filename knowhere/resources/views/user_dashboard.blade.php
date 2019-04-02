@@ -70,45 +70,51 @@
                             <nav class="navdashboard">
                                 <ul>
                                     <li>
-                                        <a class="active" href="admindashboard">
+                                        <a class="active" href="userdashboard">
                                             <i class="lni-dashboard"></i>
                                             <span>Dashboard</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="account-profile-setting.html">
+                                        <a href="umypostings">
+                                            <i class="lni-dashboard"></i>
+                                            <span>My Postings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="edituserprofile">
                                             <i class="lni-cog"></i>
-                                            <span>Profile Settings</span>
+                                            <span>Edit profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="account-myads.html">
-                                            <i class="lni-layers"></i>
-                                            <span>My Ads</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="offermessages.html">
-                                            <i class="lni-envelope"></i>
-                                            <span>Offers/Messages</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="payments.html">
+                                        <a href="Addpostingu">
                                             <i class="lni-wallet"></i>
-                                            <span>Payments</span>
+                                            <span>Add new posting</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="account-favourite-ads.html">
+                                        <a href="resetupwd">
+                                            <i class="lni-layers"></i>
+                                            <span>Reset password</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <i class="lni-wallet"></i>
+                                            <span>Option3</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
                                             <i class="lni-heart"></i>
-                                            <span>My Favourites</span>
+                                            <span>Option4</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="privacy-setting.html">
+                                        <a href="">
                                             <i class="lni-star"></i>
-                                            <span>Privacy Settings</span>
+                                            <span>Option5</span>
                                         </a>
                                     </li>
                                     <li>

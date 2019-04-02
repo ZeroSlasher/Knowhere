@@ -1,10 +1,10 @@
 <header class="header fixed clearfix">
     <div class="left">
-        <div class="logo"><a href="index-2.html"><img src="images/logo.png" alt="ExploreCity"
-                    class="img-responsive"></a></div> <!-- end .logo -->
+        <div class="logo"><a href="/"><img src="images/logo.png" alt="ExploreCity" class="img-responsive"></a></div>
+        <!-- end .logo -->
         <form class="header-search">
             <input type="text" placeholder="I’m searching for ...">
-            <button type="submit"><i class="pe-7s-search"></i></button>
+            <button type="submit" disabled><i class="pe-7s-search"></i></button>
         </form>
     </div> <!-- end .left -->
     <div class="navigation clearfix">
@@ -14,7 +14,7 @@
                     <a href="list.html">Explore</a>
                 </li> -->
                 <li class="menu-item-has-children">
-                    <a href="index-2.html">About Us</a>
+                    <a href="#">About Us</a>
                     <ul>
                         <li><a href="about">About Us</a></li>
                         <li><a href="services">Services</a></li>

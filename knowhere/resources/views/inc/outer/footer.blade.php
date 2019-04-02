@@ -58,7 +58,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="site-info float-left">
-                            <p>All copyrights reserved &copy; 2018 - Designed by ZeroSlasher</p>
+                            <p>All copyrights reserved &copy; 2019 - Designed by ZeroSlasher</p>
                         </div>
                         <div class="float-right">
                             <ul class="bottom-card">
