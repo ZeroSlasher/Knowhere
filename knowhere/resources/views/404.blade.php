@@ -50,7 +50,7 @@
 		
 		<header class="header clearfix">
 			<div class="left">
-				<div class="logo"><a href="index-2.html"><img src="images/logo.png" alt="ExploreCity" class="img-responsive"></a></div> <!-- end .logo -->
+				<div class="logo"><a href="/"><img src="images/logo.png" alt="ExploreCity" class="img-responsive"></a></div> <!-- end .logo -->
 				<form class="header-search">
 					<input type="text" placeholder="I’m searching for ...">
 					<button type="submit"><i class="pe-7s-search"></i></button>
@@ -76,7 +76,7 @@
 							</ul>
 						</li>
 						<li class="menu-item-has-children">
-							<a href="index-2.html">Pages</a>
+							<a href="/">Pages</a>
 							<ul>
 								<li><a href="how-it-works.html">How It Works</a></li>
 								<li><a href="add-listing.html">Add Listing</a></li>
@@ -156,7 +156,7 @@
 		<footer class="footer">
 			<div class="top">
 				<div class="left">
-					<div class="logo"><a href="index-2.html"><img src="images/logo-dark.png" alt="ExploreCity" class="img-responsive"></a></div> <!-- end .logo -->
+					<div class="logo"><a href="/"><img src="images/logo-dark.png" alt="ExploreCity" class="img-responsive"></a></div> <!-- end .logo -->
 				</div> <!-- end .left -->
 				<div class="social-icons">
 					<a href="#"><i class="pe-so-facebook"></i></a>

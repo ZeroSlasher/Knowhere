@@ -6,16 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reg extends Model
 {
-    protected $table = "tbl_user_reg";
-    protected $primarykey = "uregid";
+    protected $table = "tbl_users_reg";
+    protected $primarykey = "regid";
 
     public $fillable = [
         'id',
         'name',
-        'email',
         'phone',
+        'city_id',
         'image',
-        'status_id'
-
+        'oaddress',
+        'image',
+        'status_id',
     ];
 }

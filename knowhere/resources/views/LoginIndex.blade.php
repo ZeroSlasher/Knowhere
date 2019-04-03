@@ -268,7 +268,7 @@
     <footer class="footer">
         <div class="top">
             <div class="left">
-                <div class="logo"><a href="index-2.html"><img src="images/logo-dark.png" alt="ExploreCity"
+                <div class="logo"><a href="/"><img src="images/logo-dark.png" alt="ExploreCity"
                             class="img-responsive"></a></div> <!-- end .logo -->
             </div> <!-- end .left -->
             <div class="social-icons">

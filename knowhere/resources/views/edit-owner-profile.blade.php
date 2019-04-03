@@ -33,8 +33,7 @@
 <body>
 
     <header id="header-wrap">
-
-        @include('inc.admin.admindash_head')
+    @include('inc.admin.admindash_head')
 
     </header>
 
@@ -80,7 +79,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="omypostings">
+                                        <a href="mypostings">
                                             <i class="lni-dashboard"></i>
                                             <span>My Postings</span>
                                         </a>
@@ -142,60 +141,47 @@
                                     <div class="dashboard-box">
                                         <h2 class="dashbord-title">Contact Detail</h2>
                                     </div>
-                                    @include('inc.message')
+    @include('inc.message')
 
                                     <div class="dashboard-wrapper">
-                                        <form method="POST" action="/updateownerprofile" id="rqstform"
-                                            onsubmit="return formValidation2()" enctype="multipart/form-data">
-                                            @csrf
-
-                                            @isset($prof)
-                                            @foreach($prof as $p)
+                                        <form method="POST" action="/updateownerprofile" id="rqstform" onsubmit="return formValidation2()" enctype="multipart/form-data">
+                                            @csrf @isset($prof) @foreach($prof as $p)
                                             <input name='id' id='id' type="text" hidden value="{{$p->id}}">
                                             <div class="form-group mb-3">
                                                 <label class="control-label">Name</label>
-                                                <input class="form-control input-md" placeholder="Name" name='own_name'
-                                                    id='own_name' type="text" value="{{$p->name}}">
-                                                <div id="p11" class="alert alert-danger"
-                                                    style="align:center;display: none;">
+                                                <input class="form-control input-md" placeholder="Name" name='own_name' id='own_name' type="text" value="{{$p->name}}">
+                                                <div id="p11" class="alert alert-danger" style="align:center;display: none;">
                                                     <strong>Enter a valid name</strong>
                                                 </div>
                                             </div>
 
                                             <div class="form-group mb-3">
                                                 <label class="control-label">Contact number</label>
-                                                <input class="form-control input-md" value="{{$p->phone}}" name='cphone'
-                                                    id='cphone' placeholder="Contact Number" type="text">
-                                                <div id="p33" class="alert alert-danger"
-                                                    style="align:center;display: none;">
+                                                <input class="form-control input-md" value="{{$p->phone}}" name='cphone' id='cphone' placeholder="Contact Number" type="text">
+                                                <div id="p33" class="alert alert-danger" style="align:center;display: none;">
                                                     <strong>Enter a valid Phone number</strong>
                                                 </div>
                                             </div>
 
                                             <div class="form-group mb-3">
                                                 <label class="control-label">Address</label>
-                                                <textarea class="form-control input-md" id="Address"
-                                                    name="Address">{{$p->oaddress}}</textarea>
+                                                <textarea class="form-control input-md" id="Address" name="Address">{{$p->oaddress}}</textarea>
                                             </div>
 
                                             <div class="form-group mb-3">
                                                 <label class="control-label">Add profile image</label>
-                                                <input class="form-control input-md" id="prof" onchange="myFunction()"
-                                                    name="prof" type="file">
-                                                <img class="img-thumbnail" src="/uploads/{{$p->image}}"
-                                                    alt="Profile image" width="200px">
-                                                <img id="preview" src="#" style="display:none" alt="Uploaded image"
-                                                    width="200px" title="click to remove" />
+                                                <input class="form-control input-md" id="prof" onchange="myFunction()" name="prof" type="file">
+                                                <img class="img-thumbnail" src="/uploads/{{$p->image}}" alt="Profile image" width="200px">
+                                                <img id="preview" src="#" style="display:none" alt="Uploaded image" width="200px" title="click to remove" />
 
                                             </div>
-                                            @endforeach
-                                            @endisset
+                                            @endforeach @endisset
 
                                             <div class="form-group mb-3 tg-inputwithicon">
                                                 <label class="control-label">State</label>
                                                 <div class="tg-select form-control">
                                                     <select id="state" name="state">
-                                                        <option disabled selected value="0"> -- select state --
+                                                    <option selected value="{{$p->state_id}}"> {{$p->state}}
                                                         </option>
                                                         @isset($state)
                                                         @foreach($state as $states)
@@ -211,7 +197,7 @@
                                                 <label class="control-label">district</label>
                                                 <div class="tg-select form-control">
                                                     <select name="district" id="district">
-                                                        <option disabled selected value="0"> -- select district --
+                                                        <option selected value="{{$p->dist_id}}">{{$p->district}}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -221,19 +207,16 @@
                                                 <label class="control-label">city</label>
                                                 <div class="tg-select form-control">
                                                     <select name="city" id="city">
-                                                        <option disabled selected value="0"> -- select city -- </option>
+                                                        <option selected value="{{$p->city_id}}">{{$p->city}}</option>
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <div id="head1" style="align:center;display: none;"
-                                                class="alert alert-danger">
+                                            <div id="head1" style="align:center;display: none;" class="alert alert-danger">
                                                 <strong>All details are mandatory</strong>
                                             </div>
-                                            @include('inc.message')
 
-                                            <div class="button-wrapper"><button type="submit" id="submit1"
-                                                    name="submit1" class="btn btn-common">Update Profile</button></div>
+                                            <div class="button-wrapper"><button type="submit" id="submit1" name="submit1" class="btn btn-common">Update Profile</button></div>
                                         </form>
                                     </div>
                                 </div>
@@ -244,8 +227,6 @@
             </div>
         </div>
     </div>
-
-
     @include('inc.outer.footer')
 
 
@@ -276,7 +257,7 @@
     <!-- formvalidate1.js -->
     <script src="js/formvalidate2.js"></script>
     <script>
-    function readURL(input) {
+        function readURL(input) {
 
         if (input.files && input.files[0]) {
             var reader = new FileReader();

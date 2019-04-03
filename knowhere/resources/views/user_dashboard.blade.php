@@ -28,8 +28,7 @@
 <body>
 
     <header id="header-wrap">
-
-        @include('inc.admin.admindash_head')
+    @include('inc.admin.admindash_head')
 
 
     </header>
@@ -76,7 +75,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="umypostings">
+                                        <a href="mypostings">
                                             <i class="lni-dashboard"></i>
                                             <span>My Postings</span>
                                         </a>
@@ -139,8 +138,7 @@
                         <div class="inner-box">
 
                             <div class="dashboard-wrapper">
-
-                                @include('inc.profilewid')
+    @include('inc.profilewid')
 
                             </div>
                         </div>
@@ -148,8 +146,7 @@
                 </div>
             </div>
         </div>
-
-        @include('inc.outer.footer')
+    @include('inc.outer.footer')
 
 
 

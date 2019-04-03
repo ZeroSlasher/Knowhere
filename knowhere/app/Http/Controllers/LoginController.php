@@ -42,12 +42,13 @@ class LoginController extends Controller
                         Session::put('uid', $uid);
                         Session::put('utype', $sutype);
                         return redirect('/admindashboard');
-                    } elseif ($object->utype_id == '2' && $object->status_id == 1) {
+                    } 
+                    elseif ($object->utype_id == '2' && $object->status_id == 1) {
                         Session::put('id', $semail);
                         Session::put('uid', $uid);
                         Session::put('utype', $sutype);
 
-                        $ownreg = DB::table('tbl_owner_reg')->get();
+                        $ownreg = DB::table('tbl_users_reg')->where('id',$uid)->get();
                         foreach ($ownreg as $own) {
                             $name = $own->name;
                         }
@@ -59,7 +60,7 @@ class LoginController extends Controller
                         Session::put('uid', $uid);
                         Session::put('utype', $sutype);
 
-                        $usrreg = DB::table('tbl_user_reg')->get();
+                        $usrreg = DB::table('tbl_users_reg')->where('id',$uid)->get();
                         foreach ($usrreg as $usr) {
                             $name = $usr->name;
                         }

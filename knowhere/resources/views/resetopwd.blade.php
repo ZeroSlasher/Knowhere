@@ -79,7 +79,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="omypostings">
+                                        <a href="mypostings">
                                             <i class="lni-dashboard"></i>
                                             <span>My Postings</span>
                                         </a>

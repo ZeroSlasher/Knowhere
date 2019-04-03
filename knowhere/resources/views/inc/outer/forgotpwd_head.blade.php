@@ -9,7 +9,7 @@
                 <span class="lni-menu"></span>
                 <span class="lni-menu"></span>
             </button>
-            <a href="index-2.html" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a>
+            <a href="/" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a>
         </div>
         <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav mr-auto">

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Login;
-use App\Reg;
 use DB;
 use Hash;
 use Illuminate\Http\Request;

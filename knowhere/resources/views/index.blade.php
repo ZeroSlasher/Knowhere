@@ -44,81 +44,80 @@
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
     <style type="text/css">
-    body {
-        font-family: 'Varela Round', sans-serif;
-    }
+        body {
+            font-family: 'Varela Round', sans-serif;
+        }
 
-    .modal-confirm {
-        color: #636363;
-        /* width: 400px; */
+        .modal-confirm {
+            color: #636363;
+            /* width: 400px; */
+        }
 
-    }
+        .modal-confirm .modal-content {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+        }
 
-    .modal-confirm .modal-content {
-        padding: 20px;
-        border-radius: 5px;
-        border: none;
-        text-align: center;
-        font-size: 14px;
-    }
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+        }
 
-    .modal-confirm .modal-header {
-        border-bottom: none;
-        position: relative;
-    }
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 -10px;
+        }
 
-    .modal-confirm h4 {
-        text-align: center;
-        font-size: 26px;
-        margin: 30px 0 -10px;
-    }
-
-    .modal-confirm .close {
-        /* color: #fff;
+        .modal-confirm .close {
+            /* color: #fff;
         border-radius: 4px;
         background: #ff0000;
         text-decoration: none; */
-        transition: all 0.8s;
-        line-height: normal;
-        min-width: 100px;
-        border: none;
-        min-height: 40px;
-        border-radius: 7px;
-        margin: 0 5px;
-        outline: none !important;
-    }
+            transition: all 0.8s;
+            line-height: normal;
+            min-width: 100px;
+            border: none;
+            min-height: 40px;
+            border-radius: 7px;
+            margin: 0 5px;
+            outline: none !important;
+        }
 
 
 
-    .modal-confirm .modal-footer {
-        color: #999;
-        border-radius: 5px;
-        padding: 10px 15px 25px;
-    }
+        .modal-confirm .modal-footer {
+            color: #999;
+            border-radius: 5px;
+            padding: 10px 15px 25px;
+        }
 
 
-    .modal-confirm .icon-box {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto;
-        border-radius: 50%;
-        z-index: 9;
-        text-align: center;
-        border: 3px solid #f15e5e;
-    }
+        .modal-confirm .icon-box {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            border-radius: 50%;
+            z-index: 9;
+            text-align: center;
+            border: 3px solid #f15e5e;
+        }
 
-    .modal-confirm .icon-box i {
-        color: #f15e5e;
-        font-size: 46px;
-        display: inline-block;
-        margin-top: -34px;
-        margin-inline-start: -32px;
-    }
+        .modal-confirm .icon-box i {
+            color: #f15e5e;
+            font-size: 46px;
+            display: inline-block;
+            margin-top: -34px;
+            margin-inline-start: -32px;
+        }
 
-    .modal-confirm .btn-danger:hover,
-    .modal-confirm .btn-danger:focus {
-        background: #928c8c;
-    }
+        .modal-confirm .btn-danger:hover,
+        .modal-confirm .btn-danger:focus {
+            background: #928c8c;
+        }
     </style>
 </head>
 
@@ -126,22 +125,26 @@
 
     <header class="header fixed clearfix">
         <div class="left">
-            <div class="logo"><a href="index-2.html"><img src="images/logo.png" alt="ExploreCity"
-                        class="img-responsive"></a></div> <!-- end .logo -->
+            <div class="logo"><a href="/"><img src="images/logo.png" alt="ExploreCity"
+                        class="img-responsive"></a></div>
+            <!-- end .logo -->
             <form class="header-search">
                 <input type="text" placeholder="I’m searching for ...">
                 <button type="submit" disabled><i class="pe-7s-search"></i></button>
             </form>
-        </div> <!-- end .left -->
+        </div>
+        <!-- end .left -->
         <div class="navigation clearfix">
-            @include('inc.index_head')
+    @include('inc.index_head')
             <a href="#" class="responsive-menu-open"><i class="fa fa-bars"></i></a>
-        </div> <!-- end .navigation -->
+        </div>
+        <!-- end .navigation -->
         <div class="right">
-            <a href="/addlisting" class="button listing-open">Add Listing</a>
             <a href="#" class="button login-open">Log In</a>
-        </div> <!-- end .left -->
-    </header> <!-- end .header -->
+        </div>
+        <!-- end .left -->
+    </header>
+    <!-- end .header -->
 
     @if (Session::has('msg'))
     <div class="listing-wrapper1">
@@ -162,9 +165,7 @@
             </div>
         </div>
     </div>
-    @endif
-
-    @if (session('status'))
+    @endif @if (session('status'))
     <div class="listing-wrapper1">
         <div class="listing1">
             <div class="modal-dialog modal-confirm">
@@ -187,8 +188,10 @@
 
     <div class="responsive-menu">
         <a href="#" class="responsive-menu-close"><i class="fa fa-times"></i></a>
-        <nav class="responsive-nav"></nav> <!-- end .responsive-nav -->
-    </div> <!-- end .responsive-menu -->
+        <nav class="responsive-nav"></nav>
+        <!-- end .responsive-nav -->
+    </div>
+    <!-- end .responsive-menu -->
 
     <div class="section large transparent dark text-center" style="background-image: url('images/background01.jpg');">
         <div class="inner">
@@ -200,14 +203,18 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <input type="text" placeholder="What are you looking for ?">
-                            </div> <!-- end .form-group -->
-                        </div> <!-- end .col-sm-4 -->
+                            </div>
+                            <!-- end .form-group -->
+                        </div>
+                        <!-- end .col-sm-4 -->
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <input type="text" placeholder="Location">
                                 <i class="pe-7s-world"></i>
-                            </div> <!-- end .form-group -->
-                        </div> <!-- end .col-sm-4 -->
+                            </div>
+                            <!-- end .form-group -->
+                        </div>
+                        <!-- end .col-sm-4 -->
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <select class="selectpicker" data-live-search="true">
@@ -218,9 +225,12 @@
                                     @endforeach
                                     @endisset
                                 </select>
-                            </div> <!-- end .form-group -->
-                        </div> <!-- end .col-sm-4 -->
-                    </div> <!-- end .row -->
+                            </div>
+                            <!-- end .form-group -->
+                        </div>
+                        <!-- end .col-sm-4 -->
+                    </div>
+                    <!-- end .row -->
                     <button type="submit" class="button" diasbled>Search places</button>
                 </form>
                 <div class="highlight-slider-wrapper">
@@ -232,45 +242,64 @@
                                     <a href="#" class="icon">
                                         <img src="images/highlight-food.png" alt="food">
                                         <div class="overlay">Food</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
                                 <div class="item">
                                     <a href="#" class="icon">
                                         <img src="images/highlight-lodging.png" alt="lodging">
                                         <div class="overlay">Lodging</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
                                 <div class="item">
                                     <a href="#" class="icon">
                                         <img src="images/highlight-culture.png" alt="culture">
                                         <div class="overlay">Culture</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
                                 <div class="item">
                                     <a href="#" class="icon">
                                         <img src="images/highlight-shopping.png" alt="shopping">
                                         <div class="overlay">Shopping</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
                                 <div class="item">
                                     <a href="#" class="icon">
                                         <img src="images/highlight-nightlife.png" alt="nightlife">
                                         <div class="overlay">Nightlife</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
                                 <div class="item">
                                     <a href="#" class="icon">
                                         <img src="images/highlight-drink.png" alt="drink">
                                         <div class="overlay">Drink</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
-                            </div> <!-- end .highlight-slider -->
-                        </div> <!-- end .col-md-8 -->
-                    </div> <!-- end .row -->
-                </div> <!-- end .highlight-slider-wrapper -->
-            </div> <!-- end .container -->
-        </div> <!-- end .inner -->
-    </div> <!-- end .section -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
+                            </div>
+                            <!-- end .highlight-slider -->
+                        </div>
+                        <!-- end .col-md-8 -->
+                    </div>
+                    <!-- end .row -->
+                </div>
+                <!-- end .highlight-slider-wrapper -->
+            </div>
+            <!-- end .container -->
+        </div>
+        <!-- end .inner -->
+    </div>
+    <!-- end .section -->
 
     <div class="section light">
         <div class="inner">
@@ -285,70 +314,96 @@
                                 <img src="images/category-icon01.png" alt="icon">
                                 <span class="number">8</span>
                                 <span class="title">Cinema</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
+                            </div>
+                            <!-- end .inner -->
+                        </a>
+                        <!-- end .category-box -->
+                    </div>
+                    <!-- end .col-md-3 -->
                     <div class="col-md-3 col-sm-6">
                         <a href="#" class="category-box" style="background-image: url('images/category02.jpg');">
                             <div class="inner">
                                 <img src="images/category-icon02.png" alt="icon">
                                 <span class="number">36</span>
                                 <span class="title">Food</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
+                            </div>
+                            <!-- end .inner -->
+                        </a>
+                        <!-- end .category-box -->
+                    </div>
+                    <!-- end .col-md-3 -->
                     <div class="col-md-3 col-sm-6">
                         <a href="#" class="category-box" style="background-image: url('images/category03.jpg');">
                             <div class="inner">
                                 <img src="images/category-icon03.png" alt="icon">
                                 <span class="number">26</span>
                                 <span class="title">Drink</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
+                            </div>
+                            <!-- end .inner -->
+                        </a>
+                        <!-- end .category-box -->
+                    </div>
+                    <!-- end .col-md-3 -->
                     <div class="col-md-3 col-sm-6">
                         <a href="#" class="category-box" style="background-image: url('images/category04.jpg');">
                             <div class="inner">
                                 <img src="images/category-icon04.png" alt="icon">
                                 <span class="number">16</span>
                                 <span class="title">Lodging</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
+                            </div>
+                            <!-- end .inner -->
+                        </a>
+                        <!-- end .category-box -->
+                    </div>
+                    <!-- end .col-md-3 -->
                     <div class="col-sm-6">
                         <a href="#" class="category-box" style="background-image: url('images/category05.jpg');">
                             <div class="inner">
                                 <img src="images/category-icon05.png" alt="icon">
                                 <span class="number">12</span>
                                 <span class="title">Nightlife</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-sm-6 -->
+                            </div>
+                            <!-- end .inner -->
+                        </a>
+                        <!-- end .category-box -->
+                    </div>
+                    <!-- end .col-sm-6 -->
                     <div class="col-md-3 col-sm-6">
                         <a href="#" class="category-box" style="background-image: url('images/category06.jpg');">
                             <div class="inner">
                                 <img src="images/category-icon06.png" alt="icon">
                                 <span class="number">4</span>
                                 <span class="title">Visit</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
+                            </div>
+                            <!-- end .inner -->
+                        </a>
+                        <!-- end .category-box -->
+                    </div>
+                    <!-- end .col-md-3 -->
                     <div class="col-md-3 col-sm-6">
                         <a href="#" class="category-box" style="background-image: url('images/category07.jpg');">
                             <div class="inner">
                                 <img src="images/category-icon07.png" alt="icon">
                                 <span class="number">39</span>
                                 <span class="title">Shop</span>
-                            </div> <!-- end .inner -->
-                        </a> <!-- end .category-box -->
-                    </div> <!-- end .col-md-3 -->
-                </div> <!-- end .row -->
+                            </div>
+                            <!-- end .inner -->
+                        </a>
+                        <!-- end .category-box -->
+                    </div>
+                    <!-- end .col-md-3 -->
+                </div>
+                <!-- end .row -->
                 <div class="text-center">
                     <a href="/categories" disabled class="button">All Listings</a>
-                </div> <!-- end .text-center -->
-            </div> <!-- end .container -->
-        </div> <!-- end .inner -->
-    </div> <!-- end .section -->
+                </div>
+                <!-- end .text-center -->
+            </div>
+            <!-- end .container -->
+        </div>
+        <!-- end .inner -->
+    </div>
+    <!-- end .section -->
 
     <div class="section light transparent" style="background-image: url('images/background02.jpg');">
         <div class="inner">
@@ -361,37 +416,43 @@
                         <div class="services">
                             <img src="images/services-icon01.png" alt="icon" class="img-responsive center-block">
                             <h3>Choose<br>What To Do</h3>
-                            <p>Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a
-                                mall to do
-                                some shopping?</p>
+                            <p>Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a mall to do some
+                                shopping?
+                            </p>
                             <div class="process"><i class="pe-7s-angle-right-circle"></i></div>
-                        </div> <!-- end .services -->
-                    </div> <!-- end .col-sm-4 -->
+                        </div>
+                        <!-- end .services -->
+                    </div>
+                    <!-- end .col-sm-4 -->
                     <div class="col-sm-4">
                         <div class="services">
                             <img src="images/services-icon02.png" alt="icon" class="img-responsive center-block">
                             <h3>Find<br>What You Want</h3>
-                            <p>Search and filter hundreds of listings, read reviews, explore photos and find
-                                the
-                                perfect
-                                spot.</p>
+                            <p>Search and filter hundreds of listings, read reviews, explore photos and find the perfect spot.
+                            </p>
                             <div class="process"><i class="pe-7s-angle-right-circle"></i></div>
-                        </div> <!-- end .services -->
-                    </div> <!-- end .col-sm-4 -->
+                        </div>
+                        <!-- end .services -->
+                    </div>
+                    <!-- end .col-sm-4 -->
                     <div class="col-sm-4">
                         <div class="services">
                             <img src="images/services-icon03.png" alt="icon" class="img-responsive center-block">
                             <h3>Explore<br>Amazing Places</h3>
-                            <p>Go and have a good time or even make a booking directly from the listing
-                                page.
-                                All of
-                                those, thanks to Knowhere!</p>
-                        </div> <!-- end .services -->
-                    </div> <!-- end .col-sm-4 -->
-                </div> <!-- end .row -->
-            </div> <!-- end .container -->
-        </div> <!-- end .inner -->
-    </div> <!-- end .section -->
+                            <p>Go and have a good time or even make a booking directly from the listing page. All of those,
+                                thanks to Knowhere!</p>
+                        </div>
+                        <!-- end .services -->
+                    </div>
+                    <!-- end .col-sm-4 -->
+                </div>
+                <!-- end .row -->
+            </div>
+            <!-- end .container -->
+        </div>
+        <!-- end .inner -->
+    </div>
+    <!-- end .section -->
 
 
     <div class="section light">
@@ -402,19 +463,23 @@
                 </h2>
                 <form action="" method="get" id="mc-embedded-subscribe-form" class="newsletter-form">
                     <input type="email" id="mce-EMAIL" name="EMAIL" placeholder="YourEmail@domain.com">
-                    <button type="submit" id="mc-embedded-subscribe" name="subscribe" class="button"
-                        disabled>Subscribe</button>
+                    <button type="submit" id="mc-embedded-subscribe" name="subscribe" class="button" disabled>Subscribe</button>
                 </form>
-            </div> <!-- end .container -->
-        </div> <!-- end .inner -->
-    </div> <!-- end .section -->
+            </div>
+            <!-- end .container -->
+        </div>
+        <!-- end .inner -->
+    </div>
+    <!-- end .section -->
 
     <footer class="footer">
         <div class="top">
             <div class="left">
-                <div class="logo"><a href="index-2.html"><img src="images/logo-dark.png" alt="Knowhere"
-                            class="img-responsive"></a></div> <!-- end .logo -->
-            </div> <!-- end .left -->
+                <div class="logo"><a href="/"><img src="images/logo-dark.png" alt="Knowhere"
+                            class="img-responsive"></a></div>
+                <!-- end .logo -->
+            </div>
+            <!-- end .left -->
             <div class="social-icons">
                 <a href=""><i class="pe-so-facebook"></i></a>
                 <a href=""><i class="pe-so-twitter"></i></a>
@@ -425,23 +490,26 @@
             </div>
             <div class="right"></div>
             <!-- end .left -->
-        </div> <!-- end .top -->
-        <div class="bottom">Copyright &copy; 2019. All Rights Reserved By ZeroSlasher</a></div>
-    </footer> <!-- end .footer -->
+        </div>
+        <!-- end .top -->
+        <div class="bottom">Copyright &copy; 2019. All Rights Reserved By ZeroSlasher</a>
+        </div>
+    </footer>
+    <!-- end .footer -->
 
     <div class="login-wrapper">
         <div class="login">
             <form action="/login" method="post">
                 @csrf
                 <div class="form-group">
-                    <input type="email" placeholder="Email Address" id="email" onmousedown="this.type='text'"
-                        name="email" required>
-                </div> <!-- end .form-group -->
+                    <input type="email" placeholder="Email Address" id="email" onmousedown="this.type='text'" name="email" required>
+                </div>
+                <!-- end .form-group -->
                 <div class="form-group">
-                    <input type="password" required placeholder="Password" id="password" name="password"
-                        onmouseover="this.type='text'" onmouseup="this.type='password'"
+                    <input type="password" required placeholder="Password" id="password" name="password" onmouseover="this.type='text'" onmouseup="this.type='password'"
                         onmouseout="this.type='password'">
-                </div> <!-- end .form-group -->
+                </div>
+                <!-- end .form-group -->
 
                 <div class="clearfix">
                     <div class="checkbox">
@@ -451,20 +519,25 @@
                     </div>
 
                     <a href="password/reset" class="lost-password">Lost your password ?</a>
-                </div> <!-- end .clearfix -->
+                </div>
+                <!-- end .clearfix -->
                 <div class="button-wrapper"><button type="submit" class="button">Login</button></div>
                 <div class="text-center">
                     <p>Don't have an account ? <a href="#" class="signup-open">Sign up</a></p>
+
                     <div class="social">
                         <p>Connect with Social Networks</p>
                         <a href="#"><img src="images/facebook.png" alt="facebook"></a>
                         <a href="#"><img src="images/twitter.png" alt="twitter"></a>
                         <a href="#"><img src="images/google-plus.png" alt="google plus"></a>
-                    </div> <!-- end .social -->
+                    </div>
+                    <!-- end .social -->
                 </div>
             </form>
-        </div> <!-- end .login -->
-    </div> <!-- end .login-wrapper -->
+        </div>
+        <!-- end .login -->
+    </div>
+    <!-- end .login-wrapper -->
 
     <div class="signup-wrapper" id="signupwrapper">
         <div class="signup">
@@ -482,8 +555,7 @@
                 </div>
                 <!-- end .form-group -->
                 <div class="form-group">
-                    <input type="text" placeholder="Email Address" onblur="return emailDoesExist1()" id="mail"
-                        name="mail">
+                    <input type="text" placeholder="Email Address" onblur="return emailDoesExist1()" id="mail" name="mail">
                     <div id="p24" class="alert alert-danger" style="display: none;">
                         <strong>Email already registered, Use a different one</strong>
                     </div>
@@ -503,8 +575,8 @@
 
                 <!-- end .form-group -->
                 <div class="form-group">
-                    <input type="password" placeholder="Password" id="pwd" name="pwd" onmouseover="this.type='text'"
-                        onmouseup="this.type='password'" onmouseout="this.type='password'">
+                    <input type="password" placeholder="Password" id="pwd" name="pwd" onmouseover="this.type='text'" onmouseup="this.type='password'"
+                        onmouseout="this.type='password'">
                     <div id="p4" class="alert alert-danger" style="display: none;">
                         <strong>Password must be between 8 and 15 characters long and include at least one
                             digit</strong>
@@ -513,25 +585,28 @@
 
 
                 <!-- end .form-group -->
-                <div class="button-wrapper"><input type="submit" class="button" value="Register" id="Register"
-                        name="Register"></div>
+                <div class="button-wrapper"><input type="submit" class="button" value="Register" id="Register" name="Register"></div>
                 <div class="text-center">
                     <p>Already have an account? <a href="#" class="login-open">Log in</a></p>
+                    <p>Have your own establishment?<br> List it on Knowhere <a href="/addlisting" class="listing-open">here!!</a></p>
+
                     <div class="social">
                         <p>Connect with Social Networks</p>
                         <a href=""><img src="images/facebook.png" alt="facebook"></a>
                         <a href=""><img src="images/twitter.png" alt="twitter"></a>
                         <a href=""><img src="images/google-plus.png" alt="google plus"></a>
-                    </div> <!-- end .social -->
+                    </div>
+                    <!-- end .social -->
                 </div>
             </form>
-        </div> <!-- end .signup -->
-    </div> <!-- end .signup-wrapper -->
+        </div>
+        <!-- end .signup -->
+    </div>
+    <!-- end .signup-wrapper -->
 
     <div class="listing-wrapper">
         <div class="listing">
-            <form method="POST" action="/requestlisting" id="rqstform" onsubmit="return formValidation1()"
-                enctype="multipart/form-data">
+            <form method="POST" action="/requestlisting" id="rqstform" onsubmit="return formValidation1()" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group1">
@@ -586,8 +661,7 @@
                     </select>
                 </div>
                 <div class="form-group1">
-                    <input type="text" name='remail' id='remail' onblur="return emailDoesExist()"
-                        placeholder=" Contact Email">
+                    <input type="text" name='remail' id='remail' onblur="return emailDoesExist()" placeholder=" Contact Email">
                     <!-- <p id="p22"></p> -->
                     <div id="p22" class="alert alert-danger" style="align:center;display: none;">
                         <strong>Enter a valid email</strong>
@@ -607,8 +681,8 @@
                     <!-- <input type="text" placeholder="Proof of existance-documents upload field"> -->
                     <div class="text-center">
                         <label>Documents for Proof of existance</label>
-                        <h6>Proof can be Copy of licences, Image of Establishment or any Valid and legal
-                            document</h6>
+                        <h6>Proof can be Copy of licences, Image of Establishment or any Valid and legal document
+                        </h6>
 
                         <input class=" file" name="proof1" type="file" accept=".pdf,.doc,.png.,.jpg" id="proof1" />
                         <input class=" file" name="proof2" type="file" accept=".pdf,.doc,.png.,.jpg" id="proof2" />
@@ -632,17 +706,19 @@
                         <div id="head1" style="align:center;display: none;" class="alert alert-danger">
                             <strong>All details are mandatory</strong>
                         </div>
-                        <div class="button-wrapper verify-open"><button type="submit" id="submit1" name="submit1"
-                                class="button">Request verification</button></div>
+                        <div class="button-wrapper verify-open"><button type="submit" id="submit1" name="submit1" class="button">Request verification</button></div>
                     </div>
                     <div class="text-center">
                         <p>Verification details will be sent via email</p>
                         <p>Already have an account? <a href="#" class="login-open">Log in</a></p>
+
                     </div>
                 </div>
             </form>
-        </div> <!-- end .signup -->
-    </div> <!-- end .listing-wrapper -->
+        </div>
+        <!-- end .signup -->
+    </div>
+    <!-- end .listing-wrapper -->
 
     <!-- jQuery -->
     <script src="js/jquery-3.1.0.min.js"></script>
@@ -650,6 +726,7 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- google maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy-PboZ3O_A25CcJ9eoiSrKokTnWyAmt8">
+
     </script>
     <!-- rich marker -->
     <script src="js/richmarker.js"></script>

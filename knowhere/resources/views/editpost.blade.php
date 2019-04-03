@@ -29,32 +29,30 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
 
-    <!-- <link href="{{ asset('css/fileinput.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/font-awesome.min.css') }}" media="all" rel="stylesheet" type="text/css" /> -->
-    <link href="{{ asset('css/fileinput.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <style type="text/css">
-    .main-section {
-        margin: 0 auto;
-        padding: 20px;
-        margin-top: 100px;
-        background-color: #fff;
-        box-shadow: 0px 0px 20px #c1c1c1;
-    }
+    <link href="{{ asset('css/font-awesome.min.css') }}" media="all" rel="stylesheet" type="text/css" /> 
 
-    .fileinput-remove,
-    .fileinput-upload {
-        display: none;
-    }
+    <link href="{{ asset('css/fileinput.css') }}" media="all" rel="stylesheet" type="text/css" />
+    
+    <style type="text/css">
+        .main-section {
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 100px;
+            background-color: #fff;
+            box-shadow: 0px 0px 20px #c1c1c1;
+        }
+
+        .fileinput-remove,
+        .fileinput-upload {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
 
     <header id="header-wrap">
-
-
-        @include('inc.admin.admindash_head')
+    @include('inc.admin.admindash_head')
 
 
     </header>
@@ -88,41 +86,35 @@
                         <h2 class="dashbord-title">Edit posting</h2>
                     </div>
                     <div class="dashboard-wrapper">
-                        @isset($post)
-                        @foreach($post as $prof)
-                        <form name="editpost" method="Post" action="/updatepost" onsubmit="return"
-                            enctype="multipart/form-data">
+                        @isset($post) @foreach($post as $prof)
+                        <form name="editpost" method="Post" action="/updatepost" onsubmit="return" enctype="multipart/form-data">
                             @csrf
                             <input hidden type="text" name="outletid" value="{{$prof->outletid}}">
                             <div class="form-group mb-3">
                                 <label class="control-label">Outlet name</label>
-                                <input class="form-control input-md" value="{{$prof->outletname}}" id="oname"
-                                    name=" oname" placeholder="Outlet name" type="text">
+                                <input class="form-control input-md" value="{{$prof->outletname}}" id="oname" name=" oname" placeholder="Outlet name" type="text">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="control-label">Owner name</label>
-                                <input class="form-control input-md" value="{{$prof->ownername}}" name="owname"
-                                    placeholder="Owner name" type="text">
+                                <input class="form-control input-md" value="{{$prof->ownername}}" name="owname" placeholder="Owner name" type="text">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="control-label">Address</label>
-                                <textarea class="form-control input-md" id="Address"
-                                    name="Address">{{$prof->address}}</textarea>
+                                <textarea class="form-control input-md" id="Address" name="Address">{{$prof->address}}</textarea>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="control-label">Description</label>
-                                <textarea class="form-control" id="Description"
-                                    name="Description">{{$prof->description}}</textarea>
+                                <textarea class="form-control" id="Description" name="Description">{{$prof->description}}</textarea>
                             </div>
 
                             <div class="form-group mb-3 tg-inputwithicon">
                                 <label class="control-label">Category</label>
                                 <div class="tg-select form-control">
                                     <select id="catSelect" name="catSelect">
-                                        <option disabled selected value> -- select Category -- </option>
+                                        <option selected value="{{$prof->cat_id}}">{{$prof->catagory}}</option>
                                         @isset($cat)
                                         @foreach($cat as $category)
                                         <option value="{{$category->Cat_id}}">{{$category->catagory}}</option>
@@ -135,17 +127,23 @@
                                     <label class="control-label">Sub category</label>
                                     <div class="tg-select form-control">
                                         <select name="subcat" id="subcat">
-                                            <option disabled selected value> -- select Sub-category -- </option>
+                                            <option selected disabled value="{{$prof->subcat_id}}">{{$prof->subcatagory}}</option>
                                         </select>
                                     </div>
                                 </div>
 
+                                <div class="form-group mb-3">
+                                    <label class="control-label">Services</label>
+                                    <div class="tg-checkbox form-control" name="tbox" id="tbox">
+                                        <label class="control-label">Select services provided</label>
+                                    </div>
+                                </div>
 
                                 <div class="form-group mb-3 tg-inputwithicon">
                                     <label class="control-label">State</label>
                                     <div class="tg-select form-control">
                                         <select id="state" name="state">
-                                            <option disabled selected value> -- select state -- </option>
+                                            <option selected value="{{$prof->state_id}}">{{$prof->state}}</option>
                                             @isset($state)
                                             @foreach($state as $states)
                                             <option value="{{$states->state_id}}">{{$states->state}}</option>
@@ -159,7 +157,7 @@
                                     <label class="control-label">district</label>
                                     <div class="tg-select form-control">
                                         <select name="district" id="district">
-                                            <option disabled selected value> -- select district -- </option>
+                                            <option selected value="{{$prof->dist_id}}">{{$prof->district}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -168,80 +166,70 @@
                                     <label class="control-label">city</label>
                                     <div class="tg-select form-control">
                                         <select name="city" id="city">
-                                            <option disabled selected value> -- select city -- </option>
+                                            <option selected value="{{$prof->city_id}}">{{$prof->city}}</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <label class="control-label">Services</label>
-                                <div class="tg-checkbox form-control" name="tbox" id="tbox">
-                                    <label class="control-label">Select services provided</label>
-
+                                <div class="form-group mb-3">
+                                    <label class="control-label">Website</label>
+                                    <input class="form-control input-md" value="{{$prof->website}}" name="wsite" placeholder="wsite" type="text">
                                 </div>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="control-label">Website</label>
-                                <input class="form-control input-md" value="{{$prof->website}}" name="wsite"
-                                    placeholder="wsite" type="text">
-                            </div>
 
-                            <div class="form-group mb-3">
-                                <label class="control-label">Contact number</label>
-                                <input class="form-control input-md" value="{{$prof->phone1}}" name="phone1"
-                                    placeholder="Contact number" type="text">
-                            </div>
+                                <div class="form-group mb-3">
+                                    <label class="control-label">Contact number</label>
+                                    <input class="form-control input-md" value="{{$prof->phone1}}" name="phone1" placeholder="Contact number" type="text">
+                                </div>
 
-                            <div class="form-group mb-3">
-                                <label class="control-label">Alternate Contact number</label>
-                                <input class="form-control input-md" value="{{$prof->phone2}}" name="phone2"
-                                    placeholder="Alternate Contact number" type="text">
-                            </div>
+                                <div class="form-group mb-3">
+                                    <label class="control-label">Alternate Contact number</label>
+                                    <input class="form-control input-md" value="{{$prof->phone2}}" name="phone2" placeholder="Alternate Contact number" type="text">
+                                </div>
 
-                            <!-- <div class="form-group mb-3">
+                                <!-- <div class="form-group mb-3">
                                 <label class="control-label">Images</label>
                                 <input id="file" type="file" name="file" multiple class="file" data-max-file-count="4"
                                     data-min-file-count="2">
 
                             </div> -->
 
-                            @endforeach
-                            @endisset
-                            <input type="submit" class="btn btn-common sub-btn" name="upost" value="Update Posting">
+                                @endforeach @endisset
+                                <input type="submit" class="btn btn-common sub-btn" name="upost" value="Update Posting">
+                            </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
     @include('inc.outer.footer')
 
-    <script src="{{ asset('assets/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-    <script>
-    CKEDITOR.replace('Description');
-    </script>
-    <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
-    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
-    <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
-    <script src="{{ asset('assets/js/wow.js') }}"></script>
-    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/js/nivo-lightbox.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
-    <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
-    <script src="{{ asset('assets/js/summernote.js') }}"></script>
-    <!-- ajax.js -->
-    <script src="{{ asset('js/myajax.js') }}"></script>
-    <script src="{{ asset('js/fileinput.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/theme.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+        <script>
+            CKEDITOR.replace('Description');
+        </script>
+        <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
+        <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
+        <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
+        <script src="{{ asset('assets/js/wow.js') }}"></script>
+        <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('assets/js/nivo-lightbox.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
+        <script src="{{ asset('assets/js/main.js') }}"></script>
+        <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
+        <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
+        <script src="{{ asset('assets/js/summernote.js') }}"></script>
+        <!-- ajax.js -->
+        <script src="{{ asset('js/myajax.js') }}"></script>
+        <script src="{{ asset('js/fileinput.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/theme.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
 
 
-    <script type="text/javascript">
-    $("#file").fileinput({
+        <script type="text/javascript">
+            $("#file").fileinput({
         theme: 'fa',
         uploadUrl: "/storeimg",
         uploadExtraData: function() {
@@ -257,7 +245,7 @@
             return filename.replace('(', '_').replace(']', '_');
         }
     });
-    </script>
+        </script>
 
 </body>
 

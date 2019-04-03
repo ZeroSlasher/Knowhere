@@ -34,8 +34,7 @@
 <body>
 
     <header id="header-wrap">
-
-        @include('inc.admin.admindash_head')
+    @include('inc.admin.admindash_head')
 
 
     </header>
@@ -82,7 +81,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="omypostings">
+                                        <a href="mypostings">
                                             <i class="lni-dashboard"></i>
                                             <span>My Postings</span>
                                         </a>
@@ -146,24 +145,21 @@
                             <div class="dashboard-box">
                                 <h2 class="dashbord-title">Add a posting</h2>
                             </div>
-                            @include('inc.message')
+    @include('inc.message')
 
                             <div class="dashboard-wrapper">
 
-                                <form name="editpost" method="Post" action="/addpost" onsubmit="return"
-                                    enctype="multipart/form-data">
+                                <form name="editpost" method="Post" action="/addpost" onsubmit="return" enctype="multipart/form-data">
                                     @csrf
                                     <input hidden type="text" name="outletid" value="">
                                     <div class="form-group mb-3">
                                         <label class="control-label">Name of outlet</label>
-                                        <input class="form-control input-md" value="" id="oname" name=" oname"
-                                            placeholder="Outlet's name" type="text">
+                                        <input class="form-control input-md" value="" id="oname" name=" oname" placeholder="Outlet's name" type="text">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label class="control-label">Owner name</label>
-                                        <input class="form-control input-md" value="" name="owname"
-                                            placeholder="Owner name" type="text">
+                                        <input class="form-control input-md" value="" name="owname" placeholder="Owner name" type="text">
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -239,32 +235,22 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label class="control-label">Website</label>
-                                        <input class="form-control input-md" value="" name="wsite" placeholder="wsite"
-                                            type="text">
+                                        <input class="form-control input-md" value="" name="wsite" placeholder="wsite" type="text">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label class="control-label">Contact number</label>
-                                        <input class="form-control input-md" value="" name="phone1"
-                                            placeholder="Contact number" type="text">
+                                        <input class="form-control input-md" value="" name="phone1" placeholder="Contact number" type="text">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label class="control-label">Alternate Contact number</label>
-                                        <input class="form-control input-md" value="" name="phone2"
-                                            placeholder="Alternate Contact number" type="text">
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label class="control-label">Images</label>
-                                        <input id="file" type="file" name="file" multiple class="file"
-                                            data-max-file-count="4" data-min-file-count="2">
-
+                                        <input class="form-control input-md" value="" name="phone2" placeholder="Alternate Contact number" type="text">
                                     </div>
 
 
-                                    <input type="submit" class="btn btn-common sub-btn" name="upost"
-                                        value="Add Posting">
+
+                                    <input type="submit" class="btn btn-common sub-btn" name="upost" value="Add Posting">
                             </div>
                             </form>
                         </div>
@@ -274,8 +260,6 @@
             </div>
         </div>
     </div>
-
-
     @include('inc.outer.footer')
 
 
@@ -289,7 +273,7 @@
 
     <script src="{{ asset('assets/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <script>
-    CKEDITOR.replace('Description');
+        CKEDITOR.replace('Description');
     </script>
     <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
@@ -312,8 +296,12 @@
     <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
-    $("#file").fileinput({
+        $("#file").fileinput({
         theme: 'fa',
+        uploadIcon: '<i class="fa fa-cloud-upload" aria-hidden="true"></i>',
+        removeIcon: '<i class="fa fa-trash" aria-hidden="true"></i>',
+        'uploadAsync': false,
+
         uploadUrl: "/storeimg",
         uploadExtraData: function() {
             return {
@@ -322,11 +310,12 @@
         },
         allowedFileExtensions: ['jpg', 'png', 'gif'],
         overwriteInitial: false,
-        maxFileSize: 3000,
-        maxFilesNum: 4,
+        maxFileSize: 10000,
+        maxFilesNum: 8,
         slugCallback: function(filename) {
             return filename.replace('(', '_').replace(']', '_');
         }
+        
     });
     </script>
 </body>

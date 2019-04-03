@@ -8,6 +8,7 @@ use App\SubCat;
 use DB;
 use Session;
 
+
 class HomeController extends Controller
 {
 
@@ -21,11 +22,6 @@ class HomeController extends Controller
             $city = DB::table('tbl_city')->get();
             return view('index', ['data' => $cat], ['state' => $state], ['city' => $city]);
         }
-    }
-
-    public function lindex()
-    {
-        return view('LoginIndex');
     }
 
     public function subcatajax($id)
@@ -48,8 +44,6 @@ class HomeController extends Controller
         $city = City::where("dist_id", $id)->get()->toJson();
         return $city;
     }
-
-    
 
     public function forgot()
     {
@@ -117,10 +111,7 @@ class HomeController extends Controller
     {
         return view('404');
     }
-    public function deleteprofile()
-    {
-        return view('delete-profile');
-    }
+
     public function mypost()
     {
         return view('mypost');
@@ -131,6 +122,8 @@ class HomeController extends Controller
     }
     public function dummy()
     {
-
+        $promotion = DB::table('tbl_prof_images')->where('outletid', 3)->first();
+        $a = response()->json($promotion);
+        return $a;
     }
 }

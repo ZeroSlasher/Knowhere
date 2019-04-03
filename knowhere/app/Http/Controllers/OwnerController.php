@@ -5,94 +5,72 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class OwnerController extends Controller
 {
-    public function omypostings(){
+    public function mypostings()
+    {
         $utype = Session::get('utype');
         $uid = Session::get('uid');
-        if (Session::get('id') && $utype == 2) {
+        if (Session::get('id')) {
             $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
-            `tbl_status` as st, `tbl_state` as sta, tbl_cat as cat, `tbl_district` as d,tbl_owner_reg as o,tbl_login as lo
+            `tbl_status` as st, `tbl_state` as sta, tbl_cat as cat, `tbl_district` as d,tbl_users_reg as o,tbl_login as lo
             WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and
-            c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`oregid`=o.`oregid` and lo.`id`=l.`id` and s.cat_id = cat.cat_id and l.id=$uid");
-            return view('omypostings', compact('post'));
+            c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lo.`id`=l.`id` and s.cat_id = cat.cat_id and l.id=$uid");
+            return view('mypostings', compact('post'));
+        }
     }
-}
     public function editpost($id)
     {
         Session::put('outletid', $id);
         $cat = DB::table('tbl_cat')->get();
         $state = DB::table('tbl_state')->get();
         $city = DB::table('tbl_city')->get();
-         $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
-            `tbl_status` as st, `tbl_state` as sta, `tbl_district` as d,tbl_owner_reg as o,tbl_login as log
-            WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and
-            c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`oregid`=o.`oregid` and log.`id`=l.`id`
+        $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
+            `tbl_status` as st, `tbl_state` as sta, `tbl_district` as d,tbl_users_reg as o,tbl_login as lg,
+           tbl_cat as cat WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and s.cat_id = cat.cat_id and l.status_id=st.status_id and
+            c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lg.`id`=l.`id`
             and l.outletid=$id");
         return view('editpost', compact('cat', 'state', 'city', 'post'));
     }
 
     public function updatepost(Request $request)
     {
-         $request->all();
-         $oid = $request->get('outletid');
+        $request->all();
+        $oid = $request->get('outletid');
 
-         $outletname = $request->get('oname');
-         $ownername = $request->get('owname');
-         $address = $request->get('Address');
-         $description = $request->get('Description');
-         $subcat_id = $request->get('subcat'); //subcat value is there if cat is selected
-         $city_id = $request->get('city');
-         $website = $request->get('wsite');
-         $phone1 = $request->get('phone1');
-         $phone2 = $request->get('phone2');
+        $outletname = $request->get('oname');
+        $ownername = $request->get('owname');
+        $address = $request->get('Address');
+        $description = $request->get('Description');
+        $subcat_id = $request->get('subcat'); //subcat value is there if cat is selected
+        $city_id = $request->get('city');
+        $website = $request->get('wsite');
+        $phone1 = $request->get('phone1');
+        $phone2 = $request->get('phone2');
         $status_id = 3;
         if (!empty($request->get('subcat'))) //if subcat is selected
         {
-            return 1;
-            $Service_id = implode(",", $request->get('service'));//value of service is here
-            return DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
+            // return 1;
+            $Service_id = implode(",", $request->get('service')); //value of service is here
+            DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
             `address`='$address',`description`='$description',`website`='$website',`subcat_id`=$subcat_id,
             `Service_id`='$Service_id',`phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
-             
-             return redirect('/ownerdashboard')->with('info', 'Posting updated');
-        }
-        elseif(!empty($request->get('city'))) //if state,city and dist are selected
+
+            return redirect('/mypostings')->with('info', 'Posting updated');
+        
+        } 
+        else //if all are selected
         {
-            return 2;
+            // return 4;
+            DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
+           `address`='$address',`description`='$description',`website`='$website',`city_id`=$city_id,
+           `phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
 
-           return  DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
-           `address`='$address',`description`='$description',`website`='$website',`city_id`=$city_id,`phone1`='$phone1',
-           `phone2`='$phone2' WHERE `outletid`=$oid");
-
-return redirect('/ownerdashboard')->with('info', 'Posting updated');
-}
-        elseif(empty($subcat_id) && empty($city_id))// if both city and subcat are not selected
-        {
-            echo $address;
-            // return 3;
-            // return $request->all();
-
-              DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',`address`='$address',`description`='$description',`website`='$website',`phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
-             return redirect('/ownerdashboard')->with('info', 'Posting updated');
+            return redirect('/mypostings')->with('info', 'Posting updated');
 
         }
-        else//if all are selected
-        {
-            return 4;
-            return  DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
-           `address`='$address',`description`='$description',`website`='$website',`city_id`=$city_id,`subcat_id`=$subcat_id,
-            `Service_id`='$Service_id',`phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
-
-return redirect('/ownerdashboard')->with('info', 'Posting updated');
-
-        }
-
-
-
 
     }
 
@@ -111,21 +89,24 @@ return redirect('/ownerdashboard')->with('info', 'Posting updated');
 
     public function storeimg(Request $request)
     {
-        $outlet = Session::get('outletid');
+        try {
+            $outlet = Session::get('outletid');
+            if ($request->hasFile('file')) {
+                $destinationPath = 'uploads/';
+                $file = $request->file('file'); // will get all files
+                // foreach ($files as $file) {
+                $file_name = $file->getClientOriginalName(); //Get file original name
+                $rename = time() . $file_name;
+                $file->move($destinationPath, $rename); // move files to destination folder
 
-        if ($request->hasFile('file')) {
-            $destinationPath = 'uploads/';
-            $file = $request->file('file'); // will get all files
-            // foreach ($files as $file) {
-            $file_name = $file->getClientOriginalName(); //Get file original name
-            $rename = time() . $file_name;
-            $file->move($destinationPath, $rename); // move files to destination folder
+                //database code here
+                DB::select("INSERT INTO `tbl_prof_images`(`outletid`, `imgname`) VALUES ($outlet,'$rename')");
 
-            //database code here
-            DB::select("INSERT INTO `tbl_prof_images`(`outletid`, `imgname`) VALUES ($outlet,'$rename')");
-
-            // }
-            return response()->json(['uploaded' => 'successfully']);
+                // }
+                return response()->json(['uploaded' => 'successfully']);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['err' => 'Error uploading file, Internal server error']);
         }
 
     }
@@ -140,13 +121,15 @@ return redirect('/ownerdashboard')->with('info', 'Posting updated');
     {
         $oid = Session::get('uid');
         $state = DB::table('tbl_state')->get();
-        $prof = DB::table('tbl_owner_reg')->where('id', $oid)->get();
+        //$prof = DB::table('tbl_users_reg')->where('id', $oid)->get();
+        $prof = DB::select("select * from tbl_users_reg as a,tbl_city as b,tbl_district as c,tbl_state as d where a.id = '$oid' and a.city_id = b.city_id and b.dist_id = c.dist_id and c.state_id = d.state_id");
         return view('edit-owner-profile', compact('state', 'prof'));
     }
 
     public function updateownerprofile(Request $request)
     {
-        return $file = $request->file('prof');
+        $file = $request->file('prof');
+        $own = $request->all();
 
         if ($request->hasFile('prof')) {
             $destinationPath = 'uploads/';
@@ -154,13 +137,16 @@ return redirect('/ownerdashboard')->with('info', 'Posting updated');
             $file_name = $file->getClientOriginalName();
             $rename = time() . $file_name;
             $file->move($destinationPath, $rename);
-            // Storage::disk('local'->put('$rename'));
-            $own = $request->all();
-            $own['own_name'];
-            DB::select("UPDATE `tbl_owner_reg` SET `name`='$own[own_name]',`city_id`=$own[city],
+
+            DB::select("UPDATE `tbl_users_reg` SET `name`='$own[own_name]',`city_id`=$own[city],
              `phone`='$own[cphone]',`oaddress`='$own[Address]',`image`='$rename' WHERE `id`=$own[id]");
             return back()->with('info', 'profile updated');
+        } else {
+            DB::select("UPDATE `tbl_users_reg` SET `name`='$own[own_name]',`city_id`=$own[city],
+            `phone`='$own[cphone]',`oaddress`='$own[Address]' WHERE `id`=$own[id]");
+            return back()->with('info', 'profile updated');
         }
+
         return back()->with('warning', 'Invalid data recived');
 
     }
@@ -184,14 +170,15 @@ return redirect('/ownerdashboard')->with('info', 'Posting updated');
             return back()->with('error', 'All fields are mandatory');
         } elseif ($own['npass'] != $own['cpass']) {
             //return 2;
-             return back()->with('error', 'passwords not matching');
+            return back()->with('error', 'passwords not matching');
         } elseif ($validator->fails()) {
             //return 1;
             return back()->with('error', 'password: Uppercase letter,digit,min 8 characters');
-        }
-        else{
+        } else {
+
+            //reset pwd code
             return back()->with('success', 'password changed');
-        
+
         }
 
     }

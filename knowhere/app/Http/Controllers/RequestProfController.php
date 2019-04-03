@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Login;
 use App\OutletProf;
-use App\OutletReg;
+use App\Reg;
 use App\RequestProf;
 use DB;
 use Hash;
@@ -126,7 +126,8 @@ class RequestProfController extends Controller
 
                     // insert into ownreg table
                     $lastid = DB::getPdo()->lastInsertId();
-                    $reg = new OutletReg([
+                    
+                    $reg = new Reg([
                         'id' => $lastid,
                         'name' => Input::get('owname'),
                         'phone' => Input::get('phone'),
@@ -139,7 +140,7 @@ class RequestProfController extends Controller
 
                     $prof = new OutletProf([
                         'id' => $lastid,
-                        'oregid' => $oregid,
+                        'regid' => $oregid,
                         'outletname' => Input::get('oname'),
                         'ownername' => Input::get('owname'),
                         'city_id' => Input::get('cityid'),

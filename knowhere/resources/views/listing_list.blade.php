@@ -43,7 +43,7 @@
                             <span class="lni-menu"></span>
                             <span class="lni-menu"></span>
                         </button>
-                        <a href="index-2.html" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a>
+                        <a href="/" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a>
                     </div>
                     <div class="collapse navbar-collapse" id="main-navbar">
                         <ul class="navbar-nav mr-auto">
@@ -53,7 +53,7 @@
                                     Home
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="index-2.html">Home 1</a>
+                                    <a class="dropdown-item" href="/">Home 1</a>
                                     <a class="dropdown-item" href="index-3.html">Home 2</a>
                                     <a class="dropdown-item" href="index-4.html">Home 3</a>
                                 </div>
@@ -154,7 +154,7 @@
                             Home
                         </a>
                         <ul class="dropdown">
-                            <li><a href="index-2.html">Home 1</a></li>
+                            <li><a href="/">Home 1</a></li>
                             <li><a href="index-3.html">Home 2</a></li>
                             <li><a href="index-4.html">Home 2</a></li>
                         </ul>
