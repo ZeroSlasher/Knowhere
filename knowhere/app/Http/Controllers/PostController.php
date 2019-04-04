@@ -18,13 +18,6 @@ class PostController extends Controller
         return view('posting', compact('state', 'cat'));
     }
 
-    public function Addpostingu()
-    {
-        $cat = DB::table('tbl_cat')->get();
-        $state = DB::table('tbl_state')->get();
-        return view('postingu', compact('state', 'cat'));
-    }
-
     public function addpost(Request $request)
     {
         $all = $request->all();
@@ -84,5 +77,15 @@ class PostController extends Controller
             return redirect('/mypostings')->with('warning', 'Post deleted successfully');
 
         }
+    }
+
+    public function searchaction(Request $request)
+    {
+        $rqst =  $request->all();
+        $loc = $rqst['loc'];
+        $cat = $rqst['cat'];
+        $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,`tbl_status` as st, `tbl_state` as sta, tbl_cat as cat,`tbl_district` as d,tbl_users_reg as o,tbl_login as lo WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lo.`id`=l.`id`
+        and s.cat_id = cat.cat_id and( c.city='$loc' or d.district='$loc') and cat.cat_id=$cat");
+        return view('listing_list',compact('post'));
     }
 }

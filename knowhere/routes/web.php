@@ -29,7 +29,6 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::any('/ownerblock', 'UOmngController@ownerblock')->name('/ownerblock');
 
     Route::any('/editpost/{id}', 'OwnerController@editpost')->name('editpost');
-
     Route::any('/updatepost', 'OwnerController@updatepost')->name('/updatepost');
     Route::post('storeimg', 'OwnerController@storeimg')->name('/storeimg');
     Route::any('/editpostimg/{id}', 'OwnerController@editpostimg')->name('editpostimg');
@@ -46,6 +45,8 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::any('/Addposting', 'PostController@Addposting')->name('Addposting');
     Route::any('/addpost', 'PostController@addpost')->name('addpost');
     Route::any('/Addpostingu', 'PostController@Addpostingu')->name('Addpostingu');
+    Route::any('/deletepost/{id}', 'PostController@deletepost')->name('deletepost');
+    Route::any('/removepost', 'PostController@removepost')->name('removepost');
 
 });
 
@@ -55,8 +56,10 @@ Route::any('/register', 'UserRegController@register')->name('register');
 Route::any('/login', 'LoginController@login')->name('login');
 Route::any('/logout', 'LoginController@logout')->name('logout');
 Route::any('/requestlisting', 'RequestProfController@request')->name('requestlisting');
+Route::any('/searchaction', 'PostController@searchaction')->name('searchaction');
 
 Route::any('/fetchservice/{id}', 'OwnerController@fetchservice')->name('fetchservice');
+Route::any('/fetchloc', 'HomeController@fetchloc')->name('fetchloc');
 
 Route::any('/postdetails', 'HomeController@postdetails')->name('postdetails');
 Route::any('/mypost', 'HomeController@mypost')->name('mypost');
@@ -70,8 +73,6 @@ Route::any('/undermaintainence', 'HomeController@undermaintainence')->name('unde
 Route::any('/404', 'HomeController@notfound')->name('404');
 Route::any('/pricing', 'HomeController@pricing')->name('pricing');
 
-Route::any('/deletepost/{id}', 'PostController@deletepost')->name('deletepost');
-Route::any('/removepost', 'PostController@removepost')->name('removepost');
 Route::any('/viewpost', 'HomeController@viewpost')->name('viewpost');
 Route::any('/privacy', 'HomeController@privacy')->name('privacy');
 Route::any('/categories', 'HomeController@categories')->name('categories');

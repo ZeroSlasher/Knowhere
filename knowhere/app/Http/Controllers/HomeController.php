@@ -8,7 +8,6 @@ use App\SubCat;
 use DB;
 use Session;
 
-
 class HomeController extends Controller
 {
 
@@ -45,6 +44,44 @@ class HomeController extends Controller
         return $city;
     }
 
+    public function fetchloc()
+    {
+        $c = $_POST['query'];
+        if ($c) {
+
+            $city = DB::select("select city as s from tbl_city where city like '%$c%'");
+            $dist = DB::select("select district as s from tbl_district where district like '%$c%'");
+            // $state = DB::select("select state as s from tbl_state where state like '%$c%'");
+            $d = array_merge($city, $dist);
+            //$d = response()->json($data);
+
+            $output = '<ul >';
+            foreach ($d as $row) {
+                $output .= '
+                <li class="load" style="background: #fff;
+                height: 48px;
+                width: 100%;
+                line-height: 48px;
+                padding: 0 20px;
+                color: #646e7b;
+                min-width: 250px;
+                display: block;
+                border-bottom: none;
+                border-radius: 48px;
+                margin-bottom: 3px;
+                text-transform: none;
+                font-size: 14px;
+                letter-spacing: .7px;
+                position: relative;
+                -webkit-box-shadow: 0 12px 22px rgba(0, 0, 0, .2);
+                box-shadow: 0 12px 22px rgba(0, 0, 0, .2);
+                "><a href="#">' . $row->s . '</a></li>';
+            }
+            $output .= '</ul>';
+            return $output;
+        }
+    }
+
     public function forgot()
     {
         return view('forgot_password');
@@ -66,10 +103,7 @@ class HomeController extends Controller
     {
         return view('category');
     }
-    public function listing_list()
-    {
-        return view('listing_list');
-    }
+
     public function about()
     {
         return view('about');
@@ -120,10 +154,14 @@ class HomeController extends Controller
     {
         return view('comingsoon');
     }
+    public function listing_list()
+    {
+return view('listing_list');
+
+    }
     public function dummy()
     {
-        $promotion = DB::table('tbl_prof_images')->where('outletid', 3)->first();
-        $a = response()->json($promotion);
-        return $a;
+
+
     }
 }

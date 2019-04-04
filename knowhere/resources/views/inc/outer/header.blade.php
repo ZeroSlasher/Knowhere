@@ -60,7 +60,7 @@
 
                 </li>
                 <li>
-                    <a href="category.html">Categories</a>
+                    <a href="category">Categories</a>
                 </li>
                 <li>
                     <a href="listing_list">

@@ -37,12 +37,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+
     <style type="text/css">
         body {
             font-family: 'Varela Round', sans-serif;
@@ -198,26 +193,26 @@
             <div class="container">
                 <h1>Discover The City Gems</h1>
                 <p class="lead">Find great places to stay, eat, shop, or visit from local experts.</p>
-                <form>
+                <form method="POST" action="/searchaction">
+                    @csrf
                     <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <input type="text" placeholder="What are you looking for ?">
-                            </div>
-                            <!-- end .form-group -->
-                        </div>
+
                         <!-- end .col-sm-4 -->
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" placeholder="Location">
+                                <input type="text" name="loc" id="loc" placeholder="Location">
                                 <i class="pe-7s-world"></i>
+                                <div style="position: absolute;margin-top: 10px;"  id="List">
+                                    </div>
                             </div>
+                            
+                            
                             <!-- end .form-group -->
                         </div>
                         <!-- end .col-sm-4 -->
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="form-group">
-                                <select class="selectpicker" data-live-search="true">
+                                <select class="selectpicker" name="cat" data-live-search="true">
                                     <option disabled selected>All categories</option>
                                     @isset($data)
                                     @foreach($data as $category)
@@ -231,7 +226,7 @@
                         <!-- end .col-sm-4 -->
                     </div>
                     <!-- end .row -->
-                    <button type="submit" class="button" diasbled>Search places</button>
+                    <input type="submit" class="button" value="Search places ">
                 </form>
                 <div class="highlight-slider-wrapper">
                     <div class="row">
@@ -752,6 +747,10 @@
     <script src="js/formvalidate.js"></script>
     <!-- formvalidate1.js -->
     <script src="js/formvalidate1.js"></script>
+
+    <script>
+
+            </script>
 
 </body>
 
