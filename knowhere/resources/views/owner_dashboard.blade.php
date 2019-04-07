@@ -34,7 +34,7 @@
 <body>
 
     <header id="header-wrap">
-    @include('inc.admin.admindash_head')
+        @include('inc.admin.admindash_head')
 
     </header>
 
@@ -75,57 +75,57 @@
                                 <ul>
                                     <li>
                                         <a class="active" href="ownerdashboard">
-                                                            <i class="lni-dashboard"></i>
-                                                            <span>Dashboard</span>
-                                                        </a>
+                                            <i class="lni-dashboard"></i>
+                                            <span>Dashboard</span>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="mypostings">
-                                                            <i class="lni-dashboard"></i>
-                                                            <span>My Postings</span>
-                                                        </a>
+                                            <i class="lni-dashboard"></i>
+                                            <span>My Postings</span>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="editownerprofile">
-                                                            <i class="lni-cog"></i>
-                                                            <span>Profile settings</span>
-                                                        </a>
+                                        <a href="editprofile">
+                                            <i class="lni-cog"></i>
+                                            <span>Profile settings</span>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="resetopwd">
-                                                            <i class="lni-layers"></i>
-                                                            <span>Reset password</span>
-                                                        </a>
+                                        <a href="resetpwd">
+                                            <i class="lni-layers"></i>
+                                            <span>Reset password</span>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="Addposting">
-                                                            <i class="lni-wallet"></i>
-                                                            <span>Add new posting</span>
-                                                        </a>
+                                            <i class="lni-wallet"></i>
+                                            <span>Add new posting</span>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="">
-                                                            <i class="lni-wallet"></i>
-                                                            <span>Option3</span>
-                                                        </a>
+                                            <i class="lni-wallet"></i>
+                                            <span>Option3</span>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="">
-                                                            <i class="lni-heart"></i>
-                                                            <span>Option4</span>
-                                                        </a>
+                                            <i class="lni-heart"></i>
+                                            <span>Option4</span>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="">
-                                                            <i class="lni-star"></i>
-                                                            <span>Option5</span>
-                                                        </a>
+                                            <i class="lni-star"></i>
+                                            <span>Option5</span>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="/logout">
-                                                            <i class="lni-enter"></i>
-                                                            <span>Logout</span>
-                                                        </a>
+                                            <i class="lni-enter"></i>
+                                            <span>Logout</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </nav>
@@ -143,7 +143,7 @@
                         <div class="inner-box">
 
                             <div class="dashboard-wrapper">
-    @include('inc.profilewid')
+                                @include('inc.profilewid')
 
                             </div>
 
@@ -158,8 +158,8 @@
 
 
     <a href="#" class="back-to-top">
-                        <i class="lni-chevron-up"></i>
-                    </a>
+        <i class="lni-chevron-up"></i>
+    </a>
 
     <div id="preloader">
         <div class="loader" id="loader-1"></div>

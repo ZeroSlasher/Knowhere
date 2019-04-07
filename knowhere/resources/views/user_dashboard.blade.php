@@ -81,19 +81,19 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="edituserprofile">
+                                        <a href="editprofile">
                                             <i class="lni-cog"></i>
                                             <span>Edit profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="Addpostingu">
+                                        <a href="Addposting">
                                             <i class="lni-wallet"></i>
                                             <span>Add new posting</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="resetupwd">
+                                        <a href="resetpwd">
                                             <i class="lni-layers"></i>
                                             <span>Reset password</span>
                                         </a>

@@ -71,25 +71,29 @@
                             <nav class="navdashboard">
                                 <ul>
                                     <li>
+                                        @if(Session::get('utype')==2)
                                         <a href="ownerdashboard">
+                                            @elseif(Session::get('utype')==3)
+                                            <a href="userdashboard">
+                                            @endif
                                             <i class="lni-dashboard"></i>
                                             <span>Dashboard</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="active" href="mypostings">
+                                        <a class="active" href="#">
                                             <i class="lni-dashboard"></i>
                                             <span>My Postings</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="editownerprofile">
+                                        <a href="editprofile">
                                             <i class="lni-cog"></i>
                                             <span>Profile settings</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="resetopwd">
+                                        <a href="resetpwd">
                                             <i class="lni-layers"></i>
                                             <span>Reset password</span>
                                         </a>
@@ -169,9 +173,7 @@
                                                     <img class="" src="{{asset('/uploads')}}/{{$ii}}"
                                                         style="width:100%">
                                                 </div>
-                                                @php
 
-                                                @endphp
                                             </figure>
                                             <div class="feature-content">
                                                 <div class="product">
@@ -212,7 +214,7 @@
                                                     </li>
                                                 </ul>
                                                 <div class="listing-bottom">
-                                                    @if($own->status == 5)
+                                                    @if($own->status == 'validated')
                                                     <h3 class="btn-verified price float-left"><i
                                                             class="lni-pointer-right"></i>Verified</h3>
                                                     @else

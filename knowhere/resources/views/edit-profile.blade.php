@@ -27,12 +27,12 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+
 </head>
 
 <body>
 
     <header id="header-wrap">
-
         @include('inc.admin.admindash_head')
 
     </header>
@@ -73,9 +73,19 @@
                             <nav class="navdashboard">
                                 <ul>
                                     <li>
+                                        @if(Session::get('utype')==2)
                                         <a href="ownerdashboard">
+                                            @elseif(Session::get('utype')==3)
+                                            <a href="userdashboard">
+                                                @endif
+                                                <i class="lni-dashboard"></i>
+                                                <span>Dashboard</span>
+                                            </a>
+                                    </li>
+                                    <li>
+                                        <a href="mypostings">
                                             <i class="lni-dashboard"></i>
-                                            <span>Dashboard</span>
+                                            <span>My Postings</span>
                                         </a>
                                     </li>
                                     <li>
@@ -86,21 +96,15 @@
                                     </li>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="resetpwd">
                                             <i class="lni-layers"></i>
-                                            <span>Option2</span>
+                                            <span>Reset password</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            <i class="lni-envelope"></i>
-                                            <span>Option3</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
+                                        <a href="Addposting">
                                             <i class="lni-wallet"></i>
-                                            <span>Option3</span>
+                                            <span>Add new posting</span>
                                         </a>
                                     </li>
                                     <li>
@@ -141,100 +145,94 @@
                                     <div class="dashboard-box">
                                         <h2 class="dashbord-title">Contact Detail</h2>
                                     </div>
+                                    @include('inc.message')
+
                                     <div class="dashboard-wrapper">
-
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">Name</label>
-                                            <input class="form-control input-md" name="name" type="text">
-                                        </div>
-
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">Contact number</label>
-                                            <input class="form-control input-md" value="" name="phone1"
-                                                placeholder="Contact number" type="text">
-                                        </div>
-
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">Address</label>
-                                            <textarea class="form-control input-md" id="Address"
-                                                name="Address"></textarea>
-                                        </div>
-
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">Add profile image</label>
-                                            <input class="form-control input-md" name="address" type="file">
-                                        </div>
-
-                                        <div class="form-group mb-3 tg-inputwithicon">
-                                            <label class="control-label">State</label>
-                                            <div class="tg-select form-control">
-                                                <select id="state" name="state">
-                                                    <option disabled selected value> -- select state -- </option>
-                                                    @isset($state)
-                                                    @foreach($state as $states)
-                                                    <option value="{{$states->state_id}}">{{$states->state}}</option>
-                                                    @endforeach
-                                                    @endisset
-                                                </select>
+                                        <form method="POST" action="/updateownerprofile" id="rqstform"
+                                            onsubmit="return formValidation2()" enctype="multipart/form-data">
+                                            @csrf @isset($prof) @foreach($prof as $p)
+                                            <input name='id' id='id' type="text" hidden value="{{$p->id}}">
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Name</label>
+                                                <input class="form-control input-md" placeholder="Name" name='own_name'
+                                                    id='own_name' type="text" value="{{$p->name}}">
+                                                <div id="p11" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter a valid name</strong>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group mb-3 tg-inputwithicon">
-                                            <label class="control-label">district</label>
-                                            <div class="tg-select form-control">
-                                                <select name="district" id="district">
-                                                    <option disabled selected value> -- select district -- </option>
-                                                </select>
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Contact number</label>
+                                                <input class="form-control input-md" value="{{$p->phone}}" name='cphone'
+                                                    id='cphone' placeholder="Contact Number" type="text">
+                                                <div id="p33" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter a valid Phone number</strong>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group mb-3 tg-inputwithicon">
-                                            <label class="control-label">city</label>
-                                            <div class="tg-select form-control">
-                                                <select name="city" id="city">
-                                                    <option disabled selected value> -- select city -- </option>
-                                                </select>
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Address</label>
+                                                <textarea class="form-control input-md" id="Address"
+                                                    name="Address">{{$p->oaddress}}</textarea>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group mb-3 tg-inputwithicon">
-                                            <label class="control-label">District</label>
-                                            <div class="tg-select form-control">
-                                                <select>
-                                                    <option disabled selected>Select District</option>
-                                                </select>
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Add profile image</label>
+                                                <input class="form-control input-md" id="prof" onchange="myFunction()"
+                                                    name="prof" type="file">
+                                                <img class="img-thumbnail" src="/uploads/{{$p->image}}"
+                                                    alt="Profile image" width="200px">
+                                                <img id="preview" src="#" style="display:none" alt="Uploaded image"
+                                                    width="200px" title="click to remove" />
+
                                             </div>
-                                        </div>
-                                        <div class="form-group mb-3 tg-inputwithicon">
-                                            <label class="control-label">City</label>
-                                            <div class="tg-select form-control">
-                                                <select>
-                                                    <option disabled selected>Select City</option>
-                                                </select>
+                                            @endforeach @endisset
+
+                                            <div class="form-group mb-3 tg-inputwithicon">
+                                                <label class="control-label">State</label>
+                                                <div class="tg-select form-control">
+                                                    <select id="state" name="state">
+                                                        <option selected value="{{$p->state_id}}"> {{$p->state}}
+                                                        </option>
+                                                        @isset($state)
+                                                        @foreach($state as $states)
+                                                        <option value="{{$states->state_id}}">{{$states->state}}
+                                                        </option>
+                                                        @endforeach
+                                                        @endisset
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">Email</label>
-                                            <input class="form-control input-md" name="email" type="email">
-                                        </div>
+                                            <div class="form-group mb-3 tg-inputwithicon">
+                                                <label class="control-label">district</label>
+                                                <div class="tg-select form-control">
+                                                    <select name="district" id="district">
+                                                        <option selected value="{{$p->dist_id}}">{{$p->district}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">Current password</label>
-                                            <input class="form-control input-md" name="curpass" type="text">
-                                        </div>
+                                            <div class="form-group mb-3 tg-inputwithicon">
+                                                <label class="control-label">city</label>
+                                                <div class="tg-select form-control">
+                                                    <select name="city" id="city">
+                                                        <option selected value="{{$p->city_id}}">{{$p->city}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">New password</label>
-                                            <input class="form-control input-md" name="npass" type="text">
-                                        </div>
+                                            <div id="head1" style="align:center;display: none;"
+                                                class="alert alert-danger">
+                                                <strong>All details are mandatory</strong>
+                                            </div>
 
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">Confirm password</label>
-                                            <input class="form-control input-md" name="cpass" type="text">
-                                        </div>
-
-                                        <button class="btn btn-common" type="button">Update Profile</button>
+                                            <div class="button-wrapper"><button type="submit" id="submit1"
+                                                    name="submit1" class="btn btn-common">Update Profile</button></div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -244,8 +242,6 @@
             </div>
         </div>
     </div>
-
-
     @include('inc.outer.footer')
 
 
@@ -273,9 +269,39 @@
     <script src="assets/js/contact-form-script.min.js"></script>
     <script src="assets/js/summernote.js"></script>
     <script src="{{ asset('js/myajax.js') }}"></script>
+    <!-- formvalidate2.js -->
+    <script src="js/formvalidate2.js"></script>
+    <script>
+    function readURL(input) {
 
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#prof").change(function() {
+        readURL(this);
+    });
+
+    function myFunction() {
+        var x = document.getElementById("preview");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        }
+    }
+
+    $('#preview').on('click', function() {
+        $('#prof').val("");
+        $('#preview').hide();
+    });
+    </script>
 </body>
 
-<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/account-profile-setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:22 GMT -->
 
 </html>

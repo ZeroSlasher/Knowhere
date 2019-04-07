@@ -57,35 +57,38 @@
             <div class="container">
                 <h1>Discover The City Gems</h1>
                 <p class="lead">Find great places to stay, eat, shop, or visit from local experts.</p>
-                <form>
+                <form method="POST" action="/searchaction">
+                    @csrf
                     <div class="row">
-                        <div class="col-sm-4">
+
+                        <!-- end .col-sm-4 -->
+                        <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" placeholder="What are you looking for ?">
-                            </div> <!-- end .form-group -->
-                        </div> <!-- end .col-sm-4 -->
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <input type="text" placeholder="Location">
+                                <input type="text" name="loc" id="loc" autocomplete="off" placeholder="Location">
                                 <i class="pe-7s-world"></i>
-                            </div> <!-- end .form-group -->
-                        </div> <!-- end .col-sm-4 -->
-                        <div class="col-sm-4">
+                                <div style="position: absolute;margin-top: 10px;"  id="List">
+                                    </div>
+                            </div>
+                            <!-- end .form-group -->
+                        </div>
+                        <!-- end .col-sm-4 -->
+                        <div class="col-sm-6">
                             <div class="form-group">
-                                <select class="selectpicker" data-live-search="true">
-                                    <option>All categories</option>
-                                    <option>Food</option>
-                                    <option>Cafe'</option>
-                                    <option>Restaurant</option>
-                                    <option>Lodging</option>
-                                    <option>Culture</option>
-                                    <option>Shopping</option>
-                                    <option>Drink</option>
+                                <select class="selectpicker" name="cat" data-live-search="true">
+                                    <option value selected>All categories</option>
+                                    @isset($data)
+                                    @foreach($data as $category)
+                                    <option value="{{$category->Cat_id}}">{{$category->catagory}}</option>
+                                    @endforeach
+                                    @endisset
                                 </select>
-                            </div> <!-- end .form-group -->
-                        </div> <!-- end .col-sm-4 -->
-                    </div> <!-- end .row -->
-                    <button type="submit" class="button">Search places</button>
+                            </div>
+                            <!-- end .form-group -->
+                        </div>
+                        <!-- end .col-sm-4 -->
+                    </div>
+                    <!-- end .row -->
+                    <input type="submit" class="button" value="Search places ">
                 </form>
                 <div class="highlight-slider-wrapper">
                     <div class="row">
@@ -96,45 +99,64 @@
                                     <a href="#" class="icon">
                                         <img src="images/highlight-food.png" alt="food">
                                         <div class="overlay">Food</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
                                 <div class="item">
                                     <a href="#" class="icon">
                                         <img src="images/highlight-lodging.png" alt="lodging">
                                         <div class="overlay">Lodging</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
                                 <div class="item">
                                     <a href="#" class="icon">
                                         <img src="images/highlight-culture.png" alt="culture">
                                         <div class="overlay">Culture</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
                                 <div class="item">
                                     <a href="#" class="icon">
                                         <img src="images/highlight-shopping.png" alt="shopping">
                                         <div class="overlay">Shopping</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
                                 <div class="item">
                                     <a href="#" class="icon">
                                         <img src="images/highlight-nightlife.png" alt="nightlife">
                                         <div class="overlay">Nightlife</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
                                 <div class="item">
                                     <a href="#" class="icon">
                                         <img src="images/highlight-drink.png" alt="drink">
                                         <div class="overlay">Drink</div>
-                                    </a> <!-- end .icon -->
-                                </div> <!-- end .item -->
-                            </div> <!-- end .highlight-slider -->
-                        </div> <!-- end .col-md-8 -->
-                    </div> <!-- end .row -->
-                </div> <!-- end .highlight-slider-wrapper -->
-            </div> <!-- end .container -->
-        </div> <!-- end .inner -->
-    </div> <!-- end .section -->
+                                    </a>
+                                    <!-- end .icon -->
+                                </div>
+                                <!-- end .item -->
+                            </div>
+                            <!-- end .highlight-slider -->
+                        </div>
+                        <!-- end .col-md-8 -->
+                    </div>
+                    <!-- end .row -->
+                </div>
+                <!-- end .highlight-slider-wrapper -->
+            </div>
+            <!-- end .container -->
+        </div>
+        <!-- end .inner -->
+    </div>
+    <!-- end .section -->
 
     <div class="section light">
         <div class="inner">
@@ -254,35 +276,44 @@
     <div class="section light">
         <div class="inner">
             <div class="container">
-                <h2 class="text-center">Our Newsletter<small>Get an extra 39% off for next your holiday</small></h2>
-                <form
-                    action="https://johneyboy.us7.list-manage.com/subscribe/post-json?u=3210d74dbf054134a29daf97c&amp;id=50ad235761&amp;c=?"
-                    method="get" id="mc-embedded-subscribe-form" class="newsletter-form">
+                <h2 class="text-center">Our Newsletter<small>Get an extra 39% off for next your
+                        holiday</small>
+                </h2>
+                <form action="" method="get" id="mc-embedded-subscribe-form" class="newsletter-form">
                     <input type="email" id="mce-EMAIL" name="EMAIL" placeholder="YourEmail@domain.com">
-                    <button type="submit" id="mc-embedded-subscribe" name="subscribe" class="button">Subscribe</button>
+                    <button type="submit" id="mc-embedded-subscribe" name="subscribe" class="button" disabled>Subscribe</button>
                 </form>
-            </div> <!-- end .container -->
-        </div> <!-- end .inner -->
-    </div> <!-- end .section -->
+            </div>
+            <!-- end .container -->
+        </div>
+        <!-- end .inner -->
+    </div>
+    <!-- end .section -->
 
     <footer class="footer">
         <div class="top">
             <div class="left">
-                <div class="logo"><a href="/"><img src="images/logo-dark.png" alt="ExploreCity"
-                            class="img-responsive"></a></div> <!-- end .logo -->
-            </div> <!-- end .left -->
-            <div class="social-icons">
-                <a href="#"><i class="pe-so-facebook"></i></a>
-                <a href="#"><i class="pe-so-twitter"></i></a>
-                <a href="#"><i class="pe-so-vimeo"></i></a>
-                <a href="#"><i class="pe-so-tripadvisor"></i></a>
-                <a href="#"><i class="pe-so-instagram"></i></a>
-                <a href="#"><i class="pe-so-google-plus"></i></a>
+                <div class="logo"><a href="/"><img src="images/logo-dark.png" alt="Knowhere"
+                            class="img-responsive"></a></div>
+                <!-- end .logo -->
             </div>
-            <div class="right">Proudly Made in Viet Nam<a href="#">+84 968796789</a></div> <!-- end .left -->
-        </div> <!-- end .top -->
-        <div class="bottom">Copyright &copy; 2016. All Rights Reserved By <a href="#">Wecookcode</a></div>
-    </footer> <!-- end .footer -->
+            <!-- end .left -->
+            <div class="social-icons">
+                <a href=""><i class="pe-so-facebook"></i></a>
+                <a href=""><i class="pe-so-twitter"></i></a>
+                <a href=""><i class="pe-so-vimeo"></i></a>
+                <a href=""><i class="pe-so-tripadvisor"></i></a>
+                <a href=""><i class="pe-so-instagram"></i></a>
+                <a href=""><i class="pe-so-google-plus"></i></a>
+            </div>
+            <div class="right"></div>
+            <!-- end .left -->
+        </div>
+        <!-- end .top -->
+        <div class="bottom">Copyright &copy; 2019. All Rights Reserved By ZeroSlasher</a>
+        </div>
+    </footer>
+    <!-- end .footer -->
 
     <div class="login-wrapper">
         <div class="login">

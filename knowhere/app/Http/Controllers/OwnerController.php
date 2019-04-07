@@ -117,13 +117,13 @@ class OwnerController extends Controller
         return back()->with('success', 'image removed successfully');
     }
 
-    public function editownerprofile()
+    public function editprofile()
     {
         $oid = Session::get('uid');
         $state = DB::table('tbl_state')->get();
         //$prof = DB::table('tbl_users_reg')->where('id', $oid)->get();
         $prof = DB::select("select * from tbl_users_reg as a,tbl_city as b,tbl_district as c,tbl_state as d where a.id = '$oid' and a.city_id = b.city_id and b.dist_id = c.dist_id and c.state_id = d.state_id");
-        return view('edit-owner-profile', compact('state', 'prof'));
+        return view('edit-profile', compact('state', 'prof'));
     }
 
     public function updateownerprofile(Request $request)

@@ -14,7 +14,8 @@ class HomeController extends Controller
     public function index()
     {
         if (Session::get('id')) {
-            return view('LoginIndex');
+            $cat = DB::table('tbl_cat')->get();
+            return view('LoginIndex', ['data' => $cat]);
         } else {
             $cat = DB::table('tbl_cat')->get();
             $state = DB::table('tbl_state')->get();
@@ -137,10 +138,7 @@ class HomeController extends Controller
     {
         return view('how-it-works');
     }
-    public function postdetails()
-    {
-        return view('postdetails');
-    }
+
     public function notfound()
     {
         return view('404');
@@ -154,14 +152,9 @@ class HomeController extends Controller
     {
         return view('comingsoon');
     }
-    public function listing_list()
-    {
-return view('listing_list');
 
-    }
     public function dummy()
     {
-
 
     }
 }

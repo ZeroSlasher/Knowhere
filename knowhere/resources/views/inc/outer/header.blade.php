@@ -44,7 +44,7 @@
                     </ul>
                     <ul class="sign-in">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                            <a class="nav-link dropdown-toggle" href="/" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false"><i class="lni-home"></i>home</a>
                         </li>
                     </ul>

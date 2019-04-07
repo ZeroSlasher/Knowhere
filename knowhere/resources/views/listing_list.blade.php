@@ -30,11 +30,11 @@
     <body>
 
         <header id="header-wrap">
-@if(Session::get('uid'))
-@include('inc.admin.admindash_head')
-@else
-@include('inc.outer.header')
-@endif
+            @if(Session::get('uid'))
+            @include('inc.admin.admindash_head')
+            @else
+            @include('inc.outer.header')
+            @endif
 
         </header>
 
@@ -164,358 +164,143 @@
                             <div class="tab-content">
                                 <div id="grid-view" class="tab-pane fade">
                                     <div class="row">
+                                            @if(isset($post)) @foreach($post as $own)
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="featured-box">
                                                 <figure>
-                                                    <div class="icon">
+                                                    {{-- <div class="icon">
                                                         <i class="lni-heart"></i>
-                                                    </div>
+                                                    </div> --}}
+                                                    @php
+
+                                                        if (isset($own->outletid)) {
+                                                        $images =
+                                                        Illuminate\Support\Facades\DB::table('tbl_prof_images')->where('outletid',$own->outletid)->get();
+                                                        foreach ($images as $i) {
+                                                        $ii = $i->imgname;
+                                                        }
+                                                        }
+                                                        @endphp
                                                     <a href="#"><img class="img-fluid"
-                                                            src="assets/img/featured/img1.jpg" alt=""></a>
+                                                            src="{{asset('/uploads')}}/{{$ii}}" alt=""></a>
                                                 </figure>
                                                 <div class="feature-content">
                                                     <div class="product">
                                                         <a href="#"><i class="lni-folder"></i>
-                                                            Mobile Phones</a>
+                                                            {{$own->catagory}} -- {{$own->subcatagory}}</a>
                                                     </div>
-                                                    <h4><a href="ads-details.html">Apple
-                                                            iPhone X</a></h4>
-                                                    <span>Last Updated: 3 hours ago</span>
+                                                    <h4><a href="ads-details.html">{{$own->outletname}}</a></h4>
+                                                    <span>Last Updated: {{$own->updated_at}}</span>
                                                     <ul class="address">
                                                         <li>
                                                             <a href="#"><i class="lni-map-marker"></i>
-                                                                Avenue C, US</a>
+                                                                {{$own->city}},{{$own->district}},{{$own->state}}</a>
                                                         </li>
                                                         <li>
                                                             <a href="#"><i class="lni-alarm-clock"></i>
-                                                                Feb 18, 2018</a>
+                                                                {{$own->created_at}}</a>
                                                         </li>
                                                         <li>
                                                             <a href="#"><i class="lni-user"></i>
-                                                                Maria Barlow</a>
+                                                                {{$own->ownername}}</a>
                                                         </li>
                                                         <li>
-                                                            <a href="#"><i class="lni-package"></i>
-                                                                Used</a>
-                                                        </li>
+                                                                <a href="#"><i class="lni-home"></i>
+                                                                    {{$own->address}}</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#"><i class="lni-phone-handset"></i>
+                                                                    {{$own->phone1}}</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#"><i class="lni-phone-handset"></i>
+                                                                    {{$own->phone2}}</a>
+                                                            </li>
                                                     </ul>
                                                     <div class="listing-bottom">
-                                                        <h3 class="price float-left">$200.00
-                                                        </h3>
-                                                        <a href="account-myads.html" class="btn-verified float-right"><i
-                                                                class="lni-check-box"></i>
-                                                            Verified Ad</a>
+                                                            @if($own->status == 'Validated')
+                                                            <h3 class="btn-verified price float-left"><i
+                                                                    class="lni-pointer-right"></i>Verified</h3>
+                                                            @else
+                                                            <h3 class="btn-verified price float-left"><i
+                                                                    class="lni-pointer-right"></i>Referred</h3>
+                                                            @endif
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="featured-box">
-                                                <figure>
-                                                    <div class="icon">
-                                                        <i class="lni-heart"></i>
-                                                    </div>
-                                                    <a href="#"><img class="img-fluid"
-                                                            src="assets/img/featured/img2.jpg" alt=""></a>
-                                                </figure>
-                                                <div class="feature-content">
-                                                    <div class="product">
-                                                        <a href="#"><i class="lni-folder"></i> Real
-                                                            Estate</a>
-                                                    </div>
-                                                    <h4><a href="ads-details.html">Amazing
-                                                            Room for Rent</a></h4>
-                                                    <span>Last Updated: 4 hours ago</span>
-                                                    <ul class="address">
-                                                        <li>
-                                                            <a href="#"><i class="lni-map-marker"></i>
-                                                                Dallas, Washington</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-alarm-clock"></i>
-                                                                Jan 7, 2018</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-user"></i>
-                                                                John Smith</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-package"></i>
-                                                                Used</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="listing-bottom">
-                                                        <h3 class="price float-left">$450.00
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="featured-box">
-                                                <figure>
-                                                    <div class="icon">
-                                                        <i class="lni-heart"></i>
-                                                    </div>
-                                                    <a href="#"><img class="img-fluid"
-                                                            src="assets/img/featured/img3.jpg" alt=""></a>
-                                                </figure>
-                                                <div class="feature-content">
-                                                    <div class="product">
-                                                        <a href="#"><i class="lni-folder"></i>
-                                                            Electronics</a>
-                                                    </div>
-                                                    <h4><a href="ads-details.html">Canon SX
-                                                            Powershot D-SLR</a></h4>
-                                                    <span>Last Updated: 4 hours ago</span>
-                                                    <ul class="address">
-                                                        <li>
-                                                            <a href="#"><i class="lni-map-marker"></i>
-                                                                Dallas, Washington</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-alarm-clock"></i>
-                                                                Mar 18, 2018</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-user"></i>
-                                                                David Givens</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-package"></i>
-                                                                Used</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="listing-bottom">
-                                                        <h3 class="price float-left">$700.00
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="featured-box">
-                                                <figure>
-                                                    <div class="icon">
-                                                        <i class="lni-heart"></i>
-                                                    </div>
-                                                    <a href="#"><img class="img-fluid"
-                                                            src="assets/img/featured/img4.jpg" alt=""></a>
-                                                </figure>
-                                                <div class="feature-content">
-                                                    <div class="product">
-                                                        <a href="#"><i class="lni-folder"></i>
-                                                            Vehicles</a>
-                                                    </div>
-                                                    <h4><a href="ads-details.html">BMW 5
-                                                            Series GT Car</a></h4>
-                                                    <span>Last Updated: 5 hours ago</span>
-                                                    <ul class="address">
-                                                        <li>
-                                                            <a href="#"><i class="lni-map-marker"></i>
-                                                                Dallas, Washington</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-alarm-clock"></i>
-                                                                Dec 18, 2018</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-user"></i>
-                                                                Elon Musk</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-package"></i>
-                                                                N/A</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="listing-bottom">
-                                                        <h3 class="price float-left">$300.00
-                                                        </h3>
-                                                        <a href="account-myads.html" class="btn-verified float-right"><i
-                                                                class="lni-check-box"></i>
-                                                            Verified Ad</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach @endif
+
                                     </div>
                                 </div>
                                 <div id="list-view" class="tab-pane fade active show">
                                     <div class="row">
+                                            @if(isset($post)) @foreach($post as $own)
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="featured-box">
                                                 <figure>
-                                                    <div class="icon">
+                                                        @php
+
+                                                        if (isset($own->outletid)) {
+                                                        $images =
+                                                        Illuminate\Support\Facades\DB::table('tbl_prof_images')->where('outletid',$own->outletid)->get();
+                                                        foreach ($images as $i) {
+                                                        $ii = $i->imgname;
+                                                        }
+                                                        }
+                                                        @endphp
+                                                    {{-- <div class="icon">
                                                         <i class="lni-heart"></i>
-                                                    </div>
+                                                    </div> --}}
+
                                                     <a href="#"><img class="img-fluid"
-                                                            src="assets/img/featured/img5.jpg" alt=""></a>
+                                                            src="{{asset('/uploads')}}/{{$ii}}" style="width:100%" alt=""></a>
                                                 </figure>
                                                 <div class="feature-content">
                                                     <div class="product">
                                                         <a href="#"><i class="lni-folder"></i>
-                                                            Apple</a>
+                                                            {{$own->catagory}} -- {{$own->subcatagory}}</a>
                                                     </div>
-                                                    <h4><a href="ads-details.html">Apple
-                                                            Macbook Pro 13 Inch</a></h4>
-                                                    <span>Last Updated: 4 hours ago</span>
+                                                <h4><a href="postdetails/{{$own->outletid}}">{{$own->outletname}}</a></h4>
+                                                    <span>Last Updated: {{$own->updated_at}}</span>
                                                     <ul class="address">
                                                         <li>
-                                                            <a href="#"><i class="lni-map-marker"></i>Louis,
-                                                                Missouri, US</a>
+                                                            <a href="#"><i class="lni-map-marker"></i>{{$own->city}},{{$own->district}},{{$own->state}}</a>
                                                         </li>
                                                         <li>
                                                             <a href="#"><i class="lni-alarm-clock"></i>
-                                                                May 18, 2018</a>
+                                                                {{$own->created_at}}</a>
                                                         </li>
                                                         <li>
                                                             <a href="#"><i class="lni-user"></i>
-                                                                Will Ernest</a>
+                                                                {{$own->ownername}}</a>
                                                         </li>
                                                         <li>
-                                                            <a href="#"><i class="lni-package"></i>
-                                                                Brand New</a>
-                                                        </li>
+                                                                <a href="#"><i class="lni-home"></i>
+                                                                    {{$own->address}}</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#"><i class="lni-phone-handset"></i>
+                                                                    {{$own->phone1}}</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#"><i class="lni-phone-handset"></i>
+                                                                    {{$own->phone2}}</a>
+                                                            </li>
                                                     </ul>
                                                     <div class="listing-bottom">
-                                                        <h3 class="price float-left">$450.00
-                                                        </h3>
-                                                        <a href="account-myads.html" class="btn-verified float-right"><i
-                                                                class="lni-check-box"></i>
-                                                            Verified Ad</a>
+                                                            @if($own->status == 'Validated')
+                                                            <h3 class="btn-verified price float-left"><i
+                                                                    class="lni-pointer-right"></i>Verified</h3>
+                                                            @else
+                                                            <h3 class="btn-verified price float-left"><i
+                                                                    class="lni-pointer-right"></i>Referred</h3>
+                                                            @endif
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <div class="featured-box">
-                                                <figure>
-                                                    <div class="icon">
-                                                        <i class="lni-heart"></i>
-                                                    </div>
-                                                    <a href="#"><img class="img-fluid"
-                                                            src="assets/img/featured/img6.jpg" alt=""></a>
-                                                </figure>
-                                                <div class="feature-content">
-                                                    <div class="product">
-                                                        <a href="#"><i class="lni-folder"></i>
-                                                            Restaurant</a>
-                                                    </div>
-                                                    <h4><a href="ads-details.html">Cream
-                                                            Restaurant</a></h4>
-                                                    <span>Last Updated: 4 hours ago</span>
-                                                    <ul class="address">
-                                                        <li>
-                                                            <a href="#"><i class="lni-map-marker"></i>
-                                                                Dallas, Washington</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-alarm-clock"></i>
-                                                                Feb 18, 2018</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-user"></i>
-                                                                Samuel Palmer</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-package"></i>
-                                                                Brand New</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="listing-bottom">
-                                                        <h3 class="price float-left">$250.00
-                                                        </h3>
-                                                        <a href="account-myads.html" class="btn-verified float-right"><i
-                                                                class="lni-check-box"></i>
-                                                            Verified Ad</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <div class="featured-box">
-                                                <figure>
-                                                    <div class="icon">
-                                                        <i class="lni-heart"></i>
-                                                    </div>
-                                                    <a href="#"><img class="img-fluid"
-                                                            src="assets/img/featured/img3.jpg" alt=""></a>
-                                                </figure>
-                                                <div class="feature-content">
-                                                    <div class="product">
-                                                        <a href="#"><i class="lni-folder"></i>
-                                                            Electronics</a>
-                                                    </div>
-                                                    <h4><a href="ads-details.html">Canon SX
-                                                            Powershot D-SLR</a></h4>
-                                                    <span>Last Updated: 4 hours ago</span>
-                                                    <ul class="address">
-                                                        <li>
-                                                            <a href="#"><i class="lni-map-marker"></i>
-                                                                Dallas, Washington</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-alarm-clock"></i>
-                                                                Mar 18, 2018</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-user"></i>
-                                                                David Givens</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-package"></i>
-                                                                Used</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="listing-bottom">
-                                                        <h3 class="price float-left">$700.00
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <div class="featured-box">
-                                                <figure>
-                                                    <div class="icon">
-                                                        <i class="lni-heart"></i>
-                                                    </div>
-                                                    <a href="#"><img class="img-fluid"
-                                                            src="assets/img/featured/img2.jpg" alt=""></a>
-                                                </figure>
-                                                <div class="feature-content">
-                                                    <div class="product">
-                                                        <a href="#"><i class="lni-folder"></i> Real
-                                                            Estate</a>
-                                                    </div>
-                                                    <h4><a href="ads-details.html">Amazing
-                                                            Room for Rent</a></h4>
-                                                    <span>Last Updated: 4 hours ago</span>
-                                                    <ul class="address">
-                                                        <li>
-                                                            <a href="#"><i class="lni-map-marker"></i>
-                                                                Dallas, Washington</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-alarm-clock"></i>
-                                                                Jan 7, 2018</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-user"></i>
-                                                                John Smith</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="lni-package"></i>
-                                                                Used</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="listing-bottom">
-                                                        <h3 class="price float-left">$450.00
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach @endif
                                     </div>
                                 </div>
                             </div>
@@ -523,16 +308,6 @@
 
 
                         <div class="pagination-bar">
-                            <nav>
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item"><a class="page-link active" href="#">1</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
 
                     </div>
@@ -540,129 +315,7 @@
             </div>
         </div>
 
-
-        <footer>
-
-            <section class="footer-Content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-                            <div class="widget">
-                                <h3 class="footer-logo"><img src="assets/img/logo.png" alt=""></h3>
-                                <div class="textwidget">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit. Quisque lobortis tincidunt est, et euismod
-                                        purus suscipit quis. Etiam euismod ornare elementum.
-                                        Sed ex est, consectetur eget facilisis sed, auctor
-                                        ut purus.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-                            <div class="widget">
-                                <h3 class="block-title">Latest Ads</h3>
-                                <ul class="media-content-list">
-                                    <li>
-                                        <div class="media-left">
-                                            <img class="img-fluid" src="assets/img/art/img1.jpg" alt="">
-                                            <div class="overlay">
-                                                <span class="price">$ 79</span>
-                                            </div>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="post-title"><a href="ads-details.html">Brand
-                                                    New
-                                                    Macbook Pro</a></h4>
-                                            <span class="date">12 Jan 2018</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media-left">
-                                            <img class="img-fluid" src="assets/img/art/img2.jpg" alt="">
-                                            <div class="overlay">
-                                                <span class="price">$ 49</span>
-                                            </div>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="post-title"><a href="ads-details.html">Canon
-                                                    Photography Camera</a></h4>
-                                            <span class="date">28 Mar 2018</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-                            <div class="widget">
-                                <h3 class="block-title">Help & Support</h3>
-                                <ul class="menu">
-                                    <li><a href="#">Live Chat</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Purchase Protection</a></li>
-                                    <li><a href="#">Support</a></li>
-                                    <li><a href="#">Contact us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-                            <div class="widget">
-                                <h3 class="block-title">Subscribe us</h3>
-                                <p class="text-sub">We have over 5 years of experience Our
-                                    suppoer avalable to help you 24 hours a day, seven days
-                                    week</p>
-                                <form method="post" id="subscribe-form" name="subscribe-form" class="validate">
-                                    <div class="form-group is-empty">
-                                        <input type="email" value="" name="Email" class="form-control" id="EMAIL"
-                                            placeholder="Email address" required="">
-                                        <button type="submit" name="subscribe" id="subscribes"
-                                            class="btn btn-common sub-btn"><i class="lni-check-box"></i></button>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </form>
-                                <ul class="footer-social">
-                                    <li><a class="facebook" href="#"><i class="lni-facebook-filled"></i></a></li>
-                                    <li><a class="twitter" href="#"><i class="lni-twitter-filled"></i></a></li>
-                                    <li><a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a></li>
-                                    <li><a class="google-plus" href="#"><i class="lni-google-plus"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            <div id="copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="site-info float-left">
-                                <p>All copyrights reserved &copy; 2018 - Designed by <a href="https://uideck.com/"
-                                        rel="nofollow">UIdeck</a>
-                                </p>
-                            </div>
-                            <div class="float-right">
-                                <ul class="bottom-card">
-                                    <li>
-                                        <a href="#"><img src="assets/img/footer/card1.jpg" alt="card"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="assets/img/footer/card2.jpg" alt="card"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="assets/img/footer/card3.jpg" alt="card"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="assets/img/footer/card4.jpg" alt="card"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </footer>
+    @include('inc.outer.footer')
 
 
         <a href="#" class="back-to-top">

@@ -34,11 +34,9 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::any('/editpostimg/{id}', 'OwnerController@editpostimg')->name('editpostimg');
     Route::any('/deleteupload/{id}', 'OwnerController@deleteupload')->name('deleteupload');
 
-    Route::any('/editownerprofile', 'OwnerController@editownerprofile')->name('editownerprofile');
-    Route::any('/updateownerprofile', 'OwnerController@editownerprofile')->name('editownerprofile');
-    Route::any('/updateownerprofile', 'OwnerController@editownerprofile')->name('editownerprofile');
-    Route::any('/updateownerprofile', 'OwnerController@updateownerprofile')->name('editownerprofile');
-    Route::any('/resetopwd', 'OwnerController@resetopwd')->name('resetopwd');
+    Route::any('/editprofile', 'OwnerController@editprofile')->name('editprofile');
+    Route::any('/updateownerprofile', 'OwnerController@updateownerprofile')->name('updateownerprofile');
+    Route::any('/resetpwd', 'OwnerController@resetopwd')->name('resetpwd');
     Route::any('/mypostings', 'OwnerController@mypostings')->name('mypostings');
 
     Route::any('/changepassword', 'OwnerController@changepassword')->name('changepassword');
@@ -61,7 +59,7 @@ Route::any('/searchaction', 'PostController@searchaction')->name('searchaction')
 Route::any('/fetchservice/{id}', 'OwnerController@fetchservice')->name('fetchservice');
 Route::any('/fetchloc', 'HomeController@fetchloc')->name('fetchloc');
 
-Route::any('/postdetails', 'HomeController@postdetails')->name('postdetails');
+Route::any('/postdetails/{id}', 'PostController@postdetails')->name('postdetails');
 Route::any('/mypost', 'HomeController@mypost')->name('mypost');
 
 Route::any('/howitworks', 'HomeController@howitworks')->name('howitworks');
@@ -99,3 +97,10 @@ Route::POST('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::GET('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 
 Route::any('/dummy', 'HomeController@dummy')->name('dummy');
+
+Route::get('getip', function () {
+    $position = Location::get(Request::ip());
+
+    return Response::json($position);
+
+});

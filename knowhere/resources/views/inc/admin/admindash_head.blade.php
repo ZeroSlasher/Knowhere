@@ -9,8 +9,7 @@
                 <span class="lni-menu"></span>
                 <span class="lni-menu"></span>
             </button>
-            <a href="/" class="navbar-brand"><img src="{{asset('images/logo.png')}}"
-                    alt="Knowhere"></a>
+            <a href="/" class="navbar-brand"><img src="{{asset('images/logo.png')}}" alt="Knowhere"></a>
         </div>
         <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav mr-auto">
@@ -48,7 +47,17 @@
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"><i class="lni-user"></i> My Account</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="logout"><i class="lni-home"></i> Logout</a>
+                        <a class="dropdown-item" href="logout"><i class="lni-enter"></i> Logout</a>
+                        @if(Session::get('utype')=='1')
+                        <a class="dropdown-item" href="/admindashboard" class="button"><i
+                                class="lni-home"></i>Dashboard</a>
+                        @elseif(Session::get('utype')=='2')
+                        <a class="dropdown-item" href="/ownerdashboard" class="button"><i
+                                class="lni-home"></i>Dashboard</a>
+                        @elseif(Session::get('utype')=='3')
+                        <a class="dropdown-item" href="/userdashboard" class="button"><i
+                                class="lni-home"></i>Dashboard</a>
+                        @endif
                         <!-- <a class="dropdown-item" href="account-profile-setting.html"><i class="lni-home"></i> Account Home</a> -->
 
                     </div>
@@ -84,7 +93,16 @@
         <li>
             <a>My Account</a>
             <ul class="dropdown">
+
                 <li><a href="/logout"><i class="lni-home"></i>Logout</a></li>
+
+                @if(Session::get('utype')=='1')
+                <li><a href="/admindashboard"><i class="lni-enter"></i>Dashboard</a></li>
+                @elseif(Session::get('utype')=='2')
+                <li><a href="/ownerdashboard"><i class="lni-enter"></i>Dashboard</a></li>
+                @elseif(Session::get('utype')=='3')
+                <li><a href="/userdashboard"><i class="lni-enter"></i>Dashboard</a></li>
+                @endif
                 <!-- <li><a href="account-profile-setting.html"><i class="lni-home"></i> Account Home</a></li>-->
 
             </ul>

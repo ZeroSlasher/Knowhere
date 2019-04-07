@@ -1,35 +1,30 @@
 function formValidation2() {
     // Make quick references to our fields
     var own_name = document.getElementById('own_name'); //1
+    var cphone = document.getElementById('cphone'); //2
+    var address = document.getElementById('Address');
     var state = document.getElementById('state');
     var district = document.getElementById('district');
     var city = document.getElementById('city');
-    var remail = document.getElementById('remail'); //3
-    var cphone = document.getElementById('cphone'); //4
 
 
 
 
     //  to check empty form fields.
 
-    if (own_name.value.length == 0 || state.value.length == 0 || district.value.length == 0 ||
-        city.value.length == 0 || remail.value.length == 0 || cphone.value.length == 0) {
+    if (own_name.value.length == 0 || cphone.value.length == 0 || address.value.length == 0 ||
+        state.value.length == 0 || district.value.length == 0 || city.value.length == 0) {
         $("#head1").show().delay(1000).fadeOut();
         $('#submit1').addClass('disabled');
         return false;
     }
+    // alert();
+    if (inputAlphabetl(own_name, 3, 15)) {
 
-    if (inputAlphabetl(own_name, 3, 15)) { //1
-
-        // if (inputAlphabetl(est_name, 3, 30)) { //2
-
-        if (emailValidation(remail)) { //3
-
-            if (phonevalidation(cphone, 10)) { //4                    
-                return true;
-            }
+        if (phonevalidation(cphone)) {
+            return true;
         }
-        // }
+
     }
     $('#submit1').addClass('disabled');
     return false;
@@ -55,28 +50,17 @@ function inputAlphabetl(inputtext, min, max) {
     }
 }
 
-function emailValidation(inputtext) {
-    var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-    if (inputtext.value.match(emailExp)) {
-        document.getElementById('p22').innerText = "";
-        return true;
-    } else {
-        // document.getElementById('p3').innerText = "Enter a vaild email"; //this segment displays the validation rule for email
-        $("#p22").fadeIn().delay('1000').fadeOut();
-        // remail.value = '';
-        return false;
-    }
-}
 
 
-function phonevalidation(inputtext, max) {
-    var alphaExp = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
+function phonevalidation(inputtext) {
+    var alphaExp = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/;
     var uInput = inputtext.value;
-    if (inputtext.value.match(alphaExp) && uInput.length == max) {
+    if (inputtext.value.match(alphaExp)) {
         document.getElementById('p33').innerText = "";
 
         return true;
     } else {
+
         // document.getElementById('p1').innerText = "Enter valid name";  //this segment displays the validation rule for name
         $("#p33").fadeIn().delay('1000').fadeOut();
         // cphone.value = '';

@@ -200,20 +200,18 @@
                         <!-- end .col-sm-4 -->
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" name="loc" id="loc" placeholder="Location">
+                                <input type="text" name="loc" id="loc" autocomplete="off" placeholder="Location">
                                 <i class="pe-7s-world"></i>
                                 <div style="position: absolute;margin-top: 10px;"  id="List">
                                     </div>
                             </div>
-                            
-                            
                             <!-- end .form-group -->
                         </div>
                         <!-- end .col-sm-4 -->
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <select class="selectpicker" name="cat" data-live-search="true">
-                                    <option disabled selected>All categories</option>
+                                    <option value selected>All categories</option>
                                     @isset($data)
                                     @foreach($data as $category)
                                     <option value="{{$category->Cat_id}}">{{$category->catagory}}</option>
