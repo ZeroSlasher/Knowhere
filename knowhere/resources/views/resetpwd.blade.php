@@ -27,12 +27,12 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
-
 </head>
 
 <body>
 
     <header id="header-wrap">
+
         @include('inc.admin.admindash_head')
 
     </header>
@@ -43,10 +43,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-wrapper">
-                        <h2 class="product-title">Profile Settings</h2>
+                        <h2 class="product-title">Reset Password</h2>
                         <ol class="breadcrumb">
                             <li><a href="#">Home /</a></li>
-                            <li class="current">Profile Settings</li>
+                            <li class="current">Reset Password</li>
                         </ol>
                     </div>
                 </div>
@@ -89,18 +89,19 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="active" href="#">
+                                        <a href="editprofile">
                                             <i class="lni-cog"></i>
                                             <span>Profile Settings</span>
                                         </a>
                                     </li>
                                     </li>
                                     <li>
-                                        <a href="resetpwd">
+                                        <a class="active" href="#">
                                             <i class="lni-layers"></i>
                                             <span>Reset password</span>
                                         </a>
                                     </li>
+
                                     <li>
                                         <a href="Addposting">
                                             <i class="lni-wallet"></i>
@@ -151,101 +152,59 @@
                             <div class="inner-box" style="width: 1000px;">
                                 <div class="tg-contactdetail">
                                     <div class="dashboard-box">
-                                        <h2 class="dashbord-title">Contact Detail</h2>
+                                        <h2 class="dashbord-title">Reset Password</h2>
                                     </div>
                                     @include('inc.message')
-
+                                    <div class="alert alert-info" style="align:center;">
+                                        <strong>Password: Uppercase letter,digit,min 8 characters</strong>
+                                    </div>
                                     <div class="dashboard-wrapper">
-                                        <form method="POST" action="/updateownerprofile" id="rqstform"
-                                            onsubmit="return formValidation2()" enctype="multipart/form-data">
-                                            @csrf @isset($prof) @foreach($prof as $p)
-                                            <input name='id' id='id' type="text" hidden value="{{$p->id}}">
+                                        <form method="POST" action="/changepassword" id="rqstform"
+                                            onsubmit="return formValidation3()" enctype="multipart/form-data">
+                                            @csrf
+                                            @isset($log)
+                                            @foreach($log as $l)
+                                            <input type="text" name="id" hidden value="{{$l->id}}">
                                             <div class="form-group mb-3">
-                                                <label class="control-label">Name</label>
-                                                <input class="form-control input-md" placeholder="Name" name='own_name'
-                                                    id='own_name' type="text" value="{{$p->name}}">
-                                                <div id="p11" class="alert alert-danger"
+                                                <label class="control-label">Email</label>
+                                                <input class="form-control input-md" value="{{$l->email}}" name='email'
+                                                    id='email' onblur="return emailDoesExist()"
+                                                    placeholder=" Contact Email">
+                                                <div id="p22" class="alert alert-danger"
                                                     style="align:center;display: none;">
-                                                    <strong>Enter a valid name</strong>
+                                                    <strong>Enter a valid email</strong>
                                                 </div>
-                                            </div>
-
-                                            <div class="form-group mb-3">
-                                                <label class="control-label">Title</label>
-                                                <textarea class="form-control input-md" id="title"
-                                                    name="title">{{$p->title}}</textarea>
-                                            </div>
-
-                                            <div class="form-group mb-3">
-                                                <label class="control-label">Contact number</label>
-                                                <input class="form-control input-md" value="{{$p->phone}}" name='cphone'
-                                                    id='cphone' placeholder="Contact Number" type="text">
-                                                <div id="p33" class="alert alert-danger"
+                                                <div id="p23" class="alert alert-danger"
                                                     style="align:center;display: none;">
-                                                    <strong>Enter a valid Phone number</strong>
+                                                    <strong>Email already registered, Use a different one!!</strong>
                                                 </div>
+                                            </div>
+                                            @endforeach
+                                            @endisset
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Current password</label>
+                                                <input class="form-control input-md" name="curpass" type="text">
                                             </div>
 
                                             <div class="form-group mb-3">
-                                                <label class="control-label">Address</label>
-                                                <textarea class="form-control input-md" id="Address"
-                                                    name="Address">{{$p->oaddress}}</textarea>
+                                                <label class="control-label">New password</label>
+                                                <input class="form-control input-md" name="npass" type="text">
                                             </div>
 
                                             <div class="form-group mb-3">
-                                                <label class="control-label">Add profile image</label>
-                                                <input class="form-control input-md" id="prof" onchange="myFunction()"
-                                                    name="prof" type="file">
-                                                <img class="img-thumbnail" src="/uploads/{{$p->image}}"
-                                                    alt="Profile image" width="200px">
-                                                <img id="preview" src="#" style="display:none" alt="Uploaded image"
-                                                    width="200px" title="click to remove" />
-
+                                                <label class="control-label">Confirm password</label>
+                                                <input class="form-control input-md" name="cpass" type="text">
                                             </div>
-                                            @endforeach @endisset
-
-                                            <div class="form-group mb-3 tg-inputwithicon">
-                                                <label class="control-label">State</label>
-                                                <div class="tg-select form-control">
-                                                    <select id="state" name="state">
-                                                        <option selected value="{{$p->state_id}}"> {{$p->state}}
-                                                        </option>
-                                                        @isset($state)
-                                                        @foreach($state as $states)
-                                                        <option value="{{$states->state_id}}">{{$states->state}}
-                                                        </option>
-                                                        @endforeach
-                                                        @endisset
-                                                    </select>
-                                                </div>
+                                            <div id="p24" class="alert alert-danger"
+                                                style="align:center;display: none;">
+                                                <strong>check password</strong>
                                             </div>
-
-                                            <div class="form-group mb-3 tg-inputwithicon">
-                                                <label class="control-label">district</label>
-                                                <div class="tg-select form-control">
-                                                    <select name="district" id="district">
-                                                        <option selected value="{{$p->dist_id}}">{{$p->district}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group mb-3 tg-inputwithicon">
-                                                <label class="control-label">city</label>
-                                                <div class="tg-select form-control">
-                                                    <select name="city" id="city">
-                                                        <option selected value="{{$p->city_id}}">{{$p->city}}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div id="head1" style="align:center;display: none;"
+                                            <div id="head" style="align:center;display: none;"
                                                 class="alert alert-danger">
-                                                <strong>All details are mandatory</strong>
+                                                <strong>Enter valid input</strong>
                                             </div>
-
                                             <div class="button-wrapper"><button type="submit" id="submit1"
-                                                    name="submit1" class="btn btn-common">Update Profile</button></div>
+                                                    name="submit1" class="btn btn-common">Reset Password</button></div>
                                         </form>
                                     </div>
                                 </div>
@@ -256,6 +215,8 @@
             </div>
         </div>
     </div>
+
+
     @include('inc.outer.footer')
 
 
@@ -283,39 +244,38 @@
     <script src="assets/js/contact-form-script.min.js"></script>
     <script src="assets/js/summernote.js"></script>
     <script src="{{ asset('js/myajax.js') }}"></script>
-    <!-- formvalidate2.js -->
-    <script src="js/formvalidate2.js"></script>
+    <!-- formvalidate1.js -->
+    <!-- <script src="js/formvalidate3.js"></script> -->
     <script>
-    function readURL(input) {
+    function emailDoesExist() {
+        $('#submit1').addClass('disabled');
+        var email = document.getElementById('email').value;
+        if (email) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '/mailcheck/' + email,
+                type: "GET",
+                dataType: "json",
+                // data: {
+                //     'email': remail
+                // },
+                success: function(data) {
+                    if (data == 1) {
+                        $("#p23").fadeIn().delay('1000').fadeOut();
+                    } else {
+                        $('#submit1').removeClass('disabled');
 
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+                    }
 
-            reader.onload = function(e) {
-                $('#preview').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
+                }
+            });
         }
     }
-
-    $("#prof").change(function() {
-        readURL(this);
-    });
-
-    function myFunction() {
-        var x = document.getElementById("preview");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        }
-    }
-
-    $('#preview').on('click', function() {
-        $('#prof').val("");
-        $('#preview').hide();
-    });
     </script>
 </body>
 
+<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/account-profile-setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:22 GMT -->
 
 </html>

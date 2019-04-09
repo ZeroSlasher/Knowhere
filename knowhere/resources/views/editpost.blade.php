@@ -29,30 +29,30 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
 
-    <link href="{{ asset('css/font-awesome.min.css') }}" media="all" rel="stylesheet" type="text/css" /> 
+    <link href="{{ asset('css/font-awesome.min.css') }}" media="all" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('css/fileinput.css') }}" media="all" rel="stylesheet" type="text/css" />
-    
-    <style type="text/css">
-        .main-section {
-            margin: 0 auto;
-            padding: 20px;
-            margin-top: 100px;
-            background-color: #fff;
-            box-shadow: 0px 0px 20px #c1c1c1;
-        }
 
-        .fileinput-remove,
-        .fileinput-upload {
-            display: none;
-        }
+    <style type="text/css">
+    .main-section {
+        margin: 0 auto;
+        padding: 20px;
+        margin-top: 100px;
+        background-color: #fff;
+        box-shadow: 0px 0px 20px #c1c1c1;
+    }
+
+    .fileinput-remove,
+    .fileinput-upload {
+        display: none;
+    }
     </style>
 </head>
 
 <body>
 
     <header id="header-wrap">
-    @include('inc.admin.admindash_head')
+        @include('inc.admin.admindash_head')
 
 
     </header>
@@ -61,7 +61,7 @@
     <div class="page-header" style="background: url({{ asset('assets/img/banner1.jpg') }});">
         <div class="container">
             <div class="row">
-    <div class="col-md-12">
+                <div class="col-md-12">
                     <div class="breadcrumb-wrapper">
                         <h2 class="product-title">Profile Settings</h2>
                         <ol class="breadcrumb">
@@ -87,27 +87,38 @@
                     </div>
                     <div class="dashboard-wrapper">
                         @isset($post) @foreach($post as $prof)
-                        <form name="editpost" method="Post" action="/updatepost" onsubmit="return" enctype="multipart/form-data">
+                        <form name="editpost" method="Post" action="/updatepost" onsubmit="return"
+                            enctype="multipart/form-data">
                             @csrf
                             <input hidden type="text" name="outletid" value="{{$prof->outletid}}">
                             <div class="form-group mb-3">
                                 <label class="control-label">Outlet name</label>
-                                <input class="form-control input-md" value="{{$prof->outletname}}" id="oname" name=" oname" placeholder="Outlet name" type="text">
+                                <input class="form-control input-md" value="{{$prof->outletname}}" id="oname"
+                                    name=" oname" placeholder="Outlet name" type="text">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="control-label">Owner name</label>
-                                <input class="form-control input-md" value="{{$prof->ownername}}" name="owname" placeholder="Owner name" type="text">
+                                <input class="form-control input-md" value="{{$prof->ownername}}" name="owname"
+                                    placeholder="Owner name" type="text">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="control-label">Address</label>
-                                <textarea class="form-control input-md" id="Address" name="Address">{{$prof->address}}</textarea>
+                                <textarea class="form-control input-md" id="Address"
+                                    name="Address">{{$prof->address}}</textarea>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="control-label">Title</label>
+                                <textarea class="form-control input-md" id="Title"
+                                    name="Title">{{$prof->Title}}</textarea>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="control-label">Description</label>
-                                <textarea class="form-control" id="Description" name="Description">{{$prof->description}}</textarea>
+                                <textarea class="form-control" id="Description"
+                                    name="Description">{{$prof->description}}</textarea>
                             </div>
 
                             <div class="form-group mb-3 tg-inputwithicon">
@@ -127,7 +138,8 @@
                                     <label class="control-label">Sub category</label>
                                     <div class="tg-select form-control">
                                         <select name="subcat" id="subcat">
-                                            <option selected disabled value="{{$prof->subcat_id}}">{{$prof->subcatagory}}</option>
+                                            <option selected disabled value="{{$prof->subcat_id}}">
+                                                {{$prof->subcatagory}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -173,17 +185,20 @@
 
                                 <div class="form-group mb-3">
                                     <label class="control-label">Website</label>
-                                    <input class="form-control input-md" value="{{$prof->website}}" name="wsite" placeholder="wsite" type="text">
+                                    <input class="form-control input-md" value="{{$prof->website}}" name="wsite"
+                                        placeholder="wsite" type="text">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="control-label">Contact number</label>
-                                    <input class="form-control input-md" value="{{$prof->phone1}}" name="phone1" placeholder="Contact number" type="text">
+                                    <input class="form-control input-md" value="{{$prof->phone1}}" name="phone1"
+                                        placeholder="Contact number" type="text">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="control-label">Alternate Contact number</label>
-                                    <input class="form-control input-md" value="{{$prof->phone2}}" name="phone2" placeholder="Alternate Contact number" type="text">
+                                    <input class="form-control input-md" value="{{$prof->phone2}}" name="phone2"
+                                        placeholder="Alternate Contact number" type="text">
                                 </div>
 
                                 <!-- <div class="form-group mb-3">
@@ -201,11 +216,11 @@
                 </div>
             </div>
         </div>
-    @include('inc.outer.footer')
+        @include('inc.outer.footer')
 
         <script src="{{ asset('assets/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
         <script>
-            CKEDITOR.replace('Description');
+        CKEDITOR.replace('Description');
         </script>
         <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
         <script src="{{ asset('assets/js/popper.min.js') }}"></script>
@@ -229,22 +244,22 @@
 
 
         <script type="text/javascript">
-            $("#file").fileinput({
-        theme: 'fa',
-        uploadUrl: "/storeimg",
-        uploadExtraData: function() {
-            return {
-                _token: $("input[name='_token']").val(),
-            };
-        },
-        allowedFileExtensions: ['jpg', 'png', 'gif'],
-        overwriteInitial: false,
-        maxFileSize: 3000,
-        maxFilesNum: 4,
-        slugCallback: function(filename) {
-            return filename.replace('(', '_').replace(']', '_');
-        }
-    });
+        $("#file").fileinput({
+            theme: 'fa',
+            uploadUrl: "/storeimg",
+            uploadExtraData: function() {
+                return {
+                    _token: $("input[name='_token']").val(),
+                };
+            },
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: false,
+            maxFileSize: 3000,
+            maxFilesNum: 4,
+            slugCallback: function(filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
+        });
         </script>
 
 </body>

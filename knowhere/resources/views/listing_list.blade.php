@@ -5,6 +5,8 @@
     <head>
 
         <meta charset="utf-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Knowhere</title>
 
@@ -41,15 +43,50 @@
 
         <div class="page-header" style="background: url(assets/img/banner1.jpg);">
             <div class="container">
+
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="breadcrumb-wrapper">
-                            <h2 class="product-title">Listings</h2>
-                            <ol class="breadcrumb">
-                                <li><a href="/">Home /</a></li>
-                                <li class="current">Listings</li>
-                            </ol>
+                        <div class="search-bar">
+                            <div class="search-inner">
+                                <form class="search-form">
+                                    <div class="form-group inputwithicon">
+                                        <i class="lni-tag"></i>
+                                        <input type="text" name="customword" class="form-control"
+                                            placeholder="Enter Product Keyword">
+                                    </div>
+                                    <div class="form-group inputwithicon">
+                                        <i class="lni-map-marker"></i>
+                                        <div class="select">
+                                            <select>
+                                                <option value="none">All Locations</option>
+                                                <option value="none">New York</option>
+                                                <option value="none">California</option>
+                                                <option value="none">Washington</option>
+                                                <option value="none">Birmingham</option>
+                                                <option value="none">Chicago</option>
+                                                <option value="none">Phoenix</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group inputwithicon">
+                                        <i class="lni-menu"></i>
+                                        <div class="select">
+                                            <select class="form-control" name="cat" data-live-search="true">
+                                                <option value selected>All categories</option>
+                                                @isset($data)
+                                                @foreach($data as $category)
+                                                <option value="{{$category->Cat_id}}">{{$category->catagory}}</option>
+                                                @endforeach
+                                                @endisset
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-common" type="button"><i class="lni-search"></i> Search
+                                        Now</button>
+                                </form>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -63,14 +100,28 @@
                         <aside>
 
                             <div class="widget_search">
-                                <form role="search" id="search-form">
-                                    <input type="search" class="form-control" autocomplete="off" name="s"
-                                        placeholder="Search..." id="search-input" value="">
-                                    <button type="submit" id="search-submit" class="search-btn"><i
+                                <form role="search" id="search-form" method="POST" action="/searchaction">
+                                    @csrf
+                                    <input type="text" name="loc" id="loc" autocomplete="off" class="form-control"
+                                        placeholder="Location"><i class="pe-7s-world"></i>
+                                    <div style="position: absolute;margin-top: 10px;" id="List">
+                                    </div>
+                                    <div style="padding-top: 10px;    padding-bottom: 5px;">
+
+                                        <select class="form-control" name="cat" data-live-search="true">
+                                            <option value selected>All categories</option>
+                                            @isset($data)
+                                            @foreach($data as $category)
+                                            <option value="{{$category->Cat_id}}">{{$category->catagory}}</option>
+                                            @endforeach
+                                            @endisset
+                                        </select>
+                                    </div>
+                                    <button type="submit" style="float: right;" class="btn btn-common"><i
                                             class="lni-search"></i></button>
+
                                 </form>
                             </div>
-
                             <div class="widget categories">
                                 <h4 class="widget-title">All Categories</h4>
                                 <ul class="categories-list">
@@ -129,8 +180,9 @@
                     <div class="col-lg-9 col-md-12 col-xs-12 page-content">
 
                         <div class="product-filter">
+
                             <div class="short-name">
-                                <span>Showing (1 - 12 products of 7371 products)</span>
+                                <span>Showing (1 - 10 products of 7371 products)</span>
                             </div>
                             <div class="Show-item">
                                 <span>Show Items</span>
@@ -164,7 +216,7 @@
                             <div class="tab-content">
                                 <div id="grid-view" class="tab-pane fade">
                                     <div class="row">
-                                            @if(isset($post)) @foreach($post as $own)
+                                        @if(isset($post)) @foreach($post as $own)
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="featured-box">
                                                 <figure>
@@ -173,14 +225,14 @@
                                                     </div> --}}
                                                     @php
 
-                                                        if (isset($own->outletid)) {
-                                                        $images =
-                                                        Illuminate\Support\Facades\DB::table('tbl_prof_images')->where('outletid',$own->outletid)->get();
-                                                        foreach ($images as $i) {
-                                                        $ii = $i->imgname;
-                                                        }
-                                                        }
-                                                        @endphp
+                                                    if (isset($own->outletid)) {
+                                                    $images =
+                                                    Illuminate\Support\Facades\DB::table('tbl_prof_images')->where('outletid',$own->outletid)->get();
+                                                    foreach ($images as $i) {
+                                                    $ii = $i->imgname;
+                                                    }
+                                                    }
+                                                    @endphp
                                                     <a href="#"><img class="img-fluid"
                                                             src="{{asset('/uploads')}}/{{$ii}}" alt=""></a>
                                                 </figure>
@@ -205,26 +257,26 @@
                                                                 {{$own->ownername}}</a>
                                                         </li>
                                                         <li>
-                                                                <a href="#"><i class="lni-home"></i>
-                                                                    {{$own->address}}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><i class="lni-phone-handset"></i>
-                                                                    {{$own->phone1}}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><i class="lni-phone-handset"></i>
-                                                                    {{$own->phone2}}</a>
-                                                            </li>
+                                                            <a href="#"><i class="lni-home"></i>
+                                                                {{$own->address}}</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="lni-phone-handset"></i>
+                                                                {{$own->phone1}}</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="lni-phone-handset"></i>
+                                                                {{$own->phone2}}</a>
+                                                        </li>
                                                     </ul>
                                                     <div class="listing-bottom">
-                                                            @if($own->status == 'Validated')
-                                                            <h3 class="btn-verified price float-left"><i
-                                                                    class="lni-pointer-right"></i>Verified</h3>
-                                                            @else
-                                                            <h3 class="btn-verified price float-left"><i
-                                                                    class="lni-pointer-right"></i>Referred</h3>
-                                                            @endif
+                                                        @if($own->status == 'Validated')
+                                                        <h3 class="btn-verified price float-left"><i
+                                                                class="lni-pointer-right"></i>Verified</h3>
+                                                        @else
+                                                        <h3 class="btn-verified price float-left"><i
+                                                                class="lni-pointer-right"></i>Referred</h3>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -235,37 +287,41 @@
                                 </div>
                                 <div id="list-view" class="tab-pane fade active show">
                                     <div class="row">
-                                            @if(isset($post)) @foreach($post as $own)
+                                        @if(isset($post)) @foreach($post as $own)
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="featured-box">
                                                 <figure>
-                                                        @php
+                                                    @php
 
-                                                        if (isset($own->outletid)) {
-                                                        $images =
-                                                        Illuminate\Support\Facades\DB::table('tbl_prof_images')->where('outletid',$own->outletid)->get();
-                                                        foreach ($images as $i) {
-                                                        $ii = $i->imgname;
-                                                        }
-                                                        }
-                                                        @endphp
+                                                    if (isset($own->outletid)) {
+                                                    $images =
+                                                    Illuminate\Support\Facades\DB::table('tbl_prof_images')->where('outletid',$own->outletid)->get();
+                                                    foreach ($images as $i) {
+                                                    $ii = $i->imgname;
+                                                    }
+                                                    }
+                                                    @endphp
                                                     {{-- <div class="icon">
                                                         <i class="lni-heart"></i>
                                                     </div> --}}
 
                                                     <a href="#"><img class="img-fluid"
-                                                            src="{{asset('/uploads')}}/{{$ii}}" style="width:100%" alt=""></a>
+                                                            src="{{asset('/uploads')}}/{{$ii}}" style="width:100%"
+                                                            alt=""></a>
                                                 </figure>
                                                 <div class="feature-content">
                                                     <div class="product">
                                                         <a href="#"><i class="lni-folder"></i>
                                                             {{$own->catagory}} -- {{$own->subcatagory}}</a>
                                                     </div>
-                                                <h4><a href="postdetails/{{$own->outletid}}">{{$own->outletname}}</a></h4>
+                                                    <h4><a
+                                                            href="postdetails/{{$own->outletid}}">{{$own->outletname}}</a>
+                                                    </h4>
                                                     <span>Last Updated: {{$own->updated_at}}</span>
                                                     <ul class="address">
                                                         <li>
-                                                            <a href="#"><i class="lni-map-marker"></i>{{$own->city}},{{$own->district}},{{$own->state}}</a>
+                                                            <a href="#"><i
+                                                                    class="lni-map-marker"></i>{{$own->city}},{{$own->district}},{{$own->state}}</a>
                                                         </li>
                                                         <li>
                                                             <a href="#"><i class="lni-alarm-clock"></i>
@@ -276,26 +332,26 @@
                                                                 {{$own->ownername}}</a>
                                                         </li>
                                                         <li>
-                                                                <a href="#"><i class="lni-home"></i>
-                                                                    {{$own->address}}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><i class="lni-phone-handset"></i>
-                                                                    {{$own->phone1}}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><i class="lni-phone-handset"></i>
-                                                                    {{$own->phone2}}</a>
-                                                            </li>
+                                                            <a href="#"><i class="lni-home"></i>
+                                                                {{$own->address}}</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="lni-phone-handset"></i>
+                                                                {{$own->phone1}}</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="lni-phone-handset"></i>
+                                                                {{$own->phone2}}</a>
+                                                        </li>
                                                     </ul>
                                                     <div class="listing-bottom">
-                                                            @if($own->status == 'Validated')
-                                                            <h3 class="btn-verified price float-left"><i
-                                                                    class="lni-pointer-right"></i>Verified</h3>
-                                                            @else
-                                                            <h3 class="btn-verified price float-left"><i
-                                                                    class="lni-pointer-right"></i>Referred</h3>
-                                                            @endif
+                                                        @if($own->status == 'Validated')
+                                                        <h3 class="btn-verified price float-left"><i
+                                                                class="lni-pointer-right"></i>Verified</h3>
+                                                        @else
+                                                        <h3 class="btn-verified price float-left"><i
+                                                                class="lni-pointer-right"></i>Referred</h3>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -308,6 +364,7 @@
 
 
                         <div class="pagination-bar">
+
                         </div>
 
                     </div>
@@ -315,7 +372,7 @@
             </div>
         </div>
 
-    @include('inc.outer.footer')
+        @include('inc.outer.footer')
 
 
         <a href="#" class="back-to-top">
@@ -341,6 +398,8 @@
         <script src="assets/js/form-validator.min.js"></script>
         <script src="assets/js/contact-form-script.min.js"></script>
         <script src="assets/js/summernote.js"></script>
+        <script src="js/myajax.js"></script>
+
     </body>
 
     <!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/adlistinglist.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:13:50 GMT -->

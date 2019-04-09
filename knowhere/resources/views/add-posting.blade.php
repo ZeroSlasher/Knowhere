@@ -108,6 +108,14 @@
                                             <span>Add new posting</span>
                                         </a>
                                     </li>
+                                    @if(Session::get('utype')==2)
+                                    <li>
+                                        <a href="/addloc">
+                                            <i class="lni-wallet"></i>
+                                            <span>Add nearby locations</span>
+                                        </a>
+                                    </li>
+                                    @endif
                                     <li>
                                         <a href="">
                                             <i class="lni-wallet"></i>
@@ -157,8 +165,8 @@
                                     onsubmit="return formValidation4()" enctype="multipart/form-data">
                                     @csrf
                                     <div id="head" style="align:center;display: none;" class="alert alert-danger">
-                                            <strong>All details are mandatory</strong>
-                                        </div>
+                                        <strong>All details are mandatory</strong>
+                                    </div>
                                     <input hidden type="text" name="outletid" value="">
                                     <div class="form-group mb-3">
                                         <label class="control-label">Name of outlet</label>
@@ -170,6 +178,9 @@
                                         <label class="control-label">Owner name</label>
                                         <input class="form-control input-md" id="owname" name="owname"
                                             placeholder="Owner name" type="text">
+                                        <div id="p11" class="alert alert-danger" style="align:center;display: none;">
+                                            <strong>Enter a valid name</strong>
+                                        </div>
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -254,18 +265,30 @@
                                             <label class="control-label">Website</label>
                                             <input class="form-control input-md" id="wsite" name="wsite"
                                                 placeholder="wsite" type="text">
+                                            <div id="p44" class="alert alert-danger"
+                                                style="align:center;display: none;">
+                                                <strong>Enter a valid URL</strong>
+                                            </div>
                                         </div>
 
                                         <div class="form-group mb-3">
                                             <label class="control-label">Contact number</label>
                                             <input class="form-control input-md" id="phone1" name="phone1"
                                                 placeholder="Contact number" type="text">
+                                            <div id="p33" class="alert alert-danger"
+                                                style="align:center;display: none;">
+                                                <strong>Enter a valid Contact number</strong>
+                                            </div>
                                         </div>
 
                                         <div class="form-group mb-3">
                                             <label class="control-label">Alternate Contact number</label>
                                             <input class="form-control input-md" id="phone2" name="phone2"
                                                 placeholder="Alternate Contact number" type="text">
+                                            <div id="p33" class="alert alert-danger"
+                                                style="align:center;display: none;">
+                                                <strong>Enter a valid Contact number</strong>
+                                            </div>
                                         </div>
 
                                         <input type="submit" class="btn btn-common sub-btn" name="upost"
@@ -308,7 +331,7 @@
         <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
         <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
         <script src="{{ asset('assets/js/summernote.js') }}"></script>
-        <!-- formvalidate2.js -->
+        <!-- formvalidate4.js -->
         <script src="js/formvalidate4.js"></script>
         <!-- ajax.js -->
         <script src="{{ asset('js/myajax.js') }}"></script>

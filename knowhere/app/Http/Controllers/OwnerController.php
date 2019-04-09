@@ -59,9 +59,8 @@ class OwnerController extends Controller
             `Service_id`='$Service_id',`phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
 
             return redirect('/mypostings')->with('info', 'Posting updated');
-        
-        } 
-        else //if all are selected
+
+        } else //if all are selected
         {
             // return 4;
             DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
@@ -155,7 +154,7 @@ class OwnerController extends Controller
     {
         $oid = Session::get('uid');
         $log = DB::table('tbl_login')->where('id', $oid)->get();
-        return view('resetopwd', compact('log'));
+        return view('resetpwd', compact('log'));
     }
 
     public function changepassword(Request $request)
@@ -163,6 +162,7 @@ class OwnerController extends Controller
         $validator = Validator::make($request->all(), [
             'npass' => 'required|regex:/^(?=.*\d).{8,15}$/',
             'cpass' => 'required|regex:/^(?=.*\d).{8,15}$/',
+            'email' => 'required|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
         ]);
         $own = $request->all();
         if ($own['npass'] == null || $own['cpass'] == null || $own['curpass'] == null) {
@@ -173,8 +173,15 @@ class OwnerController extends Controller
             return back()->with('error', 'passwords not matching');
         } elseif ($validator->fails()) {
             //return 1;
-            return back()->with('error', 'password: Uppercase letter,digit,min 8 characters');
+            return back()->with('error', 'Invalid input recieved');
         } else {
+            // $uid = Session::get('uid');
+            // $pwd = $own['npass'];
+            // $hpwd = Hash::make($pwd);
+
+            // DB::table('tbl_login')
+            //     ->where('id', $uid)
+            //     ->update(['email' => $request->get('email'), 'password' => $hpwd]);
 
             //reset pwd code
             return back()->with('success', 'password changed');
@@ -182,4 +189,10 @@ class OwnerController extends Controller
         }
 
     }
+
+    public function addloc()
+    {
+        return 'add locations view';
+    }
+
 }

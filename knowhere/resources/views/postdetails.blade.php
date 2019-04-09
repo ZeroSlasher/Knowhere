@@ -29,7 +29,23 @@ Session::put('idu','aa');
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
 
+    <style>
+    .comment-wrapper .panel-body {
+        max-height: 650px;
+        /* overflow: auto; */
+    }
 
+    .comment-wrapper .media-list .media img {
+        width: 64px;
+        height: 64px;
+        border: 2px solid #e5e7e8;
+    }
+
+    .comment-wrapper .media-list .media {
+        border-bottom: 1px dashed #efefef;
+        margin-bottom: 25px;
+    }
+    </style>
 </head>
 
 <body>
@@ -178,6 +194,63 @@ Session::put('idu','aa');
                                 <li><i class="lni-warning"></i> Report this ad</li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+
+
+                <div class="row bootstrap snippets">
+                    <div class="col-md-6 col-md-offset-2 col-sm-12">
+                        <div class="comment-wrapper">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    @include('inc.message')
+
+                                    Review panel
+                                </div>
+                                <div class="panel-body">
+                                    <form method="post" action="/addreview">
+                                        @csrf
+                                        @isset($post) @foreach($post as $own)
+                                        <input type="text" hidden value="{{$own->outletid}}" name="id">
+                                        @endforeach @endisset
+                                        <input type="text" class="form-control" placeholder="Title" name="title"
+                                            style="margin:5px">
+                                        <textarea class="form-control" name="review"
+                                            placeholder="write a comment..."></textarea>
+                                        @if(!Session::get('id'))
+                                        <input type="text" class="form-control" placeholder="email" name="email"
+                                            style="margin:5px">
+                                        <input type="text" class="form-control" placeholder="name" name="name">
+                                        @endif
+
+                                        <button type="submit" class="btn btn-info pull-right"
+                                            style="margin:5px">Post</button>
+                                    </form>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a href="#" class="pull-left">
+                                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt=""
+                                                    class="img-circle">
+                                            </a>
+                                            <div class="media-body" style="    margin-left: 20px;">
+                                                <span class="text-muted pull-right">
+                                                    <small class="text-muted">30 min ago</small>
+                                                </span>
+                                                <strong class="text-success">@MartinoMont</strong>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                    Lorem ipsum dolor sit amet, <a href="#">#consecteturadipiscing
+                                                    </a>.
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -106,7 +106,7 @@
                                     <li>
                                         <a href="">
                                             <i class="lni-wallet"></i>
-                                            <span>Option3</span>
+                                            <span>Add nearby locations</span>
                                         </a>
                                     </li>
                                     <li>

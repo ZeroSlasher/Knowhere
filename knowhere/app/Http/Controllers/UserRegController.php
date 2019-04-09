@@ -26,6 +26,16 @@ class UserRegController extends Controller
         ]);
 
         $log->save();
+
+        $usr = new User([
+            'email' => $request->get('mail'),
+            'password' => $hpwd,
+            'utype_id' => 3,
+            'status_id' => 1,
+        ]);
+
+        $log->save();
+
         $lastid = DB::getPdo()->lastInsertId();
         $reg = new Reg([
             'id' => $lastid,

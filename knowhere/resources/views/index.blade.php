@@ -39,80 +39,80 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <style type="text/css">
-        body {
-            font-family: 'Varela Round', sans-serif;
-        }
+    body {
+        font-family: 'Varela Round', sans-serif;
+    }
 
-        .modal-confirm {
-            color: #636363;
-            /* width: 400px; */
-        }
+    .modal-confirm {
+        color: #636363;
+        /* width: 400px; */
+    }
 
-        .modal-confirm .modal-content {
-            padding: 20px;
-            border-radius: 5px;
-            border: none;
-            text-align: center;
-            font-size: 14px;
-        }
+    .modal-confirm .modal-content {
+        padding: 20px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+        font-size: 14px;
+    }
 
-        .modal-confirm .modal-header {
-            border-bottom: none;
-            position: relative;
-        }
+    .modal-confirm .modal-header {
+        border-bottom: none;
+        position: relative;
+    }
 
-        .modal-confirm h4 {
-            text-align: center;
-            font-size: 26px;
-            margin: 30px 0 -10px;
-        }
+    .modal-confirm h4 {
+        text-align: center;
+        font-size: 26px;
+        margin: 30px 0 -10px;
+    }
 
-        .modal-confirm .close {
-            /* color: #fff;
+    .modal-confirm .close {
+        /* color: #fff;
         border-radius: 4px;
         background: #ff0000;
         text-decoration: none; */
-            transition: all 0.8s;
-            line-height: normal;
-            min-width: 100px;
-            border: none;
-            min-height: 40px;
-            border-radius: 7px;
-            margin: 0 5px;
-            outline: none !important;
-        }
+        transition: all 0.8s;
+        line-height: normal;
+        min-width: 100px;
+        border: none;
+        min-height: 40px;
+        border-radius: 7px;
+        margin: 0 5px;
+        outline: none !important;
+    }
 
 
 
-        .modal-confirm .modal-footer {
-            color: #999;
-            border-radius: 5px;
-            padding: 10px 15px 25px;
-        }
+    .modal-confirm .modal-footer {
+        color: #999;
+        border-radius: 5px;
+        padding: 10px 15px 25px;
+    }
 
 
-        .modal-confirm .icon-box {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto;
-            border-radius: 50%;
-            z-index: 9;
-            text-align: center;
-            border: 3px solid #f15e5e;
-        }
+    .modal-confirm .icon-box {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        border-radius: 50%;
+        z-index: 9;
+        text-align: center;
+        border: 3px solid #f15e5e;
+    }
 
-        .modal-confirm .icon-box i {
-            color: #f15e5e;
-            font-size: 46px;
-            display: inline-block;
-            margin-top: -34px;
-            margin-inline-start: -32px;
-        }
+    .modal-confirm .icon-box i {
+        color: #f15e5e;
+        font-size: 46px;
+        display: inline-block;
+        margin-top: -34px;
+        margin-inline-start: -32px;
+    }
 
-        .modal-confirm .btn-danger:hover,
-        .modal-confirm .btn-danger:focus {
-            background: #928c8c;
-        }
+    .modal-confirm .btn-danger:hover,
+    .modal-confirm .btn-danger:focus {
+        background: #928c8c;
+    }
     </style>
 </head>
 
@@ -120,8 +120,7 @@
 
     <header class="header fixed clearfix">
         <div class="left">
-            <div class="logo"><a href="/"><img src="images/logo.png" alt="ExploreCity"
-                        class="img-responsive"></a></div>
+            <div class="logo"><a href="/"><img src="images/logo.png" alt="ExploreCity" class="img-responsive"></a></div>
             <!-- end .logo -->
             <form class="header-search">
                 <input type="text" placeholder="I’m searching for ...">
@@ -130,7 +129,7 @@
         </div>
         <!-- end .left -->
         <div class="navigation clearfix">
-    @include('inc.index_head')
+            @include('inc.index_head')
             <a href="#" class="responsive-menu-open"><i class="fa fa-bars"></i></a>
         </div>
         <!-- end .navigation -->
@@ -202,8 +201,8 @@
                             <div class="form-group">
                                 <input type="text" name="loc" id="loc" autocomplete="off" placeholder="Location">
                                 <i class="pe-7s-world"></i>
-                                <div style="position: absolute;margin-top: 10px;"  id="List">
-                                    </div>
+                                <div style="position: absolute;margin-top: 10px;" id="List">
+                                </div>
                             </div>
                             <!-- end .form-group -->
                         </div>
@@ -409,7 +408,8 @@
                         <div class="services">
                             <img src="images/services-icon01.png" alt="icon" class="img-responsive center-block">
                             <h3>Choose<br>What To Do</h3>
-                            <p>Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a mall to do some
+                            <p>Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a mall to do
+                                some
                                 shopping?
                             </p>
                             <div class="process"><i class="pe-7s-angle-right-circle"></i></div>
@@ -421,7 +421,8 @@
                         <div class="services">
                             <img src="images/services-icon02.png" alt="icon" class="img-responsive center-block">
                             <h3>Find<br>What You Want</h3>
-                            <p>Search and filter hundreds of listings, read reviews, explore photos and find the perfect spot.
+                            <p>Search and filter hundreds of listings, read reviews, explore photos and find the perfect
+                                spot.
                             </p>
                             <div class="process"><i class="pe-7s-angle-right-circle"></i></div>
                         </div>
@@ -432,7 +433,8 @@
                         <div class="services">
                             <img src="images/services-icon03.png" alt="icon" class="img-responsive center-block">
                             <h3>Explore<br>Amazing Places</h3>
-                            <p>Go and have a good time or even make a booking directly from the listing page. All of those,
+                            <p>Go and have a good time or even make a booking directly from the listing page. All of
+                                those,
                                 thanks to Knowhere!</p>
                         </div>
                         <!-- end .services -->
@@ -456,7 +458,8 @@
                 </h2>
                 <form action="" method="get" id="mc-embedded-subscribe-form" class="newsletter-form">
                     <input type="email" id="mce-EMAIL" name="EMAIL" placeholder="YourEmail@domain.com">
-                    <button type="submit" id="mc-embedded-subscribe" name="subscribe" class="button" disabled>Subscribe</button>
+                    <button type="submit" id="mc-embedded-subscribe" name="subscribe" class="button"
+                        disabled>Subscribe</button>
                 </form>
             </div>
             <!-- end .container -->
@@ -468,8 +471,8 @@
     <footer class="footer">
         <div class="top">
             <div class="left">
-                <div class="logo"><a href="/"><img src="images/logo-dark.png" alt="Knowhere"
-                            class="img-responsive"></a></div>
+                <div class="logo"><a href="/"><img src="images/logo-dark.png" alt="Knowhere" class="img-responsive"></a>
+                </div>
                 <!-- end .logo -->
             </div>
             <!-- end .left -->
@@ -495,11 +498,13 @@
             <form action="/login" method="post">
                 @csrf
                 <div class="form-group">
-                    <input type="email" placeholder="Email Address" id="email" onmousedown="this.type='text'" name="email" required>
+                    <input type="email" placeholder="Email Address" id="email" onmousedown="this.type='text'"
+                        name="email" required>
                 </div>
                 <!-- end .form-group -->
                 <div class="form-group">
-                    <input type="password" required placeholder="Password" id="password" name="password" onmouseover="this.type='text'" onmouseup="this.type='password'"
+                    <input type="password" required placeholder="Password" id="password" name="password"
+                        onmouseover="this.type='text'" onmouseup="this.type='password'"
                         onmouseout="this.type='password'">
                 </div>
                 <!-- end .form-group -->
@@ -548,7 +553,8 @@
                 </div>
                 <!-- end .form-group -->
                 <div class="form-group">
-                    <input type="text" placeholder="Email Address" onblur="return emailDoesExist1()" id="mail" name="mail">
+                    <input type="text" placeholder="Email Address" onblur="return emailDoesExist1()" id="mail"
+                        name="mail">
                     <div id="p24" class="alert alert-danger" style="display: none;">
                         <strong>Email already registered, Use a different one</strong>
                     </div>
@@ -568,8 +574,8 @@
 
                 <!-- end .form-group -->
                 <div class="form-group">
-                    <input type="password" placeholder="Password" id="pwd" name="pwd" onmouseover="this.type='text'" onmouseup="this.type='password'"
-                        onmouseout="this.type='password'">
+                    <input type="password" placeholder="Password" id="pwd" name="pwd" onmouseover="this.type='text'"
+                        onmouseup="this.type='password'" onmouseout="this.type='password'">
                     <div id="p4" class="alert alert-danger" style="display: none;">
                         <strong>Password must be between 8 and 15 characters long and include at least one
                             digit</strong>
@@ -578,10 +584,12 @@
 
 
                 <!-- end .form-group -->
-                <div class="button-wrapper"><input type="submit" class="button" value="Register" id="Register" name="Register"></div>
+                <div class="button-wrapper"><input type="submit" class="button" value="Register" id="Register"
+                        name="Register"></div>
                 <div class="text-center">
                     <p>Already have an account? <a href="#" class="login-open">Log in</a></p>
-                    <p>Have your own establishment?<br> List it on Knowhere <a href="/addlisting" class="listing-open">here!!</a></p>
+                    <p>Have your own establishment?<br> List it on Knowhere <a href="/addlisting"
+                            class="listing-open">here!!</a></p>
 
                     <div class="social">
                         <p>Connect with Social Networks</p>
@@ -599,7 +607,8 @@
 
     <div class="listing-wrapper">
         <div class="listing">
-            <form method="POST" action="/requestlisting" id="rqstform" onsubmit="return formValidation1()" enctype="multipart/form-data">
+            <form method="POST" action="/requestlisting" id="rqstform" onsubmit="return formValidation1()"
+                enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group1">
@@ -654,7 +663,8 @@
                     </select>
                 </div>
                 <div class="form-group1">
-                    <input type="text" name='remail' id='remail' onblur="return emailDoesExist()" placeholder=" Contact Email">
+                    <input type="text" name='remail' id='remail' onblur="return emailDoesExist()"
+                        placeholder=" Contact Email">
                     <!-- <p id="p22"></p> -->
                     <div id="p22" class="alert alert-danger" style="align:center;display: none;">
                         <strong>Enter a valid email</strong>
@@ -699,7 +709,8 @@
                         <div id="head1" style="align:center;display: none;" class="alert alert-danger">
                             <strong>All details are mandatory</strong>
                         </div>
-                        <div class="button-wrapper verify-open"><button type="submit" id="submit1" name="submit1" class="button">Request verification</button></div>
+                        <div class="button-wrapper verify-open"><button type="submit" id="submit1" name="submit1"
+                                class="button">Request verification</button></div>
                     </div>
                     <div class="text-center">
                         <p>Verification details will be sent via email</p>
@@ -748,7 +759,7 @@
 
     <script>
 
-            </script>
+    </script>
 
 </body>
 

@@ -34,6 +34,6 @@ class CreateTblCityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('city');
+        Schema::dropIfExists('tbl_city');
     }
 }

@@ -75,10 +75,10 @@
                                         <a href="ownerdashboard">
                                             @elseif(Session::get('utype')==3)
                                             <a href="userdashboard">
-                                            @endif
-                                            <i class="lni-dashboard"></i>
-                                            <span>Dashboard</span>
-                                        </a>
+                                                @endif
+                                                <i class="lni-dashboard"></i>
+                                                <span>Dashboard</span>
+                                            </a>
                                     </li>
                                     <li>
                                         <a class="active" href="#">
@@ -104,6 +104,14 @@
                                             <span>Add new posting</span>
                                         </a>
                                     </li>
+                                    @if(Session::get('utype')==2)
+                                    <li>
+                                        <a href="/addloc">
+                                            <i class="lni-wallet"></i>
+                                            <span>Add nearby locations</span>
+                                        </a>
+                                    </li>
+                                    @endif
                                     <li>
                                         <a href="">
                                             <i class="lni-wallet"></i>

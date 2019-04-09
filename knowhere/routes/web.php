@@ -45,6 +45,7 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::any('/Addpostingu', 'PostController@Addpostingu')->name('Addpostingu');
     Route::any('/deletepost/{id}', 'PostController@deletepost')->name('deletepost');
     Route::any('/removepost', 'PostController@removepost')->name('removepost');
+    Route::any('/addloc', 'OwnerController@addloc')->name('addloc');
 
 });
 
@@ -60,6 +61,9 @@ Route::any('/fetchservice/{id}', 'OwnerController@fetchservice')->name('fetchser
 Route::any('/fetchloc', 'HomeController@fetchloc')->name('fetchloc');
 
 Route::any('/postdetails/{id}', 'PostController@postdetails')->name('postdetails');
+Route::any('/addreview', 'PostController@addreview')->name('addreview');
+
+
 Route::any('/mypost', 'HomeController@mypost')->name('mypost');
 
 Route::any('/howitworks', 'HomeController@howitworks')->name('howitworks');
