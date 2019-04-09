@@ -155,6 +155,6 @@ class HomeController extends Controller
 
     public function dummy()
     {
-
+        return view();
     }
 }

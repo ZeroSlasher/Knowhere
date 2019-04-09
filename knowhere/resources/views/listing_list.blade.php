@@ -364,6 +364,7 @@
 
 
                         <div class="pagination-bar">
+                            {{ $post->appends($_GET)->links() }}
 
                         </div>
 

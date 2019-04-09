@@ -192,7 +192,7 @@
             <div class="container">
                 <h1>Discover The City Gems</h1>
                 <p class="lead">Find great places to stay, eat, shop, or visit from local experts.</p>
-                <form method="POST" action="/searchaction">
+                <form method="GET" action="/searchaction">
                     @csrf
                     <div class="row">
 

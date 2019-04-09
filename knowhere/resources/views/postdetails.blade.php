@@ -31,8 +31,10 @@ Session::put('idu','aa');
 
     <style>
     .comment-wrapper .panel-body {
-        max-height: 650px;
-        /* overflow: auto; */
+        max-height: inherit;
+        max-width: inherit;
+        flex-grow: inherit;
+        overflow: inherit;
     }
 
     .comment-wrapper .media-list .media img {
@@ -142,9 +144,9 @@ Session::put('idu','aa');
                             </div>
                             <h4 class="title-small mb-3">Services Provided:</h4>
                             <ul class="list-specification">
-
-                                <li><i class="lni-check-mark-circle"></i>{{$own->Service_id}}</li>
-
+                                @foreach($service as $s)
+                                <li><i class="lni-check-mark-circle"></i>{{$s->service}}</li>
+                                @endforeach
                             </ul>
                         </div>
                         <ul class="advertisement mb-4">
@@ -226,26 +228,30 @@ Session::put('idu','aa');
                                         <button type="submit" class="btn btn-info pull-right"
                                             style="margin:5px">Post</button>
                                     </form>
-                                    <div class="clearfix"></div>
-                                    <hr>
+
                                     <ul class="media-list">
+                                        @isset($review)
+                                        @foreach($review as $r)
                                         <li class="media">
+
                                             <a href="#" class="pull-left">
                                                 <img src="https://bootdey.com/img/Content/user_1.jpg" alt=""
                                                     class="img-circle">
                                             </a>
                                             <div class="media-body" style="    margin-left: 20px;">
                                                 <span class="text-muted pull-right">
-                                                    <small class="text-muted">30 min ago</small>
+                                                    <small class="text-muted">{{$r->updated_at}}</small>
                                                 </span>
-                                                <strong class="text-success">@MartinoMont</strong>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                    Lorem ipsum dolor sit amet, <a href="#">#consecteturadipiscing
-                                                    </a>.
-                                                </p>
+                                                <strong class="text-success">{{$r->name}}</strong>
+                                                <p class="text-info">{{$r->title}}</p>
+                                                <h6>
+                                                    {{$r->review}}
+                                                </h6>
                                             </div>
                                         </li>
+                                        @endforeach
+                                        @endisset
+                                        {{$review->links()}}
                                     </ul>
                                 </div>
                             </div>

@@ -57,7 +57,7 @@
             <div class="container">
                 <h1>Discover The City Gems</h1>
                 <p class="lead">Find great places to stay, eat, shop, or visit from local experts.</p>
-                <form method="POST" action="/searchaction">
+                <form method="GET" action="/searchaction">
                     @csrf
                     <div class="row">
 
@@ -66,8 +66,8 @@
                             <div class="form-group">
                                 <input type="text" name="loc" id="loc" autocomplete="off" placeholder="Location">
                                 <i class="pe-7s-world"></i>
-                                <div style="position: absolute;margin-top: 10px;"  id="List">
-                                    </div>
+                                <div style="position: absolute;margin-top: 10px;" id="List">
+                                </div>
                             </div>
                             <!-- end .form-group -->
                         </div>
@@ -281,7 +281,8 @@
                 </h2>
                 <form action="" method="get" id="mc-embedded-subscribe-form" class="newsletter-form">
                     <input type="email" id="mce-EMAIL" name="EMAIL" placeholder="YourEmail@domain.com">
-                    <button type="submit" id="mc-embedded-subscribe" name="subscribe" class="button" disabled>Subscribe</button>
+                    <button type="submit" id="mc-embedded-subscribe" name="subscribe" class="button"
+                        disabled>Subscribe</button>
                 </form>
             </div>
             <!-- end .container -->
@@ -293,8 +294,8 @@
     <footer class="footer">
         <div class="top">
             <div class="left">
-                <div class="logo"><a href="/"><img src="images/logo-dark.png" alt="Knowhere"
-                            class="img-responsive"></a></div>
+                <div class="logo"><a href="/"><img src="images/logo-dark.png" alt="Knowhere" class="img-responsive"></a>
+                </div>
                 <!-- end .logo -->
             </div>
             <!-- end .left -->

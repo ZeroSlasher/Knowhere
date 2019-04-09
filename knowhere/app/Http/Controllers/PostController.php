@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Images;
-use App\Review;
 use App\OutletProf;
 use App\Reg;
+use App\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -103,7 +103,7 @@ class PostController extends Controller
                 ->join('tbl_login', 'tbl_outlet_prof.id', '=', 'tbl_login.id')
                 ->join('tbl_cat', 'tbl_subcat.cat_id', '=', 'tbl_cat.cat_id')
                 ->orwhere('tbl_city.city', '=', $loc)
-                ->orwhere('tbl_district.district', '=', $loc)->get();
+                ->orwhere('tbl_district.district', '=', $loc)->paginate(10);
 
             $data = DB::table('tbl_cat')->get();
 
@@ -124,7 +124,7 @@ class PostController extends Controller
                 ->join('tbl_cat', 'tbl_subcat.cat_id', '=', 'tbl_cat.cat_id')
                 ->where('tbl_cat.cat_id', '=', $cat)
                 ->orwhere('tbl_city.city', '=', $loc)
-                ->orwhere('tbl_district.district', '=', $loc)->get();
+                ->orwhere('tbl_district.district', '=', $loc)->paginate(10);
             return view('listing_list', compact('post', 'data'));
         }
     }
@@ -132,52 +132,64 @@ class PostController extends Controller
     public function postdetails($id)
     {
 
-         $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
+        $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
             `tbl_status` as st, `tbl_state` as sta, `tbl_district` as d,tbl_users_reg as o,tbl_login as lg,
            tbl_cat as cat WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and s.cat_id = cat.cat_id and l.status_id=st.status_id and
             c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lg.`id`=l.`id`
             and l.outletid=$id");
+        $review = DB::table('tbl_review')->where('outlet_id', $id)->paginate(5);
+        foreach ($post as $p) {
+            $s = $p->Service_id;
+        }
+         $ss = explode(',', $s);
 
-        return view('postdetails', compact('post'));
+        $i = 0;
+        foreach ($ss as $sss) {
+            $service[$i] = DB::table('tbl_services')->where('service_id', $sss)->select('service')->get()[0];
+            $i++;
+        }
+        
+        //return $service;
+
+        return view('postdetails', compact('post', 'review', 'service'));
     }
 
     public function addreview(Request $request)
-{
-    if(Session::get('id')){
-        $id = Session::get('uid');
-        $email = Session::get('id');
-        $outletid = $request->get('id');
-        $dbname = DB::select("select name from tbl_users_reg where id = $id");
-        foreach($dbname as $n){
-            $name= $n->name;
+    {
+        if (Session::get('id')) {
+            $id = Session::get('uid');
+            $email = Session::get('id');
+            $outletid = $request->get('id');
+            $dbname = DB::select("select name from tbl_users_reg where id = $id");
+            foreach ($dbname as $n) {
+                $name = $n->name;
+            }
+            $review = new Review([
+                'email' => $email,
+                'title' => $request->get('title'),
+                'outlet_id' => $outletid,
+                'name' => $name,
+                'review' => $request->get('review'),
+            ]);
+
+            $review->save();
+            return back()->with('success', 'Review posted');
+        } else {
+            $email = $request->get('email');
+            $outletid = $request->get('id');
+            $title = $request->get('title');
+            $name = $request->get('name');
+            $review = $request->get('review');
+            $reviewdb = new Review([
+                'email' => $email,
+                'title' => $request->get('title'),
+                'outlet_id' => $outletid,
+                'name' => $name,
+                'review' => $request->get('review'),
+            ]);
+
+            $reviewdb->save();
+            return back()->with('success', 'Review posted');
         }
-        $review = new Review([
-            'email' => $email,
-            'title' => $request->get('title'),
-            'outlet_id' => $outletid,
-            'name' => $name,
-            'review' => $request->get('review'),
-        ]);
-
-        $review->save();
-        return back();
     }
-    else{
-        $email = $request->get('email');
-        $outletid = $request->get('id');
-        $title = $request->get('title');
-        $name = $request->get('name');
-        $review = $request->get('review');
-        $reviewdb = new Review([
-            'email' => $email,
-            'title' => $request->get('title'),
-            'outlet_id' => $outletid,
-            'name' => $name,
-            'review' => $request->get('review'),
-        ]);
-
-        $reviewdb->save();
-        return back()->with('success', 'Review posted');
-    }
-}    
 }

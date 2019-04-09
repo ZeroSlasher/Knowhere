@@ -101,10 +101,3 @@ Route::POST('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::GET('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 
 Route::any('/dummy', 'HomeController@dummy')->name('dummy');
-
-Route::get('getip', function () {
-    $position = Location::get(Request::ip());
-
-    return Response::json($position);
-
-});
