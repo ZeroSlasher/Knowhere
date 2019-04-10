@@ -15,6 +15,7 @@ class Review extends Model
         'outlet_id',
         'review',
         'title',
+        'rating',
 
     ];
 }

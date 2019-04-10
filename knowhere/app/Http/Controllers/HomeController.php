@@ -155,6 +155,7 @@ class HomeController extends Controller
 
     public function dummy()
     {
-        return view();
+        $str = ("'h'e'l_'_l'o'");
+        return str_replace( array( "'","'" ),'',$str );
     }
 }

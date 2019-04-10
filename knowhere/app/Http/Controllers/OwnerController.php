@@ -129,7 +129,7 @@ class OwnerController extends Controller
     {
         $file = $request->file('prof');
         $own = $request->all();
-
+$title =  str_replace( array( "'","'" ),'',$own['title'] );
         if ($request->hasFile('prof')) {
             $destinationPath = 'uploads/';
             $file = $request->file('prof');
@@ -138,11 +138,11 @@ class OwnerController extends Controller
             $file->move($destinationPath, $rename);
 
             DB::select("UPDATE `tbl_users_reg` SET `name`='$own[own_name]',`city_id`=$own[city],
-             `phone`='$own[cphone]',`oaddress`='$own[Address]',`image`='$rename' WHERE `id`=$own[id]");
+            `title`='$title', `phone`='$own[cphone]',`oaddress`='$own[Address]',`image`='$rename' WHERE `id`=$own[id]");
             return back()->with('info', 'profile updated');
         } else {
             DB::select("UPDATE `tbl_users_reg` SET `name`='$own[own_name]',`city_id`=$own[city],
-            `phone`='$own[cphone]',`oaddress`='$own[Address]' WHERE `id`=$own[id]");
+            `title`='$title',`phone`='$own[cphone]',`oaddress`='$own[Address]' WHERE `id`=$own[id]");
             return back()->with('info', 'profile updated');
         }
 

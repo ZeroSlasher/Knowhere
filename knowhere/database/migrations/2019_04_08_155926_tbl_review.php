@@ -25,6 +25,8 @@ class TblReview extends Migration
 
             $table->string('review');
 
+            $table->float('rating');
+
             $table->string('title');
 
             $table->timestamps();

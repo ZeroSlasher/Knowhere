@@ -132,49 +132,84 @@ class PostController extends Controller
     public function postdetails($id)
     {
 
-        $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
+         $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
             `tbl_status` as st, `tbl_state` as sta, `tbl_district` as d,tbl_users_reg as o,tbl_login as lg,
            tbl_cat as cat WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and s.cat_id = cat.cat_id and l.status_id=st.status_id and
             c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lg.`id`=l.`id`
             and l.outletid=$id");
         $review = DB::table('tbl_review')->where('outlet_id', $id)->paginate(5);
+        $tot_rating = 0;
+foreach($review as $r){
+    $ra = $r->rating;
+    $tot_rating = $tot_rating + $ra;
+}
+         $avg_rating = $tot_rating/count($review);
+         $fin_rating = number_format((float)$avg_rating, 1, '.', '');
         foreach ($post as $p) {
             $s = $p->Service_id;
         }
-         $ss = explode(',', $s);
+        $ss = explode(',', $s);
 
         $i = 0;
         foreach ($ss as $sss) {
             $service[$i] = DB::table('tbl_services')->where('service_id', $sss)->select('service')->get()[0];
             $i++;
         }
-        
-        //return $service;
 
-        return view('postdetails', compact('post', 'review', 'service'));
+        return view('postdetails', compact('post', 'review', 'service','fin_rating'));
     }
 
     public function addreview(Request $request)
     {
-        if (Session::get('id')) {
-            $id = Session::get('uid');
-            $email = Session::get('id');
-            $outletid = $request->get('id');
-            $dbname = DB::select("select name from tbl_users_reg where id = $id");
-            foreach ($dbname as $n) {
-                $name = $n->name;
-            }
+        if (Session::get('id')) 
+        {
+
+        $id = Session::get('uid');
+        $email = Session::get('id');
+        $outletid = $request->get('id');
+        $dbname = DB::select("select name from tbl_users_reg where id = $id");
+        foreach ($dbname as $n) {
+            $name = $n->name;
+        }
+        $emaile = 1;
+        //check if email already in table
+        $exist = DB::select("select email from tbl_review where outlet_id = $outletid");
+        foreach ($exist as $e) {
+            $emaile = $e->email;
+        }
+
+        if ($emaile != 1) {
+            // DB::table('tbl_review')
+            //     ->where('email', $emaile)
+            //     ->update([
+            //         'title' => $request->get('title'),
+            //         'review' => $request->get('review'),
+            //         'rating' => $request->get('rating'),
+            //     ]);
+
+                Review::where('email', $emaile)->update([
+                    'title' => $request->get('title'),
+                    'review' => $request->get('review'),
+                    'rating' => $request->get('rating')]);
+
+            return back()->with('success', 'Review updated');
+
+        } else {
             $review = new Review([
                 'email' => $email,
                 'title' => $request->get('title'),
                 'outlet_id' => $outletid,
                 'name' => $name,
                 'review' => $request->get('review'),
+                'rating' => $request->get('rating'),
             ]);
 
             $review->save();
             return back()->with('success', 'Review posted');
-        } else {
+        }
+
+        }
+        else {
             $email = $request->get('email');
             $outletid = $request->get('id');
             $title = $request->get('title');
@@ -186,6 +221,8 @@ class PostController extends Controller
                 'outlet_id' => $outletid,
                 'name' => $name,
                 'review' => $request->get('review'),
+                'rating' => $request->get('rating'),
+
             ]);
 
             $reviewdb->save();
