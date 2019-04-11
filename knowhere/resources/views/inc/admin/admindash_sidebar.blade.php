@@ -3,10 +3,9 @@
         <div class="sidebar-box">
             <div class="user">
                 <figure>
-                    <a href="#"><img src="assets/img/author/img1.jpg" alt="ZeroSlasher"></a>
+                    <a href="#"><img src="assets/img/author/img1.jpg" alt=""></a>
                 </figure>
                 <div class="usercontent">
-
                     <h3>{{Session::get('name')}}</h3>
                     <h4>Administrator</h4>
                 </div>
@@ -40,19 +39,19 @@
                     <li>
                         <a href="undermaintainence">
                             <i class="lni-wallet"></i>
-                            <span>Offers/Messages</span>
+                            <span>Post Reportings</span>
                         </a>
                     </li>
                     <li>
                         <a href="undermaintainence">
                             <i class="lni-heart"></i>
-                            <span>Option</span>
+                            <span>Comment Reports</span>
                         </a>
                     </li>
                     <li>
                         <a href="undermaintainence">
                             <i class="lni-star"></i>
-                            <span>Option</span>
+                            <span>Messages/Enquiries</span>
                         </a>
                     </li>
                     <li>

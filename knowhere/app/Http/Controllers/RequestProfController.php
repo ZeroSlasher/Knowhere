@@ -51,6 +51,7 @@ class RequestProfController extends Controller
 
             ]);
             $rqst->save();
+
             return redirect('/')->with('msg', 'Request Submitted successfully.. You will be informed via email on the approval of the request');
 
         } else {
@@ -95,7 +96,7 @@ class RequestProfController extends Controller
             //mail
             $data = array('name' => Input::get('owname'), 'oname' => Input::get('oname'), 'password' => $pwd, 'email' => $mail);
             Mail::send('emails.email', $data, function ($message) {
-                $mail = Input::get('email');;
+                $mail = Input::get('email');
                 $reciver = Input::get('owname');
                 $message->from('knowhere@gmail.com', 'Knowhere');
                 $message->to($mail, $reciver)->subject('Account confirmation at Kowhere');
@@ -126,7 +127,7 @@ class RequestProfController extends Controller
 
                     // insert into ownreg table
                     $lastid = DB::getPdo()->lastInsertId();
-                    
+
                     $reg = new Reg([
                         'id' => $lastid,
                         'name' => Input::get('owname'),

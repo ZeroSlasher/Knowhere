@@ -30,14 +30,14 @@
                         About
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="about">About Us</a>
-                        <a class="dropdown-item" href="services">Services</a>
-                        <a class="dropdown-item" href="faq">FAQ</a>
+                        <a class="dropdown-item" href="/about">About Us</a>
+                        <a class="dropdown-item" href="/services">Services</a>
+                        <a class="dropdown-item" href="/faq">FAQ</a>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="contact">
+                    <a class="nav-link" href="/contact">
                         Contact
                     </a>
                 </li>
@@ -47,7 +47,7 @@
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"><i class="lni-user"></i> My Account</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="logout"><i class="lni-enter"></i> Logout</a>
+                        <a class="dropdown-item" href="/logout"><i class="lni-enter"></i> Logout</a>
                         @if(Session::get('utype')=='1')
                         <a class="dropdown-item" href="/admindashboard" class="button"><i
                                 class="lni-home"></i>Dashboard</a>
@@ -82,13 +82,13 @@
         <li>
             <a href="#">Pages</a>
             <ul class="dropdown">
-                <li><a href="about">About Us</a></li>
-                <li><a href="services">Services</a></li>
-                <li><a href="faq">FAQ</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/faq">FAQ</a></li>
             </ul>
         </li>
         <li>
-            <a href="contact">Contact Us</a>
+            <a href="/contact">Contact Us</a>
         </li>
         <li>
             <a>My Account</a>

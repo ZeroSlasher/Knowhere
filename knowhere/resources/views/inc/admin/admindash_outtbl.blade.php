@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-    @include('inc.message')
+                @include('inc.message')
                 <table class="table table-responsive dashboardtable tablemyads">
                     <thead>
                         <tr>
@@ -67,7 +67,8 @@
                                 </td>
                                 <!-- email -->
                                 <td data-title="Title">
-                                    <input type="text" id="email" name="email" value="{{$cmp->email}}" style="background:rgba(0,0,0,0);border:none;cursor:not-allowed;font-family:montserrat, sans-serif;"
+                                    <input type="text" id="email" name="email" value="{{$cmp->email}}"
+                                        style="background:rgba(0,0,0,0);border:none;cursor:not-allowed;font-family:montserrat, sans-serif;"
                                         size='20' readonly />
                                 </td>
                                 <!-- Phone -->
@@ -81,15 +82,20 @@
                                 <td data-title="Phone"><span class="adcategories">{{$cmp->oaddress}}</span>
                                 </td>
                                 <!-- status -->
-                                <td data-title="Status"><span class="adstatus adstatusactive">{{$cmp->status}}</span>
+                                @if($cmp->status == 'active')
+                                <td data-title="Status"><span class="adstatus adstatusactive">Active</span>
                                 </td>
+                                @elseif($cmp->status == 'block')
+                                <td data-title="Status"><span class="adstatus adstatusdeleted">Blocked</span>
+                                </td>
+                                @endif
                                 <td data-title="Action">
                                     <div class="btns-actions">
                                         @if($cmp->status =='active')
                                         <button type="submit" class="btn-action btn-delete"><i
-                                                 class="lni-ban"></i></button> @else
+                                                class="lni-ban"></i></button> @else
                                         <button type="submit" class="btn-action btn-view"><i
-                                                 class="lni-check-mark-circle"></i></button>                                        @endif
+                                                class="lni-check-mark-circle"></i></button> @endif
                                     </div>
                         </form>
                         </td>

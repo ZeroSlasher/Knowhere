@@ -175,14 +175,14 @@ Session::put('idu','aa');
                         <div class="ads-details-info">
                             <h2>{{$own->outletname}}</h2>
                             <div class="row">
-                                <div class="form-control" style="width: fit-content;height: fit-content;"> Total Rating: <label
-                                        class="text-info">{{$fin_rating}}<label><i
+                                <div class="form-control" style="width: fit-content;height: fit-content;"> Total Rating:
+                                    <label class="text-info">{{$fin_rating}}<label><i
                                                 class="lni-star-filled text-warning"></i>
                                 </div>
-                                @if($own->status == 'validated')
+                                @if($own->status == 'Validated')
                                 <h5 class="btn-info price"><i class="lni-pointer-right"></i>Verified
                                 </h5>
-                                @else
+                                @elseif($own->status == 'invalidated')
                                 <h5 class="btn-info price"><i class="lni-pointer-right"></i>Reffered
                                 </h5>
                                 @endif

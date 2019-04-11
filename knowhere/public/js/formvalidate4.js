@@ -31,7 +31,7 @@ function formValidation4() {
 
 
 
-    if (inputAlphabet(owname)) {
+    if (inputAlphabetl(owname)) {
 
         if (inputwebsite(wsite)) {
 
@@ -52,15 +52,18 @@ function formValidation4() {
 
 //function that checks whether input text is an alphabetic character or not.
 
-
-function inputAlphabet(inputtext) {
-    var alphaExp = /^[a-zA-Z0-9]+$/;
+function inputAlphabetl(inputtext) {
+    var alphaExp = /^[a-z ,.'-]+$/i;
     if (inputtext.value.match(alphaExp)) {
+        document.getElementById('p11').innerText = "";
         return true;
     } else {
+        // $("#p1").show().delay(1000).fadeOut();
+        // document.getElementById('p2').innerText = "Enter valid name";  //this segment displays the validation rule for name
         $("#p11").fadeIn().delay('1000').fadeOut();
         inputtext.focus();
         return false;
+
     }
 }
 
@@ -77,7 +80,7 @@ function phonevalidation(inputtext) {
 }
 
 function inputwebsite(inputtext) {
-    var alphaExp = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*$)/;
+    var alphaExp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
     if (inputtext.value.match(alphaExp)) {
         return true;
     } else {

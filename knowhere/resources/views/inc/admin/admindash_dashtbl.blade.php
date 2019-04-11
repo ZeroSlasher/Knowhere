@@ -140,8 +140,8 @@
                                      <div class="btns-actions">
                                          <button type="submit" class="btn-action btn-edit"><i
                                                  class="lni-check-mark-circle"></i></button>
-                                         <a class="btn-action btn-delete" href="/rqstdisapprove/{{$cmp->rqst_id}}"><i
-                                                 class="lni-ban"></i></a>
+                                         <!-- <a class="btn-action btn-delete" href="/rqstdisapprove/{{$cmp->rqst_id}}"><i
+                                                 class="lni-ban"></i></a> -->
 
 
                                      </div>

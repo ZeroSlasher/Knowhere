@@ -112,7 +112,7 @@
                             <div class="form-group mb-3">
                                 <label class="control-label">Title</label>
                                 <textarea class="form-control input-md" id="Title"
-                                    name="Title">{{$prof->Title}}</textarea>
+                                    name="Title">{{$prof->otitle}}</textarea>
                             </div>
 
                             <div class="form-group mb-3">

@@ -188,7 +188,7 @@
                                                     <a href="#"><i class="lni-folder"></i>
                                                         {{$own->catagory}} -- {{$own->subcatagory}}</a>
                                                 </div>
-                                                <h4><a href=" ">{{$own->outletname}} </a>
+                                                <h4><a href="editpost/{{$own->outletid}}">{{$own->outletname}} </a>
                                                 </h4> <span>Last Updated: {{$own->updated_at}}</span>
                                                 <ul class=" address">
                                                     <li>
@@ -267,7 +267,7 @@
     <script src="assets/js/jquery-min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-     
+
     <script src="assets/js/jquery.counterup.min.js"></script>
     <script src="assets/js/waypoints.min.js"></script>
     <script src="assets/js/wow.js"></script>

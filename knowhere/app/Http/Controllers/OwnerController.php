@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -21,6 +22,7 @@ class OwnerController extends Controller
             return view('mypostings', compact('post'));
         }
     }
+
     public function editpost($id)
     {
         Session::put('outletid', $id);
@@ -40,10 +42,12 @@ class OwnerController extends Controller
         $request->all();
         $oid = $request->get('outletid');
 
-        $outletname = $request->get('oname');
-        $ownername = $request->get('owname');
-        $address = $request->get('Address');
-        $description = $request->get('Description');
+        // str_replace(array("'", "'"), '', $request->get('Description'));
+        $outletname = str_replace(array("'", "'"), '', $request->get('oname'));
+        $ownername = str_replace(array("'", "'"), '', $request->get('owname'));
+        $address = str_replace(array("'", "'"), '', $request->get('Address'));
+        $description = str_replace(array("'", "'"), '', $request->get('Description'));
+        $title = str_replace(array("'", "'"), '', $request->get('Title'));
         $subcat_id = $request->get('subcat'); //subcat value is there if cat is selected
         $city_id = $request->get('city');
         $website = $request->get('wsite');
@@ -55,7 +59,7 @@ class OwnerController extends Controller
             // return 1;
             $Service_id = implode(",", $request->get('service')); //value of service is here
             DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
-            `address`='$address',`description`='$description',`website`='$website',`subcat_id`=$subcat_id,
+            `address`='$address',`description`='$description',`website`='$website',`otitle`='$title',`subcat_id`=$subcat_id,
             `Service_id`='$Service_id',`phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
 
             return redirect('/mypostings')->with('info', 'Posting updated');
@@ -64,7 +68,7 @@ class OwnerController extends Controller
         {
             // return 4;
             DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
-           `address`='$address',`description`='$description',`website`='$website',`city_id`=$city_id,
+           `address`='$address',`description`='$description',`website`='$website',`otitle`='$title',`city_id`=$city_id,
            `phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
 
             return redirect('/mypostings')->with('info', 'Posting updated');
@@ -129,7 +133,7 @@ class OwnerController extends Controller
     {
         $file = $request->file('prof');
         $own = $request->all();
-$title =  str_replace( array( "'","'" ),'',$own['title'] );
+        $title = str_replace(array("'", "'"), '', $own['title']);
         if ($request->hasFile('prof')) {
             $destinationPath = 'uploads/';
             $file = $request->file('prof');
@@ -159,32 +163,67 @@ $title =  str_replace( array( "'","'" ),'',$own['title'] );
 
     public function changepassword(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'npass' => 'required|regex:/^(?=.*\d).{8,15}$/',
-            'cpass' => 'required|regex:/^(?=.*\d).{8,15}$/',
-            'email' => 'required|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
-        ]);
         $own = $request->all();
-        if ($own['npass'] == null || $own['cpass'] == null || $own['curpass'] == null) {
-            //return 3;
-            return back()->with('error', 'All fields are mandatory');
-        } elseif ($own['npass'] != $own['cpass']) {
+        if (array_key_exists('email', $own)) {
+            //return 1;
+            $validator = Validator::make($request->all(), [
+                'curpass' => 'required|regex:/^(?=.*\d).{8,15}$/',
+                'npass' => 'required|regex:/^(?=.*\d).{8,15}$/',
+                'cpass' => 'required|regex:/^(?=.*\d).{8,15}$/',
+                'email' => 'required|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
+            ]);
+        } else {
             //return 2;
+
+            $validator = Validator::make($request->all(), [
+                // 'curpass' => 'required|regex:/^(?=.*\d).{8,15}$/',
+                'curpass' => 'required',
+                'npass' => 'required|regex:/^(?=.*\d).{8,15}$/',
+                'cpass' => 'required|regex:/^(?=.*\d).{8,15}$/',
+            ]);
+        }
+
+        if ($own['npass'] != $own['cpass']) {
+            //return 3;
             return back()->with('error', 'passwords not matching');
         } elseif ($validator->fails()) {
-            //return 1;
-            return back()->with('error', 'Invalid input recieved');
+            //return 4;
+            return back()->with('error', 'Empty or Invalid entry recieved');
         } else {
-            // $uid = Session::get('uid');
-            // $pwd = $own['npass'];
-            // $hpwd = Hash::make($pwd);
+            //return 5;
+            $uid = Session::get('uid');
+            $cpwd = $own['curpass'];
+            $pwd = $own['npass'];
+            $hpwd = Hash::make($pwd);
+            //if current pwd is correct
+            $currentp = DB::select("select password from tbl_login where id = $uid");
+            foreach ($currentp as $cp) {
+                $crntpass = $cp->password;
+            }
 
-            // DB::table('tbl_login')
-            //     ->where('id', $uid)
-            //     ->update(['email' => $request->get('email'), 'password' => $hpwd]);
+            if (Hash::check($cpwd, $crntpass)) {
+                //return 6;
+                if (array_key_exists('email', $own)) {
+                    //return 7;
+                    DB::table('tbl_login')
+                        ->where('id', $uid)
+                        ->update(['email' => $request->get('email'), 'password' => $hpwd]);
 
-            //reset pwd code
-            return back()->with('success', 'password changed');
+                    return back()->with('success', 'Email and Password changed');
+                } else {
+                    //return 8;
+                    DB::table('tbl_login')
+                        ->where('id', $uid)
+                        ->update(['password' => $hpwd]);
+
+                    return back()->with('success', 'Password changed');
+                }
+            } else {
+
+                //return 9;
+                return back()->with('error', 'Incorrect Password');
+
+            }
 
         }
 

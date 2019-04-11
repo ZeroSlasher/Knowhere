@@ -12,6 +12,7 @@ class OutletProf extends Model
     public $fillable = [
         'id',
         'regid',
+        'otitle',
         'outletname',
         'ownername',
         'address',

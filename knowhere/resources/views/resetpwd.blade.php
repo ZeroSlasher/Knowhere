@@ -158,6 +158,11 @@
                                     <div class="alert alert-info" style="align:center;">
                                         <strong>Password: Uppercase letter,digit,min 8 characters</strong>
                                     </div>
+                                    <div class="alert alert-warning" style="align:center;">
+                                        <input type="button" class="btn btn-info" value="Click To update email
+                                            also" id="disablebtn">
+                                        <strong></strong>
+                                    </div>
                                     <div class="dashboard-wrapper">
                                         <form method="POST" action="/changepassword" id="rqstform"
                                             onsubmit="return formValidation3()" enctype="multipart/form-data">
@@ -167,8 +172,8 @@
                                             <input type="text" name="id" hidden value="{{$l->id}}">
                                             <div class="form-group mb-3">
                                                 <label class="control-label">Email</label>
-                                                <input class="form-control input-md" value="{{$l->email}}" name='email'
-                                                    id='email' onblur="return emailDoesExist()"
+                                                <input disabled class="form-control input-md" value="{{$l->email}}"
+                                                    name='email' id='email' onblur="return emailDoesExist()"
                                                     placeholder=" Contact Email">
                                                 <div id="p22" class="alert alert-danger"
                                                     style="align:center;display: none;">
@@ -232,7 +237,7 @@
     <script src="assets/js/jquery-min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-     
+
     <script src="assets/js/jquery.counterup.min.js"></script>
     <script src="assets/js/waypoints.min.js"></script>
     <script src="assets/js/wow.js"></script>
@@ -244,8 +249,17 @@
     <script src="assets/js/contact-form-script.min.js"></script>
     <script src="assets/js/summernote.js"></script>
     <script src="{{ asset('js/myajax.js') }}"></script>
-    <!-- formvalidate1.js -->
-    <!-- <script src="js/formvalidate3.js"></script> -->
+    <script>
+    $(document).ready(function() {
+        $('#disablebtn').click(function() {
+            if ($('#email').prop('disabled')) {
+                $('#email').prop('disabled', false)
+            } else {
+                $('#email').prop('disabled', true)
+            }
+        });
+    })
+    </script>
     <script>
     function emailDoesExist() {
         $('#submit1').addClass('disabled');
@@ -275,7 +289,5 @@
     }
     </script>
 </body>
-
-<!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/account-profile-setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:15:22 GMT -->
 
 </html>

@@ -29,7 +29,7 @@
 <body>
 
     <header id="header-wrap">
-    @include('inc.admin.admindash_head')
+        @include('inc.admin.admindash_head')
 
 
     </header>
@@ -40,10 +40,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-wrapper">
-                        <h2 class="product-title">My Ads</h2>
+                        <h2 class="product-title">My Postings</h2>
                         <ol class="breadcrumb">
                             <li><a href="#">Home /</a></li>
-                            <li class="current">My Ads</li>
+                            <li class="current">My Postings</li>
                         </ol>
                     </div>
                 </div>
@@ -63,59 +63,77 @@
                                     <a href="#"><img src="assets/img/author/img1.jpg" alt=""></a>
                                 </figure>
                                 <div class="usercontent">
-                                    <h3>User</h3>
-                                    <h4>Administrator</h4>
+                                    <h3>{{Session::get('name')}}</h3>
+                                    <h4></h4>
                                 </div>
                             </div>
                             <nav class="navdashboard">
                                 <ul>
                                     <li>
-                                        <a href="dashboard.html">
-<i class="lni-dashboard"></i>
-<span>Dashboard</span>
-</a>
+                                        @if(Session::get('utype')==2)
+                                        <a href="ownerdashboard">
+                                            @elseif(Session::get('utype')==3)
+                                            <a href="userdashboard">
+                                                @endif
+                                                <i class="lni-dashboard"></i>
+                                                <span>Dashboard</span>
+                                            </a>
                                     </li>
                                     <li>
-                                        <a href="account-profile-setting.html">
-<i class="lni-cog"></i>
-<span>Profile Settings</span>
-</a>
+                                        <a class="active" href="#">
+                                            <i class="lni-dashboard"></i>
+                                            <span>My Postings</span>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a class="active" href="account-myads.html">
-<i class="lni-layers"></i>
-<span>My Ads</span>
-</a>
+                                        <a href="editprofile">
+                                            <i class="lni-cog"></i>
+                                            <span>Profile settings</span>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="offermessages.html">
-<i class="lni-envelope"></i>
-<span>Offers/Messages</span>
-</a>
+                                        <a href="resetpwd">
+                                            <i class="lni-layers"></i>
+                                            <span>Reset password</span>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="payments.html">
-<i class="lni-wallet"></i>
-<span>Payments</span>
-</a>
+                                        <a href="Addposting">
+                                            <i class="lni-wallet"></i>
+                                            <span>Add new posting</span>
+                                        </a>
+                                    </li>
+                                    @if(Session::get('utype')==2)
+                                    <li>
+                                        <a href="/addloc">
+                                            <i class="lni-wallet"></i>
+                                            <span>Add nearby locations</span>
+                                        </a>
+                                    </li>
+                                    @endif
+                                    <li>
+                                        <a href="">
+                                            <i class="lni-wallet"></i>
+                                            <span>Option3</span>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="account-favourite-ads.html">
-<i class="lni-heart"></i>
-<span>My Favourites</span>
-</a>
+                                        <a href="">
+                                            <i class="lni-heart"></i>
+                                            <span>Option4</span>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="privacy-setting.html">
-<i class="lni-star"></i>
-<span>Privacy Settings</span>
-</a>
+                                        <a href="">
+                                            <i class="lni-star"></i>
+                                            <span>Option5</span>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="#">
-<i class="lni-enter"></i>
-<span>Logout</span>
-</a>
+                                        <a href="/logout">
+                                            <i class="lni-enter"></i>
+                                            <span>Logout</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </nav>
@@ -170,21 +188,27 @@
                                                     <label class="custom-control-label" for="adone"></label>
                                                 </div>
                                             </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img1.jpg" alt=""></td>
+                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img1.jpg"
+                                                    alt=""></td>
                                             <td data-title="Title">
                                                 <h3>HP Laptop 6560b core i3 3nd generation</h3>
                                                 <span>Ad ID: ng3D5hAMHPajQrM</span>
                                             </td>
-                                            <td data-title="Category"><span class="adcategories">Laptops & PCs</span></td>
-                                            <td data-title="Ad Status"><span class="adstatus adstatusactive">active</span></td>
+                                            <td data-title="Category"><span class="adcategories">Laptops & PCs</span>
+                                            </td>
+                                            <td data-title="Ad Status"><span
+                                                    class="adstatus adstatusactive">active</span>
+                                            </td>
                                             <td data-title="Price">
                                                 <h3>139$</h3>
                                             </td>
                                             <td data-title="Action">
                                                 <div class="btns-actions">
                                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i class="lni-trash"></i></a>
+                                                    <a class="btn-action btn-edit" href="#"><i
+                                                            class="lni-pencil"></i></a>
+                                                    <a class="btn-action btn-delete" href="#"><i
+                                                            class="lni-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -195,21 +219,26 @@
                                                     <label class="custom-control-label" for="adtwo"></label>
                                                 </div>
                                             </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img2.jpg" alt=""></td>
+                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img2.jpg"
+                                                    alt=""></td>
                                             <td data-title="Title">
                                                 <h3>Jvc Haebr80b In-ear Sports Headphones</h3>
                                                 <span>Ad ID: ng3D5hAMHPajQrM</span>
                                             </td>
                                             <td data-title="Category">Electronics</td>
-                                            <td data-title="Ad Status"><span class="adstatus adstatusactive">Active</span></td>
+                                            <td data-title="Ad Status"><span
+                                                    class="adstatus adstatusactive">Active</span>
+                                            </td>
                                             <td data-title="Price">
                                                 <h3>$189</h3>
                                             </td>
                                             <td data-title="Action">
                                                 <div class="btns-actions">
                                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i class="lni-trash"></i></a>
+                                                    <a class="btn-action btn-edit" href="#"><i
+                                                            class="lni-pencil"></i></a>
+                                                    <a class="btn-action btn-delete" href="#"><i
+                                                            class="lni-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -220,7 +249,8 @@
                                                     <label class="custom-control-label" for="adthree"></label>
                                                 </div>
                                             </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img3.jpg" alt=""></td>
+                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img3.jpg"
+                                                    alt=""></td>
                                             <td data-title="Title">
                                                 <h3>Furniture Straps 4-Pack, TV Anti-Tip Metal Wall </h3>
                                                 <span>Ad ID: ng3D5hAMHPajQrM</span>
@@ -235,8 +265,10 @@
                                             <td data-title="Action">
                                                 <div class="btns-actions">
                                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i class="lni-trash"></i></a>
+                                                    <a class="btn-action btn-edit" href="#"><i
+                                                            class="lni-pencil"></i></a>
+                                                    <a class="btn-action btn-delete" href="#"><i
+                                                            class="lni-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -247,20 +279,23 @@
                                                     <label class="custom-control-label" for="adfour"></label>
                                                 </div>
                                             </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img4.jpg" alt=""></td>
+                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img4.jpg"
+                                                    alt=""></td>
                                             <td data-title="Title">
                                                 <h3>Apple iPhone X, Fully Unlocked 5.8", 64 GB - Black</h3>
                                                 <span>Ad ID: ng3D5hAMHPajQrM</span>
                                             </td>
                                             <td data-title="Category">Mobile</td>
-                                            <td data-title="Ad Status"><span class="adstatus adstatussold">Sold</span></td>
+                                            <td data-title="Ad Status"><span class="adstatus adstatussold">Sold</span>
+                                            </td>
                                             <td data-title="Price">
                                                 <h3>$89</h3>
                                             </td>
                                             <td data-title="Action">
                                                 <div class="btns-actions">
                                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i class="lni-trash"></i></a>
+                                                    <a class="btn-action btn-delete" href="#"><i
+                                                            class="lni-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -271,21 +306,26 @@
                                                     <label class="custom-control-label" for="adfive"></label>
                                                 </div>
                                             </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img5.jpg" alt=""></td>
+                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img5.jpg"
+                                                    alt=""></td>
                                             <td data-title="Title">
                                                 <h3>Apple Macbook Pro 13 Inch with/without Touch Bar</h3>
                                                 <span>Ad ID: ng3D5hAMHPajQrM</span>
                                             </td>
                                             <td data-title="Category">Apple</td>
-                                            <td data-title="Ad Status"><span class="adstatus adstatusactive">Active</span></td>
+                                            <td data-title="Ad Status"><span
+                                                    class="adstatus adstatusactive">Active</span>
+                                            </td>
                                             <td data-title="Price">
                                                 <h3>$289</h3>
                                             </td>
                                             <td data-title="Action">
                                                 <div class="btns-actions">
                                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i class="lni-trash"></i></a>
+                                                    <a class="btn-action btn-edit" href="#"><i
+                                                            class="lni-pencil"></i></a>
+                                                    <a class="btn-action btn-delete" href="#"><i
+                                                            class="lni-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -296,20 +336,23 @@
                                                     <label class="custom-control-label" for="adsix"></label>
                                                 </div>
                                             </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img6.jpg" alt=""></td>
+                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img6.jpg"
+                                                    alt=""></td>
                                             <td data-title="Title">
                                                 <h3>Apple MQDT2CL/A 10.5-Inch 64GB Wi-Fi iPad Pro</h3>
                                                 <span>Ad ID: ng3D5hAMHPajQrM</span>
                                             </td>
                                             <td data-title="Category">Apple iPad</td>
-                                            <td data-title="Ad Status"><span class="adstatus adstatussold">Sold</span></td>
+                                            <td data-title="Ad Status"><span class="adstatus adstatussold">Sold</span>
+                                            </td>
                                             <td data-title="Price">
                                                 <h3>$159</h3>
                                             </td>
                                             <td data-title="Action">
                                                 <div class="btns-actions">
                                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i class="lni-trash"></i></a>
+                                                    <a class="btn-action btn-delete" href="#"><i
+                                                            class="lni-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -320,21 +363,26 @@
                                                     <label class="custom-control-label" for="adseven"></label>
                                                 </div>
                                             </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img7.jpg" alt=""></td>
+                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img7.jpg"
+                                                    alt=""></td>
                                             <td data-title="Title">
                                                 <h3>Essential Phone 8GB Unlocked with Dual Camera</h3>
                                                 <span>Ad ID: ng3D5hAMHPajQrM</span>
                                             </td>
                                             <td data-title="Category">Mobile</td>
-                                            <td data-title="Ad Status"><span class="adstatus adstatusexpired">Expired</span></td>
+                                            <td data-title="Ad Status"><span
+                                                    class="adstatus adstatusexpired">Expired</span>
+                                            </td>
                                             <td data-title="Price">
                                                 <h3>$89</h3>
                                             </td>
                                             <td data-title="Action">
                                                 <div class="btns-actions">
                                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i class="lni-trash"></i></a>
+                                                    <a class="btn-action btn-edit" href="#"><i
+                                                            class="lni-pencil"></i></a>
+                                                    <a class="btn-action btn-delete" href="#"><i
+                                                            class="lni-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -345,7 +393,8 @@
                                                     <label class="custom-control-label" for="adeight"></label>
                                                 </div>
                                             </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img8.jpg" alt=""></td>
+                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img8.jpg"
+                                                    alt=""></td>
                                             <td data-title="Title">
                                                 <h3>LG Nexus 5x LG-H791 32GB GSM Smartphone</h3>
                                                 <span>Ad ID: ng3D5hAMHPajQrM</span>
@@ -360,8 +409,10 @@
                                             <td data-title="Action">
                                                 <div class="btns-actions">
                                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i class="lni-trash"></i></a>
+                                                    <a class="btn-action btn-edit" href="#"><i
+                                                            class="lni-pencil"></i></a>
+                                                    <a class="btn-action btn-delete" href="#"><i
+                                                            class="lni-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -372,21 +423,26 @@
                                                     <label class="custom-control-label" for="adnine"></label>
                                                 </div>
                                             </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img9.jpg" alt=""></td>
+                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img9.jpg"
+                                                    alt=""></td>
                                             <td data-title="Title">
                                                 <h3>Samsung Galaxy G550T On5 GSM Unlocked Smartphone</h3>
                                                 <span>Ad ID: ng3D5hAMHPajQrM</span>
                                             </td>
                                             <td data-title="Category">Mobile</td>
-                                            <td data-title="Ad Status"><span class="adstatus adstatusexpired">Expired</span></td>
+                                            <td data-title="Ad Status"><span
+                                                    class="adstatus adstatusexpired">Expired</span>
+                                            </td>
                                             <td data-title="Price">
                                                 <h3>$129</h3>
                                             </td>
                                             <td data-title="Action">
                                                 <div class="btns-actions">
                                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i class="lni-trash"></i></a>
+                                                    <a class="btn-action btn-edit" href="#"><i
+                                                            class="lni-pencil"></i></a>
+                                                    <a class="btn-action btn-delete" href="#"><i
+                                                            class="lni-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -397,21 +453,26 @@
                                                     <label class="custom-control-label" for="adten"></label>
                                                 </div>
                                             </td>
-                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img10.jpg" alt=""></td>
+                                            <td class="photo"><img class="img-fluid" src="assets/img/product/img10.jpg"
+                                                    alt=""></td>
                                             <td data-title="Title">
                                                 <h3>Apple iMac Pro 27" All-in-One Desktop, Space Gray</h3>
                                                 <span>Ad ID: ng3D5hAMHPajQrM</span>
                                             </td>
                                             <td data-title="Category">Apple iMac</td>
-                                            <td data-title="Ad Status"><span class="adstatus adstatusdeleted">Deleted</span></td>
+                                            <td data-title="Ad Status"><span
+                                                    class="adstatus adstatusdeleted">Deleted</span>
+                                            </td>
                                             <td data-title="Price">
                                                 <h3>$389</h3>
                                             </td>
                                             <td data-title="Action">
                                                 <div class="btns-actions">
                                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i class="lni-pencil"></i></a>
-                                                    <a class="btn-action btn-delete" href="#"><i class="lni-trash"></i></a>
+                                                    <a class="btn-action btn-edit" href="#"><i
+                                                            class="lni-pencil"></i></a>
+                                                    <a class="btn-action btn-delete" href="#"><i
+                                                            class="lni-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -435,8 +496,10 @@
                         <div class="widget">
                             <h3 class="footer-logo"><img src="assets/img/logo.png" alt=""></h3>
                             <div class="textwidget">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lobortis tincidunt est,
-                                    et euismod purus suscipit quis. Etiam euismod ornare elementum. Sed ex est, consectetur
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lobortis tincidunt
+                                    est,
+                                    et euismod purus suscipit quis. Etiam euismod ornare elementum. Sed ex est,
+                                    consectetur
                                     eget facilisis sed, auctor ut purus.</p>
                             </div>
                         </div>
@@ -465,7 +528,8 @@
                                         </div>
                                     </div>
                                     <div class="media-body">
-                                        <h4 class="post-title"><a href="ads-details.html">Canon Photography Camera</a></h4>
+                                        <h4 class="post-title"><a href="ads-details.html">Canon Photography Camera</a>
+                                        </h4>
                                         <span class="date">28 Mar 2018</span>
                                     </div>
                                 </li>
@@ -487,13 +551,16 @@
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
                         <div class="widget">
                             <h3 class="block-title">Subscribe us</h3>
-                            <p class="text-sub">We have over 5 years of experience Our suppoer avalable to help you 24 hours a day, seven days
+                            <p class="text-sub">We have over 5 years of experience Our suppoer avalable to help you 24
+                                hours a day, seven days
                                 week
                             </p>
                             <form method="post" id="subscribe-form" name="subscribe-form" class="validate">
                                 <div class="form-group is-empty">
-                                    <input type="email" value="" name="Email" class="form-control" id="EMAIL" placeholder="Email address" required="">
-                                    <button type="submit" name="subscribe" id="subscribes" class="btn btn-common sub-btn"><i class="lni-check-box"></i></button>
+                                    <input type="email" value="" name="Email" class="form-control" id="EMAIL"
+                                        placeholder="Email address" required="">
+                                    <button type="submit" name="subscribe" id="subscribes"
+                                        class="btn btn-common sub-btn"><i class="lni-check-box"></i></button>
                                     <div class="clearfix"></div>
                                 </div>
                             </form>
@@ -515,7 +582,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="site-info float-left">
-                            <p>All copyrights reserved &copy; 2018 - Designed by <a href="https://uideck.com/" rel="nofollow">UIdeck</a></p>
+                            <p>All copyrights reserved &copy; 2018 - Designed by <a href="https://uideck.com/"
+                                    rel="nofollow">UIdeck</a></p>
                         </div>
                         <div class="float-right">
                             <ul class="bottom-card">
@@ -542,8 +610,8 @@
 
 
     <a href="#" class="back-to-top">
-<i class="lni-chevron-up"></i>
-</a>
+        <i class="lni-chevron-up"></i>
+    </a>
 
     <div id="preloader">
         <div class="loader" id="loader-1"></div>
@@ -553,7 +621,7 @@
     <script src="assets/js/jquery-min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-     
+
     <script src="assets/js/jquery.counterup.min.js"></script>
     <script src="assets/js/waypoints.min.js"></script>
     <script src="assets/js/wow.js"></script>
