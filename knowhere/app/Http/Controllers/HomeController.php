@@ -155,7 +155,17 @@ class HomeController extends Controller
 
     public function dummy()
     {
-        $str = ("'h'e'l_'_l'o'");
-        return str_replace( array( "'","'" ),'',$str );
+        $name = ("'h'e'l_'_l'o'");
+        str_replace(array("'", "'"), '', $name);
+
+        try {
+            // $geocode = app('geocoder')->reverse(43.882587, -103.454067)->get();
+            //  Geocoder::reverse(9.59178059790211, 76.53152575399213)->get();
+            return dd(app('geocoder')->reverse(9.59178059790211, 76.53152575399213)->get());
+
+            //return $geocode;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

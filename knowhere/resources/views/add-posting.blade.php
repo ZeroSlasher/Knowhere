@@ -31,7 +31,7 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" media="all" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+<body onLoad="initialize()">
 
     <header id="header-wrap">
         @include('inc.admin.admindash_head')
@@ -183,185 +183,398 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group mb-3">
-                                        <label class="control-label">Address of the outlet</label>
-                                        <textarea class="form-control input-md" id="Address" name="Address"></textarea>
-                                    </div>
 
                                     <div class="form-group mb-3">
-                                        <label class="control-label">Give an intro about the est.</label>
-                                        <textarea class="form-control input-md" id="title" name="title"></textarea>
-                                    </div>
+                                        <label class="control-label">Mark your location</label>
+                                        <div id="map_canvas" style="height:400px;width:auto;"></div>
+                                        <div id="latlong">
+                                            <p>Latitude: <input size="20" type="text" id="lat" name="lat"></p>
+                                            <p>Longitude: <input size="20" type="text" id="lng" name="lng"></p>
 
-                                    <div class="form-group mb-3">
-                                        <label class="control-label">give a description about outlet</label>
-                                        <textarea class="form-control" id="Description" name="Description"></textarea>
-                                    </div>
-
-                                    <div class="form-group mb-3 tg-inputwithicon">
-                                        <label class="control-label">which category the outlet belongs to</label>
-                                        <div class="tg-select form-control">
-                                            <select id="catSelect" name="catSelect">
-                                                <option disabled selected value> -- select Category -- </option>
-                                                @isset($cat)
-                                                @foreach($cat as $category)
-                                                <option value="{{$category->Cat_id}}">{{$category->catagory}}</option>
-                                                @endforeach
-                                                @endisset
-                                            </select>
                                         </div>
 
-                                        <div class="form-group mb-3 tg-inputwithicon">
-                                            <label class="control-label">select appropriate Sub category</label>
-                                            <div class="tg-select form-control">
-                                                <select name="subcat" id="subcat">
-                                                    <option disabled selected value> -- select Sub-category -- </option>
-                                                </select>
-                                            </div>
-                                        </div>
+
+
 
 
                                         <div class="form-group mb-3">
-                                            <label class="control-label">Services</label>
-                                            <div class="tg-checkbox form-control" name="tbox" id="tbox">
-                                                <label class="control-label">Select services provided</label>
-                                            </div>
+                                            <label class="control-label">Address of the outlet</label>
+                                            <textarea class="form-control input-md" id="Address"
+                                                name="Address"></textarea>
                                         </div>
 
+                                        <div class="form-group mb-3">
+                                            <label class="control-label">Give an intro about the est.</label>
+                                            <textarea class="form-control input-md" id="title" name="title"></textarea>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label class="control-label">give a description about outlet</label>
+                                            <textarea class="form-control" id="Description"
+                                                name="Description"></textarea>
+                                        </div>
 
                                         <div class="form-group mb-3 tg-inputwithicon">
-                                            <label class="control-label">State</label>
+                                            <label class="control-label">which category the outlet belongs to</label>
                                             <div class="tg-select form-control">
-                                                <select id="state" name="state">
-                                                    <option disabled selected value> -- select state -- </option>
-                                                    @isset($state)
-                                                    @foreach($state as $states)
-                                                    <option value="{{$states->state_id}}">{{$states->state}}</option>
+                                                <select id="catSelect" name="catSelect">
+                                                    <option disabled selected value> -- select Category -- </option>
+                                                    @isset($cat)
+                                                    @foreach($cat as $category)
+                                                    <option value="{{$category->Cat_id}}">{{$category->catagory}}
+                                                    </option>
                                                     @endforeach
                                                     @endisset
                                                 </select>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group mb-3 tg-inputwithicon">
-                                            <label class="control-label">district</label>
-                                            <div class="tg-select form-control">
-                                                <select name="district" id="district">
-                                                    <option disabled selected value> -- select district -- </option>
-                                                </select>
+                                            <div class="form-group mb-3 tg-inputwithicon">
+                                                <label class="control-label">select appropriate Sub category</label>
+                                                <div class="tg-select form-control">
+                                                    <select name="subcat" id="subcat">
+                                                        <option disabled selected value> -- select Sub-category --
+                                                        </option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group mb-3 tg-inputwithicon">
-                                            <label class="control-label">city</label>
-                                            <div class="tg-select form-control">
-                                                <select name="city" id="city">
-                                                    <option disabled selected value> -- select city -- </option>
-                                                </select>
+
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Services</label>
+                                                <div class="tg-checkbox form-control" name="tbox" id="tbox">
+                                                    <label class="control-label">Select services provided</label>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">Website</label>
-                                            <input class="form-control input-md" id="wsite" name="wsite"
-                                                placeholder="wsite" type="text">
-                                            <div id="p44" class="alert alert-danger"
-                                                style="align:center;display: none;">
-                                                <strong>Enter a valid URL</strong>
+
+                                            <div class="form-group mb-3 tg-inputwithicon">
+                                                <label class="control-label">State</label>
+                                                <div class="tg-select form-control">
+                                                    <select id="state" name="state">
+                                                        <option disabled selected value> -- select state -- </option>
+                                                        @isset($state)
+                                                        @foreach($state as $states)
+                                                        <option value="{{$states->state_id}}">{{$states->state}}
+                                                        </option>
+                                                        @endforeach
+                                                        @endisset
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">Contact number</label>
-                                            <input class="form-control input-md" id="phone1" name="phone1"
-                                                placeholder="Contact number" type="text">
-                                            <div id="p33" class="alert alert-danger"
-                                                style="align:center;display: none;">
-                                                <strong>Enter a valid Contact number</strong>
+                                            <div class="form-group mb-3 tg-inputwithicon">
+                                                <label class="control-label">district</label>
+                                                <div class="tg-select form-control">
+                                                    <select name="district" id="district">
+                                                        <option disabled selected value> -- select district -- </option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group mb-3">
-                                            <label class="control-label">Alternate Contact number</label>
-                                            <input class="form-control input-md" id="phone2" name="phone2"
-                                                placeholder="Alternate Contact number" type="text">
-                                            <div id="p33" class="alert alert-danger"
-                                                style="align:center;display: none;">
-                                                <strong>Enter a valid Contact number</strong>
+                                            <div class="form-group mb-3 tg-inputwithicon">
+                                                <label class="control-label">city</label>
+                                                <div class="tg-select form-control">
+                                                    <select name="city" id="city">
+                                                        <option disabled selected value> -- select city -- </option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <input type="submit" class="btn btn-common sub-btn" name="upost"
-                                            value="Add Posting">
-                                    </div>
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Website</label>
+                                                <input class="form-control input-md" id="wsite" name="wsite"
+                                                    placeholder="wsite" type="text">
+                                                <div id="p44" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter a valid URL</strong>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Contact number</label>
+                                                <input class="form-control input-md" id="phone1" name="phone1"
+                                                    placeholder="Contact number" type="text">
+                                                <div id="p33" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter a valid Contact number</strong>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Alternate Contact number</label>
+                                                <input class="form-control input-md" id="phone2" name="phone2"
+                                                    placeholder="Alternate Contact number" type="text">
+                                                <div id="p33" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter a valid Contact number</strong>
+                                                </div>
+                                            </div>
+
+                                            <input type="submit" class="btn btn-common sub-btn" name="upost"
+                                                value="Add Posting">
+                                        </div>
                                 </form>
                             </div>
 
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-12 col-md-8 col-lg-9">
+
+
+                </div>
             </div>
         </div>
-        @include('inc.outer.footer')
+    </div>
+    @include('inc.outer.footer')
 
 
-        <a href="#" class="back-to-top">
-            <i class="lni-chevron-up"></i>
-        </a>
+    <a href="#" class="back-to-top">
+        <i class="lni-chevron-up"></i>
+    </a>
 
-        <div id="preloader">
-            <div class="loader" id="loader-1"></div>
-        </div>
+    <div id="preloader">
+        <div class="loader" id="loader-1"></div>
+    </div>
 
-        <script src="{{ asset('assets/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-        <script>
-        CKEDITOR.replace('Description');
+    <script src="{{ asset('assets/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script>
+    CKEDITOR.replace('Description');
+    </script>
+    <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('assets/js/wow.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/nivo-lightbox.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
+    <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
+    <script src="{{ asset('assets/js/summernote.js') }}"></script>
+    <!-- formvalidate4.js -->
+    <script src="js/formvalidate4.js"></script>
+    <!-- ajax.js -->
+    <script src="{{ asset('js/myajax.js') }}"></script>
+    <script src="{{ asset('js/fileinput.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/theme.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+    $("#file").fileinput({
+        theme: 'fa',
+        uploadIcon: '<i class="fa fa-cloud-upload" aria-hidden="true"></i>',
+        removeIcon: '<i class="fa fa-trash" aria-hidden="true"></i>',
+        'uploadAsync': false,
+
+        uploadUrl: "/storeimg",
+        uploadExtraData: function() {
+            return {
+                _token: $("input[name='_token']").val(),
+            };
+        },
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+        overwriteInitial: false,
+        maxFileSize: 10000,
+        maxFilesNum: 8,
+        slugCallback: function(filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+
+    });
+    </script>
+
+    <cfoutput>
+        <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVtoU6ioC5PVtX8DeQD7ZWpy8AJvvmO9E">
         </script>
-        <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
-        <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
-        <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
-        <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
-        <script src="{{ asset('assets/js/wow.js') }}"></script>
-        <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('assets/js/nivo-lightbox.js') }}"></script>
-        <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
-        <script src="{{ asset('assets/js/main.js') }}"></script>
-        <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
-        <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
-        <script src="{{ asset('assets/js/summernote.js') }}"></script>
-        <!-- formvalidate4.js -->
-        <script src="js/formvalidate4.js"></script>
-        <!-- ajax.js -->
-        <script src="{{ asset('js/myajax.js') }}"></script>
-        <script src="{{ asset('js/fileinput.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/theme.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
+    </cfoutput>
 
-        <script type="text/javascript">
-        $("#file").fileinput({
-            theme: 'fa',
-            uploadIcon: '<i class="fa fa-cloud-upload" aria-hidden="true"></i>',
-            removeIcon: '<i class="fa fa-trash" aria-hidden="true"></i>',
-            'uploadAsync': false,
+    <script type="text/javascript">
+    //<![CDATA[
 
-            uploadUrl: "/storeimg",
-            uploadExtraData: function() {
-                return {
-                    _token: $("input[name='_token']").val(),
-                };
-            },
-            allowedFileExtensions: ['jpg', 'png', 'gif'],
-            overwriteInitial: false,
-            maxFileSize: 10000,
-            maxFilesNum: 8,
-            slugCallback: function(filename) {
-                return filename.replace('(', '_').replace(']', '_');
-            }
+    // global "map" variable
+    var map = null;
+    var marker = null;
+
+    // popup window for pin, if in use
+    var infowindow = new google.maps.InfoWindow({
+        size: new google.maps.Size(150, 50)
+    });
+
+    // A function to create the marker and set up the event window function
+    function createMarker(latlng, name, html) {
+
+        var contentString = html;
+
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            zIndex: Math.round(latlng.lat() * -100000) << 5
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(contentString);
+
+            infowindow.open(map, marker);
+
 
         });
-        </script>
+
+        google.maps.event.trigger(marker, 'click');
+
+        return marker;
+
+    }
+
+    function initialize() {
+
+        // the location of the initial pin
+        var myLatlng = new google.maps.LatLng(9.59178059790211, 76.53152575399213);
+
+        // create the map
+        var myOptions = {
+            zoom: 19,
+            center: myLatlng,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+            },
+            navigationControl: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        // establish the initial marker/pin
+        var image = '/images/pin2.png';
+        marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            icon: image,
+            title: "Property Location"
+        });
+
+        // establish the initial div form fields
+        //formlat = document.getElementById("lat").value = myLatlng.lat();
+        //formlng = document.getElementById("lng").value = myLatlng.lng();
+
+        // close popup window
+        google.maps.event.addListener(map, 'click', function() {
+            infowindow.close();
+        });
+
+        // removing old markers/pins
+        google.maps.event.addListener(map, 'click', function(event) {
+            //call function to create marker
+            if (marker) {
+                marker.setMap(null);
+                marker = null;
+            }
+
+            // Information for popup window if you so chose to have one
+
+            //marker = createMarker(event.latLng, "name", "<b>Location</b><br>" + event.latLng);
+
+
+            var image = '/images/pin2.png';
+            var myLatLng = event.latLng;
+            /*
+            var marker = new google.maps.Marker({
+                by removing the 'var' subsquent pin placement removes the old pin icon
+            */
+            marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                icon: image,
+                title: "Property Location"
+            });
+
+            // populate the form fields with lat & lng
+            formlat = document.getElementById("lat").value = event.latLng.lat();
+            formlng = document.getElementById("lng").value = event.latLng.lng();
+
+            // getReverseGeocodingData(formlat, formlng);
+            // ReverseGeocodingData(formlat, formlng);
+        });
+
+    }
+    //]]>
+    </script>
+    <script>
+    function ReverseGeocodingData(lat, lng) {
+        var url = "https://us1.locationiq.com/v1/reverse.php?key=4641d6045d6876&lat=" + lat + "&lon=" + lng +
+            "&format=json";
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": url,
+            "method": "GET"
+        }
+
+        $.ajax(settings).done(function(response) {
+            console.log(response);
+            console.log(response.display_name);
+            $("#Address").val(response.display_name);
+        });
+    }
+
+    $("body").on("click", "#map_canvas", function() {
+        // console.log();
+
+    });
+
+
+    $("body").on("DOMSubtreeModified", ".address", function() {
+        $html = "";
+
+        var children = $(".address").children();
+        $html += $(".address").siblings()[0].outerText + "\n";
+        $html += children[0].innerText + "\n";
+        $html += children[1].innerText + "\n";
+        $html += children[2].innerText + "\n";
+        $html += children[3].innerText + "\n";
+
+        $("#Address").val($html);
+    });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+    function getReverseGeocodingData(lat, lng) {
+        var latlng = new google.maps.LatLng(lat, lng);
+        // This is making the Geocode request
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'latLng': latlng
+        }, function(results, status) {
+            if (status !== google.maps.GeocoderStatus.OK) {
+                alert(status);
+            }
+            // This is checking to see if the Geoeode Status is OK before proceeding
+            if (status == google.maps.GeocoderStatus.OK) {
+                console.log(results);
+                $("#Address").val(results);
+                var address = (results[0].formatted_address);
+            }
+        });
+    }
+    </script>
 </body>
 
 

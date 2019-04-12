@@ -19,6 +19,8 @@ class OutletProf extends Model
         'description',
         'website',
         'city_id',
+        'latitude',
+        'longitude',
         'subcat_id',
         'Service_id',
         'phone1',
