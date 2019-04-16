@@ -13,6 +13,7 @@ class OutletProf extends Model
         'id',
         'regid',
         'otitle',
+        'oemail',
         'outletname',
         'ownername',
         'address',

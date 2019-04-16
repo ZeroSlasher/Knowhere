@@ -208,6 +208,9 @@
                                     <a class="nav-link active" data-toggle="tab" href="#list-view"><i
                                             class="lni-list"></i></a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#map-view"><i class="lni-map"></i></a>
+                                </li>
                             </ul>
                         </div>
 
@@ -359,6 +362,27 @@
                                         @endforeach @endif
                                     </div>
                                 </div>
+                                <div id="map-view" class="tab-pane fade">
+                                    <div class="row">
+
+                                        <div id="map" style="height: 100%;">
+                                        </div>
+                                    </div>
+                                    <script async defer
+                                        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+                                    var map;
+
+                                    function initMap() {
+                                        map = new google.maps.Map(document.getElementById('map'), {
+                                            center: {
+                                                lat: -34.397,
+                                                lng: 150.644,
+                                            },
+                                            zoom: 8,
+                                        });
+                                    }
+                                    </script>
+                                </div>
                             </div>
                         </div>
 
@@ -388,7 +412,7 @@
         <script src="assets/js/jquery-min.js"></script>
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
-         
+
         <script src="assets/js/jquery.counterup.min.js"></script>
         <script src="assets/js/waypoints.min.js"></script>
         <script src="assets/js/wow.js"></script>

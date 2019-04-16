@@ -28,10 +28,13 @@ class CreateTblOutletProfTable extends Migration
 
             $table->string('address');
 
-            $table->string('image1')->nullable();
-            $table->string('image2')->nullable();
-            $table->string('image3')->nullable();
-            $table->string('image4')->nullable();
+            $table->string('oemail');
+
+            $table->string('otitle');   
+
+            $table->string('latitude'); 
+                       
+            $table->string('longitude');
 
             $table->string('description', 500);
 

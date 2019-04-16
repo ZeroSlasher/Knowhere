@@ -41,11 +41,14 @@ class PostController extends Controller
             'outletname' => $all['oname'],
             'ownername' => $all['owname'],
             'address' => $all['Address'],
+            'latitude' => $all['lat'],
+            'longitude' => $all['lng'],
             'description' => $all['Description'],
             'city_id' => $all['city'],
             'subcat_id' => $all['subcat'],
             'website' => $all['wsite'],
             'Service_id' => $service,
+            'oemail' => $all['oemail'],
             'phone1' => $all['phone1'],
             'phone2' => $all['phone2'],
             'status_id' => $status,
@@ -167,24 +170,21 @@ class PostController extends Controller
 
     public function addreview(Request $request)
     {
-            
-            $outletid = $request->get('id');
-            $title = $request->get('title');
-            $review =  $request->get('review');
-            $rating = $request->get('rating');
-            if (Session::get('id')) 
-            {
-                $id = Session::get('uid');
-                $email = Session::get('id');
-                $dbname = DB::select("select name from tbl_users_reg where id = $id");
-                foreach ($dbname as $n) 
-                    {
-                        $name = $n->name;
-                    }
+
+        $outletid = $request->get('id');
+        $title = $request->get('title');
+        $review = $request->get('review');
+        $rating = $request->get('rating');
+        if (Session::get('id')) {
+            $id = Session::get('uid');
+            $email = Session::get('id');
+            $dbname = DB::select("select name from tbl_users_reg where id = $id");
+            foreach ($dbname as $n) {
+                $name = $n->name;
+            }
 
             $exist = DB::select("select email from tbl_review where outlet_id = $outletid and email='$email'");
-            if(count($exist) == 0)
-            {  
+            if (count($exist) == 0) {
                 $review = new Review([
                     'email' => $email,
                     'title' => $title,
@@ -196,30 +196,25 @@ class PostController extends Controller
                 $review->save();
                 return back()->with('success', 'Review posted');
             }
-            if(count($exist) > 0)
-            {
-            foreach ($exist as $e) 
-            {
-                $emaile = $e->email;
-            }
-            Review::where('email', $emaile)
-                    ->where('outlet_id',$outletid)
+            if (count($exist) > 0) {
+                foreach ($exist as $e) {
+                    $emaile = $e->email;
+                }
+                Review::where('email', $emaile)
+                    ->where('outlet_id', $outletid)
                     ->update([
                         'title' => $request->get('title'),
                         'review' => $request->get('review'),
                         'rating' => $request->get('rating'),
-                            ]);
+                    ]);
 
-            return back()->with('success', 'Review updated');
+                return back()->with('success', 'Review updated');
             }
-                }
+        } else {
 
-             else {
-                
-                $email = $request->get('email');
-                $exist = DB::select("select email from tbl_review where outlet_id = $outletid and email = '$email'");
-                if(count($exist) == 0)
-            { 
+            $email = $request->get('email');
+            $exist = DB::select("select email from tbl_review where outlet_id = $outletid and email = '$email'");
+            if (count($exist) == 0) {
                 $review = new Review([
                     'email' => $email,
                     'title' => $title,
@@ -232,58 +227,25 @@ class PostController extends Controller
                 $review->save();
                 return back()->with('success', 'Review posted');
             }
-            if(count($exist) > 0)
-            {
+            if (count($exist) > 0) {
                 foreach ($exist as $e) {
                     $emaile = $e->email;
                 }
                 if ($emaile == $email) {
                     //update review
                     $review = Review::where('email', $emaile)
-                    ->where('outlet_id',$outletid)
-                    ->update([
-                        'title' => $title,
-                        'review' => $review,
-                        'rating' => $rating,
-                        'name' => $request->get('name'),
-                    ]);
+                        ->where('outlet_id', $outletid)
+                        ->update([
+                            'title' => $title,
+                            'review' => $review,
+                            'rating' => $rating,
+                            'name' => $request->get('name'),
+                        ]);
                     return back()->with('success', 'Review updated');
                 } else {
-                    
+                    return back()->with('error', 'Error occured.. please try again');
                 }
             }
         }
-            //if ($emaile != 1) {
-                // DB::table('tbl_review')
-                //     ->where('email', $emaile)
-                //     ->update([
-                //         'title' => $request->get('title'),
-                //         'review' => $request->get('review'),
-                //         'rating' => $request->get('rating'),
-                //     ]);
-
-
-
-            //}
-                //     } else {
-                //         $email = $request->get('email');
-                //         $outletid = $request->get('id');
-                //         $title = $request->get('title');
-                //         $name = $request->get('name');
-                //         $review = $request->get('review');
-                //         $reviewdb = new Review([
-                //             'email' => $email,
-                //             'title' => $title,
-                //             'outlet_id' => $outletid,
-                //             'name' => $name,
-                //             'review' => $request->get('review'),
-                //             'rating' => $request->get('rating'),
-
-                //         ]);
-
-                //         $reviewdb->save();
-                //         return back()->with('success', 'Review posted');
-                //     }
-                // }
-}
+    }
 }

@@ -188,19 +188,15 @@
                                         <label class="control-label">Mark your location</label>
                                         <div id="map_canvas" style="height:400px;width:auto;"></div>
                                         <div id="latlong">
-                                            <p>Latitude: <input size="20" type="text" id="lat" name="lat"></p>
-                                            <p>Longitude: <input size="20" type="text" id="lng" name="lng"></p>
+                                            <input hidden type="text" id="lat" name="lat">
+                                            <input hidden type="text" id="lng" name="lng">
 
                                         </div>
 
-
-
-
-
                                         <div class="form-group mb-3">
                                             <label class="control-label">Address of the outlet</label>
-                                            <textarea class="form-control input-md" id="Address"
-                                                name="Address"></textarea>
+                                            <textarea class="form-control input-md" id="Address" name="Address"
+                                                rows="5"></textarea>
                                         </div>
 
                                         <div class="form-group mb-3">
@@ -283,10 +279,20 @@
                                             <div class="form-group mb-3">
                                                 <label class="control-label">Website</label>
                                                 <input class="form-control input-md" id="wsite" name="wsite"
-                                                    placeholder="wsite" type="text">
+                                                    placeholder="Website address" type="text">
                                                 <div id="p44" class="alert alert-danger"
                                                     style="align:center;display: none;">
                                                     <strong>Enter a valid URL</strong>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label class="control-label">Email</label>
+                                                <input class="form-control input-md" id="oemail" name="oemail"
+                                                    placeholder="Contact emai" type="text">
+                                                <div id="p55" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter a Email</strong>
                                                 </div>
                                             </div>
 
@@ -363,29 +369,7 @@
     <script src="{{ asset('js/theme.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
 
-    <script type="text/javascript">
-    $("#file").fileinput({
-        theme: 'fa',
-        uploadIcon: '<i class="fa fa-cloud-upload" aria-hidden="true"></i>',
-        removeIcon: '<i class="fa fa-trash" aria-hidden="true"></i>',
-        'uploadAsync': false,
 
-        uploadUrl: "/storeimg",
-        uploadExtraData: function() {
-            return {
-                _token: $("input[name='_token']").val(),
-            };
-        },
-        allowedFileExtensions: ['jpg', 'png', 'gif'],
-        overwriteInitial: false,
-        maxFileSize: 10000,
-        maxFilesNum: 8,
-        slugCallback: function(filename) {
-            return filename.replace('(', '_').replace(']', '_');
-        }
-
-    });
-    </script>
 
     <cfoutput>
         <script type="text/javascript"
@@ -394,18 +378,13 @@
     </cfoutput>
 
     <script type="text/javascript">
-    //<![CDATA[
-
-    // global "map" variable
     var map = null;
     var marker = null;
 
-    // popup window for pin, if in use
     var infowindow = new google.maps.InfoWindow({
         size: new google.maps.Size(150, 50)
     });
 
-    // A function to create the marker and set up the event window function
     function createMarker(latlng, name, html) {
 
         var contentString = html;
@@ -432,10 +411,8 @@
 
     function initialize() {
 
-        // the location of the initial pin
-        var myLatlng = new google.maps.LatLng(9.59178059790211, 76.53152575399213);
+        var myLatlng = new google.maps.LatLng(9.591652242993, 76.531287431717);
 
-        // create the map
         var myOptions = {
             zoom: 19,
             center: myLatlng,
@@ -449,7 +426,6 @@
 
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-        // establish the initial marker/pin
         var image = '/images/pin2.png';
         marker = new google.maps.Marker({
             position: myLatlng,
@@ -458,34 +434,20 @@
             title: "Property Location"
         });
 
-        // establish the initial div form fields
-        //formlat = document.getElementById("lat").value = myLatlng.lat();
-        //formlng = document.getElementById("lng").value = myLatlng.lng();
 
-        // close popup window
         google.maps.event.addListener(map, 'click', function() {
             infowindow.close();
         });
 
-        // removing old markers/pins
         google.maps.event.addListener(map, 'click', function(event) {
-            //call function to create marker
             if (marker) {
                 marker.setMap(null);
                 marker = null;
             }
 
-            // Information for popup window if you so chose to have one
-
-            //marker = createMarker(event.latLng, "name", "<b>Location</b><br>" + event.latLng);
-
-
             var image = '/images/pin2.png';
             var myLatLng = event.latLng;
-            /*
-            var marker = new google.maps.Marker({
-                by removing the 'var' subsquent pin placement removes the old pin icon
-            */
+
             marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map,
@@ -497,13 +459,13 @@
             formlat = document.getElementById("lat").value = event.latLng.lat();
             formlng = document.getElementById("lng").value = event.latLng.lng();
 
-            // getReverseGeocodingData(formlat, formlng);
-            // ReverseGeocodingData(formlat, formlng);
+            ReverseGeocodingData(formlat, formlng);
         });
 
     }
-    //]]>
     </script>
+
+
     <script>
     function ReverseGeocodingData(lat, lng) {
         var url = "https://us1.locationiq.com/v1/reverse.php?key=4641d6045d6876&lat=" + lat + "&lon=" + lng +
@@ -516,19 +478,22 @@
         }
 
         $.ajax(settings).done(function(response) {
-            console.log(response);
-            console.log(response.display_name);
-            $("#Address").val(response.display_name);
+
+            if ($("#Address").val()) {} else {
+                $("#Address").val(response.display_name);
+            }
         });
     }
 
     $("body").on("click", "#map_canvas", function() {
-        // console.log();
+
+        $("#Address").val("");
 
     });
 
 
     $("body").on("DOMSubtreeModified", ".address", function() {
+
         $html = "";
 
         var children = $(".address").children();
@@ -539,42 +504,10 @@
         $html += children[3].innerText + "\n";
 
         $("#Address").val($html);
+
     });
     </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script type="text/javascript">
-    function getReverseGeocodingData(lat, lng) {
-        var latlng = new google.maps.LatLng(lat, lng);
-        // This is making the Geocode request
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({
-            'latLng': latlng
-        }, function(results, status) {
-            if (status !== google.maps.GeocoderStatus.OK) {
-                alert(status);
-            }
-            // This is checking to see if the Geoeode Status is OK before proceeding
-            if (status == google.maps.GeocoderStatus.OK) {
-                console.log(results);
-                $("#Address").val(results);
-                var address = (results[0].formatted_address);
-            }
-        });
-    }
-    </script>
 </body>
 
 

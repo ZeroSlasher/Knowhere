@@ -42,7 +42,6 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::any('/changepassword', 'OwnerController@changepassword')->name('changepassword');
     Route::any('/Addposting', 'PostController@Addposting')->name('Addposting');
     Route::any('/addpost', 'PostController@addpost')->name('addpost');
-    Route::any('/Addpostingu', 'PostController@Addpostingu')->name('Addpostingu');
     Route::any('/deletepost/{id}', 'PostController@deletepost')->name('deletepost');
     Route::any('/removepost', 'PostController@removepost')->name('removepost');
     Route::any('/addloc', 'OwnerController@addloc')->name('addloc');

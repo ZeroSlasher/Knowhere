@@ -53,13 +53,17 @@ class OwnerController extends Controller
         $website = $request->get('wsite');
         $phone1 = $request->get('phone1');
         $phone2 = $request->get('phone2');
+        $lat = $request->get('lat');
+        $lng = $request->get('lng');
+        $email = $request->get('oemail');
         $status_id = 3;
         if (!empty($request->get('subcat'))) //if subcat is selected
         {
             // return 1;
             $Service_id = implode(",", $request->get('service')); //value of service is here
-            DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
-            `address`='$address',`description`='$description',`website`='$website',`otitle`='$title',`subcat_id`=$subcat_id,
+            DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',`latitude`=$lat,
+            `longitude` = $lng,`address`='$address',`description`='$description',`website`='$website',`otitle`='$title',
+            `subcat_id`=$subcat_id,`oemail`='$email',
             `Service_id`='$Service_id',`phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
 
             return redirect('/mypostings')->with('info', 'Posting updated');
@@ -67,7 +71,8 @@ class OwnerController extends Controller
         } else //if all are selected
         {
             // return 4;
-            DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',
+            DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',`latitude`=$lat,
+            `longitude` = $lng,`oemail`='$email',
            `address`='$address',`description`='$description',`website`='$website',`otitle`='$title',`city_id`=$city_id,
            `phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
 
