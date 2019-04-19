@@ -111,7 +111,17 @@ class PostController extends Controller
 
             $data = DB::table('tbl_cat')->get();
 
-            return view('listing_list', compact('post', 'data'));
+            foreach ($post as $p) {
+                $ad = str_replace(',', ' ', $p->address);
+
+                $lat = $p->latitude;
+                $lng = $p->longitude;
+
+                $new[] = array($ad, $lat, $lng);
+            }
+            $tpost = count($post);
+
+            return view('listing_list', compact('post', 'data', 'new', 'tpost'));
         } else {
 
             // $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,`tbl_status` as st, `tbl_state` as sta, tbl_cat as cat,`tbl_district` as d,tbl_users_reg as o,tbl_login as lo WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lo.`id`=l.`id`
@@ -129,7 +139,18 @@ class PostController extends Controller
                 ->where('tbl_cat.cat_id', '=', $cat)
                 ->orwhere('tbl_city.city', '=', $loc)
                 ->orwhere('tbl_district.district', '=', $loc)->paginate(10);
-            return view('listing_list', compact('post', 'data'));
+
+            foreach ($post as $p) {
+                $ad = str_replace(',', ' ', $p->address);
+                $lat = $p->latitude;
+                $lng = $p->longitude;
+
+                $new[] = array($ad, $lat, $lng);
+            }
+
+            $tpost = count($post);
+
+            return view('listing_list', compact('post', 'data', 'new', 'tpost'));
         }
     }
 

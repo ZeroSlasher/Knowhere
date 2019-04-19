@@ -10,9 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::group(['middleware' => ['revalidate', 'usersession']], function () {
 
-Route::group(['middleware' => 'revalidate'], function () {
-// Routes that want to revalidate
+// });
+
+// Route::group(['middleware' => 'revalidate'], function () {
+    // Routes that want to revalidate
 
 //Dashboard
     Route::any('/admindashboard', 'DashController@admindash')->name('admindashboard');
@@ -61,7 +64,6 @@ Route::any('/fetchloc', 'HomeController@fetchloc')->name('fetchloc');
 
 Route::any('/postdetails/{id}', 'PostController@postdetails')->name('postdetails');
 Route::any('/addreview', 'PostController@addreview')->name('addreview');
-
 
 Route::any('/mypost', 'HomeController@mypost')->name('mypost');
 

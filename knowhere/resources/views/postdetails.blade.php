@@ -270,7 +270,7 @@ Session::put('idu','aa');
 
                                 <div class="short-info">
                                     @foreach($post as $p)
-                                    <h4>Rate and review {{$p->outletname}}</h4>
+                                    <h4 class="respond-title">Rate and review {{$p->outletname}}</h4>
                                     @endforeach
                                     <!-- if session is there -->
                                     <div class="panel-body">

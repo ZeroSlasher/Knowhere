@@ -182,24 +182,9 @@
                         <div class="product-filter">
 
                             <div class="short-name">
-                                <span>Showing (1 - 10 products of 7371 products)</span>
+                                <span>Showing (1 - 10 of {{$tpost}} results)</span>
                             </div>
-                            <div class="Show-item">
-                                <span>Show Items</span>
-                                <form class="woocommerce-ordering" method="post">
-                                    <label>
-                                        <select name="order" class="orderby">
-                                            <option selected="selected" value="menu-order">
-                                                49 items</option>
-                                            <option value="popularity">popularity</option>
-                                            <option value="popularity">Average ration
-                                            </option>
-                                            <option value="popularity">newness</option>
-                                            <option value="popularity">price</option>
-                                        </select>
-                                    </label>
-                                </form>
-                            </div>
+
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#grid-view"><i class="lni-grid"></i></a>
@@ -362,71 +347,95 @@
                                         @endforeach @endif
                                     </div>
                                 </div>
+
                                 <div id="map-view" class="tab-pane fade">
                                     <div class="row">
+                                        <div class="col-lg-12">
 
-                                        <div id="map" style="height: 100%;">
+                                            <div id="map" style="/* display: flex; */width: 100%;height: 900px;"></div>
+                                            <script
+                                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVtoU6ioC5PVtX8DeQD7ZWpy8AJvvmO9E"
+                                                async defer>
+                                            </script>
+
+
+                                            <script type="text/javascript">
+                                            var locations = <?php echo json_encode($new); ?>;
+
+
+
+                                            var map = new google.maps.Map(document.getElementById('map'), {
+                                                zoom: 10,
+                                                center: new google.maps.LatLng(9.591652242993, 76.531287431717),
+                                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                                            });
+
+                                            var infowindow = new google.maps.InfoWindow();
+
+                                            var marker, i;
+
+                                            for (i = 0; i < locations.length; i++) {
+                                                marker = new google.maps.Marker({
+                                                    position: new google.maps.LatLng(locations[i][1], locations[
+                                                        i][2]),
+                                                    map: map
+                                                });
+
+                                                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                                                    return function() {
+                                                        infowindow.setContent(locations[i][0]);
+                                                        infowindow.open(map, marker);
+                                                    }
+                                                })(marker, i));
+                                            }
+                                            </script>
                                         </div>
                                     </div>
-                                    <script async defer
-                                        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-                                    var map;
-
-                                    function initMap() {
-                                        map = new google.maps.Map(document.getElementById('map'), {
-                                            center: {
-                                                lat: -34.397,
-                                                lng: 150.644,
-                                            },
-                                            zoom: 8,
-                                        });
-                                    }
-                                    </script>
                                 </div>
                             </div>
+
+
+                            <div class="pagination-bar">
+                                {{ $post->appends($_GET)->links() }}
+
+                            </div>
+
                         </div>
-
-
-                        <div class="pagination-bar">
-                            {{ $post->appends($_GET)->links() }}
-
-                        </div>
-
                     </div>
                 </div>
             </div>
-        </div>
 
-        @include('inc.outer.footer')
-
-
-        <a href="#" class="back-to-top">
-            <i class="lni-chevron-up"></i>
-        </a>
-
-        <div id="preloader">
-            <div class="loader" id="loader-1"></div>
-        </div>
+            @include('inc.outer.footer')
 
 
-        <script src="assets/js/jquery-min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
+            <a href="#" class="back-to-top">
+                <i class="lni-chevron-up"></i>
+            </a>
 
-        <script src="assets/js/jquery.counterup.min.js"></script>
-        <script src="assets/js/waypoints.min.js"></script>
-        <script src="assets/js/wow.js"></script>
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/nivo-lightbox.js"></script>
-        <script src="assets/js/jquery.slicknav.js"></script>
-        <script src="assets/js/main.js"></script>
-        <script src="assets/js/form-validator.min.js"></script>
-        <script src="assets/js/contact-form-script.min.js"></script>
-        <script src="assets/js/summernote.js"></script>
-        <script src="js/myajax.js"></script>
+            <div id="preloader">
+                <div class="loader" id="loader-1"></div>
+            </div>
+
+
+            <script src="assets/js/jquery-min.js"></script>
+            <script src="assets/js/popper.min.js"></script>
+            <script src="assets/js/bootstrap.min.js"></script>
+
+            <script src="assets/js/jquery.counterup.min.js"></script>
+            <script src="assets/js/waypoints.min.js"></script>
+            <script src="assets/js/wow.js"></script>
+            <script src="assets/js/owl.carousel.min.js"></script>
+            <script src="assets/js/nivo-lightbox.js"></script>
+            <script src="assets/js/jquery.slicknav.js"></script>
+            <script src="assets/js/main.js"></script>
+            <script src="assets/js/form-validator.min.js"></script>
+            <script src="assets/js/contact-form-script.min.js"></script>
+            <script src="assets/js/summernote.js"></script>
+            <script src="js/myajax.js"></script>
+
+
 
     </body>
 
-    <!-- Mirrored from preview.uideck.com/items/Knowhere-1.1/adlistinglist.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 06:13:50 GMT -->
 
     </html>
