@@ -42,22 +42,26 @@
         $('.signup-wrapper').removeClass('open');
         $('.listing-wrapper').removeClass('open');
     });
-    $(document).on('click', function (event) {
-        if (!$(event.target).closest('.login').length && !$(event.target).closest('.login-open').length) {
-            $('.login-wrapper').removeClass('open');
-        }
-    });
+    // $(document).on('click', function (event) {
+    //     if (!$(event.target).closest('.login').length && !$(event.target).closest('.login-open').length) {
+    //         $('.login-wrapper').removeClass('open');
+    //     }
+    // });
+
+
     $('.signup-open').on('click', function (event) {
         event.preventDefault();
         $('.signup-wrapper').addClass('open');
         $('.login-wrapper').removeClass('open');
         $('.listing-wrapper').removeClass('open');
     });
-    $(document).on('click', function (event) {
-        if (!$(event.target).closest('.signup').length && !$(event.target).closest('.signup-open').length) {
-            $('.signup-wrapper').removeClass('open');
-        }
-    });
+    // $(document).on('click', function (event) {
+    //     if (!$(event.target).closest('.signup').length && !$(event.target).closest('.signup-open').length) {
+    //         $('.signup-wrapper').removeClass('open');
+    //     }
+    // });
+
+
     $('.listing-open').on('click', function (event) {
         event.preventDefault();
         $('.listing-wrapper').addClass('open');
@@ -66,20 +70,33 @@
 
 
     });
-    $(document).on('click', function (event) {
-        if (!$(event.target).closest('.listing').length && !$(event.target).closest('.listing-open').length) {
-            $('.listing-wrapper').removeClass('open');
-        }
+    // $(document).on('click', function (event) {
+    //     if (!$(event.target).closest('.listing').length && !$(event.target).closest('.listing-open').length) {
+    //         $('.listing-wrapper').removeClass('open');
+    //     }
+    // });
+    $('.closed3').on('click', function (event) {
+        $('.listing-wrapper').removeClass('open');
+
     });
+    $('.closed2').on('click', function (event) {
+        $('.signup-wrapper').removeClass('open');
+
+    });
+    $('.closed1').on('click', function (event) {
+        $('.login-wrapper').removeClass('open');
+
+    });
+    
     $('.close').on('click', function (event) {
         $('.listing-wrapper1').removeClass('open');
 
     });
+    $('.closed').on('click', function (event) {
+        $('.verify-wrapper').removeClass('open');
 
-    // $('.verify-open').on('click', function(event) {
-    // 	event.preventDefault();
-    // 	$('.verify-wrapper').addClass('unhide');
-    // });
+    });
+
 
     /*==========  Accordion  ==========*/
     $('.panel-heading a').on('click', function () {

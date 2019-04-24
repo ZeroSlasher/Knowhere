@@ -86,10 +86,12 @@ Route::any('/payment', 'HomeController@payment')->name('payment');
 Route::any('/offer', 'HomeController@offer')->name('offer');
 Route::any('/comingsoon', 'HomeController@coming')->name('comingsoon');
 
-Route::any('subcat/ajax/{id}', 'HomeController@subcatajax')->name('subcat/ajax/{id}');
-Route::any('dist/ajax/{id}', 'HomeController@distajax')->name('dist/ajax/{id}');
-Route::any('city/ajax/{id}', 'HomeController@cityajax')->name('city/ajax/{id}');
-Route::any('/mailcheck/{id}', 'RequestProfController@mailcheck')->name('mailcheck/{id}');
+Route::any('subcat/ajax/{id}', 'HomeController@subcatajax')->name('subcatajax');
+Route::any('dist/ajax/{id}', 'HomeController@distajax')->name('distajax');
+Route::any('city/ajax/{id}', 'HomeController@cityajax')->name('cityajax');
+Route::any('/mailcheck/{id}', 'HomeController@mailcheck')->name('mailcheck');
+Route::any('/mailverify/{id}', 'HomeController@mailverify')->name('mailverify');
+Route::any('/verifycode/{vcode}/{vmail}', 'HomeController@verifycode')->name('verifycode');
 
 // Password reset link request routes...
 

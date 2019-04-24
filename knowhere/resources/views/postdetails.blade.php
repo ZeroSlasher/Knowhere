@@ -154,7 +154,7 @@ Session::put('idu','aa');
 
 
 
-                                    <img src="/uploads/{{$ii}}">
+                                    <img src="/uploads/{{$ii}}" style="height: -webkit-fill-available;">
 
 
 
@@ -276,7 +276,7 @@ Session::put('idu','aa');
                                     <div class="panel-body">
                                         <form method="post" action="/addreview">
                                             @csrf
-                                            <div class="row" style="display: -webkit-box;">
+                                            <div class="row">
                                                 <div class="form-control" style="width: max-content;height: 50px;">
                                                     <fieldset id='star_rating' class="rating">
                                                         <input class="stars" type="radio" id="star5" name="rating"

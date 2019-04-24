@@ -91,7 +91,11 @@ function phonevalidation(inputtext, max) {
 
 
 
-
+$(document).ready(function () {
+    $("#remail").blur(function () {
+        emailDoesExist();
+    });
+});
 
 
 // $(document).ready(function () {
@@ -99,7 +103,9 @@ function phonevalidation(inputtext, max) {
 function emailDoesExist() {
     $('#submit1').addClass('disabled');
     var remail = document.getElementById('remail').value;
-    if (remail) {
+
+    var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+    if (remail && remail.match(emailExp)) {
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -115,12 +121,49 @@ function emailDoesExist() {
                     $("#p23").fadeIn().delay('1000').fadeOut();
                     document.getElementById('remail').value = "";
                 } else {
+                    $('#submit1').removeClass('disabled');
+                    emailverify();
 
+                }
+
+            }
+        });
+    } else {
+        $("#p22").show().delay(1000).fadeOut();
+    }
+}
+//     });
+// });
+
+function emailverify() {
+    $('#submit1').addClass('disabled');
+    $('.verify-wrapper').addClass('open');
+
+    var semail = document.getElementById('remail').value;
+    $("#vmail").text(semail);
+    if (semail) {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/mailverify/' + semail,
+            type: "GET",
+            dataType: "json",
+            // data: {
+            //     'email': semail
+            // },
+            success: function (data) {
+                if (data == 1) {
+
+                    $('.verify-wrapper').removeClass('open');
+                    $("#p22222").show().delay(1000).fadeOut();
+                    return false;
+                } else {
+
+                    return true;
                 }
 
             }
         });
     }
 }
-//     });
-// });

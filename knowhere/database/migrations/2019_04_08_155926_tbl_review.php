@@ -20,8 +20,8 @@ class TblReview extends Migration
 
             $table->string('name');
 
-            $table->biginteger('outlet_id');
-            $table->foreign('outlet_id')->references('outlet_id')->on('tbl_outlet_profile');
+            $table->biginteger('outletid')->unsigned();
+            $table->foreign('outletid')->references('outletid')->on('tbl_outlet_prof');
 
             $table->string('review');
 

@@ -555,18 +555,13 @@
                 </div>
                 <!-- end .form-group -->
                 <div class="form-group">
-                    <input type="text" placeholder="Email Address" class="vcheck" id="mail" name="mail">
+                    <input type="text" placeholder="Email Address" class="vcheck" onblur="return emailDoesExist1()"
+                        id="mail" name="mail">
                     <div id="p24" class="alert alert-danger" style="display: none;">
                         <strong>Email already registered, Use a different one</strong>
                     </div>
                     <div id="p2" class="alert alert-danger" style="display: none;">
                         <strong>Enter a vaild email</strong>
-                    </div>
-                    <div id="p222" class="alert alert-success" style="display: none;">
-                        <strong>Email verified successfully</strong>
-                    </div>
-                    <div id="p2222" class="alert alert-warning" style="display: none;">
-                        <strong>Email verification failed</strong>
                     </div>
                 </div>
 
@@ -585,7 +580,7 @@
                         onmouseup="this.type='password'" onmouseout="this.type='password'">
                     <div id="p4" class="alert alert-danger" style="display: none;">
                         <strong>Password must be between 8 and 15 characters long and include at least one
-                            digit and uppercase letter </strong>
+                            digit</strong>
                     </div>
                 </div>
 
@@ -593,7 +588,6 @@
                 <!-- end .form-group -->
                 <div class="button-wrapper"><input type="submit" class="button" value="Register" id="Register"
                         name="Register"></div>
-
                 <div class="text-center">
                     <p>Already have an account? <a href="#" class="login-open">Log in</a></p>
                     <p>Have your own establishment?<br> List it on Knowhere <a href="/addlisting"
@@ -673,16 +667,14 @@
                     </select>
                 </div>
                 <div class="form-group1">
-                    <input type="text" name='remail' class="vcheck" id='remail' placeholder=" Contact Email">
+                    <input type="text" name='remail' class="vcheck" id='remail' onblur="return emailDoesExist()"
+                        placeholder=" Contact Email">
                     <!-- <p id="p22"></p> -->
                     <div id="p22" class="alert alert-danger" style="align:center;display: none;">
                         <strong>Enter a valid email</strong>
                     </div>
                     <div id="p23" class="alert alert-danger" style="align:center;display: none;">
                         <strong>Email already registered, Use a different one</strong>
-                    </div>
-                    <div id="p22222" class="alert alert-warning" style="display: none;">
-                        <strong>Email verification failed</strong>
                     </div>
                 </div>
                 <div class="form-group1">
@@ -742,27 +734,7 @@
 
     <div class="verify-wrapper" id="verifywrapper">
         <div class="verify">
-            <p>Check your email inbox for the verification mail.
-                Do check your spam folder too!</p>
-
-            <div class="form-group1">
-                Email: <p id="vmail"></p>
-                <input type="text" name='vcode' id='vcode' placeholder="Verification code">
-                <!-- <p id="p11"></p> -->
-                <div id="vwarn" class="alert alert-danger" style="align:center;display: none;">
-                    <strong>Enter code to continue!!</strong>
-                </div>
-                <div id="vwarn1" class="alert alert-danger" style="align:center;display: none;">
-                    <strong>Verification code is incorrect!!</strong>
-                </div>
-                <div id="vwarn3" class="alert alert-success" style="align:center;display: none;">
-                    <strong>Verification successfull!!</strong>
-                </div>
-            </div>
-            <div class="button-wrapper" style="margin-left: 140px;">
-                <button type="button" id="vbutton" name="vbutton" style="padding: 10px 25px;
-    border-radius: 50px;" class="btn btn-primary">Verify</button>
-            </div>
+            <h4 style="font-color=white;">test</h4>
             <button type="button" class="btn btn-danger closed">close</button>
 
         </div>

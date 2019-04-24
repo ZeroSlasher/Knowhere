@@ -6,6 +6,7 @@ use App\City;
 use App\District;
 use App\SubCat;
 use DB;
+use Mail;
 use Session;
 
 class HomeController extends Controller
@@ -43,6 +44,63 @@ class HomeController extends Controller
         // $subcat = DB::table("tbl_subcat")->where("cat_id",$id)->pluck("catagory","Cat_id");
         $city = City::where("dist_id", $id)->get()->toJson();
         return $city;
+    }
+
+    public function mailcheck($id)
+    {
+
+        $exist = DB::select("SELECT `email` FROM `tbl_login` WHERE `email` = '$id'");
+        if (empty($exist)) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public function mailverify($id)
+    {
+
+        $code = str_random(8);
+        try {
+            //mail
+            $data = array('email' => $id, 'code' => $code);
+
+            Mail::send('emails.email1', $data, function ($message) use ($id) {
+
+                $message->from('knowhere@gmail.com', 'Knowhere');
+                $message->to($id, $id)->subject('Email verification at Kowhere');
+
+            });
+        } catch (\Exception $e) {
+            return 1;
+        }
+        //insert code into table
+        $exist = DB::select("SELECT `email` FROM `tbl_verify_mail` WHERE `email` = '$id'");
+        if (empty($exist)) {
+            DB::table('tbl_verify_mail')->insert(
+                ['email' => $id, 'code' => $code]
+            );
+        } else {
+            DB::table('tbl_verify_mail')
+                ->where('email', $id)
+                ->update(['code' => $code]);
+        }
+        return 0;
+
+    }
+
+    public function verifycode($vcode, $vmail)
+    {
+        $code = DB::select("select code from tbl_verify_mail where email = '$vmail'");
+        //return $users = DB::table('tbl_verify_mail')->select('code')->where('email', $vmail)->get();
+        foreach ($code as $c) {
+            $dbcode = $c->code;
+        }
+        if ($vcode == $dbcode) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     public function fetchloc()

@@ -60,16 +60,7 @@ class RequestProfController extends Controller
 
     }
 
-    public function mailcheck($id)
-    {
 
-        $exist = DB::select("SELECT `email` FROM `tbl_login` WHERE `email` = '$id'");
-        if (empty($exist)) {
-            return 0;
-        } else {
-            return 1;
-        }
-    }
 
     public function rqstdisapprove($iid)
     {
