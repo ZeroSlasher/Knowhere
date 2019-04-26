@@ -372,8 +372,8 @@
 
 
     <cfoutput>
-        <script type="text/javascript"
-            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVtoU6ioC5PVtX8DeQD7ZWpy8AJvvmO9E">
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy-PboZ3O_A25CcJ9eoiSrKokTnWyAmt8">
+
         </script>
     </cfoutput>
 
@@ -411,10 +411,10 @@
 
     function initialize() {
 
-        var myLatlng = new google.maps.LatLng(9.591652242993, 76.531287431717);
+        var myLatlng = new google.maps.LatLng(10.00, 76.25);
 
         var myOptions = {
-            zoom: 19,
+            zoom: 8,
             center: myLatlng,
             mapTypeControl: true,
             mapTypeControlOptions: {

@@ -44,6 +44,10 @@ Route::group(['middleware' => ['revalidate', 'usersession']], function () {
 
     Route::any('/changepassword', 'OwnerController@changepassword')->name('changepassword');
     Route::any('/Addposting', 'PostController@Addposting')->name('Addposting');
+    Route::any('/postingcheck', 'PostController@postingcheck')->name('postingcheck');
+    Route::any('/checkpostexist', 'PostController@checkpostexist')->name('checkpostexist');
+
+    
     Route::any('/addpost', 'PostController@addpost')->name('addpost');
     Route::any('/deletepost/{id}', 'PostController@deletepost')->name('deletepost');
     Route::any('/removepost', 'PostController@removepost')->name('removepost');
@@ -92,6 +96,9 @@ Route::any('city/ajax/{id}', 'HomeController@cityajax')->name('cityajax');
 Route::any('/mailcheck/{id}', 'HomeController@mailcheck')->name('mailcheck');
 Route::any('/mailverify/{id}', 'HomeController@mailverify')->name('mailverify');
 Route::any('/verifycode/{vcode}/{vmail}', 'HomeController@verifycode')->name('verifycode');
+
+Route::any('/refreshcaptcha', 'HomeController@refreshCaptcha')->name('verifycode');
+
 
 // Password reset link request routes...
 

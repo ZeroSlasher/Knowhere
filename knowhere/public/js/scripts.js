@@ -75,6 +75,10 @@
     //         $('.listing-wrapper').removeClass('open');
     //     }
     // });
+    $('.closed4').on('click', function (event) {
+        $('.success-wrapper').removeClass('open');
+
+    });
     $('.closed3').on('click', function (event) {
         $('.listing-wrapper').removeClass('open');
 

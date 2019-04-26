@@ -182,7 +182,9 @@
                         <div class="product-filter">
 
                             <div class="short-name">
+                                @isset($tpost)
                                 <span>Showing (1 - 10 of {{$tpost}} results)</span>
+                                @endisset
                             </div>
 
                             <ul class="nav nav-tabs">
@@ -196,23 +198,26 @@
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#map-view"><i class="lni-map"></i></a>
                                 </li>
+                                <li>
+                                </li>
                             </ul>
                         </div>
 
 
                         <div class="adds-wrapper">
                             <div class="tab-content">
+
                                 <div id="grid-view" class="tab-pane fade">
                                     <div class="row">
                                         @if(isset($post)) @foreach($post as $own)
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="featured-box">
                                                 <figure>
-                                                    {{-- <div class="icon">
+                                                    <!-- {{-- <div class="icon">
                                                         <i class="lni-heart"></i>
-                                                    </div> --}}
+                                                    </div> --}} -->
                                                     @php
-
+                                                    $ii=0;
                                                     if (isset($own->outletid)) {
                                                     $images =
                                                     Illuminate\Support\Facades\DB::table('tbl_prof_images')->where('outletid',$own->outletid)->get();
@@ -221,8 +226,10 @@
                                                     }
                                                     }
                                                     @endphp
+                                                    @if(!$ii==0)
                                                     <a href="#"><img class="img-fluid"
                                                             src="{{asset('/uploads')}}/{{$ii}}" alt=""></a>
+                                                    @endif
                                                 </figure>
                                                 <div class="feature-content">
                                                     <div class="product">
@@ -360,7 +367,11 @@
 
 
                                             <script type="text/javascript">
-                                            var locations = <?php echo json_encode($new); ?>;
+                                            var locations = @php
+                                            if (isset($new)) {
+                                                echo json_encode($new);
+                                            }
+                                            @endphp
 
 
 
@@ -393,11 +404,13 @@
                                     </div>
                                 </div>
                             </div>
+                            @include('inc.message')
 
 
                             <div class="pagination-bar">
+                                @isset($post)
                                 {{ $post->appends($_GET)->links() }}
-
+                                @endisset
                             </div>
 
                         </div>

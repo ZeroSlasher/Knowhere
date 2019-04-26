@@ -92,11 +92,7 @@ class PostController extends Controller
 
         // if (!array_key_exists('cat', $rqst)) {
         if (!$cat) {
-            //     $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,`tbl_status` as st,
-            //      `tbl_state` as sta, tbl_cat as cat,`tbl_district` as d,tbl_users_reg as o,tbl_login as lo WHERE
-            //       l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and c.`dist_id`=d.`dist_id`
-            //       and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lo.`id`=l.`id`
-            // and s.cat_id = cat.cat_id and( c.city='$loc' or d.district='$loc')");
+
             $post = DB::table('tbl_outlet_prof')
                 ->join('tbl_city', 'tbl_outlet_prof.city_id', '=', 'tbl_city.city_id')
                 ->join('tbl_subcat', 'tbl_outlet_prof.subcat_id', '=', 'tbl_subcat.subcat_id')
@@ -106,22 +102,26 @@ class PostController extends Controller
                 ->join('tbl_users_reg', 'tbl_outlet_prof.regid', '=', 'tbl_users_reg.regid')
                 ->join('tbl_login', 'tbl_outlet_prof.id', '=', 'tbl_login.id')
                 ->join('tbl_cat', 'tbl_subcat.cat_id', '=', 'tbl_cat.cat_id')
-                ->orwhere('tbl_city.city', '=', $loc)
+                ->where('tbl_city.city', '=', $loc)
                 ->orwhere('tbl_district.district', '=', $loc)->paginate(10);
 
-            $data = DB::table('tbl_cat')->get();
-
-            foreach ($post as $p) {
-                $ad = str_replace(',', ' ', $p->address);
-
-                $lat = $p->latitude;
-                $lng = $p->longitude;
-
-                $new[] = array($ad, $lat, $lng);
-            }
             $tpost = count($post);
+            if ($tpost == 0) {
+                return view('listing_list')->with('error', 'No results found!!');
+            } else {
+                $data = DB::table('tbl_cat')->get();
 
-            return view('listing_list', compact('post', 'data', 'new', 'tpost'));
+                foreach ($post as $p) {
+                    $ad = str_replace(',', ' ', $p->address);
+
+                    $lat = $p->latitude;
+                    $lng = $p->longitude;
+
+                    $new[] = array($ad, $lat, $lng);
+                }
+
+                return view('listing_list', compact('post', 'data', 'new', 'tpost'));
+            }
         } else {
 
             // $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,`tbl_status` as st, `tbl_state` as sta, tbl_cat as cat,`tbl_district` as d,tbl_users_reg as o,tbl_login as lo WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lo.`id`=l.`id`
@@ -137,26 +137,28 @@ class PostController extends Controller
                 ->join('tbl_login', 'tbl_outlet_prof.id', '=', 'tbl_login.id')
                 ->join('tbl_cat', 'tbl_subcat.cat_id', '=', 'tbl_cat.cat_id')
                 ->where('tbl_cat.cat_id', '=', $cat)
-                ->orwhere('tbl_city.city', '=', $loc)
+                ->where('tbl_city.city', '=', $loc)
                 ->orwhere('tbl_district.district', '=', $loc)->paginate(10);
 
-            foreach ($post as $p) {
-                $ad = str_replace(',', ' ', $p->address);
-                $lat = $p->latitude;
-                $lng = $p->longitude;
-
-                $new[] = array($ad, $lat, $lng);
-            }
-
             $tpost = count($post);
+            if ($tpost == 0) {
+                return view('listing_list')->with('error', 'No results found!!');
+            } else {
+                foreach ($post as $p) {
+                    $ad = str_replace(',', ' ', $p->address);
+                    $lat = $p->latitude;
+                    $lng = $p->longitude;
 
-            return view('listing_list', compact('post', 'data', 'new', 'tpost'));
+                    $new[] = array($ad, $lat, $lng);
+                }
+
+                return view('listing_list', compact('post', 'data', 'new', 'tpost'));
+            }
         }
     }
 
     public function postdetails($id)
     {
-
         $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
             `tbl_status` as st, `tbl_state` as sta, `tbl_district` as d,tbl_users_reg as o,tbl_login as lg,
            tbl_cat as cat WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and s.cat_id = cat.cat_id and l.status_id=st.status_id and
@@ -197,6 +199,13 @@ class PostController extends Controller
         $review = $request->get('review');
         $rating = $request->get('rating');
         if (Session::get('id')) {
+            $request->validate([
+                'title' => 'required|min:6',
+                'review' => 'required||min:6',
+                'rating' => 'required',
+                'captcha' => 'required|captcha',
+            ]);
+
             $id = Session::get('uid');
             $email = Session::get('id');
             $dbname = DB::select("select name from tbl_users_reg where id = $id");
@@ -268,5 +277,18 @@ class PostController extends Controller
                 }
             }
         }
+    }
+
+    public function postingcheck()
+    {
+        $city = DB::select("select * from tbl_city");
+        $cat = DB::select("select * from tbl_cat");
+        return view('check-exist', compact('city', 'cat'));
+    }
+
+    public function checkpostexist(Request $request)
+    {
+
+        return $request->get('name');
     }
 }

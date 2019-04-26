@@ -89,6 +89,11 @@ class HomeController extends Controller
 
     }
 
+    public function refreshCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
+    }
+    
     public function verifycode($vcode, $vmail)
     {
         $code = DB::select("select code from tbl_verify_mail where email = '$vmail'");

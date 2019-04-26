@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
+        "mews/captcha": "^2.2",
         "snowfire/beautymail": "dev-master",
         "stevebauman/location": "^3.0",
         "toin0u/geocoder-laravel": "^4.1",

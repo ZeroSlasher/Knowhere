@@ -99,3 +99,34 @@ function inputwebsite(inputtext) {
 //         return false;
 //     }
 // }
+
+$(document).ready(function () {
+
+    $('#oname').keyup(function () {
+        var name = $(this).val();
+        var cat = $('#catSelect').val();
+        var city = $('#city').val();
+        if (name != '') {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/checkpostexist",
+                type: "POST",
+                data: {
+                    name: name,
+                    city: city,
+                    cat: cat,
+                },
+                success: function (data) {
+                    // $('#List').fadeIn();
+                    // $('#List').html(data);
+                    console.log(data);
+                }
+            });
+        } else {
+            $("#vwarning").show().delay(1000).fadeOut();
+            // $('#List').fadeOut();
+        }
+    });
+});

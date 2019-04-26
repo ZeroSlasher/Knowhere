@@ -154,7 +154,7 @@ Session::put('idu','aa');
 
 
 
-                                    <img src="/uploads/{{$ii}}" style="height: -webkit-fill-available;">
+                                    <img src="/uploads/{{$ii}}" style="height: ">
 
 
 
@@ -266,7 +266,15 @@ Session::put('idu','aa');
                         <div class="comment-wrapper description">
                             <div class="panel panel-info">
                                 @include('inc.message')
-
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div><br />
+                                @endif
 
                                 <div class="short-info">
                                     @foreach($post as $p)
@@ -338,53 +346,68 @@ Session::put('idu','aa');
                                                 style="margin:5px">
                                             <input type="text" class="form-control" placeholder="name" name="name">
                                             @endif
-                                            <button type="submit" class="btn btn-info pull-right"
-                                                style="margin:5px">Post</button>
-                                        </form>
-                                        <!-- close if -->
 
-                                        <ul class="media-list" style="margin-top: 55px;">
-                                            @isset($review)
-                                            @foreach($review as $r)
-                                            <li class="media">
-
-                                                <a href="#" class="pull-left">
-                                                    <img src="{{asset('images/user_1.jpg')}}" alt="" class="img-circle">
-                                                </a>
-                                                <div class="media-body" style="    margin-left: 20px;">
-                                                    <span class="text-muted pull-right">
-                                                        <small class="text-muted">Posted on: {{$r->updated_at}}</small>
-                                                    </span>
-                                                    <label>Reviewed by: </label><strong class="text-success">
-                                                        {{$r->name}}</strong>
-                                                    &nbsp;&nbsp;
-                                                    <label>Rated: </label><strong class="text-info">
-                                                        {{$r->rating}}</strong><i
-                                                        class="lni-star-filled text-warning"></i>
-
-                                                    <p class="text-info">{{$r->title}}</p>
-                                                    <h6>
-                                                        {{$r->review}}
-                                                    </h6>
-                                                </div>
-                                            </li>
-                                            @endforeach
-                                            @endisset
-                                            {{$review->links()}}
-                                        </ul>
+                                            <div class="captcha">
+                                                <span>{!! captcha_img() !!}</span>
+                                                <button type="button" class="btn btn-success"><i class="fa fa-refresh"
+                                                        id="refresh"></i></button>
+                                            </div>
+                                            <input id="captcha" type="text" class="form-control"
+                                                placeholder="Enter Captcha" name="captcha">
                                     </div>
+
+
+
+
+
+
+
+                                    <button type="submit" class="btn btn-info pull-right"
+                                        style="margin:5px">Post</button>
+                                    </form>
+                                    <!-- close if -->
+
+                                    <ul class="media-list" style="margin-top: 55px;">
+                                        @isset($review)
+                                        @foreach($review as $r)
+                                        <li class="media">
+
+                                            <a href="#" class="pull-left">
+                                                <img src="{{asset('images/user_1.jpg')}}" alt="" class="img-circle">
+                                            </a>
+                                            <div class="media-body" style="    margin-left: 20px;">
+                                                <span class="text-muted pull-right">
+                                                    <small class="text-muted">Posted on: {{$r->updated_at}}</small>
+                                                </span>
+                                                <label>Reviewed by: </label><strong class="text-success">
+                                                    {{$r->name}}</strong>
+                                                &nbsp;&nbsp;
+                                                <label>Rated: </label><strong class="text-info">
+                                                    {{$r->rating}}</strong><i class="lni-star-filled text-warning"></i>
+
+                                                <p class="text-info">{{$r->title}}</p>
+                                                <h6>
+                                                    {{$r->review}}
+                                                </h6>
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                        @endisset
+                                        {{$review->links()}}
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
 
-                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+
                 </div>
             </div>
-
         </div>
+
+    </div>
     </div>
 
 
@@ -428,6 +451,23 @@ Session::put('idu','aa');
 
         var label = $("label[for='" + $(this).attr('id') + "']")[0].title;
         $('#title').val(label);
+    });
+    </script>
+    <script type="text/javascript">
+    $('#refresh').click(function() {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                    'content')
+            },
+            type: 'GET',
+            url: '/refreshcaptcha',
+            success: function(data) {
+                console.log(data);
+
+                $(".captcha span").html(data.captcha);
+            }
+        });
     });
     </script>
 </body>

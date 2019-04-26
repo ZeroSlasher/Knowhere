@@ -755,9 +755,7 @@
                 <div id="vwarn1" class="alert alert-danger" style="align:center;display: none;">
                     <strong>Verification code is incorrect!!</strong>
                 </div>
-                <div id="vwarn3" class="alert alert-success" style="align:center;display: none;">
-                    <strong>Verification successfull!!</strong>
-                </div>
+
             </div>
             <div class="button-wrapper" style="margin-left: 140px;">
                 <button type="button" id="vbutton" name="vbutton" style="padding: 10px 25px;
@@ -766,6 +764,18 @@
             <button type="button" class="btn btn-danger closed">close</button>
 
         </div>
+    </div>
+
+
+    <div class="success-wrapper" id="successwrapper">
+        <div class="success">
+            <div class="alert alert-success">
+                <strong>Verification successfull!!</strong>
+            </div>
+            <button type="button" class="btn btn-info closed4">continue</button>
+        </div>
+        <input type="text" hidden id="s" value="0">
+
     </div>
     <!-- jQuery -->
     <script src="js/jquery-3.1.0.min.js"></script>

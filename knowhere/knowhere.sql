@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2019 at 07:28 PM
+-- Generation Time: Apr 26, 2019 at 04:50 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -56,7 +56,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (24, '2019_03_11_063335_create_tbl_outlet_prof_table', 9),
 (25, '2019_03_25_171042_create_verify_users_table', 10),
 (26, '2019_03_11_101207_create_regs_table', 11),
-(27, '2019_04_02_170228_tbl_users_reg', 11);
+(27, '2019_04_02_170228_tbl_users_reg', 11),
+(30, '2019_04_08_155926_tbl_review', 12),
+(31, '2019_04_22_043938_tbl_verify_mail', 12);
 
 -- --------------------------------------------------------
 
@@ -77,18 +79,6 @@ CREATE TABLE `password_resets` (
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 ('usernotalive@gmail.com', '$2y$10$AyZnGlk5ZNzXDEoO/k9oFO15z/liRZWO.bIEOz0QkNP4rrUlGwJiS', '2019-03-24 09:44:19'),
 ('albinsalu@gmail.com', '$2y$10$UJT82jKbbsb8B9EyueF6AOQsDaSk4NVf5uxW27NwtFTuJGMgiMlcS', '2019-04-07 11:44:58');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `regs`
---
-
-CREATE TABLE `regs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -142,11 +132,166 @@ CREATE TABLE `tbl_city` (
 --
 
 INSERT INTO `tbl_city` (`city_id`, `dist_id`, `city`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Kattappana', '2019-03-18 11:00:30', '2019-03-18 11:00:30'),
-(2, 1, 'Cherutoni', '2019-03-18 11:00:30', '2019-03-18 11:00:30'),
-(3, 2, 'Kanjirappally', '2019-03-18 11:00:30', '2019-03-18 11:00:30'),
-(4, 2, 'Ponkunnam', '2019-03-18 11:00:30', '2019-03-18 11:00:30'),
-(5, 3, 'ggg', NULL, NULL);
+(1, 2, 'kattappana', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 2, 'ponkunnam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 2, 'cherutoni', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 2, 'kanjirappally', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 2, 'Kidangoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 2, 'Kondoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 2, 'Kuravilangad', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 2, 'Kurichithanam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 2, 'Lalam (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 2, 'Meenachil', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(11, 2, 'Meenachil (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, 2, 'Melukavu', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(13, 2, 'Monippally', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(14, 2, 'Moonilavu', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 2, 'Palai', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(16, 2, 'Poonjar Nadubhagam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(17, 2, 'Poonjar Thekkekara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(18, 2, 'Poonjar Vadakkekara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(19, 2, 'Poovarany', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(20, 2, 'Puliyannoor (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(21, 2, 'Ramapuram', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(22, 2, 'Teekoy', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(23, 2, 'Thalappalam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(24, 2, 'Uzhavoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(25, 2, 'Vallichira', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(26, 2, 'Veliyannoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(27, 2, 'Vellilappally', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(28, 2, 'Chempu', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(29, 2, 'Kaduthuruthy', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(30, 2, 'Kallara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(31, 2, 'Kothanalloor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(32, 2, 'Kulasekharamangalam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(33, 2, 'Manjoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(34, 2, 'Mulakulam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(35, 2, 'Muttuchira', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(36, 2, 'Naduvile (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(37, 2, 'Njeezhoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(38, 2, 'Thalayazham', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(39, 2, 'Vadakkemuri (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(40, 2, 'Vadayar', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(41, 2, 'Vaikom', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(42, 2, 'Vaikom (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(43, 2, 'Vechoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(44, 2, 'Velloor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(45, 2, 'Aimanam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(46, 2, 'Akalakunnam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(47, 2, 'Anikkad', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(48, 2, 'Arpookara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(49, 2, 'Athirampuzha', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(50, 2, 'Ayarkunnam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(51, 2, 'Chengalam East', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(52, 2, 'Chengalam South', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(53, 2, 'Ettumanoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(54, 2, 'Kaipuzha', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(55, 2, 'Kooroppada', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(56, 2, 'Kottayam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(57, 2, 'Kumarakam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(58, 2, 'Manarcad', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(59, 2, 'Meenadam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(60, 2, 'Muttampalam (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(61, 2, 'Onamthuruth', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(62, 2, 'Pampady', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(63, 2, 'Panachikkad', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(64, 2, 'Peroor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(65, 2, 'Perumbaikad', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(66, 2, 'Puthuppally', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(67, 2, 'Thiruvarpu', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(68, 2, 'Veloor (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(69, 2, 'Changanassery', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(70, 2, 'Changanassery (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(71, 2, 'Chethipuzha', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(72, 2, 'Kangazha', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(73, 2, 'Karukachal', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(74, 2, 'Kurichy', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(75, 2, 'Madappally', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(76, 2, 'Nedumkunnam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(77, 2, 'Paippad', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(78, 2, 'Thottackad', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(79, 2, 'Thrikkodithanam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(80, 2, 'Vakathanam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(81, 2, 'Vazhappally Padinjaru (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(82, 2, 'Vazhoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(83, 2, 'Vellavoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(84, 2, 'Cheruvally', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(85, 2, 'Chirakkadavu', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(86, 2, 'Edakkunnam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(87, 2, 'Elamgulam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(88, 2, 'Elikkulam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(89, 2, 'Erumeli North', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(90, 2, 'Erumeli South', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(91, 2, 'Kanjirappally', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(92, 2, 'Koottickal', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(93, 2, 'Koovappally', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(94, 2, 'Manimala', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(95, 2, 'Mundakayam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(96, 1, 'Anaviratty', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(97, 1, 'Kannan Devan Hills', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(98, 1, 'Kanthalloor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(99, 1, 'Keezhanthoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(100, 1, 'Kottakamboor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(101, 1, 'Kunjithanny', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(102, 1, 'Mankulam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(103, 1, 'Mannamkandam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(104, 1, 'Marayoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(105, 1, 'Pallivasal', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(106, 1, 'Vattavada', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(107, 1, 'Vellathuval', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(108, 1, 'Anakkara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(109, 1, 'Anavilasam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(110, 1, 'Ayyappancoil', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(111, 1, 'Baisonvally', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(112, 1, 'Chakkupallam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(113, 1, 'Chathurangapara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(114, 1, 'Chinnakanal', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(115, 1, 'Kalkoonthal', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(116, 1, 'Kanthippara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(117, 1, 'Karunapuram', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(118, 1, 'Kattappana', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(119, 1, 'Konnathady', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(120, 1, 'Pampadumpara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(121, 1, 'Parathodu', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(122, 1, 'Poopara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(123, 1, 'Rajakkad', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(124, 1, 'Rajakumari', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(125, 1, 'Santhanpara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(126, 1, 'Thankamony (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(127, 1, 'Udumbanchola', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(128, 1, 'Upputhode', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(129, 1, 'Vandanmedu', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(130, 1, 'Vathikudy', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(131, 1, 'Alacode', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(132, 1, 'Arakkulam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(133, 1, 'Elappally', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(134, 1, 'Idukki (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(135, 1, 'Kanjikuzhi', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(136, 1, 'Karikkode (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(137, 1, 'Karimannoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(138, 1, 'Karimkunnam (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(139, 1, 'Kodikulam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(140, 1, 'Kudayathoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(141, 1, 'Kumaramangalam (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(142, 1, 'Manakkad (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(143, 1, 'Muttom', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(144, 1, 'Neyyasseri', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(145, 1, 'Purapuzha', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(146, 1, 'Thodupuzha', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(147, 1, 'Thodupuzha (Part)', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(148, 1, 'Udumbannoor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(149, 1, 'Vannapuram', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(150, 1, 'Velliyamattom', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(151, 1, 'Elappara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(152, 1, 'Kokkayar', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(153, 1, 'Kumily', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(154, 1, 'Manjumala', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(155, 1, 'Mlappara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(156, 1, 'Peerumade', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(157, 1, 'Periyar', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(158, 1, 'Peruvanthanam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(159, 1, 'Upputhara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(160, 1, 'Vagamon', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -168,8 +313,7 @@ CREATE TABLE `tbl_district` (
 
 INSERT INTO `tbl_district` (`dist_id`, `state_id`, `district`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Idukki', '2019-03-18 10:58:58', '2019-03-18 10:58:58'),
-(2, 1, 'Kottayam', '2019-03-18 10:58:58', '2019-03-18 10:58:58'),
-(3, 1, 'Kochi', '2019-04-04 07:29:14', '2019-04-04 07:29:14');
+(2, 1, 'Kottayam', '2019-03-18 10:58:58', '2019-03-18 10:58:58');
 
 -- --------------------------------------------------------
 
@@ -259,6 +403,8 @@ CREATE TABLE `tbl_outlet_prof` (
   `outletname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ownername` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
   `otitle` text COLLATE utf8mb4_unicode_ci,
   `description` longtext COLLATE utf8mb4_unicode_ci,
   `website` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -277,21 +423,22 @@ CREATE TABLE `tbl_outlet_prof` (
 -- Dumping data for table `tbl_outlet_prof`
 --
 
-INSERT INTO `tbl_outlet_prof` (`outletid`, `id`, `regid`, `outletname`, `ownername`, `address`, `otitle`, `description`, `website`, `oemail`, `city_id`, `subcat_id`, `Service_id`, `phone1`, `phone2`, `status_id`, `created_at`, `updated_at`) VALUES
-(1, 19, 1, 'ZeroCorp pvt.', 'zeroslasher', 'addresss', 'test edit', '<p>It&#39;s just so cool when you meet people who are different than you are. That can give you a different <strong>perspective</strong>, a <strong>viewpoint </strong>on life, or <strong>inspire</strong> you. I mean, what would the world be like if we were all the same? I think it would be very boring.<br />\r\n&nbsp;</p>', 'website.com', NULL, 1, 9, '11', '8547880393', '7410852096', 5, '2019-03-22 02:01:34', '2019-03-28 09:49:31'),
-(2, 19, 1, 'Nifty corp.', 'HeadKnocker', 'Address Line1\r\nAddress Line1\r\nAddress Line1\r\nAddress Line1', 'a', '<p>Larry Price was a small-time hood, who stole cars when he wasn&#39;t collecting unemployment. His world changed the day he was jumpstarted by&nbsp;<a href=\"https://en.wikipedia.org/wiki/The_Entity_(comics)\">the Entity</a>, the damaged computer of an alien spaceship that had crashed landed on the moon centuries ago. Larry&#39;s skin turned white, his hair green and his muscles expanded. Unlike members of&nbsp;<a href=\"https://en.wikipedia.org/w/index.php?title=The_Squad_(comics)&amp;action=edit&amp;redlink=1\">the Squad</a>&nbsp;who went public with their abilities, Larry waited to test his powers.</p>\r\n\r\n<p>A year later, Larry, calling himself <strong>Headknocker</strong>, decided to use his powers to rob a bank. Overpowering the police, he would have succeeded if&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hardcase\">Hardcase</a>&nbsp;had not intervened. The two battled and though Headknocker was stronger, Hardcase rendered him unconscious. Headknocker was turned over to&nbsp;<a href=\"https://en.wikipedia.org/wiki/Aladdin_(comics)\">Aladdin</a>, who placed him in their holding facility at Groom Lake.</p>\r\n\r\n<p>When Hardcase and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Choice_(comics)\">Choice</a>&nbsp;set out to break into Groom Lake facility, Headknocker was given the opportunity to repay Hardcase. Aladdin agent Malik offered to erase Headknocker&#39;s record if he would work for Aladdin and kill the heroes. Headknocker agreed and teamed with the&nbsp;<a href=\"https://en.wikipedia.org/wiki/Aladdin_Assault_Squad_(comics)\">Aladdin Assault Squad</a>&nbsp;and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hardwire_(comics)\">Hardwire</a>&nbsp;to complete the assignment. They failed, but Headknocker and Hardwire used the opportunity t&#39;o escape.</p>', 'headknocker.com', NULL, 1, 9, '3,11', '1234567890', '0987654321', 5, '2019-03-24 00:09:59', '2019-03-24 00:09:59'),
-(3, 19, 1, 'Micromedia', 'MicroManzer', 'address here', 'a', '<p>This is what we call smart power. Using every possible tool and partner to advance peace and security. Leaving no one on the <em>sidelines</em>. Showing respect even for one&#39;s enemies. Trying to understand, in so far as psychologically <em><strong>possible</strong></em>, empathize with their <strong>perspective </strong>and point of view. Helping to define the problems, determine the solutions.&nbsp;</p>', 'micromanzer.cc', NULL, 1, 2, '5,6', '1234567890', '1234567890', 5, '2019-03-30 05:42:14', '2019-03-30 05:42:14'),
-(4, 19, 2, 'Arya', 'Arya v nair', 'Arya V Nair', 'a', '<blockquote>Infuse your life with <strong>action</strong>. Don&#39;t wait for it to <strong>happen</strong>. <em>Make it happen</em>. <em>Make your own future.</em> Make your own <strong>hope</strong>. Make your own <strong>love</strong>. <s>And whatever your beliefs, honor your creator,</s> not by passively waiting for grace to come down from upon high, but by doing what you can to make grace happen... yourself, <span class=\"marker\">right now, right down here on Earth.&nbsp; </span></blockquote>', 'webxx.com', NULL, 4, 5, '8,9', '7418529630', '9865784563', 5, '2019-04-03 00:22:55', '2019-04-03 00:22:55'),
-(5, 21, 1, 'Faru', 'Farhana', 'Farhana\r\naddress\r\naddress', 'a', '<p>Trust your own <strong>instincts</strong>, go inside, follow your heart. <em>Right from the start.</em> go ahead and stand up for what you believe in. As I&#39;ve learned, that&#39;s the path to <strong>happiness</strong>.&nbsp;<br />\r\n&nbsp;</p>', 'faru.com', NULL, 2, 9, '3,4', '7896345851', '9637418520', 6, '2019-04-03 03:36:42', '2019-04-03 03:36:42'),
-(6, 21, 1, 'Ajil', 'Ajil sunny', 'ajil\'s outlet\r\naddress\r\naddress', 'a', '<p>Real education enhances the <strong>dignity </strong>of a human being and <strong>increases </strong>his or her self-respect. If only the real sense of education could be realized by each <em>individual</em> and carried forward in every field of human activity, the world will be so much a <em>better place to live in</em><br />\r\n&nbsp;</p>', 'webxx.com', NULL, 4, 7, '7', '8520741063', '9874106352', 6, '2019-04-03 09:42:58', '2019-04-03 09:42:58'),
-(13, 21, 1, 'sdfgh', 'dfghj', 'dfghj', 'a', '<p>dfghjk</p>', 'fghjk', NULL, 1, 1, '1,14', 'fghj', 'fgbn', 6, '2019-04-03 11:39:14', '2019-04-03 11:39:14'),
-(14, 21, 1, 'asdfghjkl', 'h', 'h', 'a', '<p>h</p>', 'dfgh', NULL, 3, 2, '6', 'hhh', 'hhh', 6, '2019-04-07 09:54:37', '2019-04-07 09:54:37'),
-(15, 21, 1, 'j', 'j', 'j', 'a', '<p>j</p>', 'fgh', NULL, 1, 1, '1,2', 'gfhj', 'fghj', 6, '2019-04-07 10:03:45', '2019-04-07 10:03:45'),
-(16, 21, 1, 'k', 'k', 'k', 'a', '<p>k</p>', 'aaa', NULL, 4, 1, '1,2', 'ghjk', 'ghj', 6, '2019-04-07 10:05:33', '2019-04-07 10:05:33'),
-(17, 21, 1, 'k', 'k', 'k', 'a', '<p>k</p>', 'fgh', NULL, 1, 1, '14', 'h', 'g', 6, '2019-04-07 10:06:36', '2019-04-07 10:06:36'),
-(18, 22, 3, 'choice', 'john', NULL, 'a', NULL, NULL, NULL, 1, 8, NULL, '1234567890', NULL, 3, '2019-04-10 22:35:44', '2019-04-10 22:35:44'),
-(19, 23, 4, 'Revolt', 'william', NULL, 'a', NULL, NULL, NULL, 1, 7, NULL, '1234567890', NULL, 3, '2019-04-10 22:41:57', '2019-04-10 22:41:57'),
-(20, 19, 2, 'fghjk', 'ghjkl', 'ghjkl', 'gfhjk', '<p>fghjk</p>', 'vbnm.com', NULL, 1, 1, '1,2,10,14', '7410852096', '8520963741', 5, '2019-04-11 11:55:10', '2019-04-11 11:55:10');
+INSERT INTO `tbl_outlet_prof` (`outletid`, `id`, `regid`, `outletname`, `ownername`, `address`, `latitude`, `longitude`, `otitle`, `description`, `website`, `oemail`, `city_id`, `subcat_id`, `Service_id`, `phone1`, `phone2`, `status_id`, `created_at`, `updated_at`) VALUES
+(1, 19, 1, 'ZeroCorp pvt.', 'zeroslasher', 'Padanilathu Sanitary Centre\r\nAncheril commercial complex,opp. centre\r\nLal Bahadur Shastri Rd, Logos\r\nKottayam, Kerala 686002\r\nIndia', 9.591652242993035, 76.53128743171692, 'test edit', '<p>It&#39;s just so cool when you meet people who are different than you are. That can give you a different <strong>perspective</strong>, a <strong>viewpoint </strong>on life, or <strong>inspire</strong> you. I mean, what would the world be like if we were all the same? I think it would be very boring.<br />\r\n&nbsp;</p>', 'website.com', NULL, 1, 9, '11', '8547880393', '7410852096', 5, '2019-03-22 02:01:34', '2019-03-28 09:49:31'),
+(2, 19, 1, 'Nifty corp.', 'HeadKnocker', 'Address Line1\r\nAddress Line1\r\nAddress Line1\r\nAddress Line1', 0, 0, 'a', '<p>Larry Price was a small-time hood, who stole cars when he wasn&#39;t collecting unemployment. His world changed the day he was jumpstarted by&nbsp;<a href=\"https://en.wikipedia.org/wiki/The_Entity_(comics)\">the Entity</a>, the damaged computer of an alien spaceship that had crashed landed on the moon centuries ago. Larry&#39;s skin turned white, his hair green and his muscles expanded. Unlike members of&nbsp;<a href=\"https://en.wikipedia.org/w/index.php?title=The_Squad_(comics)&amp;action=edit&amp;redlink=1\">the Squad</a>&nbsp;who went public with their abilities, Larry waited to test his powers.</p>\r\n\r\n<p>A year later, Larry, calling himself <strong>Headknocker</strong>, decided to use his powers to rob a bank. Overpowering the police, he would have succeeded if&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hardcase\">Hardcase</a>&nbsp;had not intervened. The two battled and though Headknocker was stronger, Hardcase rendered him unconscious. Headknocker was turned over to&nbsp;<a href=\"https://en.wikipedia.org/wiki/Aladdin_(comics)\">Aladdin</a>, who placed him in their holding facility at Groom Lake.</p>\r\n\r\n<p>When Hardcase and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Choice_(comics)\">Choice</a>&nbsp;set out to break into Groom Lake facility, Headknocker was given the opportunity to repay Hardcase. Aladdin agent Malik offered to erase Headknocker&#39;s record if he would work for Aladdin and kill the heroes. Headknocker agreed and teamed with the&nbsp;<a href=\"https://en.wikipedia.org/wiki/Aladdin_Assault_Squad_(comics)\">Aladdin Assault Squad</a>&nbsp;and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hardwire_(comics)\">Hardwire</a>&nbsp;to complete the assignment. They failed, but Headknocker and Hardwire used the opportunity t&#39;o escape.</p>', 'headknocker.com', NULL, 1, 9, '3,11', '1234567890', '0987654321', 5, '2019-03-24 00:09:59', '2019-03-24 00:09:59'),
+(3, 19, 1, 'Micromedia', 'MicroManzer', 'address here', 0, 0, 'a', '<p>This is what we call smart power. Using every possible tool and partner to advance peace and security. Leaving no one on the <em>sidelines</em>. Showing respect even for one&#39;s enemies. Trying to understand, in so far as psychologically <em><strong>possible</strong></em>, empathize with their <strong>perspective </strong>and point of view. Helping to define the problems, determine the solutions.&nbsp;</p>', 'micromanzer.cc', NULL, 1, 2, '5,6', '1234567890', '1234567890', 5, '2019-03-30 05:42:14', '2019-03-30 05:42:14'),
+(4, 19, 2, 'Arya', 'Arya v nair', 'Arya V Nair', 0, 0, 'a', '<blockquote>Infuse your life with <strong>action</strong>. Don&#39;t wait for it to <strong>happen</strong>. <em>Make it happen</em>. <em>Make your own future.</em> Make your own <strong>hope</strong>. Make your own <strong>love</strong>. <s>And whatever your beliefs, honor your creator,</s> not by passively waiting for grace to come down from upon high, but by doing what you can to make grace happen... yourself, <span class=\"marker\">right now, right down here on Earth.&nbsp; </span></blockquote>', 'webxx.com', NULL, 4, 5, '8,9', '7418529630', '9865784563', 5, '2019-04-03 00:22:55', '2019-04-03 00:22:55'),
+(5, 21, 1, 'Faru', 'Farhana', 'Farhana\r\naddress\r\naddress', 0, 0, 'a', '<p>Trust your own <strong>instincts</strong>, go inside, follow your heart. <em>Right from the start.</em> go ahead and stand up for what you believe in. As I&#39;ve learned, that&#39;s the path to <strong>happiness</strong>.&nbsp;<br />\r\n&nbsp;</p>', 'faru.com', NULL, 2, 9, '3,4', '7896345851', '9637418520', 6, '2019-04-03 03:36:42', '2019-04-03 03:36:42'),
+(6, 21, 1, 'Ajil', 'Ajil sunny', 'ajil\'s outlet\r\naddress\r\naddress', 0, 0, 'a', '<p>Real education enhances the <strong>dignity </strong>of a human being and <strong>increases </strong>his or her self-respect. If only the real sense of education could be realized by each <em>individual</em> and carried forward in every field of human activity, the world will be so much a <em>better place to live in</em><br />\r\n&nbsp;</p>', 'webxx.com', NULL, 4, 7, '7', '8520741063', '9874106352', 6, '2019-04-03 09:42:58', '2019-04-03 09:42:58'),
+(13, 21, 1, 'sdfgh', 'dfghj', 'dfghj', 0, 0, 'a', '<p>dfghjk</p>', 'fghjk', NULL, 1, 1, '1,14', 'fghj', 'fgbn', 6, '2019-04-03 11:39:14', '2019-04-03 11:39:14'),
+(14, 21, 1, 'asdfghjkl', 'h', 'h', 0, 0, 'a', '<p>h</p>', 'dfgh', NULL, 3, 2, '6', 'hhh', 'hhh', 6, '2019-04-07 09:54:37', '2019-04-07 09:54:37'),
+(15, 21, 1, 'j', 'j', 'j', 0, 0, 'a', '<p>j</p>', 'fgh', NULL, 1, 1, '1,2', 'gfhj', 'fghj', 6, '2019-04-07 10:03:45', '2019-04-07 10:03:45'),
+(16, 21, 1, 'k', 'k', 'k', 0, 0, 'a', '<p>k</p>', 'aaa', NULL, 4, 1, '1,2', 'ghjk', 'ghj', 6, '2019-04-07 10:05:33', '2019-04-07 10:05:33'),
+(17, 21, 1, 'k', 'k', 'k', 0, 0, 'a', '<p>k</p>', 'fgh', NULL, 1, 1, '14', 'h', 'g', 6, '2019-04-07 10:06:36', '2019-04-07 10:06:36'),
+(18, 22, 3, 'choice', 'john', NULL, 0, 0, 'a', NULL, NULL, NULL, 1, 8, NULL, '1234567890', NULL, 3, '2019-04-10 22:35:44', '2019-04-10 22:35:44'),
+(19, 23, 4, 'Revolt', 'william', NULL, 0, 0, 'a', NULL, NULL, NULL, 1, 7, NULL, '1234567890', NULL, 3, '2019-04-10 22:41:57', '2019-04-10 22:41:57'),
+(20, 19, 2, 'fghjk', 'ghjkl', 'ghjkl', 0, 0, 'gfhjk', '<p>fghjk</p>', 'vbnm.com', NULL, 1, 1, '1,2,10,14', '7410852096', '8520963741', 5, '2019-04-11 11:55:10', '2019-04-11 11:55:10'),
+(21, 19, 2, 'Amal Jyothi Engineering College', 'Amal Jyothi Engineering College', 'Amal Jyothi Engineering College, Koovappalli - Vizhikkathodu Road, Pattimattam, Vizhikkathodu, Kottayam, Kerala, 686507, India', 9.528384828281808, 76.82226419448853, 'Amal Jyothi Engineering College', '<p>Amal Jyothi Engineering College</p>', 'ajce.in', 'amaljyothi@mail.com', 1, 5, '8,9', '8520741096', '9638527410', 5, '2019-04-13 04:41:48', '2019-04-13 04:41:48');
 
 -- --------------------------------------------------------
 
@@ -336,7 +483,8 @@ INSERT INTO `tbl_prof_images` (`imgid`, `outletid`, `imgname`, `created_at`, `up
 (40, 15, 'Placeholder.jpg', '2019-04-07 10:03:46', '2019-04-07 10:03:46'),
 (41, 16, 'Placeholder.jpg', '2019-04-07 10:05:33', '2019-04-07 10:05:33'),
 (42, 17, 'Placeholder.jpg', '2019-04-07 10:06:36', '2019-04-07 10:06:36'),
-(43, 20, 'Placeholder.jpg', '2019-04-11 11:55:11', '2019-04-11 11:55:11');
+(43, 20, 'Placeholder.jpg', '2019-04-11 11:55:11', '2019-04-11 11:55:11'),
+(44, 21, 'Placeholder.jpg', '2019-04-13 04:41:48', '2019-04-13 04:41:48');
 
 -- --------------------------------------------------------
 
@@ -345,29 +493,16 @@ INSERT INTO `tbl_prof_images` (`imgid`, `outletid`, `imgname`, `created_at`, `up
 --
 
 CREATE TABLE `tbl_review` (
-  `rev_id` bigint(10) UNSIGNED NOT NULL,
+  `rev_id` int(10) UNSIGNED NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `outlet_id` bigint(20) UNSIGNED NOT NULL,
   `review` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rating` float NOT NULL,
+  `rating` double(8,2) NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `tbl_review`
---
-
-INSERT INTO `tbl_review` (`rev_id`, `email`, `name`, `outlet_id`, `review`, `rating`, `title`, `created_at`, `updated_at`) VALUES
-(22, 'fiend@gmail.com', 'Fiend', 3, 'new edit', 1, 'Sucks big time - 1 star', '2019-04-10 11:15:14', '2019-04-10 11:16:46'),
-(23, 'hyjk@hhh.nnn', 'ghjk', 3, 'hjk', 4, 'Pretty good - 4 stars', '2019-04-10 12:51:02', '2019-04-10 12:51:02'),
-(24, 'hjk@hhh.cc', 'ghj', 3, 'fghj', 3, 'Meh - 3 stars', '2019-04-10 12:51:25', '2019-04-10 12:51:25'),
-(25, 'fghj', 'ghj', 3, 'tyuj', 0.5, 'Sucks big time - 0.5 stars', '2019-04-10 12:51:53', '2019-04-10 12:51:53'),
-(26, 'rtyhjRTYH@HH.HGJK', 'RFTGHJ', 3, 'fghj', 4.5, 'Pretty good - 4.5 stars', '2019-04-10 13:10:57', '2019-04-10 13:10:57'),
-(32, 'bigboystuffs@gmail.com', 'zeroZero', 2, 'asertyj', 2.5, 'Kinda bad - 2.5 starssdfghj', '2019-04-11 10:13:43', '2019-04-11 10:15:33'),
-(33, 'albinsalu@gmail.com', 'ALBIN SALU', 2, 'test 2', 4.5, 'Pretty good - 4.5 stars', '2019-04-11 10:36:28', '2019-04-11 10:37:38');
 
 -- --------------------------------------------------------
 
@@ -532,6 +667,60 @@ INSERT INTO `tbl_utype` (`utype_id`, `utype`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_verify_mail`
+--
+
+CREATE TABLE `tbl_verify_mail` (
+  `eid` int(10) UNSIGNED NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_verify_mail`
+--
+
+INSERT INTO `tbl_verify_mail` (`eid`, `email`, `code`, `created_at`, `updated_at`) VALUES
+(1, 'albinsalu24@gmail.com', 'YcMEvnMC', NULL, NULL),
+(2, 'ADDLDML@DMC.AS', 'JTTW56rg', '2019-04-23 09:30:36', '2019-04-23 09:30:36'),
+(3, 'albinlmnb@asd.cd', 'VQkBepYF', '2019-04-23 09:46:01', '2019-04-23 09:46:01'),
+(4, 'asd@as.cc', 'hZecCzbg', '2019-04-23 09:48:40', '2019-04-23 09:48:40'),
+(5, 'asd@s.cc', 'b7YNVkmc', '2019-04-23 09:49:21', '2019-04-23 09:49:21'),
+(6, 'sadf@dfg.vv', 'x3M2aaV4', '2019-04-23 09:52:45', '2019-04-23 09:52:45'),
+(7, 'fghj@ghb.cc', 'faDIP739', '2019-04-23 09:53:37', '2019-04-23 09:53:37'),
+(8, 'fghj@dd.cc', 'wuSLtcIS', '2019-04-23 09:54:40', '2019-04-23 09:54:40'),
+(9, 'sdkjs@dd.ss', 'UGAe02bb', '2019-04-23 09:55:33', '2019-04-23 09:55:33'),
+(10, 'asd@asd.cc', 'kGEXhuNV', '2019-04-23 10:01:52', '2019-04-23 10:01:52'),
+(11, 'dfg@ghj.cc', 'MkRq9GKt', '2019-04-23 10:03:06', '2019-04-23 10:03:06'),
+(12, 'asdf@sdf.cq', 'cBOh9hZp', '2019-04-23 10:06:29', '2019-04-23 10:06:29'),
+(13, 'ASD@SD.CC', '53OZfrWE', '2019-04-23 10:06:59', '2019-04-23 10:06:59'),
+(14, 'adsf@sd.cc', 'k41OoF6U', '2019-04-23 14:15:42', '2019-04-23 14:15:42'),
+(15, 'asdcf@sdf.dd', 'qAzXT0vh', '2019-04-23 16:09:46', '2019-04-23 16:09:46'),
+(16, 'dfg@sd.cc', 'll1tlTFp', '2019-04-23 16:30:34', '2019-04-23 16:30:34'),
+(17, 'asd@ss.cc', 'KLFlz5hM', '2019-04-23 17:03:39', '2019-04-23 17:03:39'),
+(18, 'dfgh@gh.vvq', 'GzzpESQ1', '2019-04-23 17:05:27', '2019-04-23 17:05:27'),
+(19, 'erty@wfg.bb', 'rx2sO9UH', '2019-04-23 17:07:34', '2019-04-23 17:07:34'),
+(20, 'dfgh@edfgh.bb', 'WVvJ7WPf', '2019-04-23 17:08:51', '2019-04-23 17:08:51'),
+(21, 'fghj@dfgh.bb', '8AeWaqdY', '2019-04-23 17:12:15', '2019-04-23 17:12:15'),
+(22, 'fgh@dfgh.nb', 'bOeW5eEb', '2019-04-23 17:15:54', '2019-04-23 17:15:54'),
+(23, 'dfghQ@dfg.ghj', 'OHpvVcup', '2019-04-23 17:17:18', '2019-04-23 17:17:18'),
+(24, 'FCGHJKL@SDF.HJ', 'rv8mVzY9', '2019-04-23 17:21:57', '2019-04-23 17:21:57'),
+(25, 'fghjk@dfgh.jj', '6qk4XVQv', '2019-04-23 17:28:06', '2019-04-23 17:28:06'),
+(26, 'fghjk@dfghj.mm', 'LKAQCv8B', '2019-04-23 17:30:41', '2019-04-23 17:30:41'),
+(27, 'asd@sdfg.bb', 'BjYvePM1', '2019-04-25 03:57:13', '2019-04-25 03:57:13'),
+(28, 'dfg@dfg.gg', 'XjsSdt6d', '2019-04-25 03:59:05', '2019-04-25 03:59:05'),
+(29, 'sdfg@efgh.hh', 'nfxAdqcg', '2019-04-25 15:41:28', '2019-04-25 15:41:28'),
+(30, 'albinsasfdcjn@asd.ss', 'pc4mMPuo', '2019-04-25 15:51:28', '2019-04-25 15:51:28'),
+(31, 'sdfghj@edfgh.ss', 'RkJ9Po1O', '2019-04-25 15:52:56', '2019-04-25 15:52:56'),
+(32, 'sdfgh@dfgh.kk', 'Cb8M639K', '2019-04-25 15:53:59', '2019-04-25 15:53:59'),
+(33, 'asdf@asdf.gg', 'b50hAJZU', '2019-04-25 15:56:31', '2019-04-25 15:56:31'),
+(34, 'qwed@sdfg.gg', 'huxT30aR', '2019-04-25 15:58:36', '2019-04-25 15:58:36');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `verify_users`
 --
 
@@ -560,12 +749,6 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `regs`
---
-ALTER TABLE `regs`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tbl_cat`
 --
 ALTER TABLE `tbl_cat`
@@ -577,7 +760,6 @@ ALTER TABLE `tbl_cat`
 --
 ALTER TABLE `tbl_city`
   ADD PRIMARY KEY (`city_id`),
-  ADD UNIQUE KEY `tbl_city_city_unique` (`city`),
   ADD KEY `tbl_city_dist_id_foreign` (`dist_id`);
 
 --
@@ -688,6 +870,13 @@ ALTER TABLE `tbl_utype`
   ADD UNIQUE KEY `tbl_utype_utype_unique` (`utype`);
 
 --
+-- Indexes for table `tbl_verify_mail`
+--
+ALTER TABLE `tbl_verify_mail`
+  ADD PRIMARY KEY (`eid`),
+  ADD KEY `tbl_verify_mail_email_index` (`email`);
+
+--
 -- Indexes for table `verify_users`
 --
 ALTER TABLE `verify_users`
@@ -702,13 +891,7 @@ ALTER TABLE `verify_users`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT for table `regs`
---
-ALTER TABLE `regs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tbl_cat`
@@ -720,7 +903,7 @@ ALTER TABLE `tbl_cat`
 -- AUTO_INCREMENT for table `tbl_city`
 --
 ALTER TABLE `tbl_city`
-  MODIFY `city_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `city_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
 -- AUTO_INCREMENT for table `tbl_district`
@@ -750,19 +933,19 @@ ALTER TABLE `tbl_login`
 -- AUTO_INCREMENT for table `tbl_outlet_prof`
 --
 ALTER TABLE `tbl_outlet_prof`
-  MODIFY `outletid` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `outletid` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_prof_images`
 --
 ALTER TABLE `tbl_prof_images`
-  MODIFY `imgid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `imgid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `tbl_review`
 --
 ALTER TABLE `tbl_review`
-  MODIFY `rev_id` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `rev_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_services`
@@ -801,6 +984,12 @@ ALTER TABLE `tbl_utype`
   MODIFY `utype_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `tbl_verify_mail`
+--
+ALTER TABLE `tbl_verify_mail`
+  MODIFY `eid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
 -- AUTO_INCREMENT for table `verify_users`
 --
 ALTER TABLE `verify_users`
@@ -814,7 +1003,7 @@ ALTER TABLE `verify_users`
 -- Constraints for table `tbl_city`
 --
 ALTER TABLE `tbl_city`
-  ADD CONSTRAINT `tbl_city_dist_id_foreign` FOREIGN KEY (`dist_id`) REFERENCES `tbl_district` (`dist_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `tbl_city_dist_id_foreign` FOREIGN KEY (`dist_id`) REFERENCES `tbl_district` (`dist_id`);
 
 --
 -- Constraints for table `tbl_district`
