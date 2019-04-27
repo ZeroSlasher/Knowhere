@@ -204,16 +204,16 @@ class PostController extends Controller
         $rating = $request->get('rating');
         if (Session::get('id')) {
 
-            $rules = $request->validate([
-                'title' => 'required|min:6',
-                'review' => 'required||min:6',
-                'rating' => 'required',
-                'captcha' => 'required|captcha',
-            ]);
-            $validator = validator()->make(request()->all(), $rules);
-            if ($validator->fails()) {
-                return back();
-            } else {
+            // $rules = $request->validate([
+            //     'title' => 'required|min:6',
+            //     'review' => 'required||min:6',
+            //     'rating' => 'required',
+            //     'captcha' => 'required|captcha',
+            // ]);
+            // $validator = validator()->make(request()->all(), $rules);
+            // if ($validator->fails()) {
+            //     return back()->with('msg', 'test');
+            // } else {
 
                 $id = Session::get('uid');
                 $email = Session::get('id');
@@ -249,7 +249,7 @@ class PostController extends Controller
 
                     return back()->with('success', 'Review updated');
                 }
-            }
+           // }
         } else {
 
             $email = $request->get('email');

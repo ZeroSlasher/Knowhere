@@ -114,6 +114,7 @@ function lengthDefinepn(inputtext, min) {
 
 $(document).ready(function () {
     $("#mail").blur(function () {
+        $('#s').val('0');
         emailDoesExist1();
     });
 });
@@ -181,7 +182,9 @@ function emailverify1() {
                     $('.verify-wrapper').removeClass('open');
                     $("#p2222").show().delay(1000).fadeOut();
                 } else {
-
+                    $('#s').val('1');
+                    $('.verify-wrapper').removeClass('open');
+                    $('.success-wrapper').addClass('open');
                 }
 
             }

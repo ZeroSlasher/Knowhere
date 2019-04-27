@@ -282,7 +282,7 @@ Session::put('idu','aa');
                                     @endforeach
                                     <!-- if session is there -->
                                     <div class="panel-body">
-                                        <form method="post" action="/addreview">
+                                        <form method="post" action="/addreview" id="freview">
                                             @csrf
                                             <div class="row">
                                                 <div class="form-control" style="width: max-content;height: 50px;">
@@ -339,19 +339,14 @@ Session::put('idu','aa');
                                             @endforeach @endisset
                                             <input type="text" class="form-control" placeholder="Title" id="title"
                                                 name="title" style="margin:5px">
-                                            <textarea class="form-control" name="review"
+                                            <textarea class="form-control" id="review" name="review"
                                                 placeholder="write a comment..."></textarea>
                                             @if(!Session::get('id'))
                                             <div class="">
                                                 <input type="email" class="form-control" placeholder="email"
                                                     name="email" id="email" style="margin:5px;">
-                                                <input type="text" placeholder="Verification code" id="vcodebox"
-                                                    class="form-control" style="margin:5px;width:50%;display: none;">
 
 
-                                                <button id="vbutton" class="btn btn-warning"
-                                                    style="margin:5px;display: none;" type="button">verify</button>
-                                                    <input type="text" hidden id="s" value="0">
 
 
                                                 <div id="p22" class="alert alert-danger"
@@ -373,21 +368,27 @@ Session::put('idu','aa');
                                                     style="align:center;display: none;">
                                                     <strong>Enter code to continue!!</strong>
                                                 </div>
-                                                <input type="text" class="form-control" placeholder="name" name="name">
+                                                <input type="text" class="form-control" placeholder="name" id="name" name="name">
                                                 @endif
 
-                                                <div class="captcha">
+                                                <!-- <div class="captcha">
                                                     <span>{!!captcha_img()!!}</span>
                                                     <button type="button" class="btn btn-success"><i
                                                             class="fa fa-refresh" id="refresh"></i></button>
                                                 </div>
                                                 <input id="captcha" type="text" class="form-control"
-                                                    placeholder="Enter Captcha" name="captcha">
+                                                    placeholder="Enter Captcha" name="captcha"> -->
                                             </div>
                                             <div id="p2" class="alert alert-danger" style="align:center;display: none;">
                                                 <strong>You have already posted a comment!!</strong>
                                             </div>
+                                            <input type="text" placeholder="Verification code" id="vcodebox"
+                                                class="form-control" style="margin:5px;width:50%;display: none;">
 
+
+                                            <button id="vbutton" class="btn btn-warning"
+                                                style="margin:5px;display: none;" type="button">verify</button>
+                                            <input type="hidden" id="s" value="0">
                                             <button type="submit" class="btn btn-info pull-right" style="margin:5px"
                                                 id="postr">Post</button>
                                         </form>

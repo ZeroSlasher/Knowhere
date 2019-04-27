@@ -774,7 +774,7 @@
             </div>
             <button type="button" class="btn btn-info closed4">continue</button>
         </div>
-        <input type="text" hidden id="s" value="0">
+        <input type="hidden" id="s" value="0">
 
     </div>
     <!-- jQuery -->

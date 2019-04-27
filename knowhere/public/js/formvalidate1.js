@@ -27,14 +27,16 @@ function formValidation1() {
     if (inputAlphabetl(own_name, 3, 15)) { //1
 
         // if (inputAlphabetl(est_name, 3, 30)) { //2
+        if (isverified()) {
 
-        if (emailValidation(remail)) { //3
+            if (emailValidation(remail)) { //3
 
-            if (phonevalidation(cphone, 10)) { //4                    
-                return true;
+                if (phonevalidation(cphone, 10)) { //4                    
+                    return true;
+                }
             }
+            // }
         }
-        // }
     }
     $('#submit1').addClass('disabled');
     return false;
@@ -89,10 +91,23 @@ function phonevalidation(inputtext, max) {
     }
 }
 
+function isverified() {
+    var sts = $('#s').val();
+    if (sts == 0) {
+
+        $("#p2222").show().delay(1000).fadeOut();
+        $("#p22222").show().delay(1000).fadeOut();
+        return false;
+
+    } else {
+        return true;
+    }
+}
 
 
 $(document).ready(function () {
     $("#remail").blur(function () {
+        $('#s').val('0');
         emailDoesExist();
     });
 });
@@ -159,7 +174,9 @@ function emailverify() {
                     $("#p22222").show().delay(1000).fadeOut();
                     return false;
                 } else {
-
+                    $('#s').val('1');
+                    $('.verify-wrapper').removeClass('open');
+                    $('.success-wrapper').addClass('open');
                     return true;
                 }
 
