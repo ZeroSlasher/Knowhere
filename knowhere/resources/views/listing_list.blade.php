@@ -125,48 +125,16 @@
                             <div class="widget categories">
                                 <h4 class="widget-title">All Categories</h4>
                                 <ul class="categories-list">
+                                    @isset($data)
+                                    @foreach($data as $category)
                                     <li>
                                         <a href="#">
-                                            <i class="lni-dinner"></i>
-                                            Hotel & Travels <span class="category-counter">(5)</span>
+                                            <i class="lni-chevron-right-circle"></i> {{$category->catagory}} <span
+                                                class="category-counter"></span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="lni-control-panel"></i>
-                                            Services <span class="category-counter">(8)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="lni-github"></i>
-                                            Pets <span class="category-counter">(2)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="lni-coffee-cup"></i>
-                                            Restaurants <span class="category-counter">(3)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="lni-home"></i>
-                                            Real Estate <span class="category-counter">(4)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="lni-pencil"></i>
-                                            Jobs <span class="category-counter">(5)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="lni-display"></i>
-                                            Electronics <span class="category-counter">(9)</span>
-                                        </a>
-                                    </li>
+                                    @endforeach
+                                    @endisset
                                 </ul>
                             </div>
                             <div class="widget">
@@ -201,12 +169,17 @@
                                 <li>
                                 </li>
                             </ul>
+
+
                         </div>
 
 
                         <div class="adds-wrapper">
-                            <div class="tab-content">
 
+                            <div class="tab-content">
+                                @if(!empty($successMsg))
+                                <div class="alert alert-danger"> {{ $successMsg }}</div>
+                                @endif
                                 <div id="grid-view" class="tab-pane fade">
                                     <div class="row">
                                         @if(isset($post)) @foreach($post as $own)
@@ -236,7 +209,9 @@
                                                         <a href="#"><i class="lni-folder"></i>
                                                             {{$own->catagory}} -- {{$own->subcatagory}}</a>
                                                     </div>
-                                                    <h4><a href="ads-details.html">{{$own->outletname}}</a></h4>
+                                                    <h4><a
+                                                            href="postdetails/{{$own->outletid}}">{{$own->outletname}}</a>
+                                                    </h4>
                                                     <span>Last Updated: {{$own->updated_at}}</span>
                                                     <ul class="address">
                                                         <li>
@@ -404,7 +379,6 @@
                                     </div>
                                 </div>
                             </div>
-                            @include('inc.message')
 
 
                             <div class="pagination-bar">

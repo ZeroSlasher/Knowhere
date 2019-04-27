@@ -74,7 +74,7 @@
     }
 
     .profile-page .profile img {
-        max-width: 160px;
+        max-width: 50%;
         width: 100%;
         margin: 0 auto;
         -webkit-transform: translate3d(0, -50%, 0);
@@ -163,32 +163,38 @@
             <div class="container">
                 <div class="row" style="margin-top: -250px;">
                     <div class="col-md-6 ml-auto mr-auto">
+                        @foreach($udata as $u)
                         <div class="profile">
                             <div class="avatar">
-                                <img src="assets/img/author/img1.jpg" alt="Circle Image"
+                                <img src="/uploads/{{$u->image}}" alt="Circle Image"
                                     class="img-raised rounded-circle img-fluid">
                             </div>
                             <div class="name">
                                 <h3 class="title">{{Session::get('name')}}</h3>
-                                <h6></h6>
-                                <a href="" class="btn btn-just-icon btn-link btn-dribbble"><i
-                                        class="fa fa-dribbble"></i></a>
-                                <a href="" class="btn btn-just-icon btn-link btn-twitter"><i
-                                        class="fa fa-twitter"></i></a>
-                                <a href="" class="btn btn-just-icon btn-link btn-pinterest"><i
-                                        class="fa fa-pinterest"></i></a>
+                                <span><a href="#">
+                                        <h6>{{$u->title}}</h6>
+                                    </a></span>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="description text-center">
-                    <p>An artist of considerable range, Chet Faker — the name taken by Melbourne-raised, Brooklyn-based
-                        Nick
-                        Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with
-                        a solid groove structure. </p>
+
+                <div style="text-align: center;">
+                    <span><i class="lni-user"></i>Name:
+                        {{$u->name}}</span> &nbsp;
+                    <span><i class="lni-map-marker"></i>City:
+                        {{$u->city}}</span>&nbsp;
+                    <span><i class="lni-phone-handset"></i>Phone:
+                        {{$u->phone}}</span>&nbsp;
+                    <span><i class="lni-home"></i>Address:
+                        {{$u->oaddress}}</span>
                 </div>
 
-                <div class="tab-content tab-space">
+
+
+                @endforeach
+                <div>
 
                     <br>
 

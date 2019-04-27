@@ -15,8 +15,6 @@
 
     <link rel="stylesheet" type="text/css" href="assets/css/slicknav.css">
 
-    <link rel="stylesheet" type="text/css" href="assets/css/color-switcher.css">
-
     <link rel="stylesheet" type="text/css" href="assets/css/nivo-lightbox.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/summernote.css">
@@ -157,32 +155,54 @@
                         <div class="inner-box" style="width:1000px;">
                             <div class="dashboard-box">
                                 <h2 class="dashbord-title">Add a posting</h2>
+
                             </div>
+                            <p class="text center alert alert-success">Please do a search before adding the post to
+                                verify
+                                whether the outlet to be
+                                added is already existing. <br></p>
                             @include('inc.message')
 
                             <div class="dashboard-wrapper">
 
-
-
                                 <div class="form-group mb-3 tg-inputwithicon">
-                                    <label class="control-label">city where the outlet is located</label>
+                                    <label class="control-label">State</label>
                                     <div class="tg-select form-control">
-                                        <select name="city" id="city">
-                                            <option disabled selected value> -- select city -- </option>
-                                            @isset($city)
-                                            @foreach($city as $c)
-                                            <option value="{{$c->city_id}}">{{$c->city}}
+                                        <select id="state" name="state">
+                                            <option disabled selected value> -- select state -- </option>
+                                            @isset($state)
+                                            @foreach($state as $states)
+                                            <option value="{{$states->state_id}}">{{$states->state}}
                                             </option>
                                             @endforeach
                                             @endisset
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="form-group mb-3 tg-inputwithicon">
+                                    <label class="control-label">district</label>
+                                    <div class="tg-select form-control">
+                                        <select name="district" id="district">
+                                            <option selected value="0"> -- select district -- </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3 tg-inputwithicon">
+                                    <label class="control-label">city</label>
+                                    <div class="tg-select form-control">
+                                        <select name="city" id="city">
+                                            <option selected value="0"> -- select city -- </option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="form-group mb-3 tg-inputwithicon">
                                     <label class="control-label">which category the outlet belongs to</label>
                                     <div class="tg-select form-control">
                                         <select id="catSelect" name="catSelect">
-                                            <option disabled selected value> -- select Category -- </option>
+                                            <option selected value="0"> -- select Category -- </option>
                                             @isset($cat)
                                             @foreach($cat as $category)
                                             <option value="{{$category->Cat_id}}">{{$category->catagory}}
@@ -196,9 +216,19 @@
                                         <label class="control-label">Name of the outlet</label>
                                         <input class="form-control input-md" id="oname" name="oname"
                                             placeholder="Outlet's name" type="text">
-                                            <div id="vwarning" class="alert alert-danger" style="align:center;display: none;">
-                    <strong>Verification code is incorrect!!</strong>
-                </div>
+                                        <div id="vwarning" class="alert alert-danger"
+                                            style="align:center;display: none;">
+                                            <strong>Enter a search term!!</strong>
+                                        </div>
+                                        <div id="vwarning2" class="alert alert-danger"
+                                            style="align:center;display: none;">
+                                            <strong>Please select appropriate values!!</strong>
+                                        </div>
+                                        <div id="vwarning1" class="alert alert-warning"
+                                            style="align:center;display: none;">
+                                            <strong>No results found!! </strong>
+                                            <p>Click <a href="Addposting">here </a>to add the missing establishment</p>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -206,44 +236,44 @@
                         </div>
                         <div class="col-sm-12 col-md-8 col-lg-9">
 
+                            <div id="List">
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            @include('inc.outer.footer')
+                @include('inc.outer.footer')
 
 
-            <a href="#" class="back-to-top">
-                <i class="lni-chevron-up"></i>
-            </a>
+                <a href="#" class="back-to-top">
+                    <i class="lni-chevron-up"></i>
+                </a>
 
-            <div id="preloader">
-                <div class="loader" id="loader-1"></div>
-            </div>
+                <div id="preloader">
+                    <div class="loader" id="loader-1"></div>
+                </div>
 
 
-            <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
-            <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-            <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
-            <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
-            <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
-            <script src="{{ asset('assets/js/wow.js') }}"></script>
-            <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-            <script src="{{ asset('assets/js/nivo-lightbox.js') }}"></script>
-            <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
-            <script src="{{ asset('assets/js/main.js') }}"></script>
-            <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
-            <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
-            <script src="{{ asset('assets/js/summernote.js') }}"></script>
-            <!-- formvalidate4.js -->
-            <script src="js/formvalidate4.js"></script>
-            <!-- ajax.js -->
-            <script src="{{ asset('js/myajax.js') }}"></script>
-            <script src="{{ asset('js/fileinput.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('js/theme.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
+                <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+                <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+                <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
+                <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
+                <script src="{{ asset('assets/js/wow.js') }}"></script>
+                <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+                <script src="{{ asset('assets/js/nivo-lightbox.js') }}"></script>
+                <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
+                <script src="{{ asset('assets/js/main.js') }}"></script>
+                <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
+                <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
+                <script src="{{ asset('assets/js/summernote.js') }}"></script>
+                <!-- formvalidate4.js -->
+                <script src="js/formvalidate4.js"></script>
+                <!-- ajax.js -->
+                <script src="{{ asset('js/myajax.js') }}"></script>
+                <script src="{{ asset('js/fileinput.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('js/theme.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
 
 
 

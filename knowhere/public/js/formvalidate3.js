@@ -63,7 +63,124 @@
                                 }
                             }
 
+                            $(document).ready(function () {
+                                $("#email").blur(function () {
+                                    emailDoesExist();
+                                });
+                            });
+
+                            function emailDoesExist() {
+                                $('#postr').addClass('disabled');
+                                var semail = document.getElementById('email').value;
+                                var id = document.getElementById('id').value;
+
+                                var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+                                if (semail && semail.match(emailExp)) {
+                                    $.ajax({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        },
+                                        url: '/mailcheckr/' + semail + '/' + id,
+                                        type: "GET",
+                                        dataType: "json",
+                                        // data: {
+                                        //     'email': semail
+                                        // },
+                                        success: function (data) {
+                                            if (data == 1) {
+                                                $("#p2").show().delay(1000).fadeOut();
+                                                document.getElementById('email').value = "";
+                                                return false;
+                                            } else {
+                                                $('#postr').removeClass('disabled');
+                                                // $('.verify-wrapper').addClass('open');
+                                                //call to email verify ajax function
+                                                emailverify();
+                                                return true;
+                                            }
+
+                                        }
+                                    });
+                                } else {
+                                    $("#p22").show().delay(1000).fadeOut();
+                                    return false;
+                                }
+                            }
 
 
+                            function emailverify() {
+                                $('#postr').addClass('disabled');
 
 
+                                $('#vcodebox').fadeIn();
+                                $('#vbutton').fadeIn();
+
+                                var semail = document.getElementById('email').value;
+                                $("#vmail").text(semail);
+                                if (semail) {
+                                    $.ajax({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        },
+                                        url: '/mailverify/' + semail,
+                                        type: "GET",
+                                        dataType: "json",
+                                        // data: {
+                                        //     'email': semail
+                                        // },
+                                        success: function (data) {
+                                            if (data == 1) {
+                                                $('#vcodebox').fadeOut();
+                                                $('#vbutton').fadeOut();
+                                                $("#p222").show().delay(1000).fadeOut();
+                                            } else {
+                                                $('#postr').removeClass('disabled');
+                                            }
+
+                                        }
+                                    });
+                                }
+                            }
+
+
+                            $(document).ready(function () {
+                                $("#vbutton").click(function () {
+
+                                    var vcode = document.getElementById('vcodebox').value;
+                                    var vmail = document.getElementById('email').value;
+                                    if (vcode && vmail) {
+                                        $.ajax({
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                            },
+                                            url: '/verifycode/' + vcode + '/' + vmail,
+
+                                            type: "GET",
+                                            dataType: "json",
+                                            // data: {
+                                            //     'vcode': vcode,
+                                            //     'email': email,
+                                            // },
+                                            success: function (data) {
+                                                if (data == 1) {
+
+                                                    $("#vwarn1").show().delay(1000).fadeOut();
+
+                                                } else {
+                                                    $('#s').val('1');
+                                                    $('#vcodebox').fadeOut();
+                                                    $('#vbutton').fadeOut();
+                                                    $("#vs").show().delay(1000).fadeOut();
+                                                    return true;
+                                                }
+
+                                            }
+                                        });
+                                    } else {
+
+                                        $("#vwarn").show().delay(1000).fadeOut();
+                                        return false;
+
+                                    }
+                                });
+                            });

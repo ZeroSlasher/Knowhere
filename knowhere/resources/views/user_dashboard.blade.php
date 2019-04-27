@@ -87,7 +87,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="Addposting">
+                                        <a href="postingcheck">
                                             <i class="lni-wallet"></i>
                                             <span>Add new posting</span>
                                         </a>

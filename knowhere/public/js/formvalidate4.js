@@ -101,12 +101,20 @@ function inputwebsite(inputtext) {
 // }
 
 $(document).ready(function () {
-
     $('#oname').keyup(function () {
-        var name = $(this).val();
+        var name = $('#oname').val();
         var cat = $('#catSelect').val();
         var city = $('#city').val();
-        if (name != '') {
+
+        if (cat == 0 || city == 0) {
+            $("#vwarning1").hide();
+            $("#vwarning2").show().delay(1000).fadeOut();
+            $('#List').fadeOut();
+        } else if (name == "") {
+            $("#vwarning1").hide();
+            $("#vwarning").show().delay(1000).fadeOut();
+            $('#List').fadeOut();
+        } else {
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -119,14 +127,74 @@ $(document).ready(function () {
                     cat: cat,
                 },
                 success: function (data) {
-                    // $('#List').fadeIn();
-                    // $('#List').html(data);
-                    console.log(data);
+                    if (data == 0) {
+                        $("#vwarning1").show();
+                        $('#List').fadeOut();
+
+                    } else {
+                        $("#vwarning1").hide();
+                        $('#List').fadeIn();
+                        $('#List').html(data);
+                        console.log(data);
+                    }
                 }
             });
-        } else {
-            $("#vwarning").show().delay(1000).fadeOut();
-            // $('#List').fadeOut();
         }
     });
 });
+
+
+
+// $('state').on('change', function () {
+//     checkexist();
+// });
+// $('district').on('change', function () {
+//     checkexist();
+// });
+// $('city').on('change', function () {
+//     checkexist();
+// });
+// $('catSelect').on('change', function () {
+//     checkexist();
+// });
+
+
+// function checkexist() {
+
+//     var name = $('#oname').val();
+//     var cat = $('#catSelect').val();
+//     var city = $('#city').val();
+
+//     if (name = "") {
+//         $("#vwarning").show().delay(1000).fadeOut();
+//         $('#List').fadeOut();
+//     } else if (cat == 0 || city == 0) {
+//         $("#vwarning2").show().delay(1000).fadeOut();
+//         $('#List').fadeOut();
+//     } else {
+//         $.ajax({
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             },
+//             url: "/checkpostexist",
+//             type: "POST",
+//             data: {
+//                 name: name,
+//                 city: city,
+//                 cat: cat,
+//             },
+//             success: function (data) {
+//                 if (data == 0) {
+//                     $("#vwarning1").show();
+//                     $('#List').fadeOut();
+
+//                 } else {
+//                     $("#vwarning1").hide();
+//                     $('#List').fadeIn();
+//                     $('#List').html(data);
+//                     console.log(data);
+//                 }
+//             }
+//         });
+//     }
+// }

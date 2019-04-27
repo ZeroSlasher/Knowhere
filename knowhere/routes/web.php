@@ -47,7 +47,6 @@ Route::group(['middleware' => ['revalidate', 'usersession']], function () {
     Route::any('/postingcheck', 'PostController@postingcheck')->name('postingcheck');
     Route::any('/checkpostexist', 'PostController@checkpostexist')->name('checkpostexist');
 
-    
     Route::any('/addpost', 'PostController@addpost')->name('addpost');
     Route::any('/deletepost/{id}', 'PostController@deletepost')->name('deletepost');
     Route::any('/removepost', 'PostController@removepost')->name('removepost');
@@ -94,11 +93,11 @@ Route::any('subcat/ajax/{id}', 'HomeController@subcatajax')->name('subcatajax');
 Route::any('dist/ajax/{id}', 'HomeController@distajax')->name('distajax');
 Route::any('city/ajax/{id}', 'HomeController@cityajax')->name('cityajax');
 Route::any('/mailcheck/{id}', 'HomeController@mailcheck')->name('mailcheck');
+Route::any('/mailcheckr/{semail}/{id}', 'HomeController@mailcheckr')->name('mailcheckr');
 Route::any('/mailverify/{id}', 'HomeController@mailverify')->name('mailverify');
 Route::any('/verifycode/{vcode}/{vmail}', 'HomeController@verifycode')->name('verifycode');
 
 Route::any('/refreshcaptcha', 'HomeController@refreshCaptcha')->name('verifycode');
-
 
 // Password reset link request routes...
 

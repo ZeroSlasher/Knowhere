@@ -106,8 +106,9 @@ class PostController extends Controller
                 ->orwhere('tbl_district.district', '=', $loc)->paginate(10);
 
             $tpost = count($post);
+
             if ($tpost == 0) {
-                return view('listing_list')->with('error', 'No results found!!');
+                return view('listing_list', compact('tpost'))->with('error', 'No results found!!');
             } else {
                 $data = DB::table('tbl_cat')->get();
 
@@ -142,7 +143,10 @@ class PostController extends Controller
 
             $tpost = count($post);
             if ($tpost == 0) {
-                return view('listing_list')->with('error', 'No results found!!');
+                return view('listing_list')->with('tpost', $tpost)->with('successMsg', 'No results found!!');
+                // return view('listing_list', compact('tpost'))->with('error', 'No results found!!');
+                //return view('listing_list')->with('tpost', $tpost)->with('error', 'No results found!!');
+
             } else {
                 foreach ($post as $p) {
                     $ad = str_replace(',', ' ', $p->address);
@@ -199,46 +203,52 @@ class PostController extends Controller
         $review = $request->get('review');
         $rating = $request->get('rating');
         if (Session::get('id')) {
-            $request->validate([
+
+            $rules = $request->validate([
                 'title' => 'required|min:6',
                 'review' => 'required||min:6',
                 'rating' => 'required',
                 'captcha' => 'required|captcha',
             ]);
+            $validator = validator()->make(request()->all(), $rules);
+            if ($validator->fails()) {
+                return back();
+            } else {
 
-            $id = Session::get('uid');
-            $email = Session::get('id');
-            $dbname = DB::select("select name from tbl_users_reg where id = $id");
-            foreach ($dbname as $n) {
-                $name = $n->name;
-            }
-
-            $exist = DB::select("select email from tbl_review where outlet_id = $outletid and email='$email'");
-            if (count($exist) == 0) {
-                $review = new Review([
-                    'email' => $email,
-                    'title' => $title,
-                    'outlet_id' => $outletid,
-                    'name' => $name,
-                    'review' => $review,
-                    'rating' => $rating,
-                ]);
-                $review->save();
-                return back()->with('success', 'Review posted');
-            }
-            if (count($exist) > 0) {
-                foreach ($exist as $e) {
-                    $emaile = $e->email;
+                $id = Session::get('uid');
+                $email = Session::get('id');
+                $dbname = DB::select("select name from tbl_users_reg where id = $id");
+                foreach ($dbname as $n) {
+                    $name = $n->name;
                 }
-                Review::where('email', $emaile)
-                    ->where('outlet_id', $outletid)
-                    ->update([
-                        'title' => $request->get('title'),
-                        'review' => $request->get('review'),
-                        'rating' => $request->get('rating'),
-                    ]);
 
-                return back()->with('success', 'Review updated');
+                $exist = DB::select("select email from tbl_review where outlet_id = $outletid and email='$email'");
+                if (count($exist) == 0) {
+                    $review = new Review([
+                        'email' => $email,
+                        'title' => $title,
+                        'outlet_id' => $outletid,
+                        'name' => $name,
+                        'review' => $review,
+                        'rating' => $rating,
+                    ]);
+                    $review->save();
+                    return back()->with('success', 'Review posted');
+                }
+                if (count($exist) > 0) {
+                    foreach ($exist as $e) {
+                        $emaile = $e->email;
+                    }
+                    Review::where('email', $emaile)
+                        ->where('outlet_id', $outletid)
+                        ->update([
+                            'title' => $request->get('title'),
+                            'review' => $request->get('review'),
+                            'rating' => $request->get('rating'),
+                        ]);
+
+                    return back()->with('success', 'Review updated');
+                }
             }
         } else {
 
@@ -281,14 +291,68 @@ class PostController extends Controller
 
     public function postingcheck()
     {
-        $city = DB::select("select * from tbl_city");
+        $state = DB::table('tbl_state')->get();
         $cat = DB::select("select * from tbl_cat");
-        return view('check-exist', compact('city', 'cat'));
+        return view('check-exist', compact('state', 'cat'));
     }
 
     public function checkpostexist(Request $request)
     {
 
-        return $request->get('name');
+        $name = $request->get('name');
+        $city = $request->get('city');
+        $cat = $request->get('cat');
+
+        // $post = DB::table('tbl_outlet_prof')
+        //     ->join('tbl_city', 'tbl_outlet_prof.city_id', '=', 'tbl_city.city_id')
+        //     ->join('tbl_subcat', 'tbl_outlet_prof.subcat_id', '=', 'tbl_subcat.subcat_id')
+        //     ->join('tbl_district', 'tbl_city.dist_id', '=', 'tbl_district.dist_id')
+        //     ->join('tbl_state', 'tbl_district.state_id', '=', 'tbl_state.state_id')
+        //     ->join('tbl_cat', 'tbl_subcat.cat_id', '=', 'tbl_cat.cat_id')
+        //     ->where('tbl_cat.cat_id', '=', $cat)
+        //     ->where('tbl_city.city', '=', $city)
+        //     ->where('tbl_outlet_prof.outletname', LIKE, '%$name%')->get();
+
+        $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
+        `tbl_state` as sta, tbl_cat as cat,`tbl_district` as d WHERE l.city_id = c.city_id
+        AND l.subcat_id=s.subcat_id and c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id`
+        and s.cat_id = cat.cat_id and c.city_id=$city and cat.cat_id=$cat and l.outletname LIKE '%$name%'");
+
+        $output = 0;
+        if (count($post) > 0) {
+
+            $output = ' <table class="table table-responsive dashboardtable tablemyads">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>';
+            // return $output;
+            foreach ($post as $p) {
+                $output .= '
+                <tr data-category="active">
+
+                    <td data-title="Title">
+
+                        <h3><a href="postdetails/' . $p->outletid . '">' . $p->outletname . '</a></h3>
+
+                    </td>
+                    <td data-title="Category"><span class="adcategories">' . $p->catagory . '</span>
+                    </td>
+                    <td data-title="Location"><span class="adcategories">' . $p->state . '-' . $p->district . '-' . $p->city . '</span>
+                    </td>
+
+                </tr>';
+
+            }
+            $output .= '</tbody> </table>';
+            return $output;
+        } else {
+
+            return 0;
+        }
     }
 }

@@ -187,7 +187,7 @@ Session::put('idu','aa');
                                 </h5>
                                 @endif
                             </div>
-                            <p class="mb-2">Give an appropriate intro. This field is not yet given in table.</p>
+                            <p class="mb-2">{{$own->otitle}}</p>
                             <div class="details-meta">
                                 <span><a href="#"><i class="lni-alarm-clock"></i>Last Updated:
                                         {{$own->updated_at}}</a></span>
@@ -329,85 +329,112 @@ Session::put('idu','aa');
                                                     </fieldset>
                                                 </div>
                                                 <div class="form-control" style="    width: fit-content;">
-                                                    Total rating:<label class="text-info"> {{$fin_rating}}<label><i
-                                                                class="lni-star-filled text-warning"></i>
+                                                    Total rating:<label class="text-info"> {{$fin_rating}}</label><i
+                                                        class="lni-star-filled text-warning"></i>
 
                                                 </div>
                                             </div>
                                             @isset($post) @foreach($post as $own)
-                                            <input type="text" hidden value="{{$own->outletid}}" name="id">
+                                            <input type="text" hidden value="{{$own->outletid}}" name="id" id="id">
                                             @endforeach @endisset
                                             <input type="text" class="form-control" placeholder="Title" id="title"
                                                 name="title" style="margin:5px">
                                             <textarea class="form-control" name="review"
                                                 placeholder="write a comment..."></textarea>
                                             @if(!Session::get('id'))
-                                            <input type="email" class="form-control" placeholder="email" name="email"
-                                                style="margin:5px">
-                                            <input type="text" class="form-control" placeholder="name" name="name">
-                                            @endif
+                                            <div class="">
+                                                <input type="email" class="form-control" placeholder="email"
+                                                    name="email" id="email" style="margin:5px;">
+                                                <input type="text" placeholder="Verification code" id="vcodebox"
+                                                    class="form-control" style="margin:5px;width:50%;display: none;">
 
-                                            <div class="captcha">
-                                                <span>{!! captcha_img() !!}</span>
-                                                <button type="button" class="btn btn-success"><i class="fa fa-refresh"
-                                                        id="refresh"></i></button>
+
+                                                <button id="vbutton" class="btn btn-warning"
+                                                    style="margin:5px;display: none;" type="button">verify</button>
+                                                    <input type="text" hidden id="s" value="0">
+
+
+                                                <div id="p22" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter a valid email</strong>
+                                                </div>
+                                                <div id="p222" class="alert alert-warning" style="display: none;">
+                                                    <strong>Email verification failed</strong>
+                                                </div>
+                                                <div id="vwarn1" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Verification code is incorrect!!</strong>
+                                                </div>
+                                                <div id="vs" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Verification successfull!!</strong>
+                                                </div>
+                                                <div id="vwarn" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter code to continue!!</strong>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="name" name="name">
+                                                @endif
+
+                                                <div class="captcha">
+                                                    <span>{!!captcha_img()!!}</span>
+                                                    <button type="button" class="btn btn-success"><i
+                                                            class="fa fa-refresh" id="refresh"></i></button>
+                                                </div>
+                                                <input id="captcha" type="text" class="form-control"
+                                                    placeholder="Enter Captcha" name="captcha">
                                             </div>
-                                            <input id="captcha" type="text" class="form-control"
-                                                placeholder="Enter Captcha" name="captcha">
+                                            <div id="p2" class="alert alert-danger" style="align:center;display: none;">
+                                                <strong>You have already posted a comment!!</strong>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-info pull-right" style="margin:5px"
+                                                id="postr">Post</button>
+                                        </form>
+                                        <!-- close if -->
+
+                                        <ul class="media-list" style="margin-top: 55px;">
+                                            @isset($review)
+                                            @foreach($review as $r)
+                                            <li class="media">
+
+                                                <a href="#" class="pull-left">
+                                                    <img src="{{asset('images/user_1.jpg')}}" alt="" class="img-circle">
+                                                </a>
+                                                <div class="media-body" style="    margin-left: 20px;">
+                                                    <span class="text-muted pull-right">
+                                                        <small class="text-muted">Posted on: {{$r->updated_at}}</small>
+                                                    </span>
+                                                    <label>Reviewed by: </label><strong class="text-success">
+                                                        {{$r->name}}</strong>
+                                                    &nbsp;&nbsp;
+                                                    <label>Rated: </label><strong class="text-info">
+                                                        {{$r->rating}}</strong><i
+                                                        class="lni-star-filled text-warning"></i>
+
+                                                    <p class="text-info">{{$r->title}}</p>
+                                                    <h6>
+                                                        {{$r->review}}
+                                                    </h6>
+                                                </div>
+                                            </li>
+                                            @endforeach
+                                            @endisset
+                                            {{$review->links()}}
+                                        </ul>
                                     </div>
-
-
-
-
-
-
-
-                                    <button type="submit" class="btn btn-info pull-right"
-                                        style="margin:5px">Post</button>
-                                    </form>
-                                    <!-- close if -->
-
-                                    <ul class="media-list" style="margin-top: 55px;">
-                                        @isset($review)
-                                        @foreach($review as $r)
-                                        <li class="media">
-
-                                            <a href="#" class="pull-left">
-                                                <img src="{{asset('images/user_1.jpg')}}" alt="" class="img-circle">
-                                            </a>
-                                            <div class="media-body" style="    margin-left: 20px;">
-                                                <span class="text-muted pull-right">
-                                                    <small class="text-muted">Posted on: {{$r->updated_at}}</small>
-                                                </span>
-                                                <label>Reviewed by: </label><strong class="text-success">
-                                                    {{$r->name}}</strong>
-                                                &nbsp;&nbsp;
-                                                <label>Rated: </label><strong class="text-info">
-                                                    {{$r->rating}}</strong><i class="lni-star-filled text-warning"></i>
-
-                                                <p class="text-info">{{$r->title}}</p>
-                                                <h6>
-                                                    {{$r->review}}
-                                                </h6>
-                                            </div>
-                                        </li>
-                                        @endforeach
-                                        @endisset
-                                        {{$review->links()}}
-                                    </ul>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                    <div class="col-lg-4 col-md-6 col-xs-12">
 
-                </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
-
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
     </div>
 
 
@@ -440,6 +467,8 @@ Session::put('idu','aa');
     <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
     <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
     <script src="{{ asset('assets/js/summernote.js') }}"></script>
+    <script src="{{ asset('js/formvalidate3.js')}}"></script>
+
     <script>
     $(document).ready(function() {
         $("#star_rating .stars").click(function() {
@@ -465,7 +494,7 @@ Session::put('idu','aa');
             success: function(data) {
                 console.log(data);
 
-                $(".captcha span").html(data.captcha);
+                $(".captcha span").html(data);
             }
         });
     });
