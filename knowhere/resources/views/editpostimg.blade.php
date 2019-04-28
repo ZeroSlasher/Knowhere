@@ -34,42 +34,42 @@
     <link href="{{ asset('css/fileinput.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <style type="text/css">
-        .main-section {
-            margin: 0 auto;
-            padding: 20px;
-            margin-top: 100px;
-            background-color: #fff;
-            box-shadow: 0px 0px 20px #c1c1c1;
-        }
+    .main-section {
+        margin: 0 auto;
+        padding: 20px;
+        margin-top: 100px;
+        background-color: #fff;
+        box-shadow: 0px 0px 20px #c1c1c1;
+    }
 
-        .fileinput-remove,
-        .fileinput-upload {
-            display: none;
-        }
+    .fileinput-remove,
+    .fileinput-upload {
+        display: none;
+    }
 
-        .btn:focus,
-        .btn:active,
-        button:focus,
-        button:active {
-            outline: none !important;
-            box-shadow: none !important;
-        }
+    .btn:focus,
+    .btn:active,
+    button:focus,
+    button:active {
+        outline: none !important;
+        box-shadow: none !important;
+    }
 
-        #image-gallery .modal-footer {
-            display: block;
-        }
+    #image-gallery .modal-footer {
+        display: block;
+    }
 
-        .thumb {
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
+    .thumb {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
     </style>
 </head>
 
 <body>
 
     <header id="header-wrap">
-    @include('inc.admin.admindash_head')
+        @include('inc.admin.admindash_head')
 
 
     </header>
@@ -112,12 +112,13 @@
 
                             </div>
                             <div class="form-group mb-3">
-    @include('inc.message')
+                                @include('inc.message')
                                 <label class="control-label">Manage uploaded images</label><br>
                                 <div class="row">
                                     @isset($img) @foreach($img as $i)
                                     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                                        <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="/uploads/{{$i->imgname}}" data-target="#image-gallery">
+                                        <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
+                                            data-image="/uploads/{{$i->imgname}}" data-target="#image-gallery">
                                             <img class="img-thumbnail" src="/uploads/{{$i->imgname}}"
                                                 alt="Another alt text">
                                         </a>
@@ -128,7 +129,8 @@
 
                             </div>
                         </form>
-                        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog"
+                            aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -141,10 +143,12 @@
                                         <img id="image-gallery-image" class="img-responsive col-md-12" src="">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
+                                        <button type="button" class="btn btn-secondary float-left"
+                                            id="show-previous-image"><i class="fa fa-arrow-left"></i>
                                         </button>
 
-                                        <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
+                                        <button type="button" id="show-next-image"
+                                            class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -184,7 +188,7 @@
         </script> -->
 
     <script type="text/javascript">
-        $("#file").fileinput({
+    $("#file").fileinput({
         theme: 'fa',
         uploadIcon: '<i class="fa fa-cloud-upload" aria-hidden="true"></i>',
         removeIcon: '<i class="fa fa-trash" aria-hidden="true"></i>',
@@ -203,7 +207,7 @@
         slugCallback: function(filename) {
             return filename.replace('(', '_').replace(']', '_');
         }
-        
+
     });
     </script>
 

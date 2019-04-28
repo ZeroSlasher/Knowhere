@@ -155,7 +155,6 @@
 
 <body class="profile-page">
 
-
     <div class="page-header1" data-parallax="true" style="background-image:url('images/canvas.jpg');">
     </div>
     <div class="main main-raised">
@@ -166,8 +165,13 @@
                         @foreach($udata as $u)
                         <div class="profile">
                             <div class="avatar">
-                                <img src="/uploads/{{$u->image}}" alt="Circle Image"
+                                @if($u->image != null)
+                                <img src="/uploads/{{$u->image}}" alt="User Image"
                                     class="img-raised rounded-circle img-fluid">
+                                @else
+                                <img src="/images/user_1.jpg" alt="User Image"
+                                    class="img-raised rounded-circle img-fluid">
+                                @endif
                             </div>
                             <div class="name">
                                 <h3 class="title">{{Session::get('name')}}</h3>
@@ -181,13 +185,16 @@
                 </div>
 
                 <div style="text-align: center;">
-                    <span><i class="lni-user"></i>Name:
+                    <span style="margin: 10px;"><i class="lni-user"></i>Name:
                         {{$u->name}}</span> &nbsp;
-                    <span><i class="lni-map-marker"></i>City:
+
+                    @if($u->city_id != null)
+                    <span style="margin: 10px;"><i class="lni-map-marker"></i>City:
                         {{$u->city}}</span>&nbsp;
-                    <span><i class="lni-phone-handset"></i>Phone:
+                    @endif
+                    <span style="margin: 10px;"><i class="lni-phone-handset"></i>Phone:
                         {{$u->phone}}</span>&nbsp;
-                    <span><i class="lni-home"></i>Address:
+                    <span style="margin: 10px;"><i class="lni-home"></i>Address:
                         {{$u->oaddress}}</span>
                 </div>
 
@@ -205,8 +212,8 @@
                                 <div class="dashboardbox">
                                     <div class="icon"><i class="lni-write"></i></div>
                                     <div class="contentbox">
-                                        <h2><a href="#">Total Ad Posted</a></h2>
-                                        <h3>480 Add Posted</h3>
+                                        <h2><a href="#">Total Postings</a></h2>
+                                        <h3>480 Posts</h3>
                                     </div>
                                 </div>
                             </div>
@@ -214,8 +221,8 @@
                                 <div class="dashboardbox">
                                     <div class="icon"><i class="lni-add-files"></i></div>
                                     <div class="contentbox">
-                                        <h2><a href="#">Featured Ads</a></h2>
-                                        <h3>80 Add Posted</h3>
+                                        <h2><a href="#">Featured Postings</a></h2>
+                                        <h3>80 Postings</h3>
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +230,7 @@
                                 <div class="dashboardbox">
                                     <div class="icon"><i class="lni-support"></i></div>
                                     <div class="contentbox">
-                                        <h2><a href="#">Offers / Messages</a></h2>
+                                        <h2><a href="#">Messages</a></h2>
                                         <h3>2040 Messages</h3>
                                     </div>
                                 </div>
@@ -246,251 +253,7 @@
     </div>
 
 
-    <script>
-    var big_image;
 
-    $(document).ready(function() {
-        BrowserDetect.init();
-
-        // Init Material scripts for buttons ripples, inputs animations etc, more info on the next link https://github.com/FezVrasta/bootstrap-material-design#materialjs
-        $('body').bootstrapMaterialDesign();
-
-        window_width = $(window).width();
-
-        $navbar = $('.navbar[color-on-scroll]');
-        scroll_distance = $navbar.attr('color-on-scroll') || 500;
-
-        $navbar_collapse = $('.navbar').find('.navbar-collapse');
-
-        //  Activate the Tooltips
-        $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
-
-        // Activate Popovers
-        $('[data-toggle="popover"]').popover();
-
-        if ($('.navbar-color-on-scroll').length != 0) {
-            $(window).on('scroll', materialKit
-                .checkScrollForTransparentNavbar);
-        }
-
-        materialKit.checkScrollForTransparentNavbar();
-
-        if (window_width >= 768) {
-            big_image = $('.page-header1[data-parallax="true"]');
-            if (big_image.length != 0) {
-                $(window).on('scroll', materialKit.checkScrollForParallax);
-            }
-
-        }
-
-
-    });
-
-    $(document).on('click', '.navbar-toggler', function() {
-        $toggle = $(this);
-
-        if (materialKit.misc.navbar_menu_visible == 1) {
-            $('html').removeClass('nav-open');
-            materialKit.misc.navbar_menu_visible = 0;
-            $('#bodyClick').remove();
-            setTimeout(function() {
-                $toggle.removeClass('toggled');
-            }, 550);
-
-            $('html').removeClass('nav-open-absolute');
-        } else {
-            setTimeout(function() {
-                $toggle.addClass('toggled');
-            }, 580);
-
-
-            div = '<div id="bodyClick"></div>';
-            $(div).appendTo("body").click(function() {
-                $('html').removeClass('nav-open');
-
-                if ($('nav').hasClass('navbar-absolute')) {
-                    $('html').removeClass('nav-open-absolute');
-                }
-                materialKit.misc.navbar_menu_visible = 0;
-                $('#bodyClick').remove();
-                setTimeout(function() {
-                    $toggle.removeClass('toggled');
-                }, 550);
-            });
-
-            if ($('nav').hasClass('navbar-absolute')) {
-                $('html').addClass('nav-open-absolute');
-            }
-
-            $('html').addClass('nav-open');
-            materialKit.misc.navbar_menu_visible = 1;
-        }
-    });
-
-    materialKit = {
-        misc: {
-            navbar_menu_visible: 0,
-            window_width: 0,
-            transparent: true,
-            fixedTop: false,
-            navbar_initialized: false,
-            isWindow: document.documentMode || /Edge/.test(navigator.userAgent)
-        },
-
-        initFormExtendedDatetimepickers: function() {
-            $('.datetimepicker').datetimepicker({
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                    previous: 'fa fa-chevron-left',
-                    next: 'fa fa-chevron-right',
-                    today: 'fa fa-screenshot',
-                    clear: 'fa fa-trash',
-                    close: 'fa fa-remove'
-                }
-            });
-        },
-
-        initSliders: function() {
-            // Sliders for demo purpose
-            var slider = document.getElementById('sliderRegular');
-
-            noUiSlider.create(slider, {
-                start: 40,
-                connect: [true, false],
-                range: {
-                    min: 0,
-                    max: 100
-                }
-            });
-
-            var slider2 = document.getElementById('sliderDouble');
-
-            noUiSlider.create(slider2, {
-                start: [20, 60],
-                connect: true,
-                range: {
-                    min: 0,
-                    max: 100
-                }
-            });
-        },
-
-        checkScrollForParallax: function() {
-            oVal = ($(window).scrollTop() / 3);
-            big_image.css({
-                'transform': 'translate3d(0,' + oVal + 'px,0)',
-                '-webkit-transform': 'translate3d(0,' + oVal +
-                    'px,0)',
-                '-ms-transform': 'translate3d(0,' + oVal + 'px,0)',
-                '-o-transform': 'translate3d(0,' + oVal + 'px,0)'
-            });
-        },
-
-        checkScrollForTransparentNavbar: debounce(function() {
-            if ($(document).scrollTop() > scroll_distance) {
-                if (materialKit.misc.transparent) {
-                    materialKit.misc.transparent = false;
-                    $('.navbar-color-on-scroll').removeClass(
-                        'navbar-transparent');
-                }
-            } else {
-                if (!materialKit.misc.transparent) {
-                    materialKit.misc.transparent = true;
-                    $('.navbar-color-on-scroll').addClass(
-                        'navbar-transparent');
-                }
-            }
-        }, 17)
-    };
-
-    // Returns a function, that, as long as it continues to be invoked, will not
-    // be triggered. The function will be called after it stops being called for
-    // N milliseconds. If `immediate` is passed, trigger the function on the
-    // leading edge, instead of the trailing.
-
-    function debounce(func, wait, immediate) {
-        var timeout;
-        return function() {
-            var context = this,
-                args = arguments;
-            clearTimeout(timeout);
-            timeout = setTimeout(function() {
-                timeout = null;
-                if (!immediate) func.apply(context, args);
-            }, wait);
-            if (immediate && !timeout) func.apply(context, args);
-        };
-    };
-
-    var BrowserDetect = {
-        init: function() {
-            this.browser = this.searchString(this.dataBrowser) || "Other";
-            this.version = this.searchVersion(navigator.userAgent) || this
-                .searchVersion(navigator
-                    .appVersion) || "Unknown";
-        },
-        searchString: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var dataString = data[i].string;
-                this.versionSearchString = data[i].subString;
-
-                if (dataString.indexOf(data[i].subString) !== -1) {
-                    return data[i].identity;
-                }
-            }
-        },
-        searchVersion: function(dataString) {
-            var index = dataString.indexOf(this.versionSearchString);
-            if (index === -1) {
-                return;
-            }
-
-            var rv = dataString.indexOf("rv:");
-            if (this.versionSearchString === "Trident" && rv !== -1) {
-                return parseFloat(dataString.substring(rv + 3));
-            } else {
-                return parseFloat(dataString.substring(index + this
-                    .versionSearchString.length + 1));
-            }
-        },
-
-        dataBrowser: [{
-                string: navigator.userAgent,
-                subString: "Chrome",
-                identity: "Chrome"
-            },
-            {
-                string: navigator.userAgent,
-                subString: "MSIE",
-                identity: "Explorer"
-            },
-            {
-                string: navigator.userAgent,
-                subString: "Trident",
-                identity: "Explorer"
-            },
-            {
-                string: navigator.userAgent,
-                subString: "Firefox",
-                identity: "Firefox"
-            },
-            {
-                string: navigator.userAgent,
-                subString: "Safari",
-                identity: "Safari"
-            },
-            {
-                string: navigator.userAgent,
-                subString: "Opera",
-                identity: "Opera"
-            }
-        ]
-
-    };
-    </script>
 </body>
 
 </html>

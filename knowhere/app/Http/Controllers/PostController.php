@@ -22,7 +22,10 @@ class PostController extends Controller
     public function addpost(Request $request)
     {
         $all = $request->all();
-        $service = implode(",", $request->get('service'));
+        $service = 0;
+        if ($request->get('service')) {
+            $service = implode(",", $request->get('service'));
+        }
         $id = Session::get('uid');
         $oreg = Reg::select('regid')->where('id', $id)->get();
         foreach ($oreg as $o) {
@@ -75,10 +78,12 @@ class PostController extends Controller
     {
         $request->all();
         if ($request->get('Radio') == 2) {
+
             return redirect('/mypostings')->with('info', 'Post delete request declined');
         }
         if ($request->get('Radio') == 1) {
-            DB::select("delete from tbl_outlet_prof where outletid = $request->get('id')");
+            $id = $request->get('id');
+            DB::select("delete from tbl_outlet_prof where outletid = $id");
             return redirect('/mypostings')->with('warning', 'Post deleted successfully');
 
         }
@@ -86,9 +91,9 @@ class PostController extends Controller
 
     public function searchaction(Request $request)
     {
-        $rqst = $request->all();
-        $loc = $rqst['loc'];
-        $cat = $rqst['cat'];
+        $loc = $request->get('loc');
+        $cat = $request->get('cat');
+        $data = DB::table('tbl_cat')->get();
 
         // if (!array_key_exists('cat', $rqst)) {
         if (!$cat) {
@@ -106,11 +111,9 @@ class PostController extends Controller
                 ->orwhere('tbl_district.district', '=', $loc)->paginate(10);
 
             $tpost = count($post);
-
             if ($tpost == 0) {
-                return view('listing_list', compact('tpost'))->with('error', 'No results found!!');
+                return view('listing_list')->with(['tpost' => $tpost, 'data' => $data, 'loc' => $loc])->with('successMsg', 'No results found!!');
             } else {
-                $data = DB::table('tbl_cat')->get();
 
                 foreach ($post as $p) {
                     $ad = str_replace(',', ' ', $p->address);
@@ -121,13 +124,12 @@ class PostController extends Controller
                     $new[] = array($ad, $lat, $lng);
                 }
 
-                return view('listing_list', compact('post', 'data', 'new', 'tpost'));
+                return view('listing_list', compact('post', 'data', 'new', 'tpost', 'loc'));
             }
         } else {
 
             // $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,`tbl_status` as st, `tbl_state` as sta, tbl_cat as cat,`tbl_district` as d,tbl_users_reg as o,tbl_login as lo WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lo.`id`=l.`id`
             // and s.cat_id = cat.cat_id and( c.city='$loc' or d.district='$loc') and cat.cat_id=$cat");
-            $data = DB::table('tbl_cat')->get();
             $post = DB::table('tbl_outlet_prof')
                 ->join('tbl_city', 'tbl_outlet_prof.city_id', '=', 'tbl_city.city_id')
                 ->join('tbl_subcat', 'tbl_outlet_prof.subcat_id', '=', 'tbl_subcat.subcat_id')
@@ -143,7 +145,8 @@ class PostController extends Controller
 
             $tpost = count($post);
             if ($tpost == 0) {
-                return view('listing_list')->with('tpost', $tpost)->with('successMsg', 'No results found!!');
+
+                return view('listing_list')->with(['tpost' => $tpost, 'data' => $data, 'loc' => $loc])->with('successMsg', 'No results found!!');
                 // return view('listing_list', compact('tpost'))->with('error', 'No results found!!');
                 //return view('listing_list')->with('tpost', $tpost)->with('error', 'No results found!!');
 
@@ -156,7 +159,7 @@ class PostController extends Controller
                     $new[] = array($ad, $lat, $lng);
                 }
 
-                return view('listing_list', compact('post', 'data', 'new', 'tpost'));
+                return view('listing_list', compact('post', 'data', 'new', 'tpost', 'loc'));
             }
         }
     }
@@ -215,41 +218,41 @@ class PostController extends Controller
             //     return back()->with('msg', 'test');
             // } else {
 
-                $id = Session::get('uid');
-                $email = Session::get('id');
-                $dbname = DB::select("select name from tbl_users_reg where id = $id");
-                foreach ($dbname as $n) {
-                    $name = $n->name;
-                }
+            $id = Session::get('uid');
+            $email = Session::get('id');
+            $dbname = DB::select("select name from tbl_users_reg where id = $id");
+            foreach ($dbname as $n) {
+                $name = $n->name;
+            }
 
-                $exist = DB::select("select email from tbl_review where outlet_id = $outletid and email='$email'");
-                if (count($exist) == 0) {
-                    $review = new Review([
-                        'email' => $email,
-                        'title' => $title,
-                        'outlet_id' => $outletid,
-                        'name' => $name,
-                        'review' => $review,
-                        'rating' => $rating,
+            $exist = DB::select("select email from tbl_review where outlet_id = $outletid and email='$email'");
+            if (count($exist) == 0) {
+                $review = new Review([
+                    'email' => $email,
+                    'title' => $title,
+                    'outlet_id' => $outletid,
+                    'name' => $name,
+                    'review' => $review,
+                    'rating' => $rating,
+                ]);
+                $review->save();
+                return back()->with('success', 'Review posted');
+            }
+            if (count($exist) > 0) {
+                foreach ($exist as $e) {
+                    $emaile = $e->email;
+                }
+                Review::where('email', $emaile)
+                    ->where('outlet_id', $outletid)
+                    ->update([
+                        'title' => $request->get('title'),
+                        'review' => $request->get('review'),
+                        'rating' => $request->get('rating'),
                     ]);
-                    $review->save();
-                    return back()->with('success', 'Review posted');
-                }
-                if (count($exist) > 0) {
-                    foreach ($exist as $e) {
-                        $emaile = $e->email;
-                    }
-                    Review::where('email', $emaile)
-                        ->where('outlet_id', $outletid)
-                        ->update([
-                            'title' => $request->get('title'),
-                            'review' => $request->get('review'),
-                            'rating' => $request->get('rating'),
-                        ]);
 
-                    return back()->with('success', 'Review updated');
-                }
-           // }
+                return back()->with('success', 'Review updated');
+            }
+            // }
         } else {
 
             $email = $request->get('email');
@@ -316,7 +319,7 @@ class PostController extends Controller
         $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
         `tbl_state` as sta, tbl_cat as cat,`tbl_district` as d WHERE l.city_id = c.city_id
         AND l.subcat_id=s.subcat_id and c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id`
-        and s.cat_id = cat.cat_id and c.city_id=$city and cat.cat_id=$cat and l.outletname LIKE '%$name%'");
+        and s.cat_id = cat.cat_id and l.city_id=$city and cat.cat_id=$cat and l.outletname LIKE '%$name%'");
 
         $output = 0;
         if (count($post) > 0) {

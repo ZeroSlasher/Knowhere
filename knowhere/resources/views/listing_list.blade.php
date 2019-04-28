@@ -42,7 +42,7 @@
 
 
         <div class="page-header" style="background: url(assets/img/banner1.jpg);">
-            <div class="container">
+            <!-- <div class="container">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -89,7 +89,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
 
@@ -128,7 +128,8 @@
                                     @isset($data)
                                     @foreach($data as $category)
                                     <li>
-                                        <a href="#">
+                                        <a
+                                            href="/searchaction?_token={{csrf_token()}}&loc={{$loc}}&cat={{$category->Cat_id}}">
                                             <i class="lni-chevron-right-circle"></i> {{$category->catagory}} <span
                                                 class="category-counter"></span>
                                         </a>

@@ -181,10 +181,11 @@ function emailverify1() {
 
                     $('.verify-wrapper').removeClass('open');
                     $("#p2222").show().delay(1000).fadeOut();
-                } else {
-                    $('#s').val('1');
-                    $('.verify-wrapper').removeClass('open');
-                    $('.success-wrapper').addClass('open');
+                } else if (data == 0) {
+                    
+                    // $('#s').val('1');
+                    // $('.verify-wrapper').removeClass('open');
+                    // $('.success-wrapper').addClass('open');
                 }
 
             }

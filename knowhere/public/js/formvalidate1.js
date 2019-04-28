@@ -174,10 +174,10 @@ function emailverify() {
                     $("#p22222").show().delay(1000).fadeOut();
                     return false;
                 } else {
-                    $('#s').val('1');
-                    $('.verify-wrapper').removeClass('open');
-                    $('.success-wrapper').addClass('open');
-                    return true;
+                    // $('#s').val('1');
+                    // $('.verify-wrapper').removeClass('open');
+                    // $('.success-wrapper').addClass('open');
+                    // return true;
                 }
 
             }

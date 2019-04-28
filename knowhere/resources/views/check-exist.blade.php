@@ -116,19 +116,19 @@
                                     </li>
                                     @endif
                                     <li>
-                                        <a href="">
+                                        <a href="undermaintainence">
                                             <i class="lni-wallet"></i>
                                             <span>Option3</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="undermaintainence">
                                             <i class="lni-heart"></i>
                                             <span>Option4</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="undermaintainence">
                                             <i class="lni-star"></i>
                                             <span>Option5</span>
                                         </a>
@@ -155,7 +155,6 @@
                         <div class="inner-box" style="width:1000px;">
                             <div class="dashboard-box">
                                 <h2 class="dashbord-title">Add a posting</h2>
-
                             </div>
                             <p class="text center alert alert-success">Please do a search before adding the post to
                                 verify

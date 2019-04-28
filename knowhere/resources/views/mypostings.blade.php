@@ -113,19 +113,19 @@
                                     </li>
                                     @endif
                                     <li>
-                                        <a href="">
+                                        <a href="undermaintainence">
                                             <i class="lni-wallet"></i>
                                             <span>Option3</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="undermaintainence">
                                             <i class="lni-heart"></i>
                                             <span>Option4</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="undermaintainence">
                                             <i class="lni-star"></i>
                                             <span>Option5</span>
                                         </a>
@@ -156,11 +156,10 @@
                             @include('inc.message')
                             <div class="dashboard-wrapper">
                                 <div class="row">
-                                    @if(isset($post)) @foreach($post as $own)
+                                    @if(isset($posts)) @foreach($posts as $own)
                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="featured-box">
                                             <figure>
-
                                                 <div class="icon">
                                                     <a href="editpostimg/{{$own->outletid}}"><i
                                                             class="lni-upload"></i></a>
@@ -178,8 +177,13 @@
 
 
                                                 <div class="w3-content w3-display-container" style="max-width:800px">
+                                                    @if(isset($ii))
                                                     <img class="" src="{{asset('/uploads')}}/{{$ii}}"
                                                         style="width:100%">
+                                                    @else
+                                                    <img class="" src="{{asset('/uploads')}}/Placeholder.jpg"
+                                                        style="width:100%">
+                                                    @endif
                                                 </div>
 
                                             </figure>

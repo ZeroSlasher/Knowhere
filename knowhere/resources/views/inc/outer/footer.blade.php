@@ -18,11 +18,11 @@
                         <div class="widget">
                             <h3 class="block-title">Help & Support</h3>
                             <ul class="menu">
-                                <li><a href="#">Live Chat</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Purchase Protection</a></li>
-                                <li><a href="#">Support</a></li>
-                                <li><a href="#">Contact us</a></li>
+                                <li><a href="">Live Chat</a></li>
+                                <li><a href="">Privacy Policy</a></li>
+                                <li><a href="">Purchase Protection</a></li>
+                                <li><a href="">Support</a></li>
+                                <li><a href="">Contact us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -41,10 +41,9 @@
                                 </div>
                             </form>
                             <ul class="footer-social">
-                                <li><a class="facebook" href="#"><i class="lni-facebook-filled"></i></a></li>
-                                <li><a class="twitter" href="#"><i class="lni-twitter-filled"></i></a></li>
-                                <li><a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a></li>
-                                <li><a class="google-plus" href="#"><i class="lni-google-plus"></i></a></li>
+                                <li><a class="facebook" href=""><i class="lni-facebook-filled"></i></a></li>
+                                <li><a class="twitter" href=""><i class="lni-twitter-filled"></i></a></li>
+                                <li><a class="linkedin" href=""><i class="lni-linkedin-fill"></i></a></li>
                             </ul>
                         </div>
                     </div>

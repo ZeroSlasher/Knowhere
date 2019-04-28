@@ -321,7 +321,7 @@
             <form action="/login" method="post">
                 @csrf
                 <div class="form-group">
-                    <input type="email" placeholder="Email Address" id="email" name="email" required>
+                    <input type="email" autocomplete="off" placeholder="Email Address" id="email" name="email" required>
                 </div> <!-- end .form-group -->
                 <div class="form-group">
                     <input type="password" required placeholder="Password" id="password" name="password"

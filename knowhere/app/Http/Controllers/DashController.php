@@ -34,12 +34,23 @@ class DashController extends Controller
     public function userdash()
     {
         $utype = Session::get('utype');
-        if (Session::get('id') && $utype == 3) {
-            $udata = DB::table('tbl_users_reg')
-                ->join('tbl_city', 'tbl_users_reg.city_id', '=', 'tbl_city.city_id')
-                ->where('id', $uid)->get();
+        $uid = Session::get('uid');
 
-            return view('user_dashboard', compact('udata'));
+        if (Session::get('id') && $utype == 3) {
+            $udata = DB::table('tbl_users_reg')->where('id', $uid)->get();
+            foreach ($udata as $e) {
+                $city_id = $e->city_id;
+            }
+            if ($city_id == null) {
+                return view('user_dashboard', compact('udata'));
+            } else {
+
+                $udata = DB::table('tbl_users_reg')
+                    ->join('tbl_city', 'tbl_users_reg.city_id', '=', 'tbl_city.city_id')
+                    ->where('id', $uid)->get();
+
+                return view('user_dashboard', compact('udata'));
+            }
         } else {
             return redirect('/');
         }

@@ -69,49 +69,34 @@ class HomeController extends Controller
 
     public function mailverify($id)
     {
-        return 1;
-        $eid = strtolower($id);
-        $exist = DB::select("select * from tbl_verify_mail where email = '$id'");
 
-        if (count($exist) > 0) {
+        $code = str_random(8);
+        try {
+            //mail
+            $data = array('email' => $id, 'code' => $code);
 
-            foreach ($exist as $e) {
-                $email = strtolower($e->email);
-                $status = $e->isverified;
-            }
-            if ($eid == $email && $status == 8) {
-                return 0;
-            }
-        } else {
+            Mail::send('emails.email1', $data, function ($message) use ($id) {
 
-            $code = str_random(8);
-            try {
-                //mail
-                $data = array('email' => $id, 'code' => $code);
+                $message->from('knowhere@gmail.com', 'Knowhere');
+                $message->to($id, $id)->subject('Email verification at Knowhere');
 
-                Mail::send('emails.email1', $data, function ($message) use ($id) {
+            });
+        } catch (\Exception $e) {
 
-                    $message->from('knowhere@gmail.com', 'Knowhere');
-                    $message->to($id, $id)->subject('Email verification at Kowhere');
-
-                });
-            } catch (\Exception $e) {
-                return 1;
-            }
-            //insert code into table
-            // $exist = DB::select("SELECT `email` FROM `tbl_verify_mail` WHERE `email` = '$id'");
-            // if (empty($exist)) {
+            return 1;
+        }
+        //insert code into table
+        $exist = DB::select("SELECT `email` FROM `tbl_verify_mail` WHERE `email` = '$id'");
+        if (empty($exist)) {
             DB::table('tbl_verify_mail')->insert(
                 ['email' => $id, 'code' => $code, 'isverified' => 9]
             );
-            // } else {
-            //     DB::table('tbl_verify_mail')
-            //         ->where('email', $id)
-            //         ->update(['code' => $code]);
-            // }
-            return 0;
-
+        } else {
+            DB::table('tbl_verify_mail')
+                ->where('email', $id)
+                ->update(['code' => $code, 'isverified' => 9]);
         }
+        return 0;
 
     }
 

@@ -250,11 +250,12 @@ Session::put('idu','aa');
                     @endforeach @endisset
                     <div class="col-lg-4 col-md-6 col-xs-12">
                         <div class="short-info">
-                            <h4>Short Info</h4>
+                            @foreach($post as $p)
+                            <h4>Ask a qustion about {{$p->outletname}}</h4>
+                            @endforeach
                             <ul>
-                                <li><i class="lni-users"></i> More postings by <span><a>{{$own->name}}</a></span></li>
-                                <li><i class="lni-reply"></i> Send to a friend</li>
-                                <li><i class="lni-warning"></i> Report this ad</li>
+                                <li><i class="lni-question-circle"></i><a>Ask a qustion</a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -266,15 +267,6 @@ Session::put('idu','aa');
                         <div class="comment-wrapper description">
                             <div class="panel panel-info">
                                 @include('inc.message')
-                                @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div><br />
-                                @endif
 
                                 <div class="short-info">
                                     @foreach($post as $p)
@@ -282,147 +274,162 @@ Session::put('idu','aa');
                                     @endforeach
                                     <!-- if session is there -->
                                     <div class="panel-body">
+                                        @if(!Session::get('id'))
                                         <form method="post" action="/addreview" id="freview">
-                                            @csrf
-                                            <div class="row">
-                                                <div class="form-control" style="width: max-content;height: 50px;">
-                                                    <fieldset id='star_rating' class="rating">
-                                                        <input class="stars" type="radio" id="star5" name="rating"
-                                                            value="5" />
-                                                        <label class="full" for="star5"
-                                                            title="Awesome - 5 stars"></label>
-                                                        <input class="stars" type="radio" id="star4half" name="rating"
-                                                            value="4.5" />
-                                                        <label class="half" for="star4half"
-                                                            title="Pretty good - 4.5 stars"></label>
-                                                        <input class="stars" type="radio" id="star4" name="rating"
-                                                            value="4" />
-                                                        <label class="full" for="star4"
-                                                            title="Pretty good - 4 stars"></label>
-                                                        <input class="stars" type="radio" id="star3half" name="rating"
-                                                            value="3.5" />
-                                                        <label class="half" for="star3half"
-                                                            title="Meh - 3.5 stars"></label>
-                                                        <input class="stars" type="radio" id="star3" name="rating"
-                                                            value="3" />
-                                                        <label class="full" for="star3" title="Meh - 3 stars"></label>
-                                                        <input class="stars" type="radio" id="star2half" name="rating"
-                                                            value="2.5" />
-                                                        <label class="half" for="star2half"
-                                                            title="Kinda bad - 2.5 stars"></label>
-                                                        <input class="stars" type="radio" id="star2" name="rating"
-                                                            value="2" />
-                                                        <label class="full" for="star2"
-                                                            title="Kinda bad - 2 stars"></label>
-                                                        <input class="stars" type="radio" id="star1half" name="rating"
-                                                            value="1.5" />
-                                                        <label class="half" for="star1half"
-                                                            title="Meh - 1.5 stars"></label>
-                                                        <input class="stars" type="radio" id="star1" name="rating"
-                                                            value="1" />
-                                                        <label class="full" for="star1"
-                                                            title="Sucks big time - 1 star"></label>
-                                                        <input class="stars" type="radio" id="starhalf" name="rating"
-                                                            value="0.5" />
-                                                        <label class="half" for="starhalf"
-                                                            title="Sucks big time - 0.5 stars"></label>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="form-control" style="    width: fit-content;">
-                                                    Total rating:<label class="text-info"> {{$fin_rating}}</label><i
-                                                        class="lni-star-filled text-warning"></i>
-
-                                                </div>
-                                            </div>
-                                            @isset($post) @foreach($post as $own)
-                                            <input type="text" hidden value="{{$own->outletid}}" name="id" id="id">
-                                            @endforeach @endisset
-                                            <input type="text" class="form-control" placeholder="Title" id="title"
-                                                name="title" style="margin:5px">
-                                            <textarea class="form-control" id="review" name="review"
-                                                placeholder="write a comment..."></textarea>
-                                            @if(!Session::get('id'))
-                                            <div class="">
-                                                <input type="email" class="form-control" placeholder="email"
-                                                    name="email" id="email" style="margin:5px;">
-
-
-
-
-                                                <div id="p22" class="alert alert-danger"
-                                                    style="align:center;display: none;">
-                                                    <strong>Enter a valid email</strong>
-                                                </div>
-                                                <div id="p222" class="alert alert-warning" style="display: none;">
-                                                    <strong>Email verification failed</strong>
-                                                </div>
-                                                <div id="vwarn1" class="alert alert-danger"
-                                                    style="align:center;display: none;">
-                                                    <strong>Verification code is incorrect!!</strong>
-                                                </div>
-                                                <div id="vs" class="alert alert-danger"
-                                                    style="align:center;display: none;">
-                                                    <strong>Verification successfull!!</strong>
-                                                </div>
-                                                <div id="vwarn" class="alert alert-danger"
-                                                    style="align:center;display: none;">
-                                                    <strong>Enter code to continue!!</strong>
-                                                </div>
-                                                <input type="text" class="form-control" placeholder="name" id="name" name="name">
+                                            @else
+                                            <form method="post" action="/addreview" id="freviews">
                                                 @endif
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="form-control" style="width: max-content;height: 50px;">
+                                                        <fieldset id='star_rating' class="rating">
+                                                            <input class="stars" type="radio" id="star5" name="rating"
+                                                                value="5" />
+                                                            <label class="full" for="star5"
+                                                                title="Awesome - 5 stars"></label>
+                                                            <input class="stars" type="radio" id="star4half"
+                                                                name="rating" value="4.5" />
+                                                            <label class="half" for="star4half"
+                                                                title="Pretty good - 4.5 stars"></label>
+                                                            <input class="stars" type="radio" id="star4" name="rating"
+                                                                value="4" />
+                                                            <label class="full" for="star4"
+                                                                title="Pretty good - 4 stars"></label>
+                                                            <input class="stars" type="radio" id="star3half"
+                                                                name="rating" value="3.5" />
+                                                            <label class="half" for="star3half"
+                                                                title="Meh - 3.5 stars"></label>
+                                                            <input class="stars" type="radio" id="star3" name="rating"
+                                                                value="3" />
+                                                            <label class="full" for="star3"
+                                                                title="Meh - 3 stars"></label>
+                                                            <input class="stars" type="radio" id="star2half"
+                                                                name="rating" value="2.5" />
+                                                            <label class="half" for="star2half"
+                                                                title="Kinda bad - 2.5 stars"></label>
+                                                            <input class="stars" type="radio" id="star2" name="rating"
+                                                                value="2" />
+                                                            <label class="full" for="star2"
+                                                                title="Kinda bad - 2 stars"></label>
+                                                            <input class="stars" type="radio" id="star1half"
+                                                                name="rating" value="1.5" />
+                                                            <label class="half" for="star1half"
+                                                                title="Meh - 1.5 stars"></label>
+                                                            <input class="stars" type="radio" id="star1" name="rating"
+                                                                value="1" />
+                                                            <label class="full" for="star1"
+                                                                title="Sucks big time - 1 star"></label>
+                                                            <input class="stars" type="radio" id="starhalf"
+                                                                name="rating" value="0.5" />
+                                                            <label class="half" for="starhalf"
+                                                                title="Sucks big time - 0.5 stars"></label>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="form-control" style="    width: fit-content;">
+                                                        Total rating:<label class="text-info"> {{$fin_rating}}</label><i
+                                                            class="lni-star-filled text-warning"></i>
 
-                                                <!-- <div class="captcha">
+                                                    </div>
+                                                </div>
+                                                @isset($post) @foreach($post as $own)
+                                                <input type="text" hidden value="{{$own->outletid}}" name="id" id="id">
+                                                @endforeach @endisset
+                                                <input type="text" class="form-control" autocomplete="off"
+                                                    placeholder="Title" id="title" name="title" style="margin:5px">
+                                                <textarea class="form-control" id="review" autocomplete="off"
+                                                    name="review" placeholder="write a comment..."></textarea>
+                                                @if(!Session::get('id'))
+                                                <div class="">
+                                                    <input type="email" class="form-control" autocomplete="off"
+                                                        placeholder="email" name="email" id="email" style="margin:5px;">
+
+
+
+
+                                                    <div id="p22" class="alert alert-danger"
+                                                        style="align:center;display: none;">
+                                                        <strong>Enter a valid email</strong>
+                                                    </div>
+                                                    <div id="p222" class="alert alert-warning" style="display: none;">
+                                                        <strong>Email verification failed</strong>
+                                                    </div>
+                                                    <div id="vwarn1" class="alert alert-danger"
+                                                        style="align:center;display: none;">
+                                                        <strong>Verification code is incorrect!!</strong>
+                                                    </div>
+                                                    <div id="vs" class="alert alert-danger"
+                                                        style="align:center;display: none;">
+                                                        <strong>Verification successfull!!</strong>
+                                                    </div>
+                                                    <div id="vwarn" class="alert alert-danger"
+                                                        style="align:center;display: none;">
+                                                        <strong>Enter code to continue!!</strong>
+                                                    </div>
+                                                    <input type="text" class="form-control" autocomplete="off"
+                                                        placeholder="name" id="name" name="name">
+                                                    @endif
+
+                                                    <!-- <div class="captcha">
                                                     <span>{!!captcha_img()!!}</span>
                                                     <button type="button" class="btn btn-success"><i
                                                             class="fa fa-refresh" id="refresh"></i></button>
                                                 </div>
                                                 <input id="captcha" type="text" class="form-control"
                                                     placeholder="Enter Captcha" name="captcha"> -->
-                                            </div>
-                                            <div id="p2" class="alert alert-danger" style="align:center;display: none;">
-                                                <strong>You have already posted a comment!!</strong>
-                                            </div>
-                                            <input type="text" placeholder="Verification code" id="vcodebox"
-                                                class="form-control" style="margin:5px;width:50%;display: none;">
-
-
-                                            <button id="vbutton" class="btn btn-warning"
-                                                style="margin:5px;display: none;" type="button">verify</button>
-                                            <input type="hidden" id="s" value="0">
-                                            <button type="submit" class="btn btn-info pull-right" style="margin:5px"
-                                                id="postr">Post</button>
-                                        </form>
-                                        <!-- close if -->
-
-                                        <ul class="media-list" style="margin-top: 55px;">
-                                            @isset($review)
-                                            @foreach($review as $r)
-                                            <li class="media">
-
-                                                <a href="#" class="pull-left">
-                                                    <img src="{{asset('images/user_1.jpg')}}" alt="" class="img-circle">
-                                                </a>
-                                                <div class="media-body" style="    margin-left: 20px;">
-                                                    <span class="text-muted pull-right">
-                                                        <small class="text-muted">Posted on: {{$r->updated_at}}</small>
-                                                    </span>
-                                                    <label>Reviewed by: </label><strong class="text-success">
-                                                        {{$r->name}}</strong>
-                                                    &nbsp;&nbsp;
-                                                    <label>Rated: </label><strong class="text-info">
-                                                        {{$r->rating}}</strong><i
-                                                        class="lni-star-filled text-warning"></i>
-
-                                                    <p class="text-info">{{$r->title}}</p>
-                                                    <h6>
-                                                        {{$r->review}}
-                                                    </h6>
                                                 </div>
-                                            </li>
-                                            @endforeach
-                                            @endisset
-                                            {{$review->links()}}
-                                        </ul>
+                                                <div id="head" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter all fields to post review!!</strong>
+                                                </div>
+                                                <div id="namer" class="alert alert-danger"
+                                                    style="align:center;display: none;">
+                                                    <strong>Enter a valid name!!</strong>
+                                                </div>
+                                                <input type="text" autocomplete="off" placeholder="Verification code"
+                                                    id="vcodebox" class="form-control"
+                                                    style="margin:5px;width:50%;display: none;">
+
+
+                                                <button id="vbutton" class="btn btn-warning"
+                                                    style="margin:5px;display: none;" type="button">verify</button>
+                                                <input type="hidden" id="s" value="0">
+                                                <button type="submit" class="btn btn-info pull-right" style="margin:5px"
+                                                    id="postr">Post</button>
+
+                                            </form>
+                                            <!-- close if -->
+
+                                            <ul class="media-list" style="margin-top: 55px;">
+                                                @isset($review)
+                                                @foreach($review as $r)
+                                                <li class="media">
+
+                                                    <a href="#" class="pull-left">
+                                                        <img src="{{asset('images/user_1.jpg')}}" alt=""
+                                                            class="img-circle">
+                                                    </a>
+                                                    <div class="media-body" style="    margin-left: 20px;">
+                                                        <span class="text-muted pull-right">
+                                                            <small class="text-muted">Posted on:
+                                                                {{$r->updated_at}}</small>
+                                                        </span>
+                                                        <label>Reviewed by: </label><strong class="text-success">
+                                                            {{$r->name}}</strong>
+                                                        &nbsp;&nbsp;
+                                                        <label>Rated: </label><strong class="text-info">
+                                                            {{$r->rating}}</strong><i
+                                                            class="lni-star-filled text-warning"></i>
+
+                                                        <p class="text-info">{{$r->title}}</p>
+                                                        <h6>
+                                                            {{$r->review}}
+                                                        </h6>
+                                                    </div>
+                                                </li>
+                                                @endforeach
+                                                @endisset
+                                                {{$review->links()}}
+                                            </ul>
                                     </div>
                                 </div>
                             </div>
@@ -430,7 +437,19 @@ Session::put('idu','aa');
 
                     </div>
                     <div class="col-lg-4 col-md-6 col-xs-12">
+                        <div class="short-info">
+                            <h4>Short info</h4>
+                            <ul>
+                                <li><i class="lni-users"></i><a>Posted by <span>{{$own->name}}</a></span>
+                                </li>
 
+                                <li><i class="lni-reply"></i><a href="https://www.addtoany.com/share"></i>Send
+                                        to a friend</a></li>
+                                <li><i class="lni-warning"></i><a>Report this ad</a></li>
+                                <li><i class="lni-warning"></i><a>Suggest an edit</a></li>
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

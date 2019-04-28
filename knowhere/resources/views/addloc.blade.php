@@ -5,6 +5,7 @@
 <head>
 
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Knowhere</title>
 
@@ -43,10 +44,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-wrapper">
-                        <h2 class="product-title">Reset Password</h2>
+                        <h2 class="product-title">Add locations</h2>
                         <ol class="breadcrumb">
                             <li><a href="#">Home /</a></li>
-                            <li class="current">Reset Password</li>
+                            <li class="current">Add locations</li>
                         </ol>
                     </div>
                 </div>
@@ -96,7 +97,7 @@
                                     </li>
                                     </li>
                                     <li>
-                                        <a class="active" href="#">
+                                        <a href="resetpwd">
                                             <i class="lni-layers"></i>
                                             <span>Reset password</span>
                                         </a>
@@ -110,7 +111,7 @@
                                     </li>
                                     @if(Session::get('utype')==2)
                                     <li>
-                                        <a href="/addloc">
+                                        <a class="active" href="#">
                                             <i class="lni-wallet"></i>
                                             <span>Add nearby locations</span>
                                         </a>
@@ -152,65 +153,29 @@
                             <div class="inner-box" style="width: 1000px;">
                                 <div class="tg-contactdetail">
                                     <div class="dashboard-box">
-                                        <h2 class="dashbord-title">Reset Password</h2>
+                                        <h2 class="dashbord-title">Add locations</h2>
                                     </div>
                                     @include('inc.message')
                                     <div class="alert alert-info" style="align:center;">
-                                        <strong>Password: Uppercase letter,digit,min 8 characters</strong>
+                                        <strong>Please do a search before adding inorder to
+                                            verify
+                                            whether the locality has already been added!!</strong>
                                     </div>
                                     <div class="alert alert-warning" style="align:center;">
-                                        <input type="button" class="btn btn-info" value="Click To update email
-                                            also" id="disablebtn">
-                                        <strong></strong>
+                                        <strong>If not found to be existing, Add the location..</strong>
                                     </div>
                                     <div class="dashboard-wrapper">
-                                        <form method="POST" action="/changepassword" id="rqstform"
-                                            onsubmit="return formValidation3()" enctype="multipart/form-data">
-                                            @csrf
-                                            @isset($log)
-                                            @foreach($log as $l)
-                                            <input type="text" name="id" hidden value="{{$l->id}}">
-                                            <div class="form-group mb-3">
-                                                <label class="control-label">Email</label>
-                                                <input disabled class="form-control input-md" value="{{$l->email}}"
-                                                    name='email' id='email' onblur="return emailDoesExist()"
-                                                    placeholder=" Contact Email">
-                                                <div id="p22" class="alert alert-danger"
-                                                    style="align:center;display: none;">
-                                                    <strong>Enter a valid email</strong>
-                                                </div>
-                                                <div id="p23" class="alert alert-danger"
-                                                    style="align:center;display: none;">
-                                                    <strong>Email already registered, Use a different one!!</strong>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                            @endisset
-                                            <div class="form-group mb-3">
-                                                <label class="control-label">Current password</label>
-                                                <input class="form-control input-md" name="curpass" type="text">
-                                            </div>
 
-                                            <div class="form-group mb-3">
-                                                <label class="control-label">New password</label>
-                                                <input class="form-control input-md" name="npass" type="text">
-                                            </div>
+                                        <div class="form-group mb-3">
+                                            <label class="control-label">locality to be added</label>
+                                            <input class="form-control input-md" name="local" type="text">
+                                        </div>
+                                        <div class="col-sm-12 col-md-8 col-lg-9">
 
-                                            <div class="form-group mb-3">
-                                                <label class="control-label">Confirm password</label>
-                                                <input class="form-control input-md" name="cpass" type="text">
+                                            <div id="List">
+                                                <br>
                                             </div>
-                                            <div id="p24" class="alert alert-danger"
-                                                style="align:center;display: none;">
-                                                <strong>check password</strong>
-                                            </div>
-                                            <div id="head" style="align:center;display: none;"
-                                                class="alert alert-danger">
-                                                <strong>Enter valid input</strong>
-                                            </div>
-                                            <div class="button-wrapper"><button type="submit" id="submit1"
-                                                    name="submit1" class="btn btn-common">Reset Password</button></div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -219,75 +184,74 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
-    @include('inc.outer.footer')
+        @include('inc.outer.footer')
 
 
-    <a href="#" class="back-to-top">
-        <i class="lni-chevron-up"></i>
-    </a>
+        <a href="#" class="back-to-top">
+            <i class="lni-chevron-up"></i>
+        </a>
 
-    <div id="preloader">
-        <div class="loader" id="loader-1"></div>
-    </div>
+        <div id="preloader">
+            <div class="loader" id="loader-1"></div>
+        </div>
 
 
-    <script src="assets/js/jquery-min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery-min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
 
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/wow.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/nivo-lightbox.js"></script>
-    <script src="assets/js/jquery.slicknav.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/form-validator.min.js"></script>
-    <script src="assets/js/contact-form-script.min.js"></script>
-    <script src="assets/js/summernote.js"></script>
-    <script src="{{ asset('js/myajax.js') }}"></script>
-    <script>
-    $(document).ready(function() {
-        $('#disablebtn').click(function() {
-            if ($('#email').prop('disabled')) {
-                $('#email').prop('disabled', false)
-            } else {
-                $('#email').prop('disabled', true)
-            }
-        });
-    })
-    </script>
-    <script>
-    function emailDoesExist() {
-        $('#submit1').addClass('disabled');
-        var email = document.getElementById('email').value;
-        if (email) {
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: '/mailcheck/' + email,
-                type: "GET",
-                dataType: "json",
-                // data: {
-                //     'email': remail
-                // },
-                success: function(data) {
-                    if (data == 1) {
-                        $("#p23").fadeIn().delay('1000').fadeOut();
-                    } else {
-                        $('#submit1').removeClass('disabled');
-
-                    }
-
+        <script src="assets/js/jquery.counterup.min.js"></script>
+        <script src="assets/js/waypoints.min.js"></script>
+        <script src="assets/js/wow.js"></script>
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="assets/js/nivo-lightbox.js"></script>
+        <script src="assets/js/jquery.slicknav.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/form-validator.min.js"></script>
+        <script src="assets/js/contact-form-script.min.js"></script>
+        <script src="assets/js/summernote.js"></script>
+        <script src="{{ asset('js/myajax.js') }}"></script>
+        <script>
+        $(document).ready(function() {
+            $('#disablebtn').click(function() {
+                if ($('#email').prop('disabled')) {
+                    $('#email').prop('disabled', false)
+                } else {
+                    $('#email').prop('disabled', true)
                 }
             });
+        })
+        </script>
+        <script>
+        function emailDoesExist() {
+            $('#submit1').addClass('disabled');
+            var email = document.getElementById('email').value;
+            if (email) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '/mailcheck/' + email,
+                    type: "GET",
+                    dataType: "json",
+                    // data: {
+                    //     'email': remail
+                    // },
+                    success: function(data) {
+                        if (data == 1) {
+                            $("#p23").fadeIn().delay('1000').fadeOut();
+                        } else {
+                            $('#submit1').removeClass('disabled');
+
+                        }
+
+                    }
+                });
+            }
         }
-    }
-    </script>
+        </script>
 </body>
 
 </html>

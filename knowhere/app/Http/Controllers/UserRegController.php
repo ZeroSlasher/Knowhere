@@ -44,6 +44,7 @@ class UserRegController extends Controller
             'email' => $request->get('mail'),
             'name' => $request->get('name'),
             'phone' => $request->get('phone'),
+            'city_id' => 161,
             'status_id' => 1,
         ]);
         $reg->save();

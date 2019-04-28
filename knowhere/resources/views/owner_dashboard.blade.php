@@ -104,19 +104,19 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="addloc">
                                             <i class="lni-wallet"></i>
                                             <span>Add nearby locations</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="undermaintainence">
                                             <i class="lni-heart"></i>
                                             <span>Option4</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="undermaintainence">
                                             <i class="lni-star"></i>
                                             <span>Option5</span>
                                         </a>

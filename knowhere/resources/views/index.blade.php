@@ -387,7 +387,7 @@
                 </div>
                 <!-- end .row -->
                 <div class="text-center">
-                    <a href="/categories" disabled class="button">All Listings</a>
+                    <a href="#" class="button">All Listings</a>
                 </div>
                 <!-- end .text-center -->
             </div>
@@ -482,7 +482,6 @@
                 <a href=""><i class="pe-so-vimeo"></i></a>
                 <a href=""><i class="pe-so-tripadvisor"></i></a>
                 <a href=""><i class="pe-so-instagram"></i></a>
-                <a href=""><i class="pe-so-google-plus"></i></a>
             </div>
             <div class="right"></div>
             <!-- end .left -->
@@ -498,8 +497,8 @@
             <form action="/login" method="post">
                 @csrf
                 <div class="form-group">
-                    <input type="email" placeholder="Email Address" id="email" onmousedown="this.type='text'"
-                        name="email" required>
+                    <input type="email" autocomplete="off" placeholder="Email Address" id="email"
+                        onmousedown="this.type='text'" name="email" required>
                 </div>
                 <!-- end .form-group -->
                 <div class="form-group">

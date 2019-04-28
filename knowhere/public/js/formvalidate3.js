@@ -78,8 +78,9 @@
                                 $('#vbutton').fadeIn();
 
                                 var semail = document.getElementById('email').value;
-                                // $("#vmail").text(semail);
-                                if (semail) {
+                                var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+                                if (semail && semail.match(emailExp)) {
+                                    // $("#vmail").text(semail);
                                     $.ajax({
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -91,19 +92,19 @@
                                         //     'email': semail
                                         // },
                                         success: function (data) {
+                                            console.log(data);
+
                                             if (data == 1) {
                                                 //fail
-                                                // $('#vcodebox').fadeOut();
-                                                // $('#vbutton').fadeOut();
-                                                $("#p222").show().delay(1000).fadeOut();
-                                            } else {
-                                                //success
                                                 $('#vcodebox').fadeOut();
                                                 $('#vbutton').fadeOut();
-                                                $('#s').val("1");
-                                                $("#vs").show().delay(1000).fadeOut();
+                                                $("#p222").show().delay(1000).fadeOut();
+                                            } else if (data == 0) {
+                                                //success
+                                                $("#vwarn").show().delay(1000).fadeOut();
+                                                $('#vcodebox').fadeIn();
+                                                $('#vbutton').fadeIn();
 
-                                                $('#postr').removeClass('disabled');
                                             }
 
                                         }
@@ -130,22 +131,20 @@
 
                                             type: "GET",
                                             dataType: "json",
-                                            // data: {
-                                            //     'vcode': vcode,
-                                            //     'email': email,
-                                            // },
+
                                             success: function (data) {
                                                 if (data == 1) {
-
+                                                    console.log(data);
                                                     $("#vwarn1").show().delay(1000).fadeOut();
 
                                                 } else {
-
+                                                    console.log(data);
                                                     $('#vcodebox').fadeOut();
                                                     $('#vbutton').fadeOut();
                                                     $('#s').val("1");
                                                     $("#vs").show().delay(1000).fadeOut();
-                                                    return true;
+                                                    $('#postr').removeClass('disabled');
+
                                                 }
 
                                             }
@@ -169,15 +168,44 @@
                                     var email = $('#email').val();
                                     var name = $('#name').val();
                                     var status = $('#s').val();
+                                    var alphaExp = /^[a-zA-Z ]*$/;
 
+                                    if (review == "" || title == "" || rate == "" || email == "" || name == "" || status == "" || status == 0) {
+                                        $("#head").show().delay(1000).fadeOut();
 
+                                        return false;
+                                    } else if (!name.match(alphaExp)) {
+                                        $("#namer").show().delay(1000).fadeOut();
 
-
-
-                                    return false;
+                                        return false;
+                                    } else {
+                                        return true;
+                                    }
                                 });
 
                             });
+
+
+                            $(document).ready(function () {
+                                $('#freviews').on('submit', function () {
+                                    var review = $('#review').val();
+                                    var title = $('#title').val();
+                                    var rate = $("input[name=rating]").val();
+
+
+                                    if (review == "" || title == "" || rate == "") {
+                                        $("#head").show().delay(1000).fadeOut();
+
+                                        return false;
+                                    } else {
+                                        return true;
+                                    }
+                                });
+
+                            });
+
+
+
 
                             // function emailDoesExist() {
                             //     $('#postr').addClass('disabled');

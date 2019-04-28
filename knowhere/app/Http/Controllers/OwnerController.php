@@ -15,11 +15,12 @@ class OwnerController extends Controller
         $utype = Session::get('utype');
         $uid = Session::get('uid');
         if (Session::get('id')) {
-            $post = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
+            $posts = DB::select("SELECT * FROM `tbl_outlet_prof` as l, `tbl_city` as c,`tbl_subcat` as s,
             `tbl_status` as st, `tbl_state` as sta, tbl_cat as cat, `tbl_district` as d,tbl_users_reg as o,tbl_login as lo
             WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and
             c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lo.`id`=l.`id` and s.cat_id = cat.cat_id and l.id=$uid");
-            return view('mypostings', compact('post'));
+
+            return view('mypostings', compact('posts'));
         }
     }
 
@@ -131,6 +132,7 @@ class OwnerController extends Controller
         $state = DB::table('tbl_state')->get();
         //$prof = DB::table('tbl_users_reg')->where('id', $oid)->get();
         $prof = DB::select("select * from tbl_users_reg as a,tbl_city as b,tbl_district as c,tbl_state as d where a.id = '$oid' and a.city_id = b.city_id and b.dist_id = c.dist_id and c.state_id = d.state_id");
+
         return view('edit-profile', compact('state', 'prof'));
     }
 
@@ -236,7 +238,8 @@ class OwnerController extends Controller
 
     public function addloc()
     {
-        return 'add locations view';
+
+        return view('addloc');
     }
 
 }
