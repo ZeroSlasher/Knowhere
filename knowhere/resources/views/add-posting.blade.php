@@ -110,6 +110,12 @@
                                     </li>
                                     @if(Session::get('utype')==2)
                                     <li>
+                                        <a href="add_ad">
+                                            <i class="lni-heart"></i>
+                                            <span>My Adverts</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="/addloc">
                                             <i class="lni-wallet"></i>
                                             <span>Add nearby locations</span>
@@ -372,7 +378,7 @@
 
 
     <cfoutput>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy-PboZ3O_A25CcJ9eoiSrKokTnWyAmt8">
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVtoU6ioC5PVtX8DeQD7ZWpy8AJvvmO9E">
 
         </script>
     </cfoutput>

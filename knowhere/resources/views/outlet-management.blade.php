@@ -92,25 +92,25 @@
                                     <li>
                                         <a class="active" href="outletmanagement">
                                             <i class="lni-envelope"></i>
-                                            <span>Outlet management</span>
+                                            <span>Outlet Management</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="offer">
+                                        <a href="undermaintainence">
                                             <i class="lni-wallet"></i>
-                                            <span>Offers/Messages</span>
+                                            <span>Post Reportings</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="undermaintainence">
                                             <i class="lni-heart"></i>
-                                            <span>Option</span>
+                                            <span>Comment Reports</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="undermaintainence">
                                             <i class="lni-star"></i>
-                                            <span>Option</span>
+                                            <span>Messages/Enquiries</span>
                                         </a>
                                     </li>
                                     <li>
@@ -151,7 +151,7 @@
     <script src="assets/js/jquery-min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-     
+
     <script src="assets/js/jquery.counterup.min.js"></script>
     <script src="assets/js/waypoints.min.js"></script>
     <script src="assets/js/wow.js"></script>

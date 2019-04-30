@@ -3448,7 +3448,7 @@ label {
     margin-bottom: 0
 }
 
-#pricing-table .table {
+/* #pricing-table .table {
     padding-bottom: 30px;
     border-radius: 4px;
     background: #fff;
@@ -3459,11 +3459,11 @@ label {
     -ms-transition: all .3s linear;
     -o-transition: all .3s linear;
     transition: all .3s linear
-}
+} */
 
-#pricing-table .table .icon {
+/* #pricing-table .table .icon {
     padding-top: 30px
-}
+} */
 
 #pricing-table .table .icon i {
     color: #00bcd4;
@@ -4202,7 +4202,7 @@ blockquote {
     font-size: 14px;
     box-shadow: none;
     color: #848484;
-        background: #fff;
+    background: #fff;
     padding: 7px 19px;
     border: 1px solid #e5e5e5;
     border-radius: 50px;

@@ -90,35 +90,35 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="outletmanagement">
-                                            <i class="lni-envelope"></i>
-                                            <span>Outlet Owners</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="offer">
-                                            <i class="lni-wallet"></i>
-                                            <span>Offers/Messages</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="undermaintainence">
-                                            <i class="lni-heart"></i>
-                                            <span>Option</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="undermaintainence">
-                                            <i class="lni-star"></i>
-                                            <span>Option</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/logout">
-                                            <i class="lni-enter"></i>
-                                            <span>Logout</span>
-                                        </a>
-                                    </li>
+                        <a href="outletmanagement">
+                            <i class="lni-envelope"></i>
+                            <span>Outlet Management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="undermaintainence">
+                            <i class="lni-wallet"></i>
+                            <span>Post Reportings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="undermaintainence">
+                            <i class="lni-heart"></i>
+                            <span>Comment Reports</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="undermaintainence">
+                            <i class="lni-star"></i>
+                            <span>Messages/Enquiries</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout">
+                            <i class="lni-enter"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -151,7 +151,7 @@
     <script src="assets/js/jquery-min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-     
+
     <script src="assets/js/jquery.counterup.min.js"></script>
     <script src="assets/js/waypoints.min.js"></script>
     <script src="assets/js/wow.js"></script>

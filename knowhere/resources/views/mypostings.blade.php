@@ -106,6 +106,12 @@
                                     </li>
                                     @if(Session::get('utype')==2)
                                     <li>
+                                        <a href="add_ad">
+                                            <i class="lni-heart"></i>
+                                            <span>My Adverts</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="/addloc">
                                             <i class="lni-wallet"></i>
                                             <span>Add nearby locations</span>
@@ -154,6 +160,9 @@
                                 <h2 class="dashbord-title">My Postings</h2>
                             </div>
                             @include('inc.message')
+                            @if(!empty($successMsg))
+                            <div class="alert alert-danger"> {{ $successMsg }}</div>
+                            @endif
                             <div class="dashboard-wrapper">
                                 <div class="row">
                                     @if(isset($posts)) @foreach($posts as $own)
@@ -233,14 +242,21 @@
                                                     <h3 class="btn-verified price float-left"><i
                                                             class="lni-pointer-right"></i>Referred</h3>
                                                     @endif
+
+
                                                     <a href="deletepost/{{$own->outletid}}"
                                                         class="btn-verified float-right"><i class="lni-trash"></i>
                                                         Delete posting</a> &nbsp;&nbsp; &nbsp;
+
+
 
                                                     <a href="editpost/{{$own->outletid}}"
                                                         class="btn-verified float-right"><i class="lni-pencil"></i>
                                                         Edit posting</a>&nbsp;&nbsp; &nbsp;
 
+                                                    <a href="postdetails/{{$own->outletid}}"
+                                                        class="btn-verified float-right"><i class="lni-eye"></i>
+                                                        view posting</a> &nbsp;&nbsp; &nbsp;
                                                 </div>
                                             </div>
                                         </div>

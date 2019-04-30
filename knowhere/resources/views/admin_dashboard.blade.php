@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>User Dashboard</title>
+    <title>Admin Dashboard</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-wrapper">
-                        <h2 class="product-title">Dashbord</h2>
+                        <h2 class="product-title">Admin Dashbord</h2>
                         <ol class="breadcrumb">
                             <li><a href="/">Home /</a></li>
                             <li class="current">Dashboard</li>

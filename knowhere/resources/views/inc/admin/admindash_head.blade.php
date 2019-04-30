@@ -16,14 +16,6 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="/" aria-haspopup="true">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/categories">
-                        Categories
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="/listing_list" data-toggle="dropdown">Listings</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">

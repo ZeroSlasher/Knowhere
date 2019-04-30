@@ -109,6 +109,12 @@
                                     </li>
                                     @if(Session::get('utype')==2)
                                     <li>
+                                        <a href="add_ad">
+                                            <i class="lni-heart"></i>
+                                            <span>My Adverts</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="/addloc">
                                             <i class="lni-wallet"></i>
                                             <span>Add nearby locations</span>
@@ -208,12 +214,25 @@
                                                 <label class="control-label">State</label>
                                                 <div class="tg-select form-control">
                                                     <select id="state" name="state">
-                                                        <option selected value="{{$p->state_id}}"> {{$p->state}}
+                                                        @if($p->state=='Unselected')
+                                                        <option selected disabled value="{{$p->state_id}}">
+                                                            {{$p->state}}
                                                         </option>
+                                                        @else
+                                                        <option selected value="{{$p->state_id}}">
+                                                            {{$p->state}}
+                                                        </option>
+                                                        @endif
                                                         @isset($state)
                                                         @foreach($state as $states)
+                                                        @if($states->state=='Unselected')
+                                                        <option disabled value="{{$states->state_id}}">
+                                                            {{$states->state}}
+                                                        </option>
+                                                        @else
                                                         <option value="{{$states->state_id}}">{{$states->state}}
                                                         </option>
+                                                        @endif
                                                         @endforeach
                                                         @endisset
                                                     </select>

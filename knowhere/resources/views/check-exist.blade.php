@@ -109,6 +109,12 @@
                                     </li>
                                     @if(Session::get('utype')==2)
                                     <li>
+                                        <a href="add_ad">
+                                            <i class="lni-heart"></i>
+                                            <span>My Adverts</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="/addloc">
                                             <i class="lni-wallet"></i>
                                             <span>Add nearby locations</span>

@@ -51,6 +51,7 @@ Route::group(['middleware' => ['revalidate', 'usersession']], function () {
     Route::any('/deletepost/{id}', 'PostController@deletepost')->name('deletepost');
     Route::any('/removepost', 'PostController@removepost')->name('removepost');
     Route::any('/addloc', 'OwnerController@addloc')->name('addloc');
+    Route::any('/add_ad', 'OwnerController@addad')->name('addad');
 
 });
 

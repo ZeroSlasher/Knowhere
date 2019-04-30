@@ -19,8 +19,12 @@ class OwnerController extends Controller
             `tbl_status` as st, `tbl_state` as sta, tbl_cat as cat, `tbl_district` as d,tbl_users_reg as o,tbl_login as lo
             WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and l.status_id=st.status_id and
             c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lo.`id`=l.`id` and s.cat_id = cat.cat_id and l.id=$uid");
+            if (count($posts) > 0) {
+                return view('mypostings', compact('posts'));
+            } elseif (count($posts) == 0) {
 
-            return view('mypostings', compact('posts'));
+                return view('mypostings')->with('successMsg', 'No results found!!');
+            }
         }
     }
 
@@ -238,8 +242,13 @@ class OwnerController extends Controller
 
     public function addloc()
     {
-
         return view('addloc');
+    }
+
+    public function addad()
+    {
+        $outlet = DB::table('tbl_outlet_prof')->where('id', Session::get('uid'))->get();
+        return view('add-ad', compact('outlet'));
     }
 
 }

@@ -162,6 +162,7 @@
             <div class="container">
                 <div class="row" style="margin-top: -250px;">
                     <div class="col-md-6 ml-auto mr-auto">
+                        @isset($udata)
                         @foreach($udata as $u)
                         <div class="profile">
                             <div class="avatar">
@@ -201,6 +202,7 @@
 
 
                 @endforeach
+                @endisset
                 <div>
 
                     <br>
