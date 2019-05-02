@@ -201,10 +201,7 @@ class HomeController extends Controller
         return view('pricing');
     }
 
-    public function payment()
-    {
-        return view('payments');
-    }
+
     public function offer()
     {
         return view('offermessages');
@@ -230,7 +227,7 @@ class HomeController extends Controller
 
     public function dummy()
     {
-
+        return view('myads');
         $name = ("'h'e'l_'_l'o'");
         str_replace(array("'", "'"), '', $name);
 

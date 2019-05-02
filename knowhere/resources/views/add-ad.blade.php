@@ -76,30 +76,86 @@
         color: #4183D7;
     }
 
-    /* Hiding the checkbox, but allowing it to be focused */
-    .badgebox {
-        opacity: 0;
+
+
+    @keyframes click-wave {
+        0% {
+            height: 40px;
+            width: 40px;
+            opacity: 0.35;
+            position: relative;
+        }
+
+        100% {
+            height: 200px;
+            width: 200px;
+            margin-left: -80px;
+            margin-top: -80px;
+            opacity: 0;
+        }
     }
 
-    .badgebox+.badge {
-        /* Move the check mark away when unchecked */
-        text-indent: -999999px;
-        /* Makes the badge's width stay the same checked and unchecked */
-        width: 27px;
+    .option-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        position: relative;
+        top: 13.33333px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 40px;
+        width: 40px;
+        transition: all 0.15s ease-out 0s;
+        background: #cbd1d8;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 0.5rem;
+        outline: none;
+        position: relative;
+        z-index: 1000;
     }
 
-    .badgebox:focus+.badge {
-        /* Set something to make the badge looks focused */
-        /* This really depends on the application, in my case it was: */
-
-        /* Adding a light border */
-        box-shadow: inset 0px 0px 5px;
-        /* Taking the difference out of the padding */
+    .option-input:hover {
+        background: #9faab7;
     }
 
-    .badgebox:checked+.badge {
-        /* Move the check mark back when checked */
-        text-indent: 0;
+    .option-input:checked {
+        background: #40e0d0;
+    }
+
+    .option-input:checked::before {
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        content: '✔';
+        display: inline-block;
+        font-size: 26.66667px;
+        text-align: center;
+        line-height: 40px;
+    }
+
+    .option-input:checked::after {
+        -webkit-animation: click-wave 0.65s;
+        -moz-animation: click-wave 0.65s;
+        animation: click-wave 0.65s;
+        background: #40e0d0;
+        content: '';
+        display: block;
+        position: relative;
+        z-index: 100;
+    }
+
+    .option-input.radio {
+        border-radius: 50%;
+    }
+
+    .option-input.radio::after {
+        border-radius: 50%;
     }
     </style>
 </head>
@@ -142,7 +198,11 @@
                                 </figure>
                                 <div class="usercontent">
                                     <h3>{{Session::get('name')}}</h3>
+                                    @if(Session::get('utype')==2)
+                                    <h4>Outlet owner</h4>
+                                    @else
                                     <h4></h4>
+                                    @endif
                                 </div>
                             </div>
                             <nav class="navdashboard">
@@ -185,7 +245,7 @@
                                     </li>
                                     @if(Session::get('utype')==2)
                                     <li>
-                                        <a href="#" class="active">
+                                        <a href="myads" class="active">
                                             <i class="lni-heart"></i>
                                             <span>My Adverts</span>
                                         </a>
@@ -244,133 +304,149 @@
 </div> -->
                                     <div class="dashboard-wrapper">
 
+                                        <form id="addad" method="post" action="/add_advert">
+                                            @csrf
+                                            <div class="form-group mb-3 tg-inputwithicon">
+                                                <label class="control-label">Shop for which the ad is posting
+                                                    for</label>
+                                                <div class="tg-select form-control">
+                                                    <select name="outlet" id="outlet">
+                                                        <option selected value="0" disabled> -- select Outlet --
+                                                        </option>
+                                                        @isset($outlet)
+                                                        @foreach($outlet as $o)
+                                                        <option value="{{$o->outletid}}">{{$o->outletname}}
+                                                        </option>
+                                                        @endforeach
+                                                        @endisset
+                                                    </select>
+                                                </div>
 
-                                        <div class="form-group mb-3 tg-inputwithicon">
-                                            <label class="control-label">Shop for which the ad is posting for</label>
-                                            <div class="tg-select form-control">
-                                                <select name="outlet" id="outlet">
-                                                    <option selected value="0"> -- select Outlet -- </option>
-                                                    @isset($outlet)
-                                                    @foreach($outlet as $o)
-                                                    <option value="{{$o->outletid}}">{{$o->outletname}}
-                                                    </option>
-                                                    @endforeach
-                                                    @endisset
-                                                </select>
-                                            </div>
+                                                <div class="form-group mb-3">
+                                                    <label class="control-label">Content of the advertisement</label>
+                                                    <input id="file" type="file" name="file" multiple class="file"
+                                                        data-max-file-count="1" data-min-file-count="1">
+                                                </div>
 
-                                            <div class="form-group mb-3">
-                                                <label class="control-label">Content of the advertisement</label>
-                                                <input id="file" type="file" name="file" multiple class="file"
-                                                    data-min-file-count="2">
-                                            </div>
+                                                <div class="form-group mb-3">
+                                                    <label class="control-label">Description for the
+                                                        advertisement</label>
+                                                    <textarea class="form-control" id="Desc" name="Desc"></textarea>
+                                                </div>
 
-                                            <div class="form-group mb-3">
-                                                <label class="control-label">Description for the advertisement</label>
-                                                <textarea class="form-control" id="Desc" name="Desc"></textarea> </div>
+                                                <div class="form-group mb-3">
+                                                    <label class="control-label">Package for the advertisement</label>
+                                                    <div class="col-sm-12 col-md-8 col-lg-9">
+                                                        <section id="pricing-table">
+                                                            <div class="table" style="display:flex;">
+                                                                <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12">
 
-                                            <div class="form-group mb-3">
-                                                <label class="control-label">Package for the advertisement</label>
-                                                <div class="col-sm-12 col-md-8 col-lg-9">
-                                                    <section id="pricing-table">
-                                                        <div class="table" style="display:flex;">
-                                                            <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12">
+                                                                    <div class="box-part text-center">
 
-                                                                <div class="box-part text-center">
+                                                                        <div class="icon">
+                                                                            <i class="lni-gift"></i>
+                                                                        </div>
+                                                                        <div class="title">
+                                                                            <h3>SILVER</h3>
+                                                                        </div>
+                                                                        <div class="pricing-header">
+                                                                            <p class="price-value">
+                                                                                <sup>₹</sup>100<span></span>
+                                                                            </p>
+                                                                        </div>
+                                                                        <ul class="description">
+                                                                            <li><strong>Free</strong> ad posting</li>
+                                                                            <li><strong>1</strong> Featured ads
+                                                                                availability
+                                                                            </li>
+                                                                            <li><strong>For 10</strong> days</li>
+                                                                            <li><strong>100%</strong> Secure!</li>
+                                                                        </ul>
 
-                                                                    <div class="icon">
-                                                                        <i class="lni-gift"></i>
+
+                                                                        <label>
+                                                                            <input type="radio"
+                                                                                class="option-input radio" id="pkg"
+                                                                                name="pkg" value="1" checked />
+                                                                            select SILVER
+                                                                        </label>
+
                                                                     </div>
-                                                                    <div class="title">
-                                                                        <h3>SILVER</h3>
-                                                                    </div>
-                                                                    <div class="pricing-header">
-                                                                        <p class="price-value">
-                                                                            <sup>₹</sup>100<span></span>
-                                                                        </p>
-                                                                    </div>
-                                                                    <ul class="description">
-                                                                        <li><strong>Free</strong> ad posting</li>
-                                                                        <li><strong>No</strong> Featured ads
-                                                                            availability
-                                                                        </li>
-                                                                        <li><strong>For 10</strong> days</li>
-                                                                        <li><strong>100%</strong> Secure!</li>
-                                                                    </ul>
-                                                                    <label for="info" class="btn btn-info">Select <input
-                                                                            type="checkbox" id="info"
-                                                                            class="badgebox"><span
-                                                                            class="badge">&check;</span></label>
-
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12">
+                                                                <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12">
 
-                                                                <div class="box-part text-center">
+                                                                    <div class="box-part text-center">
 
-                                                                    <div class="icon">
-                                                                        <i class="lni-leaf"></i>
+                                                                        <div class="icon">
+                                                                            <i class="lni-leaf"></i>
+                                                                        </div>
+                                                                        <div class="title">
+                                                                            <h3>STANDARD</h3>
+                                                                        </div>
+                                                                        <div class="pricing-header">
+                                                                            <p class="price-value"><sup>₹</sup>200
+                                                                            </p>
+                                                                        </div>
+                                                                        <ul class="description">
+                                                                            <li><strong>Free</strong> ad posting</li>
+                                                                            <li><strong>2</strong> Featured ads
+                                                                                availability
+                                                                            </li>
+                                                                            <li><strong>For 20</strong> days</li>
+                                                                            <li><strong>100%</strong> Secure!</li>
+                                                                        </ul>
+                                                                        <label>
+                                                                            <input type="radio"
+                                                                                class="option-input radio" name="pkg"
+                                                                                value="2" />
+                                                                            select STANDARD
+                                                                        </label>
+
+
                                                                     </div>
-                                                                    <div class="title">
-                                                                        <h3>STANDARD</h3>
-                                                                    </div>
-                                                                    <div class="pricing-header">
-                                                                        <p class="price-value"><sup>₹</sup>200
-                                                                        </p>
-                                                                    </div>
-                                                                    <ul class="description">
-                                                                        <li><strong>Free</strong> ad posting</li>
-                                                                        <li><strong>6</strong> Featured ads availability
-                                                                        </li>
-                                                                        <li><strong>For 20</strong> days</li>
-                                                                        <li><strong>100%</strong> Secure!</li>
-                                                                    </ul>
-                                                                    <label for="warning" class="btn btn-warning">Select
-                                                                        <input type="checkbox" id="warning"
-                                                                            class="badgebox"><span
-                                                                            class="badge">&check;</span></label>
-
-
                                                                 </div>
-                                                            </div>
 
-                                                            <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12">
+                                                                <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12">
 
-                                                                <div class="box-part text-center">
+                                                                    <div class="box-part text-center">
 
-                                                                    <div class="icon">
-                                                                        <i class="lni-layers"></i>
+                                                                        <div class="icon">
+                                                                            <i class="lni-layers"></i>
+                                                                        </div>
+                                                                        <div class="title">
+                                                                            <h3>PLANINIUM</h3>
+                                                                        </div>
+                                                                        <div class="pricing-header">
+                                                                            <p class="price-value"><sup>₹</sup>300
+                                                                            </p>
+                                                                        </div>
+                                                                        <ul class="description">
+                                                                            <li><strong>Free</strong> ad posting</li>
+                                                                            <li><strong>3</strong> Featured ads
+                                                                                availability
+                                                                            </li>
+                                                                            <li><strong>For 30</strong> days</li>
+                                                                            <li><strong>100%</strong> Secure!</li>
+                                                                        </ul>
+                                                                        <label>
+                                                                            <input type="radio"
+                                                                                class="option-input radio" name="pkg"
+                                                                                value="3" />
+                                                                            select PLANINIUM
+                                                                        </label>
                                                                     </div>
-                                                                    <div class="title">
-                                                                        <h3>PLANINIUM</h3>
-                                                                    </div>
-                                                                    <div class="pricing-header">
-                                                                        <p class="price-value"><sup>₹</sup>300
-                                                                        </p>
-                                                                    </div>
-                                                                    <ul class="description">
-                                                                        <li><strong>Free</strong> ad posting</li>
-                                                                        <li><strong></strong> Featured ads availability
-                                                                        </li>
-                                                                        <li><strong>For 30</strong> days</li>
-                                                                        <li><strong>100%</strong> Secure!</li>
-                                                                    </ul>
-                                                                    <label for="primary" class="btn btn-primary">Select
-                                                                        <input type="checkbox" id="primary"
-                                                                            class="badgebox"><span
-                                                                            class="badge">&check;</span></label>
-
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </section>
+                                                        </section>
+                                                    </div>
                                                 </div>
                                             </div>
-
-
-
-
-                                        </div>
+                                            <input type="submit" class="btn btn-common sub-btn" style="float: right;"
+                                                name="adpost" value="Complete payment">
+                                            <div id="head" style="align:center;display: none;"
+                                                class="alert alert-danger">
+                                                <strong>All details are mandatory</strong>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -411,6 +487,8 @@
         <script src="assets/js/contact-form-script.min.js"></script>
         <script src="assets/js/summernote.js"></script>
         <script src="{{ asset('js/myajax.js') }}"></script>
+        <script src="js/formvalidate4.js"></script>
+
         <script src="{{ asset('js/fileinput.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/theme.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
@@ -430,7 +508,7 @@
             allowedFileExtensions: ['jpg', 'png', 'gif'],
             overwriteInitial: false,
             maxFileSize: 10000,
-            maxFilesNum: 8,
+            maxFilesNum: 1,
             slugCallback: function(filename) {
                 return filename.replace('(', '_').replace(']', '_');
             }

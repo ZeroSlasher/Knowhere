@@ -305,7 +305,6 @@
                 <a href=""><i class="pe-so-vimeo"></i></a>
                 <a href=""><i class="pe-so-tripadvisor"></i></a>
                 <a href=""><i class="pe-so-instagram"></i></a>
-                <a href=""><i class="pe-so-google-plus"></i></a>
             </div>
             <div class="right"></div>
             <!-- end .left -->

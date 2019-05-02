@@ -68,7 +68,7 @@
                                 </figure>
                                 <div class="usercontent">
                                     <h3>{{Session::get('name')}}</h3>
-                                    <h4></h4>
+                                    <h4>Outlet owner</h4>
                                 </div>
                             </div>
                             <nav class="navdashboard">
@@ -110,7 +110,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="add_ad">
+                                        <a href="myads">
                                             <i class="lni-heart"></i>
                                             <span>My Adverts</span>
                                         </a>

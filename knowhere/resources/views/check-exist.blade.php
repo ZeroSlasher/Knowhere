@@ -68,7 +68,13 @@
                                 </figure>
                                 <div class="usercontent">
                                     <h3>{{Session::get('name')}}</h3>
+                                    @if(Session::get('utype')==2)
+                                    <h4>Outlet owner</h4>
+                                    @elseif(Session::get('utype')==3)
+                                    <h4>User</h4>
+                                    @else
                                     <h4></h4>
+                                    @endif
                                 </div>
                             </div>
                             <nav class="navdashboard">
@@ -109,7 +115,7 @@
                                     </li>
                                     @if(Session::get('utype')==2)
                                     <li>
-                                        <a href="add_ad">
+                                        <a href="myads">
                                             <i class="lni-heart"></i>
                                             <span>My Adverts</span>
                                         </a>

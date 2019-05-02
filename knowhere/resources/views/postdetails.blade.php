@@ -17,8 +17,6 @@ Session::put('idu','aa');
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/slicknav.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color-switcher.css') }}">
-
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/nivo-lightbox.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css') }}">
@@ -365,6 +363,11 @@ Session::put('idu','aa');
                                                         style="align:center;display: none;">
                                                         <strong>Enter code to continue!!</strong>
                                                     </div>
+                                                    <div id="ack" class="alert alert-info"
+                                                        style="align:center;display: none;">
+                                                        <strong>A verification code has been sent to your email, enter
+                                                            it here to continuoue!!</strong>
+                                                    </div>
                                                     <input type="text" class="form-control" autocomplete="off"
                                                         placeholder="name" id="name" name="name">
                                                     @endif
@@ -476,7 +479,6 @@ Session::put('idu','aa');
     <script src="{{ asset('assets/js/jquery-min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
     <script src="{{ asset('assets/js/wow.js') }}"></script>

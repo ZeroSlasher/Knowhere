@@ -13,7 +13,9 @@
                             </div>
                         </div>
                     </div>
+                    @if(Session::get('utype')==1)
 
+                    @else
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
                         <div class="widget">
                             <h3 class="block-title">Help & Support</h3>
@@ -47,6 +49,7 @@
                             </ul>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </section>

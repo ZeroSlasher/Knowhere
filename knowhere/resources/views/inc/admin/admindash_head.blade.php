@@ -16,6 +16,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="/" aria-haspopup="true">Home</a>
                 </li>
+                @if(Session::get('utype')==1)
+
+                @else
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
@@ -33,6 +36,7 @@
                         Contact
                     </a>
                 </li>
+                @endif
             </ul>
             <ul class="sign-in">
                 <li class="nav-item dropdown">

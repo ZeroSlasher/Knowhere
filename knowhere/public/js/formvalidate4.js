@@ -144,6 +144,25 @@ $(document).ready(function () {
 });
 
 
+$(document).ready(function () {
+    $('#addad').on('submit', function () {
+        var outlet = $('#outlet').val();
+        var file = $('#file').val();
+        var Desc = $("#Desc").val();
+        var pkg = $('#pkg').val();
+
+
+        if (outlet == "" || file == "" || Desc == "" || pkg == "") {
+            $("#head").show().delay(1000).fadeOut();
+
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+});
+
 
 // $('state').on('change', function () {
 //     checkexist();

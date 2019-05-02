@@ -240,6 +240,23 @@ class OwnerController extends Controller
 
     }
 
+    public function payment($id)
+    {
+        $detail = DB::table('tbl_advert')
+            ->join('tbl_users_reg', 'tbl_advert.id', '=', 'tbl_users_reg.id')
+            ->join('tbl_outlet_prof', 'tbl_advert.outletid', '=', 'tbl_outlet_prof.outletid')
+            ->join('tbl_package', 'tbl_advert.pkg_id', '=', 'tbl_package.pkg_id')
+            ->join('tbl_status', 'tbl_advert.status_id', '=', 'tbl_status.status_id')
+            ->where('ad_id', $id)->get();
+
+        return view('payments', compact('detail'));
+    }
+
+    public function dopayment(Request $request)
+    {
+        return $request->all();
+    }
+
     public function addloc()
     {
         return view('addloc');
@@ -251,4 +268,88 @@ class OwnerController extends Controller
         return view('add-ad', compact('outlet'));
     }
 
+    public function addadvert(Request $request)
+    {
+        $id = Session::get('uid');
+        $outletid = $request->get('outlet');
+        $file = $request->get('file');
+        $desc = $request->get('Desc');
+        $pkg = $request->get('pkg');
+        if ($pkg == 1) {
+            $exp = 10;
+        } elseif ($pkg == 2) {
+            $exp = 20;
+        } elseif ($pkg == 3) {
+            $exp = 30;
+        }
+        $status_id = 7; //7-hidden 1-active
+        $p_status = 11; //10-complete, 11-incomplete
+
+        DB::table('tbl_advert')->insert(
+            ['id' => $id, 'outletid' => $outletid, 'ad_content' => $file,
+                'description' => $desc, 'pkg_id' => $pkg,
+                'status_id' => $status_id, 'p_status' => $p_status, 'expiring_in' => $exp]
+        );
+
+        $lastid = DB::getPdo()->lastInsertId();
+
+        // $detail = DB::table('tbl_advert')
+        //     ->join('tbl_users_reg', 'tbl_advert.id', '=', 'tbl_users_reg.id')
+        //     ->join('tbl_outlet_prof', 'tbl_advert.outletid', '=', 'tbl_outlet_prof.outletid')
+        //     ->join('tbl_package', 'tbl_advert.pkg_id', '=', 'tbl_package.pkg_id')
+        //     ->join('tbl_status', 'tbl_advert.status_id', '=', 'tbl_status.status_id')
+        //     ->where('ad_id', $lastid)->get();
+
+        // return view('payments', compact('detail'));
+        // return redirect('/payment', $lastid);
+        //return redirect()->route('payment', $detail);
+        return redirect()->action('OwnerController@payment', ['id' => $lastid]);
+    }
+
+    public function myads()
+    {
+        $outlet = DB::table('tbl_advert')
+            ->join('tbl_users_reg', 'tbl_advert.id', '=', 'tbl_users_reg.id')
+            ->join('tbl_outlet_prof', 'tbl_advert.outletid', '=', 'tbl_outlet_prof.outletid')
+            ->join('tbl_package', 'tbl_advert.pkg_id', '=', 'tbl_package.pkg_id')
+            ->join('tbl_status', 'tbl_advert.status_id', '=', 'tbl_status.status_id')
+            ->where('tbl_advert.id', Session::get('uid'))->get();
+        if (count($outlet) == 0) {
+            return view('myads')->with('successMsg', 'No data found');
+
+        } else {
+
+            $total = count($outlet);
+            return view('myads', compact('outlet', 'total'));
+
+        }
+    }
+
+    public function deletead($id)
+    {
+
+        DB::table('tbl_advert')->where('ad_id', $id)->delete();
+        return back()->with('warning', 'Ad removed successfully');
+
+    }
+
+    public function edit_s_ad($id)
+    {
+        $detail = DB::table('tbl_advert')->where('ad_id', $id)->get();
+        foreach ($detail as $d) {
+            $status = $d->status_id;
+        }
+        if ($status == 1) {
+            DB::table('tbl_advert')
+                ->where('ad_id', $id)
+                ->update(['status_id' => 7]);
+            return back()->with('warning', 'Ad has been hidden successfully');
+        } else {
+            DB::table('tbl_advert')
+                ->where('ad_id', $id)
+                ->update(['status_id' => 1]);
+            return back()->with('warning', 'Ad has been activated successfully');
+
+        }
+    }
 }

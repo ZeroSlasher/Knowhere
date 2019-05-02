@@ -76,6 +76,7 @@
 
                                 $('#vcodebox').fadeIn();
                                 $('#vbutton').fadeIn();
+                                $('#ack').fadeIn();
 
                                 var semail = document.getElementById('email').value;
                                 var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
@@ -98,6 +99,7 @@
                                                 //fail
                                                 $('#vcodebox').fadeOut();
                                                 $('#vbutton').fadeOut();
+                                                $('#ack').fadeOut();
                                                 $("#p222").show().delay(1000).fadeOut();
                                             } else if (data == 0) {
                                                 //success
@@ -110,6 +112,7 @@
                                         }
                                     });
                                 } else {
+                                    $('#ack').fadeOut();
                                     $('#vcodebox').fadeOut();
                                     $('#vbutton').fadeOut();
                                     $("#p22").show().delay(1000).fadeOut();
@@ -142,6 +145,7 @@
                                                     $('#vcodebox').fadeOut();
                                                     $('#vbutton').fadeOut();
                                                     $('#s').val("1");
+                                                    $('#ack').fadeOut();
                                                     $("#vs").show().delay(1000).fadeOut();
                                                     $('#postr').removeClass('disabled');
 
@@ -150,7 +154,7 @@
                                             }
                                         });
                                     } else {
-
+                                        $('#ack').fadeOut();
                                         $("#vwarn").show().delay(1000).fadeOut();
                                         return false;
 

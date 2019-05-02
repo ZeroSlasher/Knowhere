@@ -51,7 +51,14 @@ Route::group(['middleware' => ['revalidate', 'usersession']], function () {
     Route::any('/deletepost/{id}', 'PostController@deletepost')->name('deletepost');
     Route::any('/removepost', 'PostController@removepost')->name('removepost');
     Route::any('/addloc', 'OwnerController@addloc')->name('addloc');
+    Route::any('/myads', 'OwnerController@myads')->name('myads');
     Route::any('/add_ad', 'OwnerController@addad')->name('addad');
+    Route::any('/add_advert', 'OwnerController@addadvert')->name('addadvert');
+    Route::any('/deletead/{id}', 'OwnerController@deletead')->name('deletead');
+    Route::any('/edit_s_ad/{id}', 'OwnerController@edit_s_ad')->name('edit_s_ad');
+    Route::any('/payment/{id}', 'OwnerController@payment')->name('payment');
+    Route::any('/dopayment', 'OwnerController@dopayment')->name('dopayment');
+    
 
 });
 
@@ -86,7 +93,6 @@ Route::any('/categories', 'HomeController@categories')->name('categories');
 Route::any('/listing', 'HomeController@listing_list')->name('listing');
 
 Route::any('/posting', 'HomeController@posting')->name('posting');
-Route::any('/payment', 'HomeController@payment')->name('payment');
 Route::any('/offer', 'HomeController@offer')->name('offer');
 Route::any('/comingsoon', 'HomeController@coming')->name('comingsoon');
 

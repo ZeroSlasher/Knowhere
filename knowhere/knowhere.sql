@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2019 at 04:50 AM
+-- Generation Time: May 01, 2019 at 07:23 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -58,7 +58,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (26, '2019_03_11_101207_create_regs_table', 11),
 (27, '2019_04_02_170228_tbl_users_reg', 11),
 (30, '2019_04_08_155926_tbl_review', 12),
-(31, '2019_04_22_043938_tbl_verify_mail', 12);
+(31, '2019_04_22_043938_tbl_verify_mail', 12),
+(32, '2019_04_29_165139_tbl_package', 13);
 
 -- --------------------------------------------------------
 
@@ -67,18 +68,36 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
+  `id` int(11) NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `password_resets`
+-- Table structure for table `tbl_advert`
 --
 
-INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('usernotalive@gmail.com', '$2y$10$AyZnGlk5ZNzXDEoO/k9oFO15z/liRZWO.bIEOz0QkNP4rrUlGwJiS', '2019-03-24 09:44:19'),
-('albinsalu@gmail.com', '$2y$10$UJT82jKbbsb8B9EyueF6AOQsDaSk4NVf5uxW27NwtFTuJGMgiMlcS', '2019-04-07 11:44:58');
+CREATE TABLE `tbl_advert` (
+  `ad_id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `outletid` bigint(20) UNSIGNED NOT NULL,
+  `ad_content` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pkg_id` int(10) UNSIGNED NOT NULL,
+  `status_id` int(10) UNSIGNED NOT NULL,
+  `p_status` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_advert`
+--
+
+INSERT INTO `tbl_advert` (`ad_id`, `id`, `outletid`, `ad_content`, `description`, `pkg_id`, `status_id`, `p_status`) VALUES
+(2, 19, 4, '(12).jpg', '<p><strong>sdfergthyjkl</strong></p>', 2, 1, 11),
+(3, 19, 1, '(2).jpg', '<p>SQWDEFRGB</p>', 2, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -291,7 +310,8 @@ INSERT INTO `tbl_city` (`city_id`, `dist_id`, `city`, `created_at`, `updated_at`
 (157, 1, 'Periyar', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (158, 1, 'Peruvanthanam', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (159, 1, 'Upputhara', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(160, 1, 'Vagamon', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(160, 1, 'Vagamon', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(161, 3, 'Unselected', '2019-04-28 17:37:17', '2019-04-28 17:37:17');
 
 -- --------------------------------------------------------
 
@@ -313,7 +333,8 @@ CREATE TABLE `tbl_district` (
 
 INSERT INTO `tbl_district` (`dist_id`, `state_id`, `district`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Idukki', '2019-03-18 10:58:58', '2019-03-18 10:58:58'),
-(2, 1, 'Kottayam', '2019-03-18 10:58:58', '2019-03-18 10:58:58');
+(2, 1, 'Kottayam', '2019-03-18 10:58:58', '2019-03-18 10:58:58'),
+(3, 2, 'Unselected', '2019-04-28 17:36:28', '2019-04-28 17:36:28');
 
 -- --------------------------------------------------------
 
@@ -344,7 +365,7 @@ CREATE TABLE `tbl_listing_rqst` (
 INSERT INTO `tbl_listing_rqst` (`rqst_id`, `email`, `outletname`, `city_id`, `phone`, `ownername`, `subcat_id`, `Proof1`, `Proof2`, `Proof3`, `status_id`, `created_at`, `updated_at`) VALUES
 (1, 'bigboystuffs@gmail.com', 'ZeroCorp', 1, '8547880393', 'zero', 1, '1552929495screenshot.jpg', '1552929495screenshot.jpg', '1552929495screenshot.jpg', 4, '2019-03-18 11:48:15', '2019-03-18 11:48:15'),
 (2, 'usernotalive@gmail.com', 'choice', 1, '1234567890', 'john', 8, '1552929562screenshot.jpg', '1552929562screenshot.jpg', '1552929562screenshot.jpg', 4, '2019-03-18 11:49:22', '2019-03-18 11:49:22'),
-(3, 'albinsalu@mca.ajce.in', 'Revolt', 1, '1234567890', 'william', 7, '155323937815524764941789_PCbjOr_Tables-resubmission_Explore Nearby_Albin Salu-RLMCA-04.pdf', '155323937815524764941789_PCbjOr_Tables-resubmission_Explore Nearby_Albin Salu-RLMCA-04.pdf', '155323937815524764941789_PCbjOr_Tables-resubmission_Explore Nearby_Albin Salu-RLMCA-04.pdf', 4, '2019-03-22 01:52:58', '2019-03-22 01:52:58'),
+(3, 'albinsalu@mca.ajce.in', 'Revolt', 1, '1234567890', 'william', 7, '155323937815524764941789_PCbjOr_Tables-resubmission_Explore Nearby_Albin Salu-RLMCA-04.pdf', '155323937815524764941789_PCbjOr_Tables-resubmission_Explore Nearby_Albin Salu-RLMCA-04.pdf', '155323937815524764941789_PCbjOr_Tables-resubmission_Explore Nearby_Albin Salu-RLMCA-04.pdf', 3, '2019-03-22 01:52:58', '2019-03-22 01:52:58'),
 (4, 'thomasjoseph@mca.ajce.in', 'blazer', 2, '1234567890', 'shrike', 9, '155323972015524764941789_PCbjOr_Tables-resubmission_Explore Nearby_Albin Salu-RLMCA-04.pdf', '155323972015524764941789_PCbjOr_Tables-resubmission_Explore Nearby_Albin Salu-RLMCA-04.pdf', '155323972015524764941789_PCbjOr_Tables-resubmission_Explore Nearby_Albin Salu-RLMCA-04.pdf', 3, '2019-03-22 01:58:40', '2019-03-22 01:58:40');
 
 -- --------------------------------------------------------
@@ -384,11 +405,11 @@ CREATE TABLE `tbl_login` (
 --
 
 INSERT INTO `tbl_login` (`id`, `email`, `password`, `utype_id`, `status_id`, `verified`, `remember_token`, `created_at`, `updated_at`) VALUES
-(18, 'albinsalu@gmail.com', '$2y$10$WNAd.yptn2kDTzU589kV1OXPM7C0OL1zo.qXtll/wU8yk3BH1fl/G', 1, 1, 0, 'Ml9NBaskNPYHW2ly13LG4VXoMBc6DZpYNg4eUitQ1W86T4h9Am9y00D7QHeD', '2019-03-18 11:08:58', '2019-03-19 08:44:39'),
+(18, 'albinsalu@gmail.com', '$2y$10$yKxpwrnwMQKP4ilaao8cB.rRk2XmEgIcAcwrINg0zIJgzm6JM37Z6', 1, 1, 0, 'pwyJUWiGR41MIitwnH5usY4doSOH4tIcqAXOIoxDLfQcGs59YWitCeeYHbKH', '2019-03-18 11:08:58', '2019-04-28 21:58:51'),
 (19, 'bigboystuffs@gmail.com', '$2y$10$ihz.kVKq9.Ko7VH8bgRP.uWT1k6EEqVltjtw2ijljrBk/WFEyY00m', 2, 1, 0, 't9OFIBgCiVwgQgrnxSdYxQmxnwWbltfup3hKsIDL9J2jNoKUS32lbXGPVBDj', '2019-03-22 02:01:34', '2019-03-30 01:53:11'),
 (21, 'fiend@gmail.com', '$2y$10$UPpi7.YhYF4n4OBvel7qMOhf/sj0G0liBjKFLJYHTr1/XpeZ82g0u', 3, 1, 0, NULL, '2019-03-31 10:02:43', '2019-03-31 10:02:43'),
-(22, 'usernotalive@gmail.com', '$2y$10$QdZecyrHEa92Po7eqzkDPO2AS8UlM6zMyBgNLyh1W22bfQXSbL.Ci', 2, 1, 0, NULL, '2019-04-10 22:35:44', '2019-04-10 22:35:44'),
-(23, 'albinsalu@mca.ajce.in', '$2y$10$fK7piQz95FyN11vLV5B9g.1i8mi5lCAM/D8NDvBhbs9c9WM8TXM8K', 2, 1, 0, NULL, '2019-04-10 22:41:57', '2019-04-10 22:41:57');
+(22, 'usernotalive@gmail.com', '$2y$10$Zlih3Qr/WEefW/pnj4IgiOvIhhg1D8LC.SeaqBEahhY5L1fvGAvu2', 2, 1, 0, 'gzH5frBBwWUQtKtkqgrKEkLh4ZV5O27RlFQbOXhVBHw6hr5whEvH8UJII4cX', '2019-04-10 22:35:44', '2019-04-26 05:28:18'),
+(28, 'ALBINSALU24@GMAIL.COM', '$2y$10$HjEe.1XigmwJeaL8.6OtzOIPwVDrrnBsNfoFlKpomz9MClwLJSkCK', 3, 1, 0, NULL, '2019-04-28 22:19:38', '2019-04-28 22:19:38');
 
 -- --------------------------------------------------------
 
@@ -403,8 +424,8 @@ CREATE TABLE `tbl_outlet_prof` (
   `outletname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ownername` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `latitude` double NOT NULL,
-  `longitude` double NOT NULL,
+  `latitude` double DEFAULT NULL,
+  `longitude` double DEFAULT NULL,
   `otitle` text COLLATE utf8mb4_unicode_ci,
   `description` longtext COLLATE utf8mb4_unicode_ci,
   `website` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -424,10 +445,10 @@ CREATE TABLE `tbl_outlet_prof` (
 --
 
 INSERT INTO `tbl_outlet_prof` (`outletid`, `id`, `regid`, `outletname`, `ownername`, `address`, `latitude`, `longitude`, `otitle`, `description`, `website`, `oemail`, `city_id`, `subcat_id`, `Service_id`, `phone1`, `phone2`, `status_id`, `created_at`, `updated_at`) VALUES
-(1, 19, 1, 'ZeroCorp pvt.', 'zeroslasher', 'Padanilathu Sanitary Centre\r\nAncheril commercial complex,opp. centre\r\nLal Bahadur Shastri Rd, Logos\r\nKottayam, Kerala 686002\r\nIndia', 9.591652242993035, 76.53128743171692, 'test edit', '<p>It&#39;s just so cool when you meet people who are different than you are. That can give you a different <strong>perspective</strong>, a <strong>viewpoint </strong>on life, or <strong>inspire</strong> you. I mean, what would the world be like if we were all the same? I think it would be very boring.<br />\r\n&nbsp;</p>', 'website.com', NULL, 1, 9, '11', '8547880393', '7410852096', 5, '2019-03-22 02:01:34', '2019-03-28 09:49:31'),
-(2, 19, 1, 'Nifty corp.', 'HeadKnocker', 'Address Line1\r\nAddress Line1\r\nAddress Line1\r\nAddress Line1', 0, 0, 'a', '<p>Larry Price was a small-time hood, who stole cars when he wasn&#39;t collecting unemployment. His world changed the day he was jumpstarted by&nbsp;<a href=\"https://en.wikipedia.org/wiki/The_Entity_(comics)\">the Entity</a>, the damaged computer of an alien spaceship that had crashed landed on the moon centuries ago. Larry&#39;s skin turned white, his hair green and his muscles expanded. Unlike members of&nbsp;<a href=\"https://en.wikipedia.org/w/index.php?title=The_Squad_(comics)&amp;action=edit&amp;redlink=1\">the Squad</a>&nbsp;who went public with their abilities, Larry waited to test his powers.</p>\r\n\r\n<p>A year later, Larry, calling himself <strong>Headknocker</strong>, decided to use his powers to rob a bank. Overpowering the police, he would have succeeded if&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hardcase\">Hardcase</a>&nbsp;had not intervened. The two battled and though Headknocker was stronger, Hardcase rendered him unconscious. Headknocker was turned over to&nbsp;<a href=\"https://en.wikipedia.org/wiki/Aladdin_(comics)\">Aladdin</a>, who placed him in their holding facility at Groom Lake.</p>\r\n\r\n<p>When Hardcase and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Choice_(comics)\">Choice</a>&nbsp;set out to break into Groom Lake facility, Headknocker was given the opportunity to repay Hardcase. Aladdin agent Malik offered to erase Headknocker&#39;s record if he would work for Aladdin and kill the heroes. Headknocker agreed and teamed with the&nbsp;<a href=\"https://en.wikipedia.org/wiki/Aladdin_Assault_Squad_(comics)\">Aladdin Assault Squad</a>&nbsp;and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hardwire_(comics)\">Hardwire</a>&nbsp;to complete the assignment. They failed, but Headknocker and Hardwire used the opportunity t&#39;o escape.</p>', 'headknocker.com', NULL, 1, 9, '3,11', '1234567890', '0987654321', 5, '2019-03-24 00:09:59', '2019-03-24 00:09:59'),
-(3, 19, 1, 'Micromedia', 'MicroManzer', 'address here', 0, 0, 'a', '<p>This is what we call smart power. Using every possible tool and partner to advance peace and security. Leaving no one on the <em>sidelines</em>. Showing respect even for one&#39;s enemies. Trying to understand, in so far as psychologically <em><strong>possible</strong></em>, empathize with their <strong>perspective </strong>and point of view. Helping to define the problems, determine the solutions.&nbsp;</p>', 'micromanzer.cc', NULL, 1, 2, '5,6', '1234567890', '1234567890', 5, '2019-03-30 05:42:14', '2019-03-30 05:42:14'),
-(4, 19, 2, 'Arya', 'Arya v nair', 'Arya V Nair', 0, 0, 'a', '<blockquote>Infuse your life with <strong>action</strong>. Don&#39;t wait for it to <strong>happen</strong>. <em>Make it happen</em>. <em>Make your own future.</em> Make your own <strong>hope</strong>. Make your own <strong>love</strong>. <s>And whatever your beliefs, honor your creator,</s> not by passively waiting for grace to come down from upon high, but by doing what you can to make grace happen... yourself, <span class=\"marker\">right now, right down here on Earth.&nbsp; </span></blockquote>', 'webxx.com', NULL, 4, 5, '8,9', '7418529630', '9865784563', 5, '2019-04-03 00:22:55', '2019-04-03 00:22:55'),
+(1, 19, 1, 'ZeroCorp pvt.', 'zeroslasher', 'Dhanya Remya Theater\r\nDhanya Complex, Near NSS College\r\nSH 1, Perunna\r\nChanganassery, Kerala 686101\r\nIndia', 9.441949798265393, 76.54449462890625, 'test edit', '<p>It&#39;s just so cool when you meet people who are different than you are. That can give you a different <strong>perspective</strong>, a <strong>viewpoint </strong>on life, or <strong>inspire</strong> you. I mean, what would the world be like if we were all the same? I think it would be very boring.<br />\r\n&nbsp;</p>', 'website.com', '', 1, 9, '11', '8547880393', '7410852096', 5, '2019-03-22 02:01:34', '2019-03-28 09:49:31'),
+(2, 19, 1, 'Nifty corp.', 'HeadKnocker', 'Contour Backwaters\r\nAC Road Changanassery\r\nKottayam\r\nKerala, 686101\r\nIndia', 9.432974885974424, 76.52870178222656, 'test title', '<p>Larry Price was a small-time hood, who stole cars when he wasn&#39;t collecting unemployment. His world changed the day he was jumpstarted by&nbsp;<a href=\"https://en.wikipedia.org/wiki/The_Entity_(comics)\">the Entity</a>, the damaged computer of an alien spaceship that had crashed landed on the moon centuries ago. Larry&#39;s skin turned white, his hair green and his muscles expanded. Unlike members of&nbsp;<a href=\"https://en.wikipedia.org/w/index.php?title=The_Squad_(comics)&amp;action=edit&amp;redlink=1\">the Squad</a>&nbsp;who went public with their abilities, Larry waited to test his powers.</p>\r\n\r\n<p>A year later, Larry, calling himself <strong>Headknocker</strong>, decided to use his powers to rob a bank. Overpowering the police, he would have succeeded if&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hardcase\">Hardcase</a>&nbsp;had not intervened. The two battled and though Headknocker was stronger, Hardcase rendered him unconscious. Headknocker was turned over to&nbsp;<a href=\"https://en.wikipedia.org/wiki/Aladdin_(comics)\">Aladdin</a>, who placed him in their holding facility at Groom Lake.</p>\r\n\r\n<p>When Hardcase and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Choice_(comics)\">Choice</a>&nbsp;set out to break into Groom Lake facility, Headknocker was given the opportunity to repay Hardcase. Aladdin agent Malik offered to erase Headknocker&#39;s record if he would work for Aladdin and kill the heroes. Headknocker agreed and teamed with the&nbsp;<a href=\"https://en.wikipedia.org/wiki/Aladdin_Assault_Squad_(comics)\">Aladdin Assault Squad</a>&nbsp;and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hardwire_(comics)\">Hardwire</a>&nbsp;to complete the assignment. They failed, but Headknocker and Hardwire used the opportunity t&#39;o escape.</p>', 'headknocker.com', '', 1, 9, '3,11', '1234567890', '0987654321', 5, '2019-03-24 00:09:59', '2019-03-24 00:09:59'),
+(3, 19, 1, 'Micromedia', 'MicroManzer', 'Udayamperoor Post Office\r\nState Highway 15\r\nUdayamperoor, Thrippunithura\r\nErnakulam, Kerala 682301\r\nIndia', 9.920577659314453, 76.36201858520508, 'test title', '<p>This is what we call smart power. Using every possible tool and partner to advance peace and security. Leaving no one on the <em>sidelines</em>. Showing respect even for one&#39;s enemies. Trying to understand, in so far as psychologically <em><strong>possible</strong></em>, empathize with their <strong>perspective </strong>and point of view. Helping to define the problems, determine the solutions.&nbsp;</p>', 'micromanzer.cc', '', 1, 2, '5,6', '1234567890', '1234567890', 5, '2019-03-30 05:42:14', '2019-03-30 05:42:14'),
+(4, 19, 2, 'Arya', 'Arya v nair', 'Meenkunnam, Ernakulam, Kerala, India', 9.9309768128818, 76.55290603637695, 'test title', '<blockquote>Infuse your life with <strong>action</strong>. Don&#39;t wait for it to <strong>happen</strong>. <em>Make it happen</em>. <em>Make your own future.</em> Make your own <strong>hope</strong>. Make your own <strong>love</strong>. <s>And whatever your beliefs, honor your creator,</s> not by passively waiting for grace to come down from upon high, but by doing what you can to make grace happen... yourself, <span class=\"marker\">right now, right down here on Earth.&nbsp; </span></blockquote>', 'webxx.com', '', 96, 5, '8,9', '7418529630', '9865784563', 5, '2019-04-03 00:22:55', '2019-04-03 00:22:55'),
 (5, 21, 1, 'Faru', 'Farhana', 'Farhana\r\naddress\r\naddress', 0, 0, 'a', '<p>Trust your own <strong>instincts</strong>, go inside, follow your heart. <em>Right from the start.</em> go ahead and stand up for what you believe in. As I&#39;ve learned, that&#39;s the path to <strong>happiness</strong>.&nbsp;<br />\r\n&nbsp;</p>', 'faru.com', NULL, 2, 9, '3,4', '7896345851', '9637418520', 6, '2019-04-03 03:36:42', '2019-04-03 03:36:42'),
 (6, 21, 1, 'Ajil', 'Ajil sunny', 'ajil\'s outlet\r\naddress\r\naddress', 0, 0, 'a', '<p>Real education enhances the <strong>dignity </strong>of a human being and <strong>increases </strong>his or her self-respect. If only the real sense of education could be realized by each <em>individual</em> and carried forward in every field of human activity, the world will be so much a <em>better place to live in</em><br />\r\n&nbsp;</p>', 'webxx.com', NULL, 4, 7, '7', '8520741063', '9874106352', 6, '2019-04-03 09:42:58', '2019-04-03 09:42:58'),
 (13, 21, 1, 'sdfgh', 'dfghj', 'dfghj', 0, 0, 'a', '<p>dfghjk</p>', 'fghjk', NULL, 1, 1, '1,14', 'fghj', 'fgbn', 6, '2019-04-03 11:39:14', '2019-04-03 11:39:14'),
@@ -435,10 +456,30 @@ INSERT INTO `tbl_outlet_prof` (`outletid`, `id`, `regid`, `outletname`, `ownerna
 (15, 21, 1, 'j', 'j', 'j', 0, 0, 'a', '<p>j</p>', 'fgh', NULL, 1, 1, '1,2', 'gfhj', 'fghj', 6, '2019-04-07 10:03:45', '2019-04-07 10:03:45'),
 (16, 21, 1, 'k', 'k', 'k', 0, 0, 'a', '<p>k</p>', 'aaa', NULL, 4, 1, '1,2', 'ghjk', 'ghj', 6, '2019-04-07 10:05:33', '2019-04-07 10:05:33'),
 (17, 21, 1, 'k', 'k', 'k', 0, 0, 'a', '<p>k</p>', 'fgh', NULL, 1, 1, '14', 'h', 'g', 6, '2019-04-07 10:06:36', '2019-04-07 10:06:36'),
-(18, 22, 3, 'choice', 'john', NULL, 0, 0, 'a', NULL, NULL, NULL, 1, 8, NULL, '1234567890', NULL, 3, '2019-04-10 22:35:44', '2019-04-10 22:35:44'),
-(19, 23, 4, 'Revolt', 'william', NULL, 0, 0, 'a', NULL, NULL, NULL, 1, 7, NULL, '1234567890', NULL, 3, '2019-04-10 22:41:57', '2019-04-10 22:41:57'),
-(20, 19, 2, 'fghjk', 'ghjkl', 'ghjkl', 0, 0, 'gfhjk', '<p>fghjk</p>', 'vbnm.com', NULL, 1, 1, '1,2,10,14', '7410852096', '8520963741', 5, '2019-04-11 11:55:10', '2019-04-11 11:55:10'),
-(21, 19, 2, 'Amal Jyothi Engineering College', 'Amal Jyothi Engineering College', 'Amal Jyothi Engineering College, Koovappalli - Vizhikkathodu Road, Pattimattam, Vizhikkathodu, Kottayam, Kerala, 686507, India', 9.528384828281808, 76.82226419448853, 'Amal Jyothi Engineering College', '<p>Amal Jyothi Engineering College</p>', 'ajce.in', 'amaljyothi@mail.com', 1, 5, '8,9', '8520741096', '9638527410', 5, '2019-04-13 04:41:48', '2019-04-13 04:41:48');
+(18, 22, 3, 'choice', 'john', 'Koothattukulam - Kavana - Vazhakkulam Road, Palakuzha, Ernakulam, Kerala, 685583, India', 9.871790236942253, 76.6091251373291, 'test title', '<p>jQuery show/<em>hide options</em>&nbsp;from one select&nbsp;<em>drop down</em>, when&nbsp;<em>option</em>&nbsp;on oth<strong>er select&nbsp;<em>dropdown</em>&nbsp;is slected. I need to show/</strong><em>hide options</em>&nbsp;on one select&nbsp;<em>drop down</em>&nbsp;dependant on another select&nbsp;<em>drop down options</em>. The code below shows what I am trying to achieve</p>', '', '', 1, 8, NULL, '1234567890', '', 3, '2019-04-10 22:35:44', '2019-04-10 22:35:44'),
+(21, 19, 2, 'Amal Jyothi Engineering College', 'Amal Jyothi Engineering College', 'Amal Jyothi Engineering College, Koovappalli - Vizhikkathodu Road, Pattimattam, Vizhikkathodu, Kottayam, Kerala, 686507, India', 9.528384828281808, 76.82226419448853, 'Amal Jyothi Engineering College', '<p>Amal Jyothi Engineering College</p>', 'ajce.in', 'amaljyothi@mail.com', 1, 5, '8,9', '8520741096', '9638527410', 5, '2019-04-13 04:41:48', '2019-04-13 04:41:48'),
+(24, 22, 3, 'college of engineering', 'owner name', 'St.Mary\'s Jacobite Syrian Church\r\nKerala 686610\r\nIndia\r\nKerala 682315\r\nIndia', 9.830522439381214, 76.48080825805664, 'test intro', '<p>But i would prefer to bind or unbind&nbsp;<em>options</em>&nbsp;rather than&nbsp;<em>hiding</em>. 31k views ... Do I need to use jQuery to apply CSS to a currently&nbsp;<em>selected</em>&nbsp;list&nbsp;<em>item</em>? 252 Views.</p>', 'asdf.dd', 'aa@a.com', 4, 10, '0', '8520741963', '9638527410', 5, '2019-04-28 22:48:24', '2019-04-28 22:48:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_package`
+--
+
+CREATE TABLE `tbl_package` (
+  `pkg_id` int(10) UNSIGNED NOT NULL,
+  `duration` int(11) NOT NULL,
+  `amount` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_package`
+--
+
+INSERT INTO `tbl_package` (`pkg_id`, `duration`, `amount`) VALUES
+(1, 10, 100),
+(2, 20, 200),
+(3, 30, 300);
 
 -- --------------------------------------------------------
 
@@ -465,7 +506,6 @@ INSERT INTO `tbl_prof_images` (`imgid`, `outletid`, `imgname`, `created_at`, `up
 (8, 2, '1553793366leaves_branches_frost_snow_49789_3840x2160.jpg', '2019-04-03 17:08:33', '2019-04-03 17:08:33'),
 (9, 2, '1553793377raspberry_berry_ripe_sweet_106384_3840x2160.jpg', '2019-04-03 17:08:33', '2019-04-03 17:08:33'),
 (17, 2, '15538509365.jpg', '2019-04-03 17:08:33', '2019-04-03 17:08:33'),
-(19, 1, '1553939982_linux_wallpaper.jpg', '2019-04-03 17:08:33', '2019-04-03 17:08:33'),
 (22, 3, '1554264471595156.jpg', '2019-04-03 17:08:33', '2019-04-03 17:08:33'),
 (23, 3, '1554264480devil_may_cry_art_man_face_105920_3840x2160.jpg', '2019-04-03 17:08:33', '2019-04-03 17:08:33'),
 (24, 3, '1554264765syndicate_ea_eurocorp_shuter_103585_3840x2160.jpg', '2019-04-03 17:08:33', '2019-04-03 17:08:33'),
@@ -483,8 +523,10 @@ INSERT INTO `tbl_prof_images` (`imgid`, `outletid`, `imgname`, `created_at`, `up
 (40, 15, 'Placeholder.jpg', '2019-04-07 10:03:46', '2019-04-07 10:03:46'),
 (41, 16, 'Placeholder.jpg', '2019-04-07 10:05:33', '2019-04-07 10:05:33'),
 (42, 17, 'Placeholder.jpg', '2019-04-07 10:06:36', '2019-04-07 10:06:36'),
-(43, 20, 'Placeholder.jpg', '2019-04-11 11:55:11', '2019-04-11 11:55:11'),
-(44, 21, 'Placeholder.jpg', '2019-04-13 04:41:48', '2019-04-13 04:41:48');
+(45, 1, '1556291360599133 _1).jpg', '2019-04-26 15:09:20', '2019-04-26 15:09:20'),
+(46, 21, '15564662761088_logo.png', '2019-04-28 15:44:36', '2019-04-28 15:44:36'),
+(48, 24, 'Placeholder.jpg', '2019-04-28 22:48:24', '2019-04-28 22:48:24'),
+(49, 24, '155651151844.jpg', '2019-04-29 04:18:38', '2019-04-29 04:18:38');
 
 -- --------------------------------------------------------
 
@@ -503,6 +545,16 @@ CREATE TABLE `tbl_review` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_review`
+--
+
+INSERT INTO `tbl_review` (`rev_id`, `email`, `name`, `outlet_id`, `review`, `rating`, `title`, `created_at`, `updated_at`) VALUES
+(1, 'albinsalu@gmail.com', 'ALBIN SALU', 1, 'kollulllaaaa', 1.00, 'Sucks big time - 1 star', '2019-04-26 22:25:28', '2019-04-28 07:44:57'),
+(2, 'bigboystuffs@gmail.com', 'zeroZero', 1, 'powliii', 5.00, 'Awesome - 5 stars', '2019-04-26 23:27:10', '2019-04-28 07:42:57'),
+(3, 'vinayanav836@gmail.com', 'Vinayyy', 1, 'fghj', 1.50, 'Meh - 1.5 stars', '2019-04-26 23:29:55', '2019-04-27 01:46:13'),
+(4, 'ajilsunny007@gmail.com', 'Ajil sunny', 6, 'good', 4.00, 'Pretty good - 4 stars', '2019-04-27 12:53:03', '2019-04-27 12:54:52');
 
 -- --------------------------------------------------------
 
@@ -554,7 +606,8 @@ CREATE TABLE `tbl_state` (
 --
 
 INSERT INTO `tbl_state` (`state_id`, `state`, `created_at`, `updated_at`) VALUES
-(1, 'KERALA', NULL, NULL);
+(1, 'KERALA', NULL, NULL),
+(2, 'Unselected', '2019-04-28 17:35:56', '2019-04-28 17:35:56');
 
 -- --------------------------------------------------------
 
@@ -580,7 +633,11 @@ INSERT INTO `tbl_status` (`status_id`, `status`, `created_at`, `updated_at`) VAL
 (4, 'approved', '2019-03-18 10:41:28', '2019-03-18 10:41:28'),
 (5, 'Validated', '2019-04-03 05:58:42', '2019-04-03 05:58:42'),
 (6, 'invalidated', '2019-04-03 05:58:42', '2019-04-03 05:58:42'),
-(7, 'hidden', '2019-04-03 10:35:43', '2019-04-03 10:35:43');
+(7, 'hidden', '2019-04-03 10:35:43', '2019-04-03 10:35:43'),
+(8, 'yes', '2019-04-27 05:10:17', '2019-04-27 05:10:17'),
+(9, 'no', '2019-04-27 05:10:17', '2019-04-27 05:10:17'),
+(10, 'complete', '2019-04-30 07:11:20', '2019-04-30 07:11:20'),
+(11, 'incomplete', '2019-04-30 07:11:20', '2019-04-30 07:11:20');
 
 -- --------------------------------------------------------
 
@@ -622,7 +679,7 @@ CREATE TABLE `tbl_users_reg` (
   `regid` int(10) UNSIGNED NOT NULL,
   `id` int(10) UNSIGNED NOT NULL,
   `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `city_id` int(10) UNSIGNED NOT NULL,
+  `city_id` int(10) UNSIGNED DEFAULT NULL,
   `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` text COLLATE utf8mb4_unicode_ci,
   `oaddress` text COLLATE utf8mb4_unicode_ci,
@@ -638,9 +695,9 @@ CREATE TABLE `tbl_users_reg` (
 
 INSERT INTO `tbl_users_reg` (`regid`, `id`, `name`, `city_id`, `phone`, `title`, `oaddress`, `image`, `status_id`, `created_at`, `updated_at`) VALUES
 (1, 21, 'Fiend', 1, '6222345678', 'you dont know me', 'hhh', '1554543668[Linux Wallpaper] 5 elements [Little gift from DNG-FGG Tux User].jpg', 1, '2019-04-02 17:10:41', '2019-04-02 17:10:41'),
-(2, 19, 'zeroZero', 4, '7410852096', 'You dont know me.. Youre about to!!', 'Address\r\naddress \r\naddress', '155496555741.jpg', 1, '2019-04-02 17:10:41', '2019-04-02 17:10:41'),
-(3, 22, 'john', 1, '1234567890', NULL, NULL, NULL, 1, '2019-04-10 22:35:44', '2019-04-10 22:35:44'),
-(4, 23, 'william', 1, '1234567890', NULL, NULL, NULL, 1, '2019-04-10 22:41:57', '2019-04-10 22:41:57');
+(2, 19, 'zeroZero', 96, '7410852096', 'You dont know me.. Youre about to!!', 'Address\r\naddress \r\naddress', '155496555741.jpg', 1, '2019-04-02 17:10:41', '2019-04-02 17:10:41'),
+(3, 22, 'john', 1, '8234567890', 'Youre not seeing the entire picture', 'middle of Nowhere', '1556283131Crazytut0s (84).jpg', 1, '2019-04-10 22:35:44', '2019-04-10 22:35:44'),
+(9, 28, 'aaa', 161, '8520741963', NULL, NULL, NULL, 1, '2019-04-28 22:19:38', '2019-04-28 22:19:38');
 
 -- --------------------------------------------------------
 
@@ -674,6 +731,7 @@ CREATE TABLE `tbl_verify_mail` (
   `eid` int(10) UNSIGNED NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isverified` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -682,41 +740,14 @@ CREATE TABLE `tbl_verify_mail` (
 -- Dumping data for table `tbl_verify_mail`
 --
 
-INSERT INTO `tbl_verify_mail` (`eid`, `email`, `code`, `created_at`, `updated_at`) VALUES
-(1, 'albinsalu24@gmail.com', 'YcMEvnMC', NULL, NULL),
-(2, 'ADDLDML@DMC.AS', 'JTTW56rg', '2019-04-23 09:30:36', '2019-04-23 09:30:36'),
-(3, 'albinlmnb@asd.cd', 'VQkBepYF', '2019-04-23 09:46:01', '2019-04-23 09:46:01'),
-(4, 'asd@as.cc', 'hZecCzbg', '2019-04-23 09:48:40', '2019-04-23 09:48:40'),
-(5, 'asd@s.cc', 'b7YNVkmc', '2019-04-23 09:49:21', '2019-04-23 09:49:21'),
-(6, 'sadf@dfg.vv', 'x3M2aaV4', '2019-04-23 09:52:45', '2019-04-23 09:52:45'),
-(7, 'fghj@ghb.cc', 'faDIP739', '2019-04-23 09:53:37', '2019-04-23 09:53:37'),
-(8, 'fghj@dd.cc', 'wuSLtcIS', '2019-04-23 09:54:40', '2019-04-23 09:54:40'),
-(9, 'sdkjs@dd.ss', 'UGAe02bb', '2019-04-23 09:55:33', '2019-04-23 09:55:33'),
-(10, 'asd@asd.cc', 'kGEXhuNV', '2019-04-23 10:01:52', '2019-04-23 10:01:52'),
-(11, 'dfg@ghj.cc', 'MkRq9GKt', '2019-04-23 10:03:06', '2019-04-23 10:03:06'),
-(12, 'asdf@sdf.cq', 'cBOh9hZp', '2019-04-23 10:06:29', '2019-04-23 10:06:29'),
-(13, 'ASD@SD.CC', '53OZfrWE', '2019-04-23 10:06:59', '2019-04-23 10:06:59'),
-(14, 'adsf@sd.cc', 'k41OoF6U', '2019-04-23 14:15:42', '2019-04-23 14:15:42'),
-(15, 'asdcf@sdf.dd', 'qAzXT0vh', '2019-04-23 16:09:46', '2019-04-23 16:09:46'),
-(16, 'dfg@sd.cc', 'll1tlTFp', '2019-04-23 16:30:34', '2019-04-23 16:30:34'),
-(17, 'asd@ss.cc', 'KLFlz5hM', '2019-04-23 17:03:39', '2019-04-23 17:03:39'),
-(18, 'dfgh@gh.vvq', 'GzzpESQ1', '2019-04-23 17:05:27', '2019-04-23 17:05:27'),
-(19, 'erty@wfg.bb', 'rx2sO9UH', '2019-04-23 17:07:34', '2019-04-23 17:07:34'),
-(20, 'dfgh@edfgh.bb', 'WVvJ7WPf', '2019-04-23 17:08:51', '2019-04-23 17:08:51'),
-(21, 'fghj@dfgh.bb', '8AeWaqdY', '2019-04-23 17:12:15', '2019-04-23 17:12:15'),
-(22, 'fgh@dfgh.nb', 'bOeW5eEb', '2019-04-23 17:15:54', '2019-04-23 17:15:54'),
-(23, 'dfghQ@dfg.ghj', 'OHpvVcup', '2019-04-23 17:17:18', '2019-04-23 17:17:18'),
-(24, 'FCGHJKL@SDF.HJ', 'rv8mVzY9', '2019-04-23 17:21:57', '2019-04-23 17:21:57'),
-(25, 'fghjk@dfgh.jj', '6qk4XVQv', '2019-04-23 17:28:06', '2019-04-23 17:28:06'),
-(26, 'fghjk@dfghj.mm', 'LKAQCv8B', '2019-04-23 17:30:41', '2019-04-23 17:30:41'),
-(27, 'asd@sdfg.bb', 'BjYvePM1', '2019-04-25 03:57:13', '2019-04-25 03:57:13'),
-(28, 'dfg@dfg.gg', 'XjsSdt6d', '2019-04-25 03:59:05', '2019-04-25 03:59:05'),
-(29, 'sdfg@efgh.hh', 'nfxAdqcg', '2019-04-25 15:41:28', '2019-04-25 15:41:28'),
-(30, 'albinsasfdcjn@asd.ss', 'pc4mMPuo', '2019-04-25 15:51:28', '2019-04-25 15:51:28'),
-(31, 'sdfghj@edfgh.ss', 'RkJ9Po1O', '2019-04-25 15:52:56', '2019-04-25 15:52:56'),
-(32, 'sdfgh@dfgh.kk', 'Cb8M639K', '2019-04-25 15:53:59', '2019-04-25 15:53:59'),
-(33, 'asdf@asdf.gg', 'b50hAJZU', '2019-04-25 15:56:31', '2019-04-25 15:56:31'),
-(34, 'qwed@sdfg.gg', 'huxT30aR', '2019-04-25 15:58:36', '2019-04-25 15:58:36');
+INSERT INTO `tbl_verify_mail` (`eid`, `email`, `code`, `isverified`, `created_at`, `updated_at`) VALUES
+(1, 'albinsalu24@gmail.com', '9m22Y5Au', 9, NULL, NULL),
+(37, 'vinayanav836@gmail.com', 'VEMywy3U', 8, '2019-04-27 04:57:58', '2019-04-27 04:57:58'),
+(38, 'albinsalu@gmail.com', 'oLwxiXq2', 9, '2019-04-27 06:22:36', '2019-04-27 06:22:36'),
+(47, 'ajilsunny007@gmail.com', 'heuk55lt', 8, '2019-04-27 16:00:00', '2019-04-27 16:00:00'),
+(48, 'ajilsunny@mca.ajce.in', 'vsV2ivAK', 8, '2019-04-27 16:35:17', '2019-04-27 16:35:17'),
+(49, 'qwefrgt@sdfg.hg', 'EuEjA3GN', 9, '2019-04-27 18:04:11', '2019-04-27 18:04:11'),
+(50, 'ALBINSALU244@GMAIL.COM', 'vYbGK4W5', 9, '2019-04-30 09:08:42', '2019-04-30 09:08:42');
 
 -- --------------------------------------------------------
 
@@ -746,7 +777,19 @@ ALTER TABLE `migrations`
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `tbl_advert`
+--
+ALTER TABLE `tbl_advert`
+  ADD PRIMARY KEY (`ad_id`),
+  ADD KEY `tbl_advert_id_foreign` (`id`),
+  ADD KEY `tbl_advert_outletid_foreign` (`outletid`),
+  ADD KEY `tbl_advert_pkg_id_foreign` (`pkg_id`),
+  ADD KEY `tbl_advert_status_id_foreign` (`status_id`),
+  ADD KEY `tbl_advert_p_status_foreign` (`p_status`);
 
 --
 -- Indexes for table `tbl_cat`
@@ -802,12 +845,18 @@ ALTER TABLE `tbl_login`
 --
 ALTER TABLE `tbl_outlet_prof`
   ADD PRIMARY KEY (`outletid`),
-  ADD KEY `tbl_outlet_prof_id_foreign` (`id`),
   ADD KEY `tbl_outlet_prof_city_id_foreign` (`city_id`),
   ADD KEY `tbl_outlet_prof_subcat_id_foreign` (`subcat_id`),
   ADD KEY `tbl_outlet_prof_service_id_foreign` (`Service_id`),
   ADD KEY `tbl_outlet_prof_status_id_foreign` (`status_id`),
+  ADD KEY `tbl_outlet_prof_id_foreign` (`id`),
   ADD KEY `tbl_outlet_prof_regid_foreign` (`regid`);
+
+--
+-- Indexes for table `tbl_package`
+--
+ALTER TABLE `tbl_package`
+  ADD PRIMARY KEY (`pkg_id`);
 
 --
 -- Indexes for table `tbl_prof_images`
@@ -874,7 +923,8 @@ ALTER TABLE `tbl_utype`
 --
 ALTER TABLE `tbl_verify_mail`
   ADD PRIMARY KEY (`eid`),
-  ADD KEY `tbl_verify_mail_email_index` (`email`);
+  ADD KEY `tbl_verify_mail_email_index` (`email`),
+  ADD KEY `tbl_verify_mail_isverified_foreign` (`isverified`);
 
 --
 -- Indexes for table `verify_users`
@@ -891,7 +941,19 @@ ALTER TABLE `verify_users`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_advert`
+--
+ALTER TABLE `tbl_advert`
+  MODIFY `ad_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_cat`
@@ -903,7 +965,7 @@ ALTER TABLE `tbl_cat`
 -- AUTO_INCREMENT for table `tbl_city`
 --
 ALTER TABLE `tbl_city`
-  MODIFY `city_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+  MODIFY `city_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT for table `tbl_district`
@@ -927,25 +989,31 @@ ALTER TABLE `tbl_locality`
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `tbl_outlet_prof`
 --
 ALTER TABLE `tbl_outlet_prof`
-  MODIFY `outletid` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `outletid` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `tbl_package`
+--
+ALTER TABLE `tbl_package`
+  MODIFY `pkg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_prof_images`
 --
 ALTER TABLE `tbl_prof_images`
-  MODIFY `imgid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `imgid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `tbl_review`
 --
 ALTER TABLE `tbl_review`
-  MODIFY `rev_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `rev_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_services`
@@ -957,13 +1025,13 @@ ALTER TABLE `tbl_services`
 -- AUTO_INCREMENT for table `tbl_state`
 --
 ALTER TABLE `tbl_state`
-  MODIFY `state_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `state_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_status`
 --
 ALTER TABLE `tbl_status`
-  MODIFY `status_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `status_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_subcat`
@@ -975,7 +1043,7 @@ ALTER TABLE `tbl_subcat`
 -- AUTO_INCREMENT for table `tbl_users_reg`
 --
 ALTER TABLE `tbl_users_reg`
-  MODIFY `regid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `regid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_utype`
@@ -987,7 +1055,7 @@ ALTER TABLE `tbl_utype`
 -- AUTO_INCREMENT for table `tbl_verify_mail`
 --
 ALTER TABLE `tbl_verify_mail`
-  MODIFY `eid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `eid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `verify_users`
@@ -998,6 +1066,16 @@ ALTER TABLE `verify_users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_advert`
+--
+ALTER TABLE `tbl_advert`
+  ADD CONSTRAINT `tbl_advert_id_foreign` FOREIGN KEY (`id`) REFERENCES `tbl_login` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tbl_advert_outletid_foreign` FOREIGN KEY (`outletid`) REFERENCES `tbl_outlet_prof` (`outletid`),
+  ADD CONSTRAINT `tbl_advert_p_status_foreign` FOREIGN KEY (`p_status`) REFERENCES `tbl_status` (`status_id`),
+  ADD CONSTRAINT `tbl_advert_pkg_id_foreign` FOREIGN KEY (`pkg_id`) REFERENCES `tbl_package` (`pkg_id`),
+  ADD CONSTRAINT `tbl_advert_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `tbl_status` (`status_id`);
 
 --
 -- Constraints for table `tbl_city`
@@ -1037,8 +1115,8 @@ ALTER TABLE `tbl_login`
 --
 ALTER TABLE `tbl_outlet_prof`
   ADD CONSTRAINT `tbl_outlet_prof_city_id_foreign` FOREIGN KEY (`city_id`) REFERENCES `tbl_city` (`city_id`),
-  ADD CONSTRAINT `tbl_outlet_prof_id_foreign` FOREIGN KEY (`id`) REFERENCES `tbl_login` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `tbl_outlet_prof_regid_foreign` FOREIGN KEY (`regid`) REFERENCES `tbl_users_reg` (`regid`),
+  ADD CONSTRAINT `tbl_outlet_prof_id_foreign` FOREIGN KEY (`id`) REFERENCES `tbl_login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_outlet_prof_regid_foreign` FOREIGN KEY (`regid`) REFERENCES `tbl_users_reg` (`regid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_outlet_prof_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `tbl_status` (`status_id`),
   ADD CONSTRAINT `tbl_outlet_prof_subcat_id_foreign` FOREIGN KEY (`subcat_id`) REFERENCES `tbl_subcat` (`subcat_id`);
 
@@ -1046,7 +1124,7 @@ ALTER TABLE `tbl_outlet_prof`
 -- Constraints for table `tbl_prof_images`
 --
 ALTER TABLE `tbl_prof_images`
-  ADD CONSTRAINT `tbl_prof_images_outletid_foreign` FOREIGN KEY (`outletid`) REFERENCES `tbl_outlet_prof` (`outletid`);
+  ADD CONSTRAINT `tbl_prof_images_outletid_foreign` FOREIGN KEY (`outletid`) REFERENCES `tbl_outlet_prof` (`outletid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_review`
@@ -1073,6 +1151,12 @@ ALTER TABLE `tbl_users_reg`
   ADD CONSTRAINT `tbl_users_reg_city_id_foreign` FOREIGN KEY (`city_id`) REFERENCES `tbl_city` (`city_id`),
   ADD CONSTRAINT `tbl_users_reg_id_foreign` FOREIGN KEY (`id`) REFERENCES `tbl_login` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `tbl_users_reg_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `tbl_status` (`status_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tbl_verify_mail`
+--
+ALTER TABLE `tbl_verify_mail`
+  ADD CONSTRAINT `tbl_verify_mail_isverified_foreign` FOREIGN KEY (`isverified`) REFERENCES `tbl_status` (`status_id`);
 
 --
 -- Constraints for table `verify_users`
