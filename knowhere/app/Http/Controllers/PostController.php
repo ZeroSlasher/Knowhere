@@ -116,10 +116,9 @@ class PostController extends Controller
             } else {
 
                 foreach ($post as $p) {
-                    $ad = str_replace(',', ' ', $p->address);
-
                     $lat = $p->latitude;
                     $lng = $p->longitude;
+                    $ad = str_replace(',', ' ', $p->address);
 
                     $new[] = array($ad, $lat, $lng);
                 }
@@ -186,8 +185,12 @@ class PostController extends Controller
         }
 
         foreach ($post as $p) {
+            $lat = $p->latitude;
+            $lng = $p->longitude;
+            $adr = $p->address;
             $s = $p->Service_id;
         }
+
         $ss = explode(',', $s);
         $i = 0;
         foreach ($ss as $sss) {
@@ -195,7 +198,7 @@ class PostController extends Controller
             $i++;
         }
 
-        return view('postdetails', compact('post', 'review', 'service', 'fin_rating'));
+        return view('postdetails', compact('post', 'review', 'service', 'fin_rating', 'lat', 'lng', 'adr'));
     }
 
     public function addreview(Request $request)
@@ -206,17 +209,6 @@ class PostController extends Controller
         $review = $request->get('review');
         $rating = $request->get('rating');
         if (Session::get('id')) {
-
-            // $rules = $request->validate([
-            //     'title' => 'required|min:6',
-            //     'review' => 'required||min:6',
-            //     'rating' => 'required',
-            //     'captcha' => 'required|captcha',
-            // ]);
-            // $validator = validator()->make(request()->all(), $rules);
-            // if ($validator->fails()) {
-            //     return back()->with('msg', 'test');
-            // } else {
 
             $id = Session::get('uid');
             $email = Session::get('id');

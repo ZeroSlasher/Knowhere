@@ -90,35 +90,36 @@
                                         </a>
                                     </li>
                                     <li>
-                        <a href="outletmanagement">
-                            <i class="lni-envelope"></i>
-                            <span>Outlet Management</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="undermaintainence">
-                            <i class="lni-wallet"></i>
-                            <span>Post Reportings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="undermaintainence">
-                            <i class="lni-heart"></i>
-                            <span>Comment Reports</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="undermaintainence">
-                            <i class="lni-star"></i>
-                            <span>Messages/Enquiries</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/logout">
-                            <i class="lni-enter"></i>
-                            <span>Logout</span>
-                        </a>
-                    </li>
+                                        <a href="outletmanagement">
+                                            <i class="lni-envelope"></i>
+                                            <span>Outlet Management</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="undermaintainence">
+                                            <i class="lni-wallet"></i>
+                                            <span>Post Reportings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="paymentinfo">
+                                            <i class="lni-envelope"></i>
+                                            <span>Payment informations</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="undermaintainence">
+                                            <i class="lni-star"></i>
+                                            <span>Messages/Enquiries</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout">
+                                            <i class="lni-enter"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>

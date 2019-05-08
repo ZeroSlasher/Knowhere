@@ -180,6 +180,7 @@
                             <div class="tab-content">
                                 @if(!empty($successMsg))
                                 <div class="alert alert-danger"> {{ $successMsg }}</div>
+                                <!-- https://www.google.com/maps/search/?api=1&query=pizza+seattle+wa -->
                                 @endif
                                 <div id="grid-view" class="tab-pane fade">
                                     <div class="row">

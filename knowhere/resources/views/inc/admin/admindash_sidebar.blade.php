@@ -37,15 +37,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="undermaintainence">
-                            <i class="lni-wallet"></i>
-                            <span>Post Reportings</span>
+                        <a href="paymentinfo">
+                            <i class="lni-envelope"></i>
+                            <span>Payment informations</span>
                         </a>
                     </li>
                     <li>
                         <a href="undermaintainence">
-                            <i class="lni-heart"></i>
-                            <span>Comment Reports</span>
+                            <i class="lni-wallet"></i>
+                            <span>Post Reportings</span>
                         </a>
                     </li>
                     <li>

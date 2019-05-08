@@ -78,7 +78,7 @@ class RequestProfController extends Controller
         $pwd = str_random(8);
         $hpwd = Hash::make($pwd);
         $id = Input::get('rqst_id');
-        $mail = Input::get('email');
+        $mail = Input::get('email'); 
 
         // $connected = @fsockopen("www.google.com", 80);
         // if ($connected)

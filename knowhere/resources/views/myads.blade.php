@@ -29,6 +29,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+
     <style type="text/css">
     body {
         font-family: 'Varela Round', sans-serif;
@@ -133,6 +134,118 @@
     .trigger-btn {
         display: inline-block;
         margin: 100px auto;
+    }
+
+    .modal-header-success {
+        color: #fff;
+        padding: 9px 15px;
+        border-bottom: 1px solid #eee;
+        background-color: #5cb85c;
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-topright: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    </style>
+
+    <style>
+    /* Style the Image Used to Trigger the Modal */
+    #myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #myImg:hover {
+        opacity: 0.7;
+    }
+
+    /* The Modal (background) */
+    .imgmdl {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.9);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content (Image) */
+    .contents {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    /* Caption of Modal Image (Image Text) - Same Width as the Image */
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    /* Add Animation - Zoom in the Modal */
+    .contents,
+    #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* The Close Button */
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        .contents {
+            width: 100%;
+        }
     }
     </style>
 </head>
@@ -268,12 +381,18 @@
                     <div class="page-content">
                         <div class="inner-box">
                             <div class="dashboard-box">
-                                <h2 class="dashbord-title">My Favourites</h2>
+                                <h2 class="dashbord-title">My Advertisements</h2>
                             </div>
                             <div class="dashboard-wrapper">
                                 <nav class="nav-table">
                                     <ul>
+                                        @isset($total)
+                                        @if($total > 0)
                                         <li class=""><a>Total ads {{$total}}</a></li>
+                                        @elseif($total == 0)
+                                        <div class="alert alert-danger">No ads found!!</div>
+                                        @endif
+                                        @endisset
                                         <li><a style="float:right;    margin-left: 900px;"
                                                 class="active btn btn-success" href="add_ad">Add new
                                                 Advertisement</a>
@@ -289,6 +408,7 @@
                                             <th>outlet name</th>
                                             <th>Package</th>
                                             <th>validity</th>
+                                            <th>expiring in</th>
                                             <th>Status</th>
                                             <th>Payment Status</th>
                                             <th>Actions</th>
@@ -301,17 +421,26 @@
                                     <tbody>
                                         @isset($outlet)
                                         @foreach($outlet as $d)
-                                        <tr data-category="active">
 
-                                            <td class="photo"><img class="img-fluid" src="/uploads/{{$d->ad_content}}"
-                                                    alt="">
+                                        <tr data-category="active">
+                                            @if($d->ad_content == "")
+                                            <td class="photo"><img class="img-fluid" src="/uploads/ads/placeholder.png"
+                                                    alt="img">
                                             </td>
+                                            @else
+                                            <td class="photo"><img class="img-fluid" id="myImg"
+                                                    src="/uploads/ads/{{$d->ad_content}}"" alt=" ad_content">
+                                            </td>
+                                            @endif
                                             <td data-title="Title">
                                                 <h3>{{$d->outletname}}</h3>
                                             </td>
                                             <td data-title="Category"><span class="adcategories">{{$d->pkg_name}}</span>
                                             </td>
-                                            <td data-title="Category"><span class="adcategories">{{$d->duration}}
+                                            <td data-title="Category"><span class="adcategories">{{$d->validity}}
+                                                    days</span>
+                                            </td>
+                                            <td data-title="Category"><span class="adcategories">{{$d->expiring_in}}
                                                     days</span>
                                             </td>
                                             <td data-title="Ad Status">
@@ -333,13 +462,19 @@
                                             </td>
                                             <td data-title="Action">
                                                 <div class="btns-actions">
-                                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
-                                                    <a class="btn-action btn-edit" href="#"><i
+                                                    @if($d->p_status== '11')
+                                                    <h6 title="complete payment to enable actions">Actions unavilable
+                                                    </h6>
+                                                    @else
+
+                                                    <a class="btn-action btn-edit" href="#editad"
+                                                        data-id="{{$d->ad_id}}" data-toggle="modal"><i
                                                             class="lni-pencil"></i></a>
+
                                                     <a class="btn-action btn-delete" href="#deletemdl"
                                                         class="trigger-btn" data-id="{{$d->ad_id}}"
                                                         data-toggle="modal"><i class="lni-trash"></i></a>
-
+                                                    @endif
                                                 </div>
 
                                             </td>
@@ -385,7 +520,6 @@
                 <div class="modal-footer">
                     <form id="userForm" action="" method="post">
                         @csrf
-                        <input type="hidden" name="id">
 
                         <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -393,6 +527,48 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" id="editad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: fit-content;">
+                <div class="modal-header modal-header-success">
+                    <h5>Edit content of the ad here!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="padding: 10px;">
+                            <form id="editadform" method="post" action="" enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="form-group mb-3">
+                                    <label class="control-label">Content of the advertisement</label>
+                                    <input type="file" name="file" id="imgInp">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <img id="blah" src="#" style="width: 100%;height: auto;display:none;" />
+                                </div>
+                                <div class="form-group mb-3">
+                                    <button type="submit" class="btn btn-danger">Submit</button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+
+    <div id="myModal" class="imgmdl" style="display: none;">
+        <img class="contents" id="img01">
+        <button type="button" class="btn btn-danger" id="close" style="margin-inline-start: 55em;">x</button>
+
     </div>
 </body>
 
@@ -421,6 +597,57 @@ $('#deletemdl').on('show.bs.modal', function(event) {
     $('#userForm').attr("action", "{{ url('/deletead') }}" + "/" + id);
 });
 </script>
+
+<script>
+$('#editad').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget);
+    var id = button.data('id');
+
+    $('#editadform').attr("action", "{{ url('/editad') }}" + "/" + id);
+});
+</script>
+
+<script>
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#imgInp").change(function() {
+    $('#blah').show();
+    readURL(this);
+});
+</script>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+img.onclick = function() {
+    modal.style.display = "block";
+    modalImg.src = this.src;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementById("close");
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+</script>
+
 </body>
 
 

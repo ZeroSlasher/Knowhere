@@ -23,6 +23,7 @@ Route::group(['middleware' => ['revalidate', 'usersession']], function () {
     Route::any('/userdashboard', 'DashController@userdash')->name('userdashboard');
 
     Route::any('/approveoutlet', 'AdminController@approveoutlet')->name('approveoutlet');
+    Route::any('/paymentinfo', 'AdminController@paymentinfo')->name('paymentinfo');
     Route::any('/rqstapprove', 'RequestProfController@rqstapprove')->name('rqstapprove');
     Route::any('/rqstdisapprove/{id}', 'RequestProfController@rqstdisapprove')->name('rqstdisapprove/{id}');
     Route::any('/outletmanagement', 'AdminController@outletmanagement')->name('outletmanagement');
@@ -58,7 +59,6 @@ Route::group(['middleware' => ['revalidate', 'usersession']], function () {
     Route::any('/edit_s_ad/{id}', 'OwnerController@edit_s_ad')->name('edit_s_ad');
     Route::any('/payment/{id}', 'OwnerController@payment')->name('payment');
     Route::any('/dopayment', 'OwnerController@dopayment')->name('dopayment');
-    
 
 });
 
@@ -69,9 +69,11 @@ Route::any('/login', 'LoginController@login')->name('login');
 Route::any('/logout', 'LoginController@logout')->name('logout');
 Route::any('/requestlisting', 'RequestProfController@request')->name('requestlisting');
 Route::any('/searchaction', 'PostController@searchaction')->name('searchaction');
+Route::any('/editad/{id}', 'OwnerController@editad')->name('editad');
 
 Route::any('/fetchservice/{id}', 'OwnerController@fetchservice')->name('fetchservice');
 Route::any('/fetchloc', 'HomeController@fetchloc')->name('fetchloc');
+Route::any('/fetchlocal/{id}', 'HomeController@fetchlocal')->name('fetchlocal');
 
 Route::any('/postdetails/{id}', 'PostController@postdetails')->name('postdetails');
 Route::any('/addreview', 'PostController@addreview')->name('addreview');
@@ -79,6 +81,10 @@ Route::any('/addreview', 'PostController@addreview')->name('addreview');
 Route::any('/mypost', 'HomeController@mypost')->name('mypost');
 
 Route::any('/howitworks', 'HomeController@howitworks')->name('howitworks');
+Route::any('/loading', 'HomeController@loading')->name('loading');
+Route::any('/loadcomplete', 'HomeController@loadcomplete')->name('loadcomplete');
+
+
 Route::any('/about', 'HomeController@about')->name('about');
 Route::any('/services', 'HomeController@services')->name('services');
 Route::any('/faq', 'HomeController@faq')->name('faq');

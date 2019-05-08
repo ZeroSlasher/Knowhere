@@ -5,6 +5,7 @@
 <head>
 
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Knowhere</title>
@@ -166,6 +167,13 @@
                                         <h2 class="dashbord-title">Add locations</h2>
                                     </div>
                                     @include('inc.message')
+                                    @isset($own)
+                                    @foreach($own as $o)
+                                    <div class="alert alert-success" style="align:center;">
+                                        You can add localities around <strong>{{$o->city}}</strong>
+                                    </div>
+                                    @endforeach
+                                    @endisset
                                     <div class="alert alert-info" style="align:center;">
                                         <strong>Please do a search before adding inorder to
                                             verify
@@ -178,7 +186,7 @@
 
                                         <div class="form-group mb-3">
                                             <label class="control-label">locality to be added</label>
-                                            <input class="form-control input-md" name="local" type="text">
+                                            <input class="form-control input-md" name="local" id="local" type="text">
                                         </div>
                                         <div class="col-sm-12 col-md-8 col-lg-9">
 
@@ -211,7 +219,6 @@
         <script src="assets/js/jquery-min.js"></script>
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
-
         <script src="assets/js/jquery.counterup.min.js"></script>
         <script src="assets/js/waypoints.min.js"></script>
         <script src="assets/js/wow.js"></script>
@@ -222,7 +229,7 @@
         <script src="assets/js/form-validator.min.js"></script>
         <script src="assets/js/contact-form-script.min.js"></script>
         <script src="assets/js/summernote.js"></script>
-        <script src="{{ asset('js/myajax.js') }}"></script>
+
         <script>
         $(document).ready(function() {
             $('#disablebtn').click(function() {
@@ -261,6 +268,39 @@
                 });
             }
         }
+        </script>
+        <script>
+        $(document).ready(function() {
+
+            $('#local').keyup(function() {
+                var query = $(this).val();
+                if (query != '') {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: '/fetchlocal/' + query,
+                        type: "GET",
+                        // data: {
+                        //     query: query
+                        // },
+                        success: function(data) {
+                            console.log(data);
+                            $('#List').fadeIn();
+                            $('#List').html(data);
+                        }
+                    });
+                } else {
+                    $('#List').fadeOut();
+                }
+            });
+
+            $(document).on('click', '.load', function() {
+                $('#loc').val($(this).text());
+                $('#List').fadeOut();
+            });
+
+        });
         </script>
 </body>
 

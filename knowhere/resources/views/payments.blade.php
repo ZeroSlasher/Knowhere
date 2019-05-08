@@ -61,7 +61,7 @@
                         <h2 class="product-title">Payments</h2>
                         <ol class="breadcrumb">
                             <li><a href="#">Home /</a></li>
-                            <li><a href=" javascript:history.go(-1)">My ads /</a></li>
+                            <li><a href="/myads">My ads /</a></li>
                             <li class="current">Payments</li>
                         </ol>
                     </div>
@@ -80,9 +80,7 @@
                 <div class="col-sm-12 col-md-8 col-lg-9">
                     <div class="page-content">
                         <div class="inner-box">
-                            <div class="dashboard-box">
-                                <h2 class="dashbord-title">Payments</h2>
-                            </div>
+
                             <div class="dashboard-wrapper">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-sx-12">
@@ -147,11 +145,13 @@
                                             @isset($detail)
                                             @foreach($detail as $d)
                                             <input type="hidden" name="id" value="{{$d->ad_id}}">
+                                            <input type="hidden" name="amount" value="{{$d->amount}}">
+
                                             @endforeach
                                             @endisset
                                             <div class="form-group mb-3">
                                                 <label>Name on Card <sup>*</sup></label>
-                                                <input name="cname" id="cname" placeholder="John doe"
+                                                <input name="cname" autocomplete="off" id="cname" placeholder="John doe"
                                                     class="form-control" type="text">
                                                 <div id="nameerr" class="alert alert-danger"
                                                     style="align:center;display: none;">
@@ -161,7 +161,8 @@
 
                                             <div class="form-group mb-3 fake-input">
                                                 <label>Credit Card Number </label>
-                                                <input name="cc_number" placeholder="1234 5678 9012 3456" id="cc_number"
+                                                <input name="cc_number" autocomplete="off"
+                                                    placeholder="1234 5678 9012 3456" id="cc_number"
                                                     class="form-control" type="text">
                                                 <img id="cimg" src="" />
 
@@ -172,14 +173,16 @@
                                             </div>
 
                                             <div class="form-group mb-3 tg-inputwithicon ">
-                                                <input name="ctype" hidden id="ctype" class="form-control" type="text">
+                                                <input name="ctype" id="ctype" value="not specified"
+                                                    class="form-control" type="hidden">
 
                                             </div>
-                                            <div class="row" style="margin-left: auto;">
+                                            <div class="row"
+                                                style="    margin-left: auto; display: -webkit-inline-box;">
                                                 <div class="form-group">
                                                     <label>CVV<sup>*</sup></label>
-                                                    <input class="form-control" width="33%" placeholder="123" id="cvv"
-                                                        name="cvv" type="text">
+                                                    <input autocomplete="off" class="form-control" width="30%"
+                                                        placeholder="123" id="cvv" name="cvv" type="text">
                                                     <div id="cvverr" class="alert alert-danger"
                                                         style="align:center;display: none;">
                                                         <strong>invalid CVV!!</strong>
@@ -188,8 +191,9 @@
                                                 <div class="form-group">
                                                     <label>Expiry month
                                                         <sup>*</sup></label>
-                                                    <input class="form-control" width="33%" placeholder="MM"
-                                                        maxlength="2" id="expiry_month" name="month" type="text">
+                                                    <input class="form-control" width="30%" placeholder="MM"
+                                                        maxlength="2" autocomplete="off" id="expiry_month" name="month"
+                                                        type="text">
                                                     <div id="mntherr" class="alert alert-danger"
                                                         style="align:center;display: none;">
                                                         <strong>Enter a valid month!!</strong>
@@ -198,8 +202,9 @@
                                                 <div class="form-group">
                                                     <label>Expiry year
                                                         <sup>*</sup></label>
-                                                    <input class="form-control" width="33%" placeholder="YY"
-                                                        maxlength="2" id="expiry_year" name="year" type="text">
+                                                    <input class="form-control" width="30%" placeholder="YY"
+                                                        maxlength="2" autocomplete="off" id="expiry_year" name="year"
+                                                        type="text">
                                                     <div id="yearerr" class="alert alert-danger"
                                                         style="align:center;display: none;">
                                                         <strong>Enter a valid year!!</strong>

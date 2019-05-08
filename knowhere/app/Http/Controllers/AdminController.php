@@ -33,7 +33,7 @@ class AdminController extends Controller
             $urqst = DB::select('SELECT * FROM `tbl_users_reg` as l,`tbl_status` as st,`tbl_login` as lo WHERE l.status_id=st.status_id and l.id = lo.id and lo.utype_id = 3 ');
             $total = Reg::count();
             $active = Reg::where('status_id', '=', 1)->count(); //return no. by checking with utype_id
-            $blocked = Reg::where('status_id', '=', 2)->count();//return no. by checking with utype_id
+            $blocked = Reg::where('status_id', '=', 2)->count(); //return no. by checking with utype_id
             // $blocked = DB::select('SELECT count(*) FROM tbl_user_reg where status_id =2');
             return view('user-management', compact('urqst', 'total', 'blocked', 'active'));
         } else {
@@ -55,4 +55,18 @@ class AdminController extends Controller
         }
     }
 
+    public function paymentinfo()
+    {
+        $payment = DB::table('tbl_payments')
+            ->join('tbl_users_reg', 'tbl_payments.id', '=', 'tbl_users_reg.id')
+            ->join('tbl_advert', 'tbl_advert.ad_id', '=', 'tbl_payments.ad_id')
+            ->join('tbl_outlet_prof', 'tbl_advert.outletid', '=', 'tbl_outlet_prof.outletid')
+            ->join('tbl_status', 'tbl_payments.status_id', '=', 'tbl_status.status_id')
+            ->get();
+
+        $comp = DB::table('tbl_payments')->where('status_id', 10)->get();
+        $c_comp = count($comp);
+        $total = count($payment);
+        return view('paymentinfo', compact('payment', 'total', 'c_comp'));
+    }
 }

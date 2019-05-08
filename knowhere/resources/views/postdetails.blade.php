@@ -45,6 +45,67 @@ Session::put('idu','aa');
         border-bottom: 1px dashed #efefef;
         margin-bottom: 25px;
     }
+
+    .modal-body:not(.two-col) {
+        padding: 0px
+    }
+
+    .glyphicon {
+        margin-right: 5px;
+    }
+
+    .glyphicon-new-window {
+        margin-left: 5px;
+    }
+
+    .modal-body .radio,
+    .modal-body .checkbox {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .modal-body .list-group {
+        margin-bottom: 0;
+    }
+
+    .margin-bottom-none {
+        margin-bottom: 0;
+    }
+
+    .modal-body .radio label,
+    .modal-body .checkbox label {
+        display: block;
+    }
+
+    .modal-footer {
+        margin-top: 0px;
+    }
+
+    @media screen and (max-width: 325px) {
+        .btn-close {
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        .btn-results {
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        .btn-vote {
+            margin-top: 5px;
+            width: 100%;
+        }
+
+    }
+
+    .modal-footer .btn+.btn {
+        margin-left: 0px;
+    }
+
+    .progress {
+        margin-right: 10px;
+    }
     </style>
     <style>
     /****** Rating Starts *****/
@@ -117,10 +178,10 @@ Session::put('idu','aa');
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-wrapper">
-                        <h2 class="product-title">Details</h2>
+                        <h2 class="product-title">Post Details</h2>
                         <ol class="breadcrumb">
                             <li><a href="/">Home /</a></li>
-                            <li><a href=" javascript:history.go(-1)">Listings /</a></li>
+                            <li><a href=" javascript:history.go(-1)">Search /</a></li>
                             <li class="current">Details </li>
                         </ol>
                     </div>
@@ -246,16 +307,56 @@ Session::put('idu','aa');
                         </div>
                     </div>
                     @endforeach @endisset
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="short-info">
-                            @foreach($post as $p)
-                            <h4>Ask a qustion about {{$p->outletname}}</h4>
-                            @endforeach
-                            <ul>
-                                <li><i class="lni-question-circle"></i><a>Ask a qustion</a></li>
+                    <div class="col-lg-4 col-md-6 col-xs-12" style="    height: 350px;">
 
-                            </ul>
-                        </div>
+                        <div id="map" style="height: 100%;"></div>
+                        <script>
+                        function initMap() {
+                            var myLatLng = {
+                                lat: @php
+                                if (isset($lat)) {
+                                    echo json_encode($lat);
+                                }
+                                @endphp,
+                                lng: @php
+                                if (isset($lng)) {
+                                    echo json_encode($lng);
+                                }
+                                @endphp,
+                            };
+
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 18,
+                                center: myLatLng,
+                            });
+
+                            var marker = new google.maps.Marker({
+                                position: myLatLng,
+                                map: map,
+                                title: @php
+                                if (isset($adr)) {
+                                    echo json_encode($adr);
+                                }
+                                @endphp
+                            });
+                            google.maps.event.addListener(marker, 'click', (function() {
+                                // window.location.href = "http://maps.google.com";
+                                var s1 = "https://www.google.com/maps/search/?api=1&query=";
+                                s1 += @php
+                                if (isset($adr)) {
+                                    echo json_encode($adr);
+                                }
+                                @endphp
+
+                                window.open(s1);
+
+
+                            }));
+                        }
+                        </script>
+                        <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVtoU6ioC5PVtX8DeQD7ZWpy8AJvvmO9E&callback=initMap">
+                        </script>
                     </div>
                 </div>
 
@@ -268,7 +369,7 @@ Session::put('idu','aa');
 
                                 <div class="short-info">
                                     @foreach($post as $p)
-                                    <h4 class="respond-title">Rate and review {{$p->outletname}}</h4>
+                                    <h4>Rate and review {{$p->outletname}}</h4>
                                     @endforeach
                                     <!-- if session is there -->
                                     <div class="panel-body">
@@ -437,9 +538,8 @@ Session::put('idu','aa');
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-xs-12" style="margin-top:auto;">
                         <div class="short-info">
                             <h4>Short info</h4>
                             <ul>
@@ -448,18 +548,157 @@ Session::put('idu','aa');
 
                                 <li><i class="lni-reply"></i><a href="https://www.addtoany.com/share"></i>Send
                                         to a friend</a></li>
-                                <li><i class="lni-warning"></i><a>Report this ad</a></li>
-                                <li><i class="lni-warning"></i><a>Suggest an edit</a></li>
+
+                                <li><i class="lni-warning"></i><a data-toggle="modal" data-target="#report"
+                                        data-original-title>Report
+                                        this
+                                        ad</a></li>
+                                <li><i class="lni-warning"></i><a data-toggle="modal" data-target="#contact">Suggest
+                                        an
+                                        edit</a></li>
 
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
+    <div class="modal fade" id="report" tabindex="-1" data-backdrop="true" role="dialog" aria-labelledby="voteLabel"
+        aria-hidden="true" style="padding-top: 200px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="panel panel-primary" style="border-radius: 15px">
+                    <div class="panel-heading bg-primary modal-header text-center">
+                        <h5 id="contactLabel" style="color:white;"></span>Report this post.</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <form method="POST" action="/report">
+                        @csrf
+                        <div class="modal-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="reason"
+                                                value="Uncivil, unneighborly or offensive">
+                                            Uncivil, unneighborly or offensive
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="reason" value="Not relevant or annoying">
+                                            Not relevant or annoying
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="reason" value="Safety issue or illegal">
+                                            Safety issue or illegal
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="reason" value="Posted in error">
+                                            Posted in error
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <input type="text" class="form-control input-lg" placeholder="other"
+                                        pattern="/^[a-z ,.'-]+$/i" required autofocus>
+                                </li>
+                                <ul class="list-group">
+                                    <li>
+                                        <div class="bg-info"
+                                            style="margin-left: 20px;    margin: 10px;width: fit-content;">
+                                            <h6 class="panel-title" id="contactLabel" style="color:white;">Your details.
+                                            </h6>
+                                        </div>
+                                    </li>
+                                    <li style="background-color: #fff; padding: .75rem 1.25rem;margin-bottom: -1px;">
+                                        <div style="    margin-right: 10px;">
+                                            <input class="form-control" name="Name" placeholder="Name" type="text"
+                                                required autofocus />
+                                        </div>
+                                    </li>
+                                    <li style="padding: .75rem 1.25rem;margin-bottom: -1px;background-color: #fff;">
+                                        <div style="    margin-right: 10px;">
+                                            <input class="form-control" name="email" placeholder="Email" type="email"
+                                                required autofocus />
+                                        </div>
+                                    </li>
+                                    <li style="background-color: #fff;padding: .75rem 1.25rem;margin-bottom: -1px;">
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary btn-results" id="drop"
+                                                data-dismiss="modal" data-dismiss="modal">Report</button>
+                                            <button type="button" class="btn btn-default btn-close"
+                                                data-dismiss="modal">Close</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="contact" tabindex="-1" data-backdrop="true" role="dialog" aria-labelledby="contactLabel"
+        aria-hidden="true" style="padding-top: 200px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="panel panel-primary" style="    background-color: white;padding: 30px;border-radius: 5px;">
+                    <div class="panel-heading bg-primary modal-header text-center">
+                        <h5 class="panel-title" id="contactLabel" style="color:white;"><span
+                                class="glyphicon glyphicon-info-sign"></span>Suggest
+                            an edit for this post.</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <form action="#" method="post" accept-charset="utf-8">
+                        <div class="modal-body" style="padding: 5px;">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="lastname" placeholder="Lastname" type="text"
+                                        required />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="email" placeholder="E-mail" type="text"
+                                        required />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="subject" placeholder="Subject" type="text"
+                                        required />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <textarea style="resize:vertical;" class="form-control" placeholder="Message..."
+                                        rows="6" name="comment" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer" style="margin-bottom:-14px;">
+                            <input type="submit" class="btn btn-success" value="Send" />
+                            <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -504,23 +743,7 @@ Session::put('idu','aa');
         $('#title').val(label);
     });
     </script>
-    <script type="text/javascript">
-    $('#refresh').click(function() {
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                    'content')
-            },
-            type: 'GET',
-            url: '/refreshcaptcha',
-            success: function(data) {
-                console.log(data);
 
-                $(".captcha span").html(data);
-            }
-        });
-    });
-    </script>
 </body>
 
 </html>

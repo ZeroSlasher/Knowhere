@@ -322,17 +322,6 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="form-group mb-3">
-                                                    <label class="control-label">Content of the advertisement</label>
-                                                    <input id="file" type="file" name="file" multiple class="file"
-                                                        data-max-file-count="1" data-min-file-count="1">
-                                                </div>
-
-                                                <div class="form-group mb-3">
-                                                    <label class="control-label">Description for the
-                                                        advertisement</label>
-                                                    <textarea class="form-control" id="Desc" name="Desc"></textarea>
-                                                </div>
 
                                                 <div class="form-group mb-3">
                                                     <label class="control-label">Package for the advertisement</label>

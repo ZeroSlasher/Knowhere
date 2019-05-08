@@ -31,6 +31,6 @@ class CreateTblDistrictTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('district');
+        Schema::dropIfExists('tbl_district');
     }
 }

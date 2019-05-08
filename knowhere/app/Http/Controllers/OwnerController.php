@@ -254,12 +254,44 @@ class OwnerController extends Controller
 
     public function dopayment(Request $request)
     {
-        return $request->all();
+
+        $uid = Session::get('uid');
+        $id = $request->get('id');
+        $cname = $request->get('cname');
+        $cc_number = $request->get('cc_number');
+
+        if ($request->get('ctype')) {
+            $c_type = $request->get('ctype');
+        } else {
+            $c_type = 'not specified';
+        }
+        $cvv = $request->get('cvv');
+        $month = $request->get('month');
+        $year = $request->get('year');
+        $amount = $request->get('amount');
+
+        DB::table('tbl_advert')
+            ->where('ad_id', $id)
+            ->update(['p_status' => 10]);
+
+        DB::table('tbl_payments')->insert(
+            ['id' => $uid, 'ad_id' => $id, 'cname' => $cname, 'cc_number' => $cc_number,
+                'ctype' => $c_type, 'cvv' => $cvv, 'month' => $month, 'year' => $year, 'amount' => $amount, 'status_id' => 10,
+            ]);
+
+        return redirect('/myads')->with('success', 'Payment successfull, You can now add the ad content!!')->with('warning', 'Your ad is ready, Remember to update the ad content then only it will become active');
     }
 
     public function addloc()
     {
-        return view('addloc');
+        $own = DB::table('tbl_users_reg')
+            ->join('tbl_city', 'tbl_users_reg.city_id', '=', 'tbl_city.city_id')
+            ->where('id', Session::get('uid'))->get();
+        foreach ($own as $c) {
+            $city = $c->city_id;
+        }
+        $local = DB::table('tbl_locality')->where('city_id', $city)->get();
+        return view('addloc', compact('own', 'local'));
     }
 
     public function addad()
@@ -272,8 +304,6 @@ class OwnerController extends Controller
     {
         $id = Session::get('uid');
         $outletid = $request->get('outlet');
-        $file = $request->get('file');
-        $desc = $request->get('Desc');
         $pkg = $request->get('pkg');
         if ($pkg == 1) {
             $exp = 10;
@@ -286,24 +316,14 @@ class OwnerController extends Controller
         $p_status = 11; //10-complete, 11-incomplete
 
         DB::table('tbl_advert')->insert(
-            ['id' => $id, 'outletid' => $outletid, 'ad_content' => $file,
-                'description' => $desc, 'pkg_id' => $pkg,
-                'status_id' => $status_id, 'p_status' => $p_status, 'expiring_in' => $exp]
+            ['id' => $id, 'outletid' => $outletid, 'pkg_id' => $pkg,
+                'status_id' => $status_id, 'validity' => $exp, 'p_status' => $p_status]
         );
 
         $lastid = DB::getPdo()->lastInsertId();
 
-        // $detail = DB::table('tbl_advert')
-        //     ->join('tbl_users_reg', 'tbl_advert.id', '=', 'tbl_users_reg.id')
-        //     ->join('tbl_outlet_prof', 'tbl_advert.outletid', '=', 'tbl_outlet_prof.outletid')
-        //     ->join('tbl_package', 'tbl_advert.pkg_id', '=', 'tbl_package.pkg_id')
-        //     ->join('tbl_status', 'tbl_advert.status_id', '=', 'tbl_status.status_id')
-        //     ->where('ad_id', $lastid)->get();
-
-        // return view('payments', compact('detail'));
-        // return redirect('/payment', $lastid);
-        //return redirect()->route('payment', $detail);
         return redirect()->action('OwnerController@payment', ['id' => $lastid]);
+
     }
 
     public function myads()
@@ -338,18 +358,49 @@ class OwnerController extends Controller
         $detail = DB::table('tbl_advert')->where('ad_id', $id)->get();
         foreach ($detail as $d) {
             $status = $d->status_id;
+            $psts = $d->p_status;
         }
-        if ($status == 1) {
-            DB::table('tbl_advert')
-                ->where('ad_id', $id)
-                ->update(['status_id' => 7]);
-            return back()->with('warning', 'Ad has been hidden successfully');
-        } else {
-            DB::table('tbl_advert')
-                ->where('ad_id', $id)
-                ->update(['status_id' => 1]);
-            return back()->with('warning', 'Ad has been activated successfully');
+        if ($psts == 11) {
+            return back()->with('error', 'Complete payment to change status');
 
+        } else {
+            if ($status == 1) {
+                DB::table('tbl_advert')
+                    ->where('ad_id', $id)
+                    ->update(['status_id' => 7]);
+                return back()->with('warning', 'Ad has been hidden successfully');
+            } else {
+
+                DB::table('tbl_advert')
+                    ->where('ad_id', $id)
+                    ->update(['status_id' => 1]);
+                return back()->with('warning', 'Ad has been activated successfully');
+
+            }
         }
+    }
+
+    public function editad(Request $request, $id)
+    {
+        if ($request->has('_token')) {
+            $file_path = 'uploads/ads/';
+            $file = $request->file('file');
+
+            $fname = time() . $file->getClientOriginalName();
+            $file->move($file_path, $fname);
+            $ad = DB::table('tbl_advert')->where('ad_id', $id)->get();
+            foreach ($ad as $a) {
+                $val = $a->validity;
+            }
+            DB::table('tbl_advert')
+                ->where('ad_id', $id)
+                ->update(['ad_content' => $fname, 'expiring_in' => $val, 'status_id' => 1]);
+
+            return back()->with('success', 'Ad content has been updated and your ad is now active');
+
+        } else {
+            return back()->with('error', 'Invalid iInput recived');
+        }
+
     }
 }

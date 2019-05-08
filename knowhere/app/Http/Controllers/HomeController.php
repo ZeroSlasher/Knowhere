@@ -158,6 +158,42 @@ class HomeController extends Controller
         }
     }
 
+    public function fetchlocal($id)
+    {
+
+        if ($id) {
+
+            //return $loc = DB::table('tbl_locality')->where('locality', $id)->get();
+            $loc = DB::select("select locality from tbl_locality where locality like '%$id%'");
+
+            $output = '<ul>';
+            foreach ($loc as $row) {
+                $output .= '
+                <li class="load" style="background: #fff;
+                height: 48px;
+                width: 100%;
+                line-height: 48px;
+                padding: 0 20px;
+                color: #646e7b;
+                min-width: 250px;
+                display: block;
+                border-bottom: none;
+                border-radius: 48px;
+                margin-bottom: 3px;
+                text-transform: none;
+                font-size: 14px;
+                letter-spacing: .7px;
+                position: relative;
+                -webkit-box-shadow: 0 12px 22px rgba(0, 0, 0, .2);
+                box-shadow: 0 12px 22px rgba(0, 0, 0, .2);
+                "><a href="#">' . $row->locality . '</a></li>';
+            }
+            $output .= '</ul>';
+            return $output;
+
+        }
+    }
+
     public function forgot()
     {
         return view('forgot_password');
@@ -201,7 +237,6 @@ class HomeController extends Controller
         return view('pricing');
     }
 
-
     public function offer()
     {
         return view('offermessages');
@@ -242,4 +277,16 @@ class HomeController extends Controller
         }
 
     }
+
+    public function loading()
+    {
+        return view('loading');
+
+    }
+    public function loadcomplete()
+    {
+        return redirect('/myads')->with('success', 'Payment successfull, You can now add the ad content!!')->with('warning', 'Your ad is ready, Remember to update the ad content then only it will become active');
+
+    }
+
 }
