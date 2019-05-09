@@ -20,7 +20,8 @@ class TblAdImages extends Migration
             $table->foreign('ad_id')->references('ad_id')->on('tbl_advert');
 
             $table->timestamps();
-        });}
+        });
+    }
 
     /**
      * Reverse the migrations.

@@ -190,6 +190,10 @@
     <div class="section large transparent dark text-center" style="background-image: url('images/background01.jpg');">
         <div class="inner">
             <div class="container">
+
+                <br></div>
+
+            <div class="container">
                 <h1>Discover The City Gems</h1>
                 <p class="lead">Find great places to stay, eat, shop, or visit from local experts.</p>
                 <form method="GET" action="/searchaction">

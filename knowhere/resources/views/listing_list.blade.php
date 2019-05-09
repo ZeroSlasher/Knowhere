@@ -180,7 +180,10 @@
                             <div class="tab-content">
                                 @if(!empty($successMsg))
                                 <div class="alert alert-danger"> {{ $successMsg }}</div>
-                                <!-- https://www.google.com/maps/search/?api=1&query=pizza+seattle+wa -->
+                                <div class="alert alert-success"><a href="{{$query}}" target="_blank"><strong>Click here
+                                            to get more
+                                            results</strong></a>
+                                </div>
                                 @endif
                                 <div id="grid-view" class="tab-pane fade">
                                     <div class="row">
@@ -336,7 +339,8 @@
                                     <div class="row">
                                         <div class="col-lg-12">
 
-                                            <div id="map" style="/* display: flex; */width: 100%;height: 900px;"></div>
+                                            <div id="map" style="/* display: flex; */width: 100%;height: 900px;">
+                                            </div>
                                             <script
                                                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVtoU6ioC5PVtX8DeQD7ZWpy8AJvvmO9E"
                                                 async defer>
@@ -354,7 +358,8 @@
 
                                             var map = new google.maps.Map(document.getElementById('map'), {
                                                 zoom: 10,
-                                                center: new google.maps.LatLng(9.591652242993, 76.531287431717),
+                                                center: new google.maps.LatLng(9.591652242993,
+                                                    76.531287431717),
                                                 mapTypeId: google.maps.MapTypeId.ROADMAP
                                             });
 
@@ -364,12 +369,14 @@
 
                                             for (i = 0; i < locations.length; i++) {
                                                 marker = new google.maps.Marker({
-                                                    position: new google.maps.LatLng(locations[i][1], locations[
-                                                        i][2]),
+                                                    position: new google.maps.LatLng(locations[i][1],
+                                                        locations[
+                                                            i][2]),
                                                     map: map
                                                 });
 
-                                                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                                                google.maps.event.addListener(marker, 'click', (function(marker,
+                                                    i) {
                                                     return function() {
                                                         infowindow.setContent(locations[i][0]);
                                                         infowindow.open(map, marker);

@@ -55,6 +55,7 @@ class PostController extends Controller
             'phone1' => $all['phone1'],
             'phone2' => $all['phone2'],
             'status_id' => $status,
+            'rcount' => 0,
 
         ]);
         $post->save();
@@ -74,6 +75,76 @@ class PostController extends Controller
         return view('delete-post', compact('del'));
     }
 
+    public function report(Request $request, $id)
+    {
+        $reason = $request->get('reason');
+
+        if (Session::get('id')) {
+
+            $email = Session::get('id');
+            $dbname = DB::select("select name from tbl_users_reg where id = $id");
+            foreach ($dbname as $n) {
+                $name = $n->name;
+            }
+            $exist = DB::select("select email from tbl_report where outletid = $id and email='$email'");
+            if (count($exist) == 0) {
+                DB::table('tbl_report')->insert(
+                    ['reason' => $reason, 'email' => $email, 'name' => $name, 'outletid' => $id]
+                );
+
+                DB::table('tbl_outlet_prof')->where('outletid', $id)->increment('rcount', 1);
+                return back()->with('warning', 'Post has been reported');
+            } else {
+                return back()->with('error', 'You have already reported this post');
+            }
+        } else {
+            $email = $request->get('rpmail');
+            $name = $request->get('Name');
+
+            $exist = DB::select("select email from tbl_report where outletid = $id and email='$email'");
+            if (count($exist) == 0) {
+                DB::table('tbl_report')->insert(
+                    ['reason' => $reason, 'email' => $email, 'name' => $name, 'outletid' => $id]
+                );
+                DB::table('tbl_outlet_prof')->where('outletid', $id)->increment('rcount', 1);
+
+                return back()->with('warning', 'Post has been reported');
+            } else {
+                return back()->with('error', 'You have already reported this post');
+            }
+        }
+
+    }
+
+    public function suggest(Request $request, $id)
+    {
+        $uid = $request->get('uid');
+        $subject = $request->get('subject');
+        $comment = $request->get('comment');
+
+        if (Session::get('id')) {
+
+            $email = Session::get('id');
+            $dbname = DB::select("select name from tbl_users_reg where id = $id");
+            foreach ($dbname as $n) {
+                $name = $n->name;
+            }
+            DB::table('tbl_suggest')->insert(
+                ['outletid' => $id, 'email' => $email, 'uid' => $uid,
+                    'subject' => $subject, 'comment' => $comment]);
+            return back()->with('success', 'Your message has been sent!!');
+
+        } else {
+            $name = $request->get('name');
+            $email = $request->get('email');
+            DB::table('tbl_suggest')->insert(
+                ['outletid' => $id, 'email' => $email, 'uid' => $uid,
+                    'subject' => $subject, 'comment' => $comment]);
+            return back()->with('success', 'Your message has been sent!!');
+
+        }
+
+    }
     public function removepost(Request $request)
     {
         $request->all();
@@ -85,7 +156,6 @@ class PostController extends Controller
             $id = $request->get('id');
             DB::select("delete from tbl_outlet_prof where outletid = $id");
             return redirect('/mypostings')->with('warning', 'Post deleted successfully');
-
         }
     }
 
@@ -112,7 +182,10 @@ class PostController extends Controller
 
             $tpost = count($post);
             if ($tpost == 0) {
-                return view('listing_list')->with(['tpost' => $tpost, 'data' => $data, 'loc' => $loc])->with('successMsg', 'No results found!!');
+                $query = "https://www.google.com/maps/search/?api=1&query=";
+                $query .= rawurlencode($loc);
+
+                return view('listing_list')->with(['tpost' => $tpost, 'data' => $data, 'loc' => rawurlencode($loc), 'query' => $query])->with('successMsg', 'No results found!!');
             } else {
 
                 foreach ($post as $p) {
@@ -123,7 +196,7 @@ class PostController extends Controller
                     $new[] = array($ad, $lat, $lng);
                 }
 
-                return view('listing_list', compact('post', 'data', 'new', 'tpost', 'loc'));
+                return view('listing_list', compact('post', 'data', 'new', 'tpost'))->with(['loc' => rawurlencode($loc)]);
             }
         } else {
 
@@ -144,8 +217,16 @@ class PostController extends Controller
 
             $tpost = count($post);
             if ($tpost == 0) {
+                $c = DB::table('tbl_cat')->select('catagory')->where('cat_id', $cat)->get();
+                foreach ($c as $ca) {
+                    $cat_n = $ca->catagory;
+                }
+                $query = "https://www.google.com/maps/search/?api=1&query=";
+                $query .= rawurlencode($loc);
+                $query .= '+';
+                $query .= rawurlencode($cat_n);
 
-                return view('listing_list')->with(['tpost' => $tpost, 'data' => $data, 'loc' => $loc])->with('successMsg', 'No results found!!');
+                return view('listing_list')->with(['tpost' => $tpost, 'data' => $data, 'loc' => rawurlencode($loc), 'query' => $query])->with('successMsg', 'No results found!!');
                 // return view('listing_list', compact('tpost'))->with('error', 'No results found!!');
                 //return view('listing_list')->with('tpost', $tpost)->with('error', 'No results found!!');
 

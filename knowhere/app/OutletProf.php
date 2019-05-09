@@ -27,5 +27,6 @@ class OutletProf extends Model
         'phone1',
         'phone2',
         'status_id',
+        'rcount',
     ];
 }

@@ -539,7 +539,7 @@ Session::put('idu','aa');
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12" style="margin-top:auto;">
+                    <div class="col-lg-4 col-md-6 col-xs-12" style="margin-top:5%;">
                         <div class="short-info">
                             <h4>Short info</h4>
                             <ul>
@@ -550,11 +550,10 @@ Session::put('idu','aa');
                                         to a friend</a></li>
 
                                 <li><i class="lni-warning"></i><a data-toggle="modal" data-target="#report"
-                                        data-original-title>Report
-                                        this
-                                        ad</a></li>
-                                <li><i class="lni-warning"></i><a data-toggle="modal" data-target="#contact">Suggest
-                                        an
+                                        data-id="{{$own->outletid}}">Report this ad</a></li>
+
+                                <li><i class="lni-warning"></i><a data-toggle="modal" data-oid="{{$own->outletid}}"
+                                        data-uid="{{$own->id}}" data-target="#contact">Suggest an
                                         edit</a></li>
 
                             </ul>
@@ -574,7 +573,7 @@ Session::put('idu','aa');
                         <h5 id="contactLabel" style="color:white;"></span>Report this post.</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
-                    <form method="POST" action="/report">
+                    <form method="POST" action="" id="reportform">
                         @csrf
                         <div class="modal-body">
                             <ul class="list-group">
@@ -612,38 +611,74 @@ Session::put('idu','aa');
                                     </div>
                                 </li>
                                 <li class="list-group-item">
-                                    <input type="text" class="form-control input-lg" placeholder="other"
-                                        pattern="/^[a-z ,.'-]+$/i" required autofocus>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="reason" value="other">
+                                            Other reasons
+                                        </label>
+                                    </div>
                                 </li>
+                                @if(!Session::get('id'))
                                 <ul class="list-group">
                                     <li>
                                         <div class="bg-info"
-                                            style="margin-left: 20px;    margin: 10px;width: fit-content;">
-                                            <h6 class="panel-title" id="contactLabel" style="color:white;">Your details.
+                                            style="margin-left: 20px;margin: 10px;background-color:dodgerblue;">
+                                            <h6 class="panel-title" id="contactLabel"
+                                                style="color:white;margin-left:10px">Your details.
                                             </h6>
+                                        </div>
+                                    </li>
+                                    <li style="padding: .75rem 1.25rem;margin-bottom: -1px;background-color: #fff;">
+                                        <div style="    margin-right: 10px;">
+                                            <input class="form-control" id="rpmail" name="rpmail" placeholder="Email"
+                                                type="email" required>
+                                            <input type="hidden" id="s1" value="0">
                                         </div>
                                     </li>
                                     <li style="background-color: #fff; padding: .75rem 1.25rem;margin-bottom: -1px;">
                                         <div style="    margin-right: 10px;">
                                             <input class="form-control" name="Name" placeholder="Name" type="text"
-                                                required autofocus />
+                                                required>
                                         </div>
                                     </li>
+
                                     <li style="padding: .75rem 1.25rem;margin-bottom: -1px;background-color: #fff;">
-                                        <div style="    margin-right: 10px;">
-                                            <input class="form-control" name="email" placeholder="Email" type="email"
-                                                required autofocus />
+                                        <div id="ackr" class="alert alert-info" style="align:center;display: none;">
+                                            <strong>A verification code has been sent to your email, enter
+                                                it here to continuoue!!</strong>
+                                        </div>
+                                        <input type="text" autocomplete="off" placeholder="Verification code"
+                                            id="vcodeboxr" class="form-control"
+                                            style="margin:5px;width:50%;display: none;">
+                                        <button id="vbuttonr" class="btn btn-warning" style="margin:5px;display: none;"
+                                            type="button">verify</button>
+                                        <div id="p222r" class="alert alert-warning" style="display: none;">
+                                            <strong>Email verification failed</strong>
+                                        </div>
+                                        <div id="vwarnr" class="alert alert-danger" style="align:center;display: none;">
+                                            <strong>Enter code to continue!!</strong>
+                                        </div>
+                                        <div id="p22r" class="alert alert-danger" style="align:center;display: none;">
+                                            <strong>Enter a valid email</strong>
+                                        </div>
+                                        <div id="vwarn1r" class="alert alert-danger"
+                                            style="align:center;display: none;">
+                                            <strong>Verification code is incorrect!!</strong>
+                                        </div>
+                                        <div id="vsr" class="alert alert-danger" style="align:center;display: none;">
+                                            <strong>Verification successfull!!</strong>
                                         </div>
                                     </li>
                                     <li style="background-color: #fff;padding: .75rem 1.25rem;margin-bottom: -1px;">
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary btn-results" id="drop"
-                                                data-dismiss="modal" data-dismiss="modal">Report</button>
+                                            <button type="submit" id="reportsub" class="btn btn-primary btn-results"
+                                                id="drop">Report</button>
                                             <button type="button" class="btn btn-default btn-close"
                                                 data-dismiss="modal">Close</button>
                                         </div>
                                     </li>
                                 </ul>
+                                @endif
                             </ul>
                         </div>
                     </form>
@@ -663,12 +698,13 @@ Session::put('idu','aa');
                             an edit for this post.</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
-                    <form action="#" method="post" accept-charset="utf-8">
+                    <form action="" method="post" id="sugform">
+                        @csrf
                         <div class="modal-body" style="padding: 5px;">
+                            <input type="hidden" name="uid" id="uid" value="">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
-                                    <input class="form-control" name="lastname" placeholder="Lastname" type="text"
-                                        required />
+                                    <input class="form-control" name="name" placeholder="Name" type="text" required />
                                 </div>
                             </div>
                             <div class="row">
@@ -729,6 +765,26 @@ Session::put('idu','aa');
     <script src="{{ asset('assets/js/contact-form-script.min.js') }}"></script>
     <script src="{{ asset('assets/js/summernote.js') }}"></script>
     <script src="{{ asset('js/formvalidate3.js')}}"></script>
+
+    <script>
+    $('#report').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+
+        $('#reportform').attr("action", "{{ url('/report') }}" + "/" + id);
+    });
+    </script>
+
+    <script>
+    $('#contact').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('oid');
+        var uid = button.data('uid');
+
+        $('#sugform').attr("action", "{{ url('/suggest') }}" + "/" + id);
+        $('#uid').val(uid);
+    });
+    </script>
 
     <script>
     $(document).ready(function() {

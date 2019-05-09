@@ -70,6 +70,13 @@
                                 });
                             });
 
+                            $(document).ready(function () {
+                                $("#rpmail").blur(function () {
+                                    $('#s1').val("0");
+                                    emailverify1();
+                                });
+                            });
+
 
                             function emailverify() {
                                 $('#postr').addClass('disabled');
@@ -119,6 +126,54 @@
                                 }
                             }
 
+                            function emailverify1() {
+                                $('#reportsub').addClass('disabled');
+
+                                $('#vcodeboxr').fadeIn();
+                                $('#vbuttonr').fadeIn();
+                                $('#ackr').fadeIn();
+
+                                var semail = document.getElementById('rpmail').value;
+                                var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+                                if (semail && semail.match(emailExp)) {
+                                    // $("#vmail").text(semail);
+                                    $.ajax({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        },
+                                        url: '/mailverify/' + semail, //send mail
+                                        type: "GET",
+                                        dataType: "json",
+                                        // data: {
+                                        //     'email': semail
+                                        // },
+                                        success: function (data) {
+                                            console.log(data);
+
+                                            if (data == 1) {
+                                                //fail
+                                                $('#vcodeboxr').fadeOut();
+                                                $('#vbuttonr').fadeOut();
+                                                $('#ackr').fadeOut();
+                                                $("#p222r").show().delay(1000).fadeOut();
+                                            } else if (data == 0) {
+                                                //success
+                                                $("#vwarnr").show().delay(1000).fadeOut();
+                                                $('#vcodeboxr').fadeIn();
+                                                $('#vbuttonr').fadeIn();
+
+                                            }
+
+                                        }
+                                    });
+                                } else {
+                                    $('#ackr').fadeOut();
+                                    $('#vcodeboxr').fadeOut();
+                                    $('#vbuttonr').fadeOut();
+                                    $("#p22r").show().delay(1000).fadeOut();
+                                }
+                            }
+
 
                             $(document).ready(function () {
                                 $("#vbutton").click(function () {
@@ -156,6 +211,48 @@
                                     } else {
                                         $('#ack').fadeOut();
                                         $("#vwarn").show().delay(1000).fadeOut();
+                                        return false;
+
+                                    }
+                                });
+                            });
+
+                            $(document).ready(function () {
+                                $("#vbuttonr").click(function () {
+
+                                    var vcode = document.getElementById('vcodeboxr').value;
+                                    var vmail = document.getElementById('rpmail').value;
+                                    if (vcode && vmail) {
+                                        $.ajax({
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                            },
+                                            url: '/verifycode/' + vcode + '/' + vmail,
+
+                                            type: "GET",
+                                            dataType: "json",
+
+                                            success: function (data) {
+                                                if (data == 1) {
+                                                    console.log(data);
+                                                    $("#vwarn1r").show().delay(1000).fadeOut();
+
+                                                } else {
+                                                    console.log(data);
+                                                    $('#vcodeboxr').fadeOut();
+                                                    $('#vbuttonr').fadeOut();
+                                                    $('#s1').val("1");
+                                                    $('#ackr').fadeOut();
+                                                    $("#vsr").show().delay(1000).fadeOut();
+                                                    $('#reportsub').removeClass('disabled');
+
+                                                }
+
+                                            }
+                                        });
+                                    } else {
+                                        $('#ackr').fadeOut();
+                                        $("#vwarnr").show().delay(1000).fadeOut();
                                         return false;
 
                                     }

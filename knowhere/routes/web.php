@@ -70,6 +70,8 @@ Route::any('/logout', 'LoginController@logout')->name('logout');
 Route::any('/requestlisting', 'RequestProfController@request')->name('requestlisting');
 Route::any('/searchaction', 'PostController@searchaction')->name('searchaction');
 Route::any('/editad/{id}', 'OwnerController@editad')->name('editad');
+Route::any('/report/{id}', 'PostController@report')->name('report');
+Route::any('/suggest/{id}', 'PostController@suggest')->name('suggest');
 
 Route::any('/fetchservice/{id}', 'OwnerController@fetchservice')->name('fetchservice');
 Route::any('/fetchloc', 'HomeController@fetchloc')->name('fetchloc');
@@ -83,7 +85,6 @@ Route::any('/mypost', 'HomeController@mypost')->name('mypost');
 Route::any('/howitworks', 'HomeController@howitworks')->name('howitworks');
 Route::any('/loading', 'HomeController@loading')->name('loading');
 Route::any('/loadcomplete', 'HomeController@loadcomplete')->name('loadcomplete');
-
 
 Route::any('/about', 'HomeController@about')->name('about');
 Route::any('/services', 'HomeController@services')->name('services');
