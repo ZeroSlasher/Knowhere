@@ -669,6 +669,7 @@ Session::put('idu','aa');
                                             <strong>Verification successfull!!</strong>
                                         </div>
                                     </li>
+                                    @endif
                                     <li style="background-color: #fff;padding: .75rem 1.25rem;margin-bottom: -1px;">
                                         <div class="modal-footer">
                                             <button type="submit" id="reportsub" class="btn btn-primary btn-results"
@@ -678,7 +679,7 @@ Session::put('idu','aa');
                                         </div>
                                     </li>
                                 </ul>
-                                @endif
+
                             </ul>
                         </div>
                     </form>
@@ -709,8 +710,33 @@ Session::put('idu','aa');
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
-                                    <input class="form-control" name="email" placeholder="E-mail" type="text"
-                                        required />
+                                    <input class="form-control" name="smail" id="smail" placeholder="E-mail" type="text"
+                                        required>
+                                    <input type="hidden" id="s2" value="0">
+
+                                    <div id="acks" class="alert alert-info" style="align:center;display: none;">
+                                        <strong>A verification code has been sent to your email, enter
+                                            it here to continuoue!!</strong>
+                                    </div>
+                                    <input type="text" autocomplete="off" placeholder="Verification code" id="vcodeboxs"
+                                        class="form-control" style="margin:5px;width:50%;display: none;">
+                                    <button id="vbuttons" class="btn btn-warning" style="margin:5px;display: none;"
+                                        type="button">verify</button>
+                                    <div id="p222s" class="alert alert-warning" style="display: none;">
+                                        <strong>Email verification failed</strong>
+                                    </div>
+                                    <div id="vwarns" class="alert alert-danger" style="align:center;display: none;">
+                                        <strong>Enter code to continue!!</strong>
+                                    </div>
+                                    <div id="p22s" class="alert alert-danger" style="align:center;display: none;">
+                                        <strong>Enter a valid email</strong>
+                                    </div>
+                                    <div id="vwarn1s" class="alert alert-danger" style="align:center;display: none;">
+                                        <strong>Verification code is incorrect!!</strong>
+                                    </div>
+                                    <div id="vss" class="alert alert-danger" style="align:center;display: none;">
+                                        <strong>Verification successfull!!</strong>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -727,7 +753,7 @@ Session::put('idu','aa');
                             </div>
                         </div>
                         <div class="panel-footer" style="margin-bottom:-14px;">
-                            <input type="submit" class="btn btn-success" value="Send" />
+                            <input type="submit" id="suggestbtn" class="btn btn-success" value="Send" />
                             <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
                         </div>
                     </form>

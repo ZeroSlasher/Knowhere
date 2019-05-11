@@ -82,7 +82,8 @@ class PostController extends Controller
         if (Session::get('id')) {
 
             $email = Session::get('id');
-            $dbname = DB::select("select name from tbl_users_reg where id = $id");
+            $uid = Session::get('uid');
+            $dbname = DB::select("select name from tbl_users_reg where id = $uid");
             foreach ($dbname as $n) {
                 $name = $n->name;
             }
@@ -125,7 +126,7 @@ class PostController extends Controller
         if (Session::get('id')) {
 
             $email = Session::get('id');
-            $dbname = DB::select("select name from tbl_users_reg where id = $id");
+            $dbname = DB::select("select name from tbl_users_reg where id = $uid");
             foreach ($dbname as $n) {
                 $name = $n->name;
             }
@@ -161,6 +162,8 @@ class PostController extends Controller
 
     public function searchaction(Request $request)
     {
+        $ads = DB::table('tbl_advert')->where('status_id', 1)->where('p_status', 10)->where('expiring_in', '>', 0)->get();
+
         $loc = $request->get('loc');
         $cat = $request->get('cat');
         $data = DB::table('tbl_cat')->get();
@@ -185,7 +188,7 @@ class PostController extends Controller
                 $query = "https://www.google.com/maps/search/?api=1&query=";
                 $query .= rawurlencode($loc);
 
-                return view('listing_list')->with(['tpost' => $tpost, 'data' => $data, 'loc' => rawurlencode($loc), 'query' => $query])->with('successMsg', 'No results found!!');
+                return view('listing_list')->with(['tpost' => $tpost, 'data' => $data, 'loc' => rawurlencode($loc), 'query' => $query,'ads'=>$ads])->with('successMsg', 'No results found!!');
             } else {
 
                 foreach ($post as $p) {
@@ -196,7 +199,7 @@ class PostController extends Controller
                     $new[] = array($ad, $lat, $lng);
                 }
 
-                return view('listing_list', compact('post', 'data', 'new', 'tpost'))->with(['loc' => rawurlencode($loc)]);
+                return view('listing_list', compact('post', 'data', 'new', 'tpost'))->with(['loc' => rawurlencode($loc),'ads'=>$ads]);
             }
         } else {
 
@@ -226,7 +229,7 @@ class PostController extends Controller
                 $query .= '+';
                 $query .= rawurlencode($cat_n);
 
-                return view('listing_list')->with(['tpost' => $tpost, 'data' => $data, 'loc' => rawurlencode($loc), 'query' => $query])->with('successMsg', 'No results found!!');
+                return view('listing_list')->with(['tpost' => $tpost, 'data' => $data, 'loc' => rawurlencode($loc), 'query' => $query,'ads'=>$ads])->with('successMsg', 'No results found!!');
                 // return view('listing_list', compact('tpost'))->with('error', 'No results found!!');
                 //return view('listing_list')->with('tpost', $tpost)->with('error', 'No results found!!');
 
@@ -239,7 +242,7 @@ class PostController extends Controller
                     $new[] = array($ad, $lat, $lng);
                 }
 
-                return view('listing_list', compact('post', 'data', 'new', 'tpost', 'loc'));
+                return view('listing_list', compact('post', 'data', 'new', 'tpost', 'loc','ads'));
             }
         }
     }

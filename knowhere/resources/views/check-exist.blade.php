@@ -126,25 +126,14 @@
                                             <span>Add nearby locations</span>
                                         </a>
                                     </li>
-                                    @endif
                                     <li>
-                                        <a href="undermaintainence">
-                                            <i class="lni-wallet"></i>
-                                            <span>Option3</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="undermaintainence">
-                                            <i class="lni-heart"></i>
-                                            <span>Option4</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="undermaintainence">
+                                        <a href="messages">
                                             <i class="lni-star"></i>
-                                            <span>Option5</span>
+                                            <span>Messages/Suggetions</span>
                                         </a>
                                     </li>
+                                    @endif
+
                                     <li>
                                         <a href="/logout">
                                             <i class="lni-enter"></i>

@@ -4,6 +4,8 @@
 <head>
 
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Knowhere</title>
 
@@ -347,19 +349,13 @@
                                             <span>Add nearby locations</span>
                                         </a>
                                     </li>
-                                    @endif
                                     <li>
-                                        <a href="undermaintainence">
-                                            <i class="lni-heart"></i>
-                                            <span>Option4</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="undermaintainence">
+                                        <a href="messages">
                                             <i class="lni-star"></i>
-                                            <span>Option5</span>
+                                            <span>Messages/Suggetions</span>
                                         </a>
                                     </li>
+                                    @endif
                                     <li>
                                         <a href="/logout">
                                             <i class="lni-enter"></i>

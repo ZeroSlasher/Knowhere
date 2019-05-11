@@ -127,6 +127,12 @@
                                             <span>Add nearby locations</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="messages">
+                                            <i class="lni-star"></i>
+                                            <span>Messages/Suggetions</span>
+                                        </a>
+                                    </li>
                                     @endif
                                     <li>
                                         <a href="undermaintainence">

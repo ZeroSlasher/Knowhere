@@ -31,7 +31,7 @@
 <body>
 
     <header id="header-wrap">
-    @include('inc.admin.admindash_head')
+        @include('inc.admin.admindash_head')
 
 
     </header>
@@ -68,19 +68,20 @@
                             <p>Added on: {{$d->created_at}}</p>
 
                             <form action="/removepost" method="post" id="deletepost">
-                                @csrf 
+                                @csrf
                                 <input type="text" name="id" hidden value="{{$d->outletid}}">
                                 <label class="radio-inline">
-                                <input name="Radio" value="1" type="radio"> Yes</label>
+                                    <input name="Radio" value="1" type="radio"> Yes</label>
                                 <label class="radio-inline">
-                                <input name="Radio" value="2" type="radio"> No</label>
+                                    <input name="Radio" value="2" type="radio"> No</label>
                                 <br><br>
                                 <button type="submit" class="btn btn-danger">Delete Post</button>
                             </form>
                             @endforeach @endisset
                             <br>
-                            <button style="margin-left: 5px;" class="btn btn-basic"><a href="javascript:history.back()" class="btn-basic"><i class="lni-thumbs-down"></i>
-                                Cancel</a></button>
+                            <button style="margin-left: 5px;" class="btn btn-basic"><a href="javascript:history.back()"
+                                    class="btn-basic"><i class="lni-thumbs-down"></i>
+                                    Cancel</a></button>
                         </div>
                     </div>
                 </div>
@@ -92,8 +93,8 @@
 
 
     <a href="#" class="back-to-top">
-<i class="lni-chevron-up"></i>
-</a>
+        <i class="lni-chevron-up"></i>
+    </a>
 
     <div id="preloader">
         <div class="loader" id="loader-1"></div>

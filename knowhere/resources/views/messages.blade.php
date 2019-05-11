@@ -1,15 +1,13 @@
-<?php
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Owner's Dashboard</title>
-    <link rel="stylesheet" href="css/w3.css">
+    <title>Knowhere</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
@@ -28,13 +26,14 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
-
 </head>
 
 <body>
 
     <header id="header-wrap">
+
         @include('inc.admin.admindash_head')
+
 
     </header>
 
@@ -44,10 +43,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-wrapper">
-                        <h2 class="product-title">Dashbord</h2>
+                        <h2 class="product-title">Messages</h2>
                         <ol class="breadcrumb">
                             <li><a href="/">Home /</a></li>
-                            <li class="current">Dashboard</li>
+                            <li class="current">Messages</li>
                         </ol>
                     </div>
                 </div>
@@ -74,7 +73,7 @@
                             <nav class="navdashboard">
                                 <ul>
                                     <li>
-                                        <a class="active" href="ownerdashboard">
+                                        <a href="ownerdashboard">
                                             <i class="lni-dashboard"></i>
                                             <span>Dashboard</span>
                                         </a>
@@ -116,7 +115,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="messages">
+                                        <a class="active" href="messages">
                                             <i class="lni-star"></i>
                                             <span>Messages/Suggetions</span>
                                         </a>
@@ -141,20 +140,72 @@
                 <div class="col-sm-12 col-md-8 col-lg-9">
                     <div class="page-content">
                         <div class="inner-box">
-
-                            <div class="dashboard-wrapper">
-                                @include('inc.profilewid')
-
+                            <div class="dashboard-box">
+                                <h2 class="dashbord-title"></h2>
                             </div>
+                            <div class="dashboard-wrapper">
 
+                                <div class="dashboard-wrapper">
+                                    <form class="row offers-messages">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                                            <div class="offers-box">
+
+                                                <ul class="offers-user-online">
+                                                    @isset($msg)
+                                                    @foreach($msg as $m)
+                                                    <li class="offerer">
+                                                        <figure>
+                                                            <img src="assets/img/author/img1.jpg" alt="">
+                                                        </figure>
+                                                        <span class="bolticon"></span>
+                                                        <div class="user-name">
+                                                            <h3 class="msgview" data-id="{{$m->sid}}">{{$m->email}}</h3>
+                                                            <h5 style="font-size: 13px;">Subject: {{$m->subject}}
+                                                            </h5>
+                                                            @if($m->rstatus == 13)
+                                                            <h4><a class="text-danger">unread</a></h4>
+                                                            @elseif($m->rstatus == 12)
+                                                            <h4><a>read</a></h4>
+                                                            @endif
+                                                        </div>
+                                                    </li>
+                                                    @endforeach
+                                                    @endisset
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+                                            <div class="chat-message-box">
+                                                <div class="dashboardboxtitle">
+                                                    <h2>Chat Messages</h2>
+                                                </div>
+                                                <div id="msg">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="replay-box">
+                                                <textarea class="form-control" name="reply"
+                                                    placeholder="Type Here & Press Enter"></textarea>
+                                                <div class="icon-box">
+                                                    <i class="lni-thumbs-up"></i>
+                                                    <i class="lni-thumbs-down"></i>
+                                                    <i class="lni-emoji-smile"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+
     @include('inc.outer.footer')
+
 
 
     <a href="#" class="back-to-top">
@@ -181,6 +232,28 @@
     <script src="assets/js/contact-form-script.min.js"></script>
     <script src="assets/js/summernote.js"></script>
 
+    <script>
+    $('.msgview').on('click', function() {
+
+        var id = $(this).data('id');
+        if (id) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '/fetchmsg',
+                type: "POST",
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    console.log(data);
+                    $('#msg').html(data);
+                }
+            });
+        }
+    });
+    </script>
 </body>
 
 

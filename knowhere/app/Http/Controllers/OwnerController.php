@@ -403,4 +403,50 @@ class OwnerController extends Controller
         }
 
     }
+    public function messages()
+    {
+        $uid = Session::get('uid');
+        $msg = DB::table('tbl_suggest')->where('uid', $uid)->get();
+        return view('messages', compact('msg'));
+    }
+
+    public function fetchmsg(Request $request)
+    {
+        $id = $request->id;
+        $msg = DB::table('tbl_suggest')->where('sid', $id)->get();
+        $output = "";
+        foreach ($msg as $m) {
+            $output = '
+        <div class="offerermessage">
+        <figure>
+            <img src="assets/img/author/img1.jpg" alt="">
+        </figure>
+        <div class="description">
+            <div class="info">
+                <h3>' . $m->email . '</h3>
+                <p>' . $m->comment . '</p>
+            </div>
+            <time class="date">' . $m->created_at . '</time>
+        </div>
+    </div>';
+            if ($m->response) {
+                $output .= '<div class="memessage readmessage">
+                <figure>
+                    <img src="assets/img/author/img1.jpg" alt="">
+                </figure>
+                <div class="description">
+
+                    <div class="text-right">
+                        <div class="info">
+                            <h3>' . Session::get('id') . '</h3>
+                            <p>' . $m->response . '</p>
+                        </div>
+                    </div>
+                </div>
+            </div>';
+            }
+        }
+        return $output;
+    }
+
 }

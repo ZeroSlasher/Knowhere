@@ -3194,7 +3194,7 @@ label {
 
 .offers-messages .offers-box {
     padding: 15px 0;
-    display: inline-block;
+    display: grid;
     border-right: 1px solid #ddd
 }
 
