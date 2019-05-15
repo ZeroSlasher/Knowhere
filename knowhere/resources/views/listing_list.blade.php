@@ -28,104 +28,7 @@
 
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 
-    <style>
-    *:before,
-    *:after {
-        box-sizing: border-box;
-    }
 
-
-
-
-    .containers {
-        margin: 4% auto;
-        width: 210px;
-        height: 140px;
-        position: relative;
-        perspective: 1000px;
-    }
-
-    #carousel {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        transform-style: preserve-3d;
-        animation: rotation 20s infinite linear;
-    }
-
-    #carousel:hover {
-        animation-play-state: paused;
-    }
-
-    #carousel figure {
-        display: block;
-        position: absolute;
-        width: 186px;
-        height: 116px;
-        left: 10px;
-        top: 10px;
-        background: black;
-        overflow: hidden;
-        border: solid 5px black;
-    }
-
-    #carousel figure:nth-child(1) {
-        transform: rotateY(0deg) translateZ(288px);
-    }
-
-    #carousel figure:nth-child(2) {
-        transform: rotateY(40deg) translateZ(288px);
-    }
-
-    #carousel figure:nth-child(3) {
-        transform: rotateY(80deg) translateZ(288px);
-    }
-
-    #carousel figure:nth-child(4) {
-        transform: rotateY(120deg) translateZ(288px);
-    }
-
-    #carousel figure:nth-child(5) {
-        transform: rotateY(160deg) translateZ(288px);
-    }
-
-    #carousel figure:nth-child(6) {
-        transform: rotateY(200deg) translateZ(288px);
-    }
-
-    #carousel figure:nth-child(7) {
-        transform: rotateY(240deg) translateZ(288px);
-    }
-
-    #carousel figure:nth-child(8) {
-        transform: rotateY(280deg) translateZ(288px);
-    }
-
-    #carousel figure:nth-child(9) {
-        transform: rotateY(320deg) translateZ(288px);
-    }
-
-    .imgs {
-        width: inherit;
-        height: -webkit-fill-available;
-        transition: all .5s ease;
-    }
-
-    .imgs:hover {
-        -webkit-filter: grayscale(0);
-        transform: scale(1.2, 1.2);
-    }
-
-    @keyframes rotation {
-        from {
-            transform: rotateY(0deg);
-        }
-
-        to {
-            transform: rotateY(360deg);
-        }
-    }
-    </style>
     <style>
     /* Style the Image Used to Trigger the Modal */
     #myImg {
@@ -222,6 +125,65 @@
         .contents {
             width: 100%;
         }
+    }
+    </style>
+    <style>
+    @keyframes slidy {
+        0% {
+            left: 0%;
+        }
+
+        20% {
+            left: 0%;
+        }
+
+        25% {
+            left: -100%;
+        }
+
+        45% {
+            left: -100%;
+        }
+
+        50% {
+            left: -200%;
+        }
+
+        70% {
+            left: -200%;
+        }
+
+        75% {
+            left: -300%;
+        }
+
+        95% {
+            left: -300%;
+        }
+
+        100% {
+            left: -400%;
+        }
+    }
+
+    div#slider {
+        overflow: hidden;
+    }
+
+    div#slider figure img {
+        width: 20%;
+        height: 50%;
+        float: left;
+    }
+
+    div#slider figure {
+        position: relative;
+        width: 500%;
+        margin: 0;
+        left: 0;
+        text-align: left;
+        font-size: 0;
+        animation: 10s slidy infinite;
     }
     </style>
 </head>
@@ -324,15 +286,15 @@
 
                     </div>
                     <div class="col-lg-9 col-md-12 col-xs-12">
-                        <div class="containers">
-                            <div id="carousel">
+                        <div id="slider">
+                            <figure>
                                 @isset($ads)
                                 @foreach($ads as $ad)
-                                <figure><img class="imgs" id="myImg" src="/uploads/ads/{{$ad->ad_content}}" alt="">
-                                </figure>
+                                <img class="imgs" data-id="{{$ad->ad_id}}" id="myImg"
+                                    src="/uploads/ads/{{$ad->ad_content}}" alt="">
                                 @endforeach
                                 @endisset
-                            </div>
+                            </figure>
                         </div>
                     </div>
 
@@ -593,15 +555,33 @@
 
         <script>
         // Get the modal
-        var modal = document.getElementById('myModal');
+        var modal = document.getElementById('myModal'); //modal where image is shown
 
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.getElementById('myImg');
-        var modalImg = document.getElementById("img01");
-        img.onclick = function() {
-            modal.style.display = "block";
-            modalImg.src = img.src;
-        }
+        var img = document.getElementById('myImg'); //image displayed on page from db
+        var modalImg = document.getElementById("img01"); //img on modal
+
+        $('.imgs').on('click', function() {
+            var id = $(this).data('id');
+
+            if (id) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '/fetchads',
+                    type: "POST",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        modal.style.display = "block";
+                        modalImg.src = "/uploads/ads/" + data;
+                    }
+                });
+            }
+
+        });
 
         // Get the <span> element that closes the modal
         var span = document.getElementById("close");

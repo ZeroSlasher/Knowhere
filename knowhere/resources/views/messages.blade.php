@@ -147,7 +147,8 @@
 
                                 <div class="dashboard-wrapper">
                                     <form class="row offers-messages">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5"
+                                            style="border-right: 1px solid #ddd;">
                                             <div class="offers-box">
 
                                                 <ul class="offers-user-online">
@@ -175,7 +176,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
-                                            <div class="chat-message-box">
+                                            <div class="chat-message-box" style="width: inherit;">
                                                 <div class="dashboardboxtitle">
                                                     <h2>Chat Messages</h2>
                                                 </div>
@@ -184,15 +185,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="replay-box">
-                                                <textarea class="form-control" name="reply"
-                                                    placeholder="Type Here & Press Enter"></textarea>
-                                                <div class="icon-box">
-                                                    <i class="lni-thumbs-up"></i>
-                                                    <i class="lni-thumbs-down"></i>
-                                                    <i class="lni-emoji-smile"></i>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </form>
                                 </div>
@@ -252,6 +245,15 @@
                 }
             });
         }
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#replays').click(function() {
+            alert();
+            $replay = $('#replaytxt').text();
+            alert($replay);
+        });
     });
     </script>
 </body>

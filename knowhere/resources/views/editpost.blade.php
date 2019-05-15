@@ -94,12 +94,12 @@
                             <div class="form-group mb-3">
                                 <label class="control-label">Outlet name</label>
                                 <input class="form-control input-md" value="{{$prof->outletname}}" id="oname"
-                                    name=" oname" placeholder="Outlet name" type="text">
+                                    name=" oname" placeholder="Outlet name" type="text" required>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="control-label">Owner name</label>
-                                <input class="form-control input-md" value="{{$prof->ownername}}" name="owname"
+                                <input class="form-control input-md" required value="{{$prof->ownername}}" name="owname"
                                     placeholder="Owner name" type="text">
                             </div>
 
@@ -107,33 +107,33 @@
                                 <label class="control-label">Location</label>
                                 <div id="map_canvas" style="height:400px;width:auto;"></div>
                                 <div id="latlong">
-                                    <input hidden type="text" value="{{$prof->latitude}}" id="lat" name="lat">
-                                    <input hidden type="text" value="{{$prof->longitude}}" id="lng" name="lng">
+                                    <input hidden type="text" required value="{{$prof->latitude}}" id="lat" name="lat">
+                                    <input hidden type="text" required value="{{$prof->longitude}}" id="lng" name="lng">
 
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="control-label">Address</label>
-                                    <textarea class="form-control input-md" id="Address" name="Address"
+                                    <textarea class="form-control input-md" required id="Address" name="Address"
                                         rows="5">{{$prof->address}}</textarea>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="control-label">Title</label>
-                                    <textarea class="form-control input-md" id="Title"
+                                    <textarea class="form-control input-md" required id="Title"
                                         name="Title">{{$prof->otitle}}</textarea>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="control-label">Description</label>
-                                    <textarea class="form-control" id="Description"
+                                    <textarea class="form-control" required id="Description"
                                         name="Description">{{$prof->description}}</textarea>
                                 </div>
 
                                 <div class="form-group mb-3 tg-inputwithicon">
                                     <label class="control-label">Category</label>
                                     <div class="tg-select form-control">
-                                        <select id="catSelect" name="catSelect">
+                                        <select id="catSelect" required name="catSelect">
                                             <option selected value="{{$prof->cat_id}}">{{$prof->catagory}}</option>
                                             @isset($cat)
                                             @foreach($cat as $category)
@@ -146,7 +146,7 @@
                                     <div class="form-group mb-3 tg-inputwithicon">
                                         <label class="control-label">Sub category</label>
                                         <div class="tg-select form-control">
-                                            <select name="subcat" id="subcat">
+                                            <select required name="subcat" id="subcat">
                                                 <option selected disabled value="{{$prof->subcat_id}}">
                                                     {{$prof->subcatagory}}</option>
                                             </select>
@@ -163,11 +163,15 @@
                                     <div class="form-group mb-3 tg-inputwithicon">
                                         <label class="control-label">State</label>
                                         <div class="tg-select form-control">
-                                            <select id="state" name="state">
+                                            <select id="state" required name="state">
                                                 <option selected value="{{$prof->state_id}}">{{$prof->state}}</option>
                                                 @isset($state)
                                                 @foreach($state as $states)
+                                                @if($states->state == 'Unselected')
+                                                continue;
+                                                @else
                                                 <option value="{{$states->state_id}}">{{$states->state}}</option>
+                                                @endif
                                                 @endforeach
                                                 @endisset
                                             </select>
@@ -177,7 +181,7 @@
                                     <div class="form-group mb-3 tg-inputwithicon">
                                         <label class="control-label">district</label>
                                         <div class="tg-select form-control">
-                                            <select name="district" id="district">
+                                            <select name="district" required id="district">
                                                 <option selected value="{{$prof->dist_id}}">{{$prof->district}}</option>
                                             </select>
                                         </div>
@@ -186,7 +190,7 @@
                                     <div class="form-group mb-3 tg-inputwithicon">
                                         <label class="control-label">city</label>
                                         <div class="tg-select form-control">
-                                            <select name="city" id="city">
+                                            <select name="city" required id="city">
                                                 <option selected value="{{$prof->city_id}}">{{$prof->city}}</option>
                                             </select>
                                         </div>
@@ -194,26 +198,26 @@
 
                                     <div class="form-group mb-3">
                                         <label class="control-label">Website</label>
-                                        <input class="form-control input-md" value="{{$prof->website}}" name="wsite"
-                                            placeholder="wsite" type="text">
+                                        <input class="form-control input-md" required value="{{$prof->website}}"
+                                            name="wsite" placeholder="wsite" type="text">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label class="control-label">Email</label>
-                                        <input class="form-control input-md" value="{{$prof->oemail}}" id="oemail"
-                                            name="oemail" placeholder="Contact email" type="text">
+                                        <input class="form-control input-md" required value="{{$prof->oemail}}"
+                                            id="oemail" name="oemail" placeholder="Contact email" type="text">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label class="control-label">Contact number</label>
-                                        <input class="form-control input-md" value="{{$prof->phone1}}" name="phone1"
-                                            placeholder="Contact number" type="text">
+                                        <input class="form-control input-md" required value="{{$prof->phone1}}"
+                                            name="phone1" placeholder="Contact number" type="text">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label class="control-label">Alternate Contact number</label>
-                                        <input class="form-control input-md" value="{{$prof->phone2}}" name="phone2"
-                                            placeholder="Alternate Contact number" type="text">
+                                        <input class="form-control input-md" required value="{{$prof->phone2}}"
+                                            name="phone2" placeholder="Alternate Contact number" type="text">
                                     </div>
 
                                     <!-- <div class="form-group mb-3">
@@ -315,13 +319,22 @@
             return marker;
 
         }
+        var locations = @php
+        if (isset($new)) {
+            echo json_encode($new);
+        }
+        @endphp
 
         function initialize() {
 
-            var myLatlng = new google.maps.LatLng(10.00, 76.25);
+            for (i = 0; i < locations.length; i++) {
+                var lat = locations[i][0];
+                var lng = locations[i][1];
+            }
+            var myLatlng = new google.maps.LatLng(lat, lng);
 
             var myOptions = {
-                zoom: 8,
+                zoom: 15,
                 center: myLatlng,
                 mapTypeControl: true,
                 mapTypeControlOptions: {

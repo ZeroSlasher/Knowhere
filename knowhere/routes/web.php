@@ -60,7 +60,10 @@ Route::group(['middleware' => ['revalidate', 'usersession']], function () {
     Route::any('/payment/{id}', 'OwnerController@payment')->name('payment');
     Route::any('/dopayment', 'OwnerController@dopayment')->name('dopayment');
     Route::any('/messages', 'OwnerController@messages')->name('messages');
-
+    Route::any('/sendreplay', 'OwnerController@sendreplay')->name('sendreplay');
+    Route::any('/editad/{id}', 'OwnerController@editad')->name('editad');
+    Route::any('/hidead/{id}', 'OwnerController@hidead')->name('hidead');
+    
 });
 
 Route::any('/', 'HomeController@index')->name('/');
@@ -70,10 +73,11 @@ Route::any('/login', 'LoginController@login')->name('login');
 Route::any('/logout', 'LoginController@logout')->name('logout');
 Route::any('/requestlisting', 'RequestProfController@request')->name('requestlisting');
 Route::any('/searchaction', 'PostController@searchaction')->name('searchaction');
-Route::any('/editad/{id}', 'OwnerController@editad')->name('editad');
+
 Route::any('/report/{id}', 'PostController@report')->name('report');
 Route::any('/suggest/{id}', 'PostController@suggest')->name('suggest');
 Route::any('/fetchmsg', 'OwnerController@fetchmsg')->name('fetchmsg');
+Route::any('/fetchads', 'HomeController@fetchads')->name('fetchads');
 
 Route::any('/fetchservice/{id}', 'OwnerController@fetchservice')->name('fetchservice');
 Route::any('/fetchloc', 'HomeController@fetchloc')->name('fetchloc');

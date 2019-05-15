@@ -86,7 +86,7 @@
 
 
                             function emailverify() {
-                                $('#postr').addClass('disabled');
+                                $('#postr').prop('disabled', true);
 
                                 $('#vcodebox').fadeIn();
                                 $('#vbutton').fadeIn();
@@ -134,7 +134,7 @@
                             }
 
                             function emailverify1() {
-                                $('#reportsub').addClass('disabled');
+                                $('#reportsub').prop('disabled', true);
 
                                 $('#vcodeboxr').fadeIn();
                                 $('#vbuttonr').fadeIn();
@@ -182,13 +182,13 @@
                             }
 
                             function emailverify2() {
-                                $('#suggestbtn').addClass('disabled');
+                                $('#suggestbtn').prop('disabled', true);
 
                                 $('#vcodeboxs').fadeIn();
                                 $('#vbuttons').fadeIn();
                                 $('#acks').fadeIn();
 
-                                var semail = document.getElementById('semail').value;
+                                var semail = document.getElementById('smail').value;
                                 var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
                                 if (semail && semail.match(emailExp)) {
                                     // $("#vmail").text(semail);
@@ -257,7 +257,7 @@
                                                     $('#s').val("1");
                                                     $('#ack').fadeOut();
                                                     $("#vs").show().delay(1000).fadeOut();
-                                                    $('#postr').removeClass('disabled');
+                                                    $('#postr').prop('disabled', false);
 
                                                 }
 
@@ -299,7 +299,7 @@
                                                     $('#s1').val("1");
                                                     $('#ackr').fadeOut();
                                                     $("#vsr").show().delay(1000).fadeOut();
-                                                    $('#reportsub').removeClass('disabled');
+                                                    $('#reportsub').prop('disabled', false);
 
                                                 }
 
@@ -318,7 +318,7 @@
                                 $("#vbuttons").click(function () {
 
                                     var vcode = document.getElementById('vcodeboxs').value;
-                                    var vmail = document.getElementById('emails').value;
+                                    var vmail = document.getElementById('smail').value;
                                     if (vcode && vmail) {
                                         $.ajax({
                                             headers: {
@@ -341,7 +341,8 @@
                                                     $('#s2').val("1");
                                                     $('#acks').fadeOut();
                                                     $("#vss").show().delay(1000).fadeOut();
-                                                    $('#suggestbtn').removeClass('disabled');
+                                                    // $('#suggestbtn').removeClass('disabled');
+                                                    $('#suggestbtn').prop('disabled', false);
 
                                                 }
 

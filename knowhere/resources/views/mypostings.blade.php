@@ -171,6 +171,7 @@
                                                 @php
 
                                                 if (isset($own->outletid)) {
+                                                $ii = 'Placeholder.jpg';
                                                 $images =
                                                 Illuminate\Support\Facades\DB::table('tbl_prof_images')->where('outletid',$own->outletid)->get();
                                                 foreach ($images as $i) {
@@ -243,11 +244,15 @@
                                                         class="btn-verified float-right"><i class="lni-trash"></i>
                                                         Delete posting</a> &nbsp;&nbsp; &nbsp;
 
-
+                                                    <a href="hidepost/{{$own->outletid}}"
+                                                        class="btn-verified float-right"><i class="lni-ban"></i>
+                                                        hide posting</a>&nbsp;&nbsp; &nbsp;
 
                                                     <a href="editpost/{{$own->outletid}}"
                                                         class="btn-verified float-right"><i class="lni-pencil"></i>
                                                         Edit posting</a>&nbsp;&nbsp; &nbsp;
+
+
 
                                                     <a href="postdetails/{{$own->outletid}}"
                                                         class="btn-verified float-right"><i class="lni-eye"></i>

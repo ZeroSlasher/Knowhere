@@ -553,8 +553,7 @@ Session::put('idu','aa');
                                         data-id="{{$own->outletid}}">Report this ad</a></li>
 
                                 <li><i class="lni-warning"></i><a data-toggle="modal" data-oid="{{$own->outletid}}"
-                                        data-uid="{{$own->id}}" data-target="#contact">Suggest an
-                                        edit</a></li>
+                                        data-uid="{{$own->id}}" data-target="#contact">Contact {{$own->name}}</a></li>
 
                             </ul>
                         </div>

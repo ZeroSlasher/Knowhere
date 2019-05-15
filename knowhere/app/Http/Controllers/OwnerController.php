@@ -39,7 +39,12 @@ class OwnerController extends Controller
            tbl_cat as cat WHERE l.city_id = c.city_id AND l.subcat_id=s.subcat_id and s.cat_id = cat.cat_id and l.status_id=st.status_id and
             c.`dist_id`=d.`dist_id` and d.`state_id`=sta.`state_id` and l.`regid`=o.`regid` and lg.`id`=l.`id`
             and l.outletid=$id");
-        return view('editpost', compact('cat', 'state', 'city', 'post'));
+        foreach ($post as $p) {
+            $lat = $p->latitude;
+            $lng = $p->longitude;
+            $new[] = array($lat, $lng);
+        }
+        return view('editpost', compact('cat', 'state', 'city', 'post', 'new'));
     }
 
     public function updatepost(Request $request)
@@ -62,7 +67,7 @@ class OwnerController extends Controller
         $lng = $request->get('lng');
         $email = $request->get('oemail');
         $status_id = 3;
-        if (!empty($request->get('subcat'))) //if subcat is selected
+        if (!empty($request->get('service'))) //if subcat is selected
         {
             // return 1;
             $Service_id = implode(",", $request->get('service')); //value of service is here
@@ -77,7 +82,7 @@ class OwnerController extends Controller
         {
             // return 4;
             DB::select("UPDATE `tbl_outlet_prof` SET `outletname`='$outletname',`ownername`='$ownername',`latitude`=$lat,
-            `longitude` = $lng,`oemail`='$email',
+            `longitude` = $lng,`oemail`='$email',`subcat_id`=$subcat_id,
            `address`='$address',`description`='$description',`website`='$website',`otitle`='$title',`city_id`=$city_id,
            `phone1`='$phone1',`phone2`='$phone2' WHERE `outletid`=$oid");
 
@@ -380,6 +385,21 @@ class OwnerController extends Controller
         }
     }
 
+    public function hidead($id)
+    {
+        $detail = DB::table('tbl_outlet_prof')->where('outletid', $id)->get();
+        foreach ($detail as $d) {
+            $status = $d->status_id;
+
+        }
+
+        DB::table('tbl_outlet_prof')
+            ->where('outletid', $id)
+            ->update(['status_id' => 7]);
+        return back()->with('warning', 'Post has been hidden successfully');
+
+    }
+
     public function editad(Request $request, $id)
     {
         if ($request->has('_token')) {
@@ -413,6 +433,10 @@ class OwnerController extends Controller
     public function fetchmsg(Request $request)
     {
         $id = $request->id;
+
+        DB::table('tbl_suggest')
+            ->where('sid', $id)
+            ->update(['rstatus' => 12]);
         $msg = DB::table('tbl_suggest')->where('sid', $id)->get();
         $output = "";
         foreach ($msg as $m) {
@@ -428,7 +452,7 @@ class OwnerController extends Controller
             </div>
             <time class="date">' . $m->created_at . '</time>
         </div>
-    </div>';
+                </div>';
             if ($m->response) {
                 $output .= '<div class="memessage readmessage">
                 <figure>
@@ -444,9 +468,46 @@ class OwnerController extends Controller
                     </div>
                 </div>
             </div>';
+            } else {
+                $output .= '<div class="replay-box" style="margin-top: 20px;">
+
+                <textarea class="form-control" name="replytxt" id="replaytxt"
+                    placeholder="Send a replay" required></textarea>
+
+
+            </div>
+            <button type="button" class="btn btn-info replay" style="float:right;margin-top:10px;" id="replays" name="replay">Replay</button>
+            ';
             }
         }
         return $output;
+    }
+
+    public function sendreplay()
+    {
+
+        //get id
+        //get response
+
+        //1. send mail
+        try {
+            //mail
+            $data = array('name' => Input::get('owname'), 'oname' => Input::get('oname'), 'password' => $pwd, 'email' => $mail);
+            Mail::send('emails.email', $data, function ($message) {
+                $mail = Input::get('email');
+                $reciver = Input::get('owname');
+                $message->from('knowhere@gmail.com', 'Knowhere');
+                $message->to($mail, $reciver)->subject('Account confirmation at Kowhere');
+
+            });
+        } catch (\Exception $e) {
+            return 0; //fail
+        }
+        //2. insert replay to db
+        DB::table('tbl_suggest')
+            ->where('sid', $id)
+            ->update(['response' => $response]);
+        return 1;
     }
 
 }

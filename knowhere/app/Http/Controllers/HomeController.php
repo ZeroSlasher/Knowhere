@@ -6,6 +6,7 @@ use App\City;
 use App\District;
 use App\SubCat;
 use DB;
+use Illuminate\Http\Request;
 use Mail;
 use Session;
 
@@ -57,16 +58,6 @@ class HomeController extends Controller
         }
     }
 
-    public function mailcheckr($semail, $id)
-    {
-        $exist = DB::select("SELECT `email` FROM `tbl_review` WHERE `email` = '$semail' and outlet_id = $id");
-        if (empty($exist)) {
-            return 0;
-        } else {
-            return 1;
-        }
-    }
-
     public function mailverify($id)
     {
 
@@ -98,11 +89,6 @@ class HomeController extends Controller
         }
         return 0;
 
-    }
-
-    public function refreshCaptcha()
-    {
-        return response()->json(['captcha' => captcha_img()]);
     }
 
     public function verifycode($vcode, $vmail)
@@ -192,6 +178,16 @@ class HomeController extends Controller
             return $output;
 
         }
+    }
+
+    public function fetchads(Request $request)
+    {
+        $id = $request->id;
+        $a = DB::table('tbl_advert')->select('ad_content')->where('ad_id', $id)->get();
+        foreach ($a as $b) {
+            $adimg = $b->ad_content;
+        }
+        return $adimg;
     }
 
     public function forgot()
